@@ -1,10 +1,10 @@
 ---
 name: latex-pdf
-description: Cria documentos PDF profissionais usando LaTeX com templates prontos para ofícios, relatórios, cartas e mais. Compila com xelatex/lualatex diretamente.
+description: Cria documentos PDF profissionais usando LaTeX. Templates prontos para ofícios, relatórios, declarações, memorandos e atas de reunião. Compila com lualatex/xelatex/pdflatex. Use quando o usuário pedir qualquer documento oficial em PDF.
 compatibility: Created for Zo Computer
 metadata:
   author: aleksandro.zo.computer
-  category: Official
+  category: Documents
   display-name: LaTeX PDF Generator
   emoji: 📜
 ---
@@ -13,65 +13,102 @@ metadata:
 
 ## Quando usar
 
-Use esta skill quando o usuário pedir para **criar um PDF** com formatação profissional — especialmente documentos oficiais como ofícios, memorandos, relatórios, declarações, notificações, contratos ou cartas formais. Prefira esta skill (LaTeX nativo) em vez do pandoc quando o documento precisa de **layout controlado, numeração de páginas, cabeçalhos/rodapés personalizados, timbre ou elementos gráficos**.
-
-## Templates disponíveis
-
-| Tipo | Arquivo | Uso |
-|---|---|---|
-| **Ofício** | `references/modelo_oficio.tex` | Documento oficial para autoridades (prefeito, secretários, TCE) |
-| **Relatório** | `references/modelo_relatorio.tex` | Relatórios técnicos, auditoria, prestação de contas |
-| **Carta Formal** | `references/modelo_carta.tex` | Comunicações externas formais |
-| **Declaração/Certidão** | `references/modelo_declaracao.tex` | Declarações simples com testemunhas |
+Use esta skill quando o usuário pedir para **criar um PDF** com formatação profissional — especialmente documentos oficiais como ofícios, relatórios, declarações, memorandos e atas.
 
 ## Fluxo de trabalho
 
-### 1. Escolher o template
+### Opção A: Gerar a partir de template (rápido)
 
-Copie o template desejado de `references/` para a pasta de trabalho ou para `Prefeitura/`:
+1. Copie o template para o destino
+2. Preencha os `\newcommand` no topo do .tex
+3. Compile com `gerar-pdf.ts`
+
+### Opção B: Preencher via JSON (automatizado)
+
+1. Crie um JSON com os dados
+2. Use `fill-template.py` para gerar o .tex preenchido
+3. Compile com `gerar-pdf.ts`
+
+## Templates disponíveis
+
+| Template | Arquivo | Uso |
+|----------|---------|-----|
+| Ofício | `references/modelo_oficio.tex` | Comunicação oficial para autoridades |
+| Relatório | `references/modelo_relatorio.tex` | Relatórios técnicos, auditorias |
+| Declaração | `references/modelo_declaracao.tex` | Declarações simples com testemunhas |
+| Memorando | `references/modelo_memorando.tex` | Comunicação interna entre setores |
+| Ata de Reunião | `references/modelo_ata_reuniao.tex` | Registro de deliberações |
+
+## Scripts
+
+### 1. Compilar PDF (`gerar-pdf.ts`)
 
 ```bash
-cp Skills/latex-pdf/references/modelo_oficio.tex /home/workspace/Prefeitura/meu_oficio.tex
+# Compilar
+bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex
+
+# Compilar e limpar auxiliares
+bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --clean
+
+# Usar outro compilador
+bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --engine xelatex
+
+# Verificar dependências antes
+bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --check --clean
 ```
 
-### 2. Editar o conteúdo
+Suporta `--engine lualatex` (padrão), `xelatex` ou `pdflatex`.
 
-Edite o arquivo .tex com:
-- **Destinatário**, **remetente**, **assunto**
-- **Corpo do texto** (substitua o placeholder)
-- **Local e data**
-
-### 3. Compilar para PDF
-
-Use o script auxiliar ou compile manualmente:
+### 2. Preencher template (`fill-template.py`)
 
 ```bash
-# Opção 1 — script auxiliar (recomendado)
-bun Skills/latex-pdf/scripts/gerar-pdf.ts /caminho/do/arquivo.tex
+# Listar templates
+python3 scripts/fill-template.py --list-templates
 
-# Opção 2 — direto com lualatex
-cd /home/workspace/Prefeitura && lualatex -interaction=nonstopmode meu_oficio.tex
+# Preencher com JSON
+python3 scripts/fill-template.py references/modelo_oficio.tex dados.json --output /home/workspace/Prefeitura/meu_oficio.tex
 ```
 
-O script aceita:
-- `--clean` — remove arquivos auxiliares (.aux, .log, .out) após compilar
-- `--open` — abre o PDF (se houver visualizador disponível)
+Exemplo de `dados.json`:
+```json
+{
+  "numeroOficio": "042/2026",
+  "destinatarioNome": "Secretário de Saúde",
+  "destinatarioCargo": "Secretário Municipal de Saúde",
+  "assuntoOficio": "Solicitação de materiais",
+  "remetenteNome": "Nome do Remetente",
+  "remetenteCargo": "Cargo do Remetente"
+}
+```
 
-### 4. Verificar
+### 3. Diagnóstico (`check-latex.py`)
 
-- Confirme que o PDF foi gerado no mesmo diretório do .tex
-- Leia o PDF com `read_file` para verificar visualmente
-- Se houver erros de compilação, o log está no mesmo diretório (`.log`)
+```bash
+python3 scripts/check-latex.py
+```
+
+Verifica compiladores instalados e testa compilação mínima.
+
+## Configuração do município
+
+Os dados do município ficam em `config/municipio.json`:
+
+```json
+{
+  "municipio": "Inajá",
+  "uf": "PR",
+  "prefeitura": "Prefeitura Municipal de Inajá",
+  "prefeito": "João Eder Aguilar",
+  "brasao_path": ""
+}
+```
+
+Estes valores são usados como fallback pelo `fill-template.py` — se o JSON não sobrescrever, os valores do município são aplicados automaticamente.
 
 ## Dicas
 
-- **Sempre use lualatex** como engine — tem melhor suporte a Unicode (acentos, emojis, caracteres especiais)
-- **Duas compilações** podem ser necessárias para acertar referências e numeração de páginas (o script já faz isso)
-- Para **timbre/brasão**: use `\includegraphics` com o caminho absoluto da imagem no workspace
-- Para **documentos com muitas páginas**: o template de relatório tem numeração automática
-- Se precisar de **fontes diferentes**: adicione `\usepackage{fontspec}` e `\setmainfont{Font Name}` com lualatex
-
-## Manutenção
-
-- Adicione novos templates em `references/` conforme a demanda
-- Mantenha os templates parametrizados (com `\newcommand` para dados variáveis)
+- **Timbre/brasão**: use `\includegraphics{caminho/absoluto.png}` no template
+- **Fontes personalizadas**: ad `\usepackage{fontspec}` + `\setmainfont{Nome}` com lualatex
+- **Muitas páginas**: o template de relatório tem numeração automática
+- **Erros de compilação**: verifique o `.log` gerado na mesma pasta
+- **Adicionar templates**: coloque em `references/` e mantenha os `\newcommand` parametrizados

@@ -8,7 +8,6 @@ metadata:
   display-name: 🔄 GitHub Backup Automático
   emoji: 🔄
 ---
-
 # 🔄 GitHub Backup Automático
 
 ## Propósito

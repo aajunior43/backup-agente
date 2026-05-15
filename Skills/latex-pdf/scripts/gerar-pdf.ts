@@ -3,96 +3,140 @@
  * gerar-pdf.ts — Compila arquivos .tex para PDF usando lualatex
  *
  * Uso:
- *   bun gerar-pdf.ts <caminho/arquivo.tex> [--clean] [--open]
+ *   bun gerar-pdf.ts <caminho/arquivo.tex> [--clean] [--open] [--engine lualatex|xelatex|pdflatex]
  *
- *   --clean  Remove arquivos auxiliares (.aux, .log, .out) após compilar
- *   --open   Abre o PDF no visualizador padrão (se disponível)
+ *   --engine  Compilador a usar (padrão: lualatex)
+ *   --clean   Remove arquivos auxiliares (.aux, .log, .out) após compilar
+ *   --open    Abre o PDF no visualizador padrão
+ *   --check   Verifica dependências antes de compilar
  *
  * Exemplos:
  *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex
  *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --clean
+ *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --engine xelatex --clean
  */
 
+import { execSync } from "child_process";
+import * as fs from "fs";
+import * as path from "path";
+
 const args = process.argv.slice(2);
+
+if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
+  console.log(`
+📄 LaTeX PDF Generator — Compila .tex para PDF
+
+Uso:
+  bun gerar-pdf.ts <arquivo.tex> [opções]
+
+Opções:
+  --engine <compilador>  lualatex (padrão) | xelatex | pdflatex
+  --clean                Remove .aux, .log, .out após compilar
+  --open                 Abre o PDF após gerar
+  --check                Verifica dependências antes de compilar
+  --help                 Mostra esta ajuda
+
+Exemplos:
+  bun gerar-pdf.ts oficio.tex
+  bun gerar-pdf.ts oficio.tex --clean --open
+  bun gerar-pdf.ts oficio.tex --engine xelatex
+`);
+  process.exit(0);
+}
+
 const texPath = args.find((a) => !a.startsWith("--"));
 const clean = args.includes("--clean");
 const openPdf = args.includes("--open");
+const check = args.includes("--check");
+const engineArg = args.findIndex((a) => a === "--engine");
+const engine = engineArg >= 0 ? args[engineArg + 1] || "lualatex" : "lualatex";
 
 if (!texPath) {
-  console.error("❌ Uso: bun gerar-pdf.ts <arquivo.tex> [--clean] [--open]");
+  console.error("❌ Especifique o caminho do arquivo .tex");
   process.exit(1);
 }
 
-const path = require("path");
-const fs = require("fs");
-
-const fullPath = path.resolve(texPath);
-
-if (!fs.existsSync(fullPath)) {
-  console.error(`❌ Arquivo não encontrado: ${fullPath}`);
+const absPath = path.resolve(texPath);
+if (!fs.existsSync(absPath)) {
+  console.error(`❌ Arquivo não encontrado: ${absPath}`);
   process.exit(1);
 }
 
-if (!fullPath.endsWith(".tex")) {
-  console.error(`❌ O arquivo precisa ter extensão .tex`);
+if (!absPath.endsWith(".tex")) {
+  console.error(`❌ Arquivo não é .tex: ${absPath}`);
   process.exit(1);
 }
 
-const dir = path.dirname(fullPath);
-const baseName = path.basename(fullPath, ".tex");
+// Verificar dependências
+if (check) {
+  console.log("🔧 Verificando dependências...\n");
+  try {
+    execSync(`${engine} --version`, { stdio: "pipe" });
+    console.log(`  ✅ ${engine} encontrado`);
+  } catch {
+    console.error(`  ❌ ${engine} não encontrado`);
+    console.error(`     Instale com: sudo apt install texlive-full`);
+    process.exit(1);
+  }
+  console.log("");
+}
+
+const dir = path.dirname(absPath);
+const baseName = path.basename(absPath, ".tex");
 const pdfPath = path.join(dir, `${baseName}.pdf`);
 
-console.log(`📄 Compilando: ${fullPath}`);
-console.log(`📁 Diretório: ${dir}`);
+console.log(`📄 Compilando: ${path.relative("/home/workspace", absPath)}`);
+console.log(`   Engine: ${engine}`);
+console.log("");
 
 // Primeira compilação
-const { execSync } = require("child_process");
-
+console.log("⏳ Primeira compilação...");
 try {
-  execSync(`lualatex -interaction=nonstopmode "${baseName}.tex"`, {
-    cwd: dir,
+  execSync(`${engine} -interaction=nonstopmode -output-directory="${dir}" "${absPath}"`, {
     stdio: "pipe",
-    encoding: "utf-8",
+    cwd: dir,
   });
-  console.log("✅ Primeira compilação concluída");
-} catch (e) {
-  // lualatex retorna exit code > 0 mesmo com warnings, então ignoramos
+  console.log("   ✅ Concluída");
+} catch {
+  // lualatex retorna exit code > 0 mesmo com warnings
+  console.log("   ⚠️  Concluída (com warnings)");
 }
 
-// Segunda compilação (para acertar referências, sumário, numeração)
+// Segunda compilação (referências, sumário, numeração)
+console.log("⏳ Segunda compilação (referências)...");
 try {
-  execSync(`lualatex -interaction=nonstopmode "${baseName}.tex"`, {
-    cwd: dir,
+  execSync(`${engine} -interaction=nonstopmode -output-directory="${dir}" "${absPath}"`, {
     stdio: "pipe",
-    encoding: "utf-8",
+    cwd: dir,
   });
-  console.log("✅ Segunda compilação concluída");
-} catch (e) {
-  // Ignoramos exit code
+  console.log("   ✅ Concluída");
+} catch {
+  console.log("   ⚠️  Concluída (com warnings)");
 }
 
-// Verificar se o PDF foi gerado
+// Verificar se PDF foi gerado
 if (!fs.existsSync(pdfPath)) {
-  console.error(`❌ Falha ao gerar PDF. Verifique o log:`);
+  console.error("\n❌ PDF não foi gerado. Verifique erros no .log:");
   const logPath = path.join(dir, `${baseName}.log`);
   if (fs.existsSync(logPath)) {
-    const logTail = fs
-      .readFileSync(logPath, "utf-8")
+    const log = fs.readFileSync(logPath, "utf-8");
+    const errors = log
       .split("\n")
-      .slice(-30)
-      .join("\n");
-    console.error(logTail);
+      .filter((l) => l.startsWith("!"))
+      .slice(0, 10);
+    for (const err of errors) {
+      console.error(`   ${err}`);
+    }
   }
   process.exit(1);
 }
 
-const stats = fs.statSync(pdfPath);
-const sizeKb = (stats.size / 1024).toFixed(1);
-console.log(`✅ PDF gerado com sucesso: ${pdfPath} (${sizeKb} KB)`);
+const sizeKB = Math.round(fs.statSync(pdfPath).size / 1024);
+console.log(`\n✅ PDF gerado: ${sizeKB} KB`);
 
-// Limpar arquivos auxiliares
+// Limpar auxiliares
 if (clean) {
-  const auxExts = [".aux", ".log", ".out", ".toc", ".lof", ".lot", ".fls", ".fdb_latexmk", ".synctex.gz"];
+  const auxExts = [".aux", ".log", ".out", ".toc", ".lof", ".lot", ".bbl", ".blg", ".synctex.gz"];
   for (const ext of auxExts) {
     const auxPath = path.join(dir, `${baseName}${ext}`);
     if (fs.existsSync(auxPath)) {

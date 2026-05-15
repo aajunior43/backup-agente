@@ -1,0 +1,77 @@
+% ============================================================
+% MODELO DE MEMORANDO — Administração Pública
+% Uso: comunicação interna entre setores/secretarias
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+\setstretch{1.15}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \prefeitura}
+\fancyhead[R]{\small Memorando}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% ── CONFIGURAÇÃO DO MUNICÍPIO ──
+\newcommand{\municipio}{Inajá}
+\newcommand{\uf}{PR}
+\newcommand{\prefeitura}{Prefeitura Municipal de \municipio/\uf}
+
+%% ── DADOS DO MEMORANDO (PREENCHER) ──
+\newcommand{\numeroMemorando}{XXX/2026}
+\newcommand{\localData}{\municipio, \today}
+\newcommand{\deSetor}{Secretaria de Origem}
+\newcommand{\paraSetor}{Secretaria de Destino}
+\newcommand{\paraResponsavel}{Nome do Destinatário}
+\newcommand{\assuntoMemorando}{Assunto do Memorando}
+\newcommand{\textoMemorando}{Texto do memorando — substitua pelo conteúdo.}
+\newcommand{\remetenteNome}{Nome do Remetente}
+\newcommand{\remetenteCargo}{Cargo do Remetente}
+
+\begin{document}
+
+\begin{center}
+  \Large\textbf{MEMORANDO Nº \numeroMemorando}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{tabular}{@{}ll}
+  \textbf{De:} & \deSetor \\
+  \textbf{Para:} & \paraSetor \\
+              & \paraResponsavel \\
+  \textbf{Assunto:} & \assuntoMemorando \\
+  \textbf{Data:} & \localData \\
+\end{tabular}
+
+\vspace{0.8cm}
+
+\noindent
+\textoMemorando
+
+\vspace{1.5cm}
+
+\begin{flushright}
+  \localData
+\end{flushright}
+
+\vspace{1cm}
+
+\begin{center}
+  \rule{6cm}{0.4pt} \\
+  \textbf{\remetenteNome} \\
+  \remetenteCargo
+\end{center}
+
+\end{document}

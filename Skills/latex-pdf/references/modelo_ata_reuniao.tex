@@ -1,0 +1,115 @@
+% ============================================================
+% MODELO DE ATA DE REUNIÃO — Administração Pública
+% Uso: registrar deliberações de reuniões oficiais
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+\setstretch{1.15}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \prefeitura}
+\fancyhead[R]{\small Ata de Reunião}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% ── CONFIGURAÇÃO DO MUNICÍPIO ──
+\newcommand{\municipio}{Inajá}
+\newcommand{\uf}{PR}
+\newcommand{\prefeitura}{Prefeitura Municipal de \municipio/\uf}
+
+%% ── DADOS DA ATA (PREENCHER) ──
+\newcommand{\numeroAta}{001/2026}
+\newcommand{\dataReuniao}{\today}
+\newcommand{\horaInicio}{09:00}
+\newcommand{\horaFim}{11:00}
+\newcommand{\localReuniao}{Sala de Reuniões da \prefeitura}
+\newcommand{\presidenteReuniao}{Nome do Presidente}
+\newcommand{\secretarioReuniao}{Nome do Secretário}
+\newcommand{\pauta}{Assunto principal da reunião}
+\newcommand{\participantes}{
+  \begin{itemize}[noitemsep]
+    \item \presidenteReuniao\ — Presidente
+    \item \secretarioReuniao\ — Secretário
+    \item Participante 3 — Cargo
+  \end{itemize}
+}
+\newcommand{\textoAta}{
+  \textbf{Abertura:} Aos \dataReuniao, às \horaInicio, reuniram-se no \localReuniao\ os membros acima citados.
+
+  \vspace{0.3cm}
+
+  \textbf{Deliberações:} \pauta. Após discussão, ficou decidido que...
+
+  \vspace{0.3cm}
+
+  \textbf{Encerramento:} Nada mais havendo, o presidente encerrou a reunião às \horaFim, eu, \secretarioReuniao, lavrei a presente ata.
+}
+
+\begin{document}
+
+\begin{center}
+  \Large\textbf{ATA DE REUNIÃO Nº \numeroAta} \\
+  \large\prefeitura
+\end{center}
+
+\vspace{0.8cm}
+
+\noindent
+\textbf{Data:} \dataReuniao \\
+\textbf{Horário:} \horaInicio\ às \horaFim \\
+\textbf{Local:} \localReuniao \\
+\textbf{Presidente:} \presidenteReuniao \\
+\textbf{Secretário:} \secretarioReuniao
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Presentes:}
+\participantes
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Pauta:} \pauta
+
+\vspace{0.8cm}
+
+\textoAta
+
+\vspace{1.5cm}
+
+\begin{flushright}
+  \municipio/\uf, \dataReuniao
+\end{flushright}
+
+\vspace{1.5cm}
+
+\begin{minipage}[t]{0.45\textwidth}
+  \centering
+  \rule{6cm}{0.4pt} \\
+  \textbf{\presidenteReuniao} \\
+  Presidente
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \centering
+  \rule{6cm}{0.4pt} \\
+  \textbf{\secretarioReuniao} \\
+  Secretário
+\end{minipage}
+
+\end{document}
