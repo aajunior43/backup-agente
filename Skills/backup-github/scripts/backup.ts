@@ -11,8 +11,8 @@
 const WORKSPACE = "/home/workspace";
 const BRANCH = "main";
 
-async function run(cmd: string): Promise<{ out: string; err: string; code: number }> {
-  const proc = Bun.spawnSync(cmd.split(" "), { cwd: WORKSPACE });
+function run(cmd: string[], cwd = WORKSPACE): { out: string; err: string; code: number } {
+  const proc = Bun.spawnSync(cmd, { cwd, env: { ...process.env } });
   return {
     out: proc.stdout.toString().trim(),
     err: proc.stderr.toString().trim(),
@@ -20,110 +20,101 @@ async function run(cmd: string): Promise<{ out: string; err: string; code: numbe
   };
 }
 
-function now(): string {
-  const d = new Date();
-  return d.toISOString().replace("T", " ").slice(0, 19) + " UTC";
+function getTipoArquivo(path: string): string {
+  if (path.startsWith("Prefeitura/")) return "📋 ";
+  if (path.startsWith("financeiro/")) return "💰 ";
+  if (path.startsWith("saude/")) return "💊 ";
+  if (path.startsWith("Refeicoes/")) return "🍽️ ";
+  if (path.startsWith("Skills/")) return "🛠️ ";
+  if (path.startsWith("projetos/")) return "📁 ";
+  if (path.startsWith("Images/")) return "🖼️ ";
+  if (path.startsWith("Documentos/")) return "📄 ";
+  if (path.startsWith("Veiculo/")) return "🚗 ";
+  return "📄 ";
 }
 
 async function main() {
   const args = process.argv.slice(2);
 
-  // ── Apenas status ──
+  if (args.includes("--schedule")) {
+    console.log(`
+══════════════════════════════════════════
+  Para AGENDAR o backup automático:
+══════════════════════════════════════════
+
+Use o comando abaixo ou o painel de
+Automações do Zo Computer:
+
+  cria uma automação que executa
+  "bun /home/workspace/Skills/backup-github/scripts/backup.ts"
+  todo dia às 00:00 (horário de Inajá)
+
+Rrule: RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0
+    `);
+    return;
+  }
+
+  // Verificar se há alterações
+  const status = run(["git", "status", "--porcelain"]);
+  if (!status.out.trim()) {
+    console.log("✅ Nada para commitar — workspace limpo");
+    return;
+  }
+
   if (args.includes("--status")) {
-    const { out } = await run("git status --short");
-    if (out) {
-      console.log("📋 Arquivos modificados:\n");
-      console.log(out);
-      const { out: count } = await run("git rev-list --count HEAD");
-      console.log(`\n📦 Total de commits: ${count || 0}`);
-    } else {
-      console.log("✅ Workspace limpo — sem alterações desde o último backup.");
-      const { out: count } = await run("git rev-list --count HEAD");
-      console.log(`📦 Total de commits: ${count || 0}`);
+    console.log("📊 Status do workspace:\n");
+    for (const line of status.out.split("\n")) {
+      if (!line.trim()) continue;
+      const flag = line.slice(0, 2).trim();
+      const file = line.slice(3);
+      const icon = getTipoArquivo(file);
+      const flagLabel =
+        flag === "M" ? "modificado" :
+        flag === "?" ? "novo" :
+        flag === "D" ? "removido" :
+        flag === "A" ? "adicionado" : flag;
+      console.log(`  ${icon} ${file} (${flagLabel})`);
     }
     return;
   }
 
-  // ── Instruções de agendamento ──
-  if (args.includes("--schedule")) {
-    console.log(`
-📅 Para agendar o backup automático:
+  // Commit + push
+  console.log("🔄 Fazendo backup do workspace...\n");
 
-Use o painel de Automations no Zo Computer (link: /?t=automations)
-e crie um agente com:
+  const changedLines = status.out.split("\n").filter(Boolean);
+  const tipos = new Set(changedLines.map(l => getTipoArquivo(l.slice(3))));
+  const emojiTema = [...tipos].join("");
 
-  Instrução:
-    Rode "bun /home/workspace/Skills/backup-github/scripts/backup.ts"
-    e me informe se houve alterações enviadas para o GitHub.
+  // Add tudo
+  run(["git", "add", "."]);
 
-  Frequência sugerida:
-    Diariamente à meia-noite → RRULE: FREQ=DAILY;BYHOUR=0;BYMIN=0
+  // Criar mensagem de commit
+  const modified = changedLines.filter(l => l.startsWith(" M") || l.startsWith("M ")).length;
+  const added = changedLines.filter(l => l.startsWith("??")).length;
+  const deleted = changedLines.filter(l => l.startsWith(" D") || l.startsWith("D ")).length;
 
-Ou me peça aqui no chat que eu crio a automação pra você.
-`);
+  const partes = [];
+  if (modified) partes.push(`📝 ${modified} alterados`);
+  if (added) partes.push(`✨ ${added} novos`);
+  if (deleted) partes.push(`🗑️ ${deleted} removidos`);
+
+  const msg = `${emojiTema} Backup automático — ${partes.join(", ")}`;
+
+  const commit = run(["git", "commit", "-m", msg]);
+  if (commit.err && commit.err.includes("nothing to commit")) {
+    console.log("✅ Nada para commitar");
     return;
   }
 
-  // ── Backup normal ──
-  console.log(`🔄 Backup — ${now()}\n`);
-
-  // Verifica se é um repositório git
-  const gitCheck = await run("git rev-parse --git-dir");
-  if (gitCheck.err) {
-    console.error("❌ Não é um repositório git. Rode o setup primeiro:");
-    console.error("   bun /home/workspace/Skills/backup-github/scripts/setup.ts");
+  console.log(`📝 ${msg}`);
+  const push = run(["git", "push", "-u", "origin", BRANCH]);
+  if (push.code === 0) {
+    console.log(`📤 Enviado para GitHub`);
+    console.log(`\n✅ Backup concluído em ${new Date().toLocaleString("pt-BR")}`);
+  } else {
+    console.error(`❌ Erro no push: ${push.err}`);
     process.exit(1);
   }
-
-  // Verifica remote
-  const remoteCheck = await run("git remote -v");
-  if (!remoteCheck.out.includes("origin")) {
-    console.error("❌ Remote 'origin' não configurado. Rode o setup primeiro.");
-    process.exit(1);
-  }
-
-  // Add all
-  console.log("📁 Verificando alterações...");
-  await run("git add -A");
-
-  const status = await run("git status --short");
-  if (!status.out) {
-    console.log("✅ Nada novo para commitar — workspace já sincronizado.");
-    return;
-  }
-
-  const fileCount = status.out.split("\n").length;
-  console.log(`📝 ${fileCount} arquivo(s) alterado(s):`);
-  for (const line of status.out.split("\n").slice(0, 10)) {
-    console.log(`   ${line}`);
-  }
-  if (fileCount > 10) {
-    console.log(`   ... e mais ${fileCount - 10} arquivo(s)`);
-  }
-
-  // Commit
-  const message = `📦 Backup automático — ${fileCount} arquivo(s) alterado(s)`;
-  const commit = await run(`git commit -m "${message}"`);
-  if (commit.err && !commit.err.includes("nothing to commit")) {
-    console.error("⚠️  Aviso no commit:", commit.err);
-  }
-  console.log("✅ Commitado");
-
-  // Push
-  console.log("📤 Enviando para o GitHub...");
-  const push = await run(`git push origin ${BRANCH}`);
-  if (push.err && !push.err.includes("Everything up-to-date") && !push.err.includes("up-to-date")) {
-    console.error("⚠️  Aviso no push:", push.err);
-  }
-  console.log("✅ Enviado com sucesso!");
-
-  // Totais
-  const { out: count } = await run("git rev-list --count HEAD");
-  console.log(`\n📊 Total de commits: ${count || 0}`);
-  console.log(`🔗 https://github.com/aajunior43/workspace-backup`);
 }
 
-main().catch((e) => {
-  console.error("❌ Erro:", e.message);
-  process.exit(1);
-});
+main();
