@@ -1,0 +1,6 @@
+{
+  "name": "tavly",
+  "description": "Pesquisa na web usando a API do Tavily",
+  "icon": "🔍",
+  "color": "#4A90D9"
+}

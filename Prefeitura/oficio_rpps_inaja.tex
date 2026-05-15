@@ -1,0 +1,222 @@
+% ============================================================
+% OFÍCIO — CONSTATAÇÃO DE FALTA DE REPASSE AO RPPS
+% Prefeitura de Inajá/PR
+% ============================================================
+\documentclass[
+12pt,
+a4paper,
+brazil,
+]{article}
+
+%% ── Pacotes ──
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage{datetime2}
+
+%% ── Margens ──
+\geometry{
+  top=3cm,
+  bottom=2cm,
+  left=3cm,
+  right=2cm,
+}
+
+%% ── Cabeçalho e Rodapé ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── Espaçamento ──
+\setstretch{1.3}
+
+%% ── Data ──
+\DTMsavenow{hoje}
+\newcommand{\datacompleta}{%
+  \DTMportuguesedisplaydate{\the\DTMyear}{\the\DTMmonth}{\the\DTMday}%
+}
+
+%% ── TikZ brasão ──
+\newcommand{\brasao}{%
+  \begin{tikzpicture}[scale=0.08]
+    \fill[blue!70!black] (0,0) circle (20);
+    \fill[white] (0,0) circle (18);
+    \fill[blue!70!black] (0,0) circle (16);
+    \fill[white] (0,0) circle (14);
+    \fill[green!60!black] (-4,2) -- (0,8) -- (4,2) -- cycle;
+    \fill[green!60!black] (-4,-2) -- (0,-8) -- (4,-2) -- cycle;
+    \fill[red!70!black] (-6,0) rectangle (6,1.5);
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+%% ══════════════════════════════════════════
+%% TOPO — Brasão + Identificação
+%% ══════════════════════════════════════════
+\begin{center}
+  \brasao\\[4pt]
+  {\LARGE\textbf{Prefeitura Municipal de Inajá}}\\
+  {\normalsize Estado do Paraná}\\[2pt]
+  {\small\textbf{Secretaria Municipal de Finanças}}\\[12pt]
+  \hrule
+\end{center}
+
+\vspace{0.6cm}
+
+%% ══════════════════════════════════════════
+%% TIMBRE DO OFÍCIO
+%% ══════════════════════════════════════════
+\begin{flushright}
+  \textbf{Ofício nº \_\_\_\_/2026}
+\end{flushright}
+
+\begin{minipage}[t]{0.65\textwidth}
+  \textbf{De:} Aleksandro Alves da Rocha Junior\\
+  \hspace*{1.7cm} Secretário Municipal de Finanças\\
+  \textbf{Para:} Excelentíssimo Senhor\\
+  \hspace*{1.7cm} \textbf{João Eder Aguilar}\\
+  \hspace*{1.7cm} Prefeito Municipal de Inajá -- PR
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+  \raggedleft
+  Inajá, \datacompleta
+\end{minipage}
+
+\vspace{0.6cm}
+
+%% ══════════════════════════════════════════
+%% ASSUNTO
+%% ══════════════════════════════════════════
+\begin{center}
+  \fbox{
+    \begin{minipage}{0.9\textwidth}
+      \centering
+      \textbf{Assunto:} Constatação de ausência de repasse das contribuições ao
+      Regime Próprio de Previdência Social (RPPS) e
+      providências necessárias.
+    \end{minipage}
+  }
+\end{center}
+
+\vspace{0.5cm}
+
+%% ══════════════════════════════════════════
+%% CORPO
+%% ══════════════════════════════════════════
+Senhor Prefeito,
+
+\vspace{0.3cm}
+
+Cumprimentando-o cordialmente, sirvo-me do presente para, no exercício das
+atribuições desta Secretaria Municipal de Finanças e em atenção ao dever
+legal de fiscalização e controle interno, \textbf{COMUNICAR} a Vossa
+Excelência a constatação de que as contribuições previdenciárias devidas ao
+Regime Próprio de Previdência Social (RPPS) deste Município
+\textbf{\textcolor{red}{NÃO VÊM SENDO REPASSADAS}} no(s) seguinte(s)
+período(s):
+
+\vspace{0.4cm}
+
+\begin{center}
+  \fcolorbox{red!50!black}{red!5!white}{
+    \begin{minipage}{0.8\textwidth}
+      \centering
+      \Large
+      \textbf{[ PERÍODO A SER INFORMADO ]}
+    \end{minipage}
+  }
+\end{center}
+
+\vspace{0.4cm}
+
+Tal omissão configura grave irregularidade à luz da legislação vigente,
+notadamente:
+
+\begin{itemize}
+  \item \textbf{Art. 40 da Constituição Federal} — que assegura o regime
+    próprio de previdência e exige o equilíbrio financeiro e atuarial;
+  \item \textbf{Lei Federal nº 9.717/1998} — que disciplina a organização e
+    o funcionamento dos RPPS;
+  \item \textbf{Lei Complementar nº 101/2000 (LRF)} — que trata da
+    responsabilidade na gestão fiscal e da transparência;
+  \item \textbf{Lei Municipal específica do RPPS} — que estabelece as
+    alíquotas e prazos de recolhimento.
+\end{itemize}
+
+\vspace{0.2cm}
+
+Ressalto que o não recolhimento poderá ensejar, além da imputação de
+débito atualizado com juros e multa, as seguintes consequências ao gestor:
+
+\begin{itemize}
+  \item \textbf{Multas} aplicadas pelo Tribunal de Contas do Estado do
+    Paraná (TCE-PR), podendo alcançar valores elevados e multa diária
+    por descumprimento;
+  \item \textbf{Rejeição das contas} municipais, com parecer prévio
+    desfavorável do TCE-PR e consequente inelegibilidade do gestor
+    (Lei Complementar nº 64/1990);
+  \item \textbf{Impedimento} de receber transferências voluntárias e
+    celebrar convênios com a União e o Estado;
+  \item \textbf{Responsabilização solidária} do ordenador de despesas
+    e do agente arrecadador.
+\end{itemize}
+
+\vspace{0.3cm}
+
+Diante do exposto, solicito a Vossa Excelência que:
+
+\begin{enumerate}
+  \item \textbf{Determine, com urgência}, a regularização integral dos
+    valores não repassados, com atualização monetária e juros legais,
+    podendo, se necessário, firmar parcelamento do débito junto ao RPMS;
+  \item \textbf{Oriente} esta Secretaria de Finanças quanto ao
+    procedimento a ser adotado para o recolhimento imediato;
+  \item \textbf{Adote} as providências administrativas para que cessem
+    as omissões futuras, sob pena de responsabilização fiscal e pessoal.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+Por fim, coloco esta Secretaria à disposição para prestar os
+esclarecimentos que se fizerem necessários e para auxiliar nas
+providências de regularização.
+
+\vspace{0.6cm}
+
+\begin{flushright}
+  Atenciosamente,
+\end{flushright}
+
+\vspace{0.8cm}
+
+\begin{center}
+  \rule{0.4\textwidth}{0.5pt}\\[2pt]
+  {\large\textbf{Aleksandro Alves da Rocha Junior}}\\
+  Secretário Municipal de Finanças\\
+  Prefeitura de Inajá -- PR
+\end{center}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.2cm}
+{\footnotesize
+  \textbf{Ciente:} \hrulefill \\
+  \textbf{Data:} \_\_\_\_ / \_\_\_\_ / \_\_\_\_ \hfill
+  \textbf{Assinatura:} \hrulefill
+}
+
+\end{document}

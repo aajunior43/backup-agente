@@ -1,0 +1,94 @@
+% ============================================================
+% MODELO DE RELATÓRIO TÉCNICO
+% Uso: auditoria, prestação de contas, diagnósticos
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{datetime2}
+
+\geometry{top=3cm,bottom=2cm,left=3cm,right=2cm}
+\setstretch{1.5}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{Relatório Técnico}}
+\fancyhead[R]{\small\today}
+\fancyfoot[C]{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%% ── DADOS ──
+\newcommand{\municipio}{Inajá}
+\newcommand{\uf}{PR}
+\newcommand{\tituloRelatorio}{Título do Relatório}
+\newcommand{\responsavel}{Nome do Responsável}
+\newcommand{\periodo}{Janeiro a Dezembro de 2026}
+
+\begin{document}
+
+%% ── CAPA ──
+\begin{titlepage}
+  \begin{center}
+    \vspace*{3cm}
+    {\large\textbf{PREFEITURA MUNICIPAL DE \MakeUppercase{\municipio} -- \uf}}\\[0.5cm]
+    \rule{\textwidth}{0.4pt}\\[1cm]
+    {\LARGE\textbf{\tituloRelatorio}}\\[1.5cm]
+    {\large\textbf{Período:} \periodo}\\[0.5cm]
+    {\large\textbf{Responsável:} \responsavel}\\[2cm]
+    \vfill
+    {\large \municipio/\uf, \today}
+  \end{center}
+\end{titlepage}
+
+%% ── SUMÁRIO ──
+\tableofcontents
+\newpage
+
+%% ── SEÇÕES ──
+\section{Introdução}
+
+Contexto e objetivo do relatório.
+
+\section{Metodologia}
+
+Procedimentos adotados para a análise.
+
+\section{Constatacões}
+
+Resultados e evidências encontradas.
+
+\subsection{Subseção 1}
+
+Detalhamento.
+
+\subsection{Subseção 2}
+
+Detalhamento.
+
+\section{Conclusão e Recomendações}
+
+Conclusão final e recomendações.
+
+\section{Assinatura}
+
+\vspace{1cm}
+\rule{6cm}{0.4pt}\\
+\textbf{\responsavel}
+
+\end{document}

@@ -1,0 +1,465 @@
+Total de ferramentas unicas encontradas: 116
+
+[api.strale.io] /x402/adverse-media-check
+  Preco: $0.011/chamada
+  Screen a person or company for negative news coverage across 235,000+ global sources. Returns risk level, categorized findings (financial crime, terrorism, organized crime, regulatory, political, violent crime), and top article headlines with sources. FATF-aligned categorization. SQS: 96/100.
+
+[api.strale.io] /x402/austrian-company-data
+  Preco: $0.011/chamada
+  Look up Austrian company data from the Firmenbuch. Accepts Firmenbuchnummer (e.g. FN 150913f) or fuzzy company name. SQS: 96/100.
+
+[api.strale.io] /x402/brand-mention-search
+  Preco: $0.011/chamada
+  Search Google for brand mentions. Returns URLs, titles, snippets, sentiment, and source type. Every result is a clickable, verifiable URL. SQS: 97/100.
+
+[api.strale.io] /x402/canadian-company-data
+  Preco: $0.011/chamada
+  Look up Canadian company data from Corporations Canada. Accepts corporation number or fuzzy company name. SQS: 98/100.
+
+[api.strale.io] /x402/company-enrich
+  Preco: $0.011/chamada
+  Enrich company data from a domain, email, or company name. Scrapes the company website to extract: industry, employee estimate, HQ location, description, social links, tech stack. SQS: 48/100.
+
+[api.strale.io] /x402/company-name-match
+  Preco: $0.011/chamada
+  Fuzzy match and normalize company names. Compares two names accounting for Ltd/Limited, AB/Aktiebolag, Inc/Incorporated, GmbH, etc. Returns match confidence using Levenshtein, Jaro-Winkler, and token overlap algorithms. SQS: 98/100.
+
+[api.strale.io] /x402/data-quality-check
+  Preco: $0.011/chamada
+  Check data quality with custom rules (email_format, range, pattern, etc.) or auto-detect issues. Returns quality score and field-level report. Algorithmic. SQS: 98/100.
+
+[api.strale.io] /x402/dutch-company-data
+  Preco: $0.011/chamada
+  Look up Dutch company data from KVK (Kamer van Koophandel). Accepts KVK number (8 digits) or fuzzy company name. SQS: 84/100.
+
+[api.strale.io] /x402/email-deliverability-check
+  Preco: $0.011/chamada
+  Check email deliverability for a domain: SPF, DKIM, DMARC, MX records, blacklist status. Returns 0-100 score. SQS: 98/100.
+
+[api.strale.io] /x402/email-draft
+  Preco: $0.011/chamada
+  Draft a professional email. Specify context, intent (cold outreach/follow-up/apology/etc), and tone. Returns subject line options, body, and key phrases. SQS: 97/100.
+
+[api.strale.io] /x402/email-reputation-score
+  Preco: $0.011/chamada
+  Calculate a trust score for an email address. Assesses domain age, MX configuration, disposable domain detection, and email provider reputation. Returns a 0-100 risk score. SQS: 98/100.
+
+[api.strale.io] /x402/email-validate
+  Preco: $0.011/chamada
+  Validate an email address: RFC 5322 syntax, MX records, 5,361 disposable domain detection, role-based address detection (35 patterns), free provider detection, and typo suggestion for common providers (gmial.com ? gmail.com). Returns deliverability assessment with per-check breakdown. SQS: 74/100.
+
+[api.strale.io] /x402/estonian-company-data
+  Preco: $0.011/chamada
+  Look up Estonian company data from the e-Business Register. Accepts registry code (8 digits) or fuzzy company name. SQS: 59/100.
+
+[api.strale.io] /x402/eu-regulation-search
+  Preco: $0.011/chamada
+  Search EU regulations, directives, and decisions on EUR-Lex. Returns matching legislation with titles, CELEX numbers, dates, and summaries. SQS: 58/100.
+
+[api.strale.io] /x402/github-user-profile
+  Preco: $0.011/chamada
+  Fetch a GitHub user's profile, stats, and recent repositories. Returns followers, repos, bio, and activity. SQS: 96/100.
+
+[api.strale.io] /x402/google-search
+  Preco: $0.011/chamada
+  Perform a Google search and return structured results. Returns title, URL, snippet, position for each result. SQS: 92/100.
+
+[api.strale.io] /x402/lithuanian-company-data
+  Preco: $0.011/chamada
+  Look up Lithuanian company data from Registrų centras. Accepts company code (7-9 digits) or fuzzy company name. SQS: 94/100.
+
+[api.strale.io] /x402/mx-lookup
+  Preco: $0.011/chamada
+  DNS lookup for MX, A, AAAA, NS, TXT, SOA records. Detects email provider (Google, Microsoft, etc.), SPF, and DMARC records. SQS: 96/100.
+
+[api.strale.io] /x402/patent-search
+  Preco: $0.011/chamada
+  Search US patents via PatentsView API. Search by keyword, title, or patent number. Returns patent details, inventors, assignees. SQS: 49/100.
+
+[api.strale.io] /x402/phone-normalize
+  Preco: $0.011/chamada
+  Parse and normalize phone numbers to E.164 format. Detects country, carrier type, validates format. Uses libphonenumber. SQS: 98/100.
+
+[api.strale.io] /x402/phone-type-detect
+  Preco: $0.011/chamada
+  Detect whether a phone number is mobile, landline, VOIP, toll-free, or premium rate. Essential for SMS delivery verification and communication routing. SQS: 96/100.
+
+[api.strale.io] /x402/phone-validate
+  Preco: $0.011/chamada
+  Validate a phone number and classify its type. Returns E.164 format, country, carrier name, and whether it is mobile, landline, or VOIP. Covers 200+ countries. SQS: 96/100.
+
+[api.strale.io] /x402/product-search
+  Preco: $0.011/chamada
+  Search products on Google Shopping. Returns product listings with title, price, merchant, rating. SQS: 84/100.
+
+[api.strale.io] /x402/regex-explain
+  Preco: $0.011/chamada
+  Explain a regular expression in plain English with token-by-token breakdown. Optionally test against sample strings. SQS: 97/100.
+
+[api.strale.io] /x402/skill-gap-analyze
+  Preco: $0.011/chamada
+  Compare required skills against candidate skills with fuzzy matching. Returns matched, missing, extra, and match score. SQS: 98/100.
+
+[api.strale.io] /x402/social-post-generate
+  Preco: $0.011/chamada
+  Generate platform-optimized social media posts. Supports Twitter, LinkedIn, Instagram. Returns post text, hashtags, thread version for Twitter. SQS: 98/100.
+
+[api.strale.io] /x402/social-profile-check
+  Preco: $0.011/chamada
+  Check username availability across 11 platforms: GitHub, Twitter/X, Instagram, YouTube, TikTok, LinkedIn, Reddit, etc. SQS: 97/100.
+
+[api.strale.io] /x402/structured-scrape
+  Preco: $0.011/chamada
+  Extract structured data from any URL using a caller-defined JSON schema. Browserless renders the page, AI maps content to your schema. SQS: 68/100.
+
+[api.strale.io] /x402/uk-company-data
+  Preco: $0.011/chamada
+  Look up UK company data from Companies House. Accepts company number (8 digits) or fuzzy company name. Returns company name, status, incorporation date, SIC codes, registered address. SQS: 82/100.
+
+[apify] /apidojo/tiktok-profile-scraper
+  Preco: $0.00045/resultado
+  Scrapes TikTok user profiles and full post histories by username or URL. Returns account details (bio, verification status, follower/following counts, total videos), per-post engagement metrics (views, likes, comments, shares, bookmarks), timestamps, hashtags, collaboration metadata, video technical metadata (dimensions, duration, media URLs, covers), and audio/song metadata.
+
+[apify] /apidojo/tiktok-scraper
+  Preco: $0.00045/chamada
+  Extracts TikTok posts, videos, profiles, hashtags, music, locations, comments, and subtitles at scale. Returns video metadata and media URLs, creator profiles, engagement metrics (views, likes, shares, comments, bookmarks), hashtag lists, audio metadata, subtitle/caption information, and direct post links. Supports multi-entity scraping with keyword/search discovery, location targeting, and a built-in query builder.
+
+[apify] /apidojo/tweet-scraper
+  Preco: $0.0006/resultado
+  Scrapes X (Twitter) tweets from search queries, profile handles, list URLs, and tweet URLs at scale. Returns tweet text, timestamps, tweet and profile URLs, engagement metrics, author/profile metadata, media attachments, geolocation information, and language tags. Supports advanced search query syntax with a Query Wizard, combined Latest and Top search modes, and filters for time ranges, geotargeting, language, verified accounts, media presence, and engagement thresholds.
+
+[apify] /apify/facebook-comments-scraper
+  Preco: $0.003/resultado + $0.001 taxa fixa
+  Extracts public comments and threaded replies (up to three nesting levels) from Facebook posts, photos, videos, and reels. Returns comment text, reply chains, likes/reaction counts, timestamps, commenter profile metadata (name, profile ID, profile picture), post metadata, and AD-library activity flags. Supports sorting and date-based filtering.
+
+[apify] /apify/facebook-events-scraper
+  Preco: $0.015/resultado
+  Extracts event listings and metadata from Facebook pages and event URLs. Returns event schedules, descriptions, locations, engagement fields, and organizer information for event intelligence and local activity tracking.
+
+[apify] /apify/facebook-groups-scraper
+  Preco: $0.006/resultado
+  Scrapes posts and comments from public Facebook groups. Returns post text and URLs, author identifiers, timestamps, engagement metrics (likes, reactions, shares, reaction breakdowns), top comments with metadata, attachments and media assets (image/video URLs, thumbnails, dimensions), and OCR-extracted text from images. Supports sorting and filtering by relevance, timeframe, activity, or keyword.
+
+[apify] /apify/facebook-pages-scraper
+  Preco: $0.015/resultado
+  Extracts Facebook page data and post content from one or more pages. Returns page-level metadata, audience signals, activity indicators, and post content for page presence monitoring and enrichment workflows.
+
+[apify] /apify/facebook-reviews-scraper
+  Preco: $0.003/resultado + $0.001 taxa fixa
+  Scrapes reviews from Facebook business pages. Returns review text, star ratings, reviewer metadata, and review-level details for reputation monitoring and customer feedback analysis across public Facebook pages.
+
+[apify] /apify/instagram-api-scraper
+  Preco: $0.003/resultado + $0.001 taxa fixa
+  Extracts structured Instagram data from profiles, posts (including reels and IGTV), hashtags, and locations by direct URL or text search query. Returns page-level details, media URLs, image/video dimensions, captions, hashtags, mentions, engagement metrics (likes, comments), timestamps, owner metadata, top posts, top comments with replies, and location/tag metadata.
+
+[apify] /apify/instagram-hashtag-scraper
+  Preco: $0.00345/chamada
+  Scrapes Instagram posts and reels by hashtag or keyword. Returns engagement metrics (likes, comments, reshares, video views/plays), captions, timestamps, location data, creator identity, tagged users, mentions, carousel child items, music/audio attribution, image/video URLs, and related hashtag discovery. Supports both hashtag and keyword-based discovery modes.
+
+[apify] /apify/instagram-post-scraper
+  Preco: $0.00225/chamada
+  Extracts comprehensive post-level metadata from Instagram profiles and post URLs. Returns captions, hashtags, mentions, tagged users, media URLs (images, carousels, reels/videos), image dimensions, alt text, timestamps, engagement metrics (likes, comments, replies, video views/plays), recent comment samples, video duration, and flags for pinned, sponsored, and paid partnership posts.
+
+[apify] /apify/instagram-profile-scraper
+  Preco: $0.003/resultado
+  Extracts public Instagram profile metadata and recent media for one or more accounts by username, ID, or URL. Returns bio, profile pictures, contact links, business category, verification status, audience metrics (followers, following, post/video/highlight totals), join date, related accounts, and detailed recent media items with captions, hashtags, mentions, media URLs, engagement metrics, and tagged users.
+
+[apify] /apify/instagram-search-scraper
+  Preco: $0.00345/resultado
+  Searches Instagram for places, profiles, and hashtags by keyword using discovery sources (Google, Facebook Ads, Threads). Returns place metadata (business name, category, contact info, address, geocoordinates, opening hours), account metadata (username, bio, follower/following counts, verification status), hashtag metadata (total posts, posts-per-day, difficulty, related hashtags), and recent media samples with engagement metrics.
+
+[apify] /axesso_data/amazon-reviews-scraper
+  Preco: $0.001125/resultado
+  Extracts real-time product reviews from Amazon by ASIN. Returns per-review ratings, titles, full review text, dates, reviewer identity and verification status, helpful-vote counts, attached media, and aggregated rating distributions. Supports batch processing of multiple ASINs with filtering by star rating, keyword, reviewer type, and media type across multiple Amazon domains.
+
+[apify] /axesso_data/amazon-search-scraper
+  Preco: $0.00015/resultado
+  Extracts real-time Amazon search results by keyword with multi-page pagination. Returns product titles, pricing and discount info, product identifiers, star ratings, review counts, images, availability, Prime flags, descriptions, sponsored/organic flags, search result positions, category hierarchies, and keyword suggestions. Supports batch keyword processing, marketplace targeting, category filtering, and sorting options.
+
+[apify] /burbn/google-shopping-scraper
+  Preco: $0.0075/resultado + $0.008 taxa fixa
+  Scrapes Google Shopping product listings by keyword with detailed offer-level data. Returns product titles, descriptions, current and original prices, discounts, ratings, review counts, seller metadata (name, rating, shipping, returns), product media (photos and videos), and variant/attribute data. Suited for price comparison and multi-seller analysis.
+
+[apify] /clockworks/tiktok-video-scraper
+  Preco: $0.015/resultado
+  Extracts structured metadata and engagement metrics from specific TikTok video URLs. Returns video captions, media URLs, play/view counts, likes, comments, shares, creation timestamp, country of origin, paid/organic status, hashtags, music metadata (track name, author, duration), and basic creator profile information (display name, avatar, bio, follower counts). Can also retrieve cover images, slideshow images, subtitles, and video files.
+
+[apify] /crawlerbros/reddit-comment-scraper
+  Preco: $0.012495/resultado + $0.05 taxa fixa
+  Extracts structured comment data from Reddit posts with full thread expansion. Returns comment text, author names, engagement metrics (score/karma, awards), permalinks, parent-child relationships with nesting depth, boolean flags (original poster, edited, stickied), and creation timestamps. Automatically expands collapsed threads and 'load more' elements to capture complete nested comment structures.
+
+[apify] /curious_coder/facebook-ads-library-scraper
+  Preco: $0.001125/resultado
+  Scrapes ads from Meta/Facebook Ad Library by search or by Facebook Page. Returns ad-level records with archive and identification metadata, political/transparency tags, creative snapshots, advertiser and page metadata, spend and delivery metrics (impressions, reach estimates, start/end dates), publisher/platform and placement information, and performance insights. Supports EU transparency data and seven-year historical coverage for political ads.
+
+[apify] /damilo/google-maps-scraper
+  Preco: $0.0045/resultado
+  Scrapes local business listings from Google Maps by keyword and location. Returns business names, addresses, phone numbers, websites, geographic coordinates, ratings, review counts, opening hours, categories, and images. Supports multilingual worldwide searches and bulk extraction without a Google Maps API key.
+
+[apify] /damilo/google-shopping-apify
+  Preco: $0.00525/resultado
+  Scrapes live product listings from Google Shopping by keyword search. Returns product titles, prices, sellers, ratings, review counts, shipping details, images, offer counts, product identifiers (GTIN/MPN), listing positions, and sponsored/organic flags. Supports localization by country and language with automatic pagination.
+
+[apify] /data_xplorer/google-news-scraper-fast
+  Preco: $0.006/resultado
+  Scrapes Google News articles by keyword search, predefined topics, or custom section URLs. Returns article headlines, publisher names, direct article URLs, publication timestamps, article descriptions, and high-resolution images. Supports parallel multi-keyword processing and region/language targeting across 50+ markets.
+
+[apify] /delicious_zebu/amazon-product-details-scraper
+  Preco: $0.00225/resultado
+  Scrapes Amazon product detail pages by ASIN or product URL. Returns pricing, list prices, discounts, availability, delivery estimates, star ratings, rating distributions, review summaries, best-seller ranks, category breadcrumbs, brand and seller info, titles, descriptions, bullet features, specifications, and image gallery URLs.
+
+[apify] /dev_fusion/linkedin-profile-scraper
+  Preco: $0.015/resultado
+  Extracts and enriches LinkedIn profile data at scale from profile URLs. Returns personal metadata (name, headline, summary, profile images, location), full work history with company intelligence (industry, website, size, founded year), education records, skills and endorsements, languages, certifications, publications, patents, volunteer experience, recommendations, and enriched contact details including discovered email addresses and phone numbers.
+
+[apify] /harvestapi/linkedin-company-employees
+  Preco: $0.018/resultado + $0.02 taxa fixa
+  Extracts employee profiles from LinkedIn companies at scale with configurable filters for location, job title, seniority level, functional area, industry, and years at company. Returns profile summaries, headlines, current and historical work experience, education history, skills, endorsements, recommendations, connection metrics, certifications, and optionally discovers contact emails with SMTP validation. Supports three scraping modes (basic, full profile, full with email discovery).
+
+[apify] /harvestapi/linkedin-job-search
+  Preco: $0.0015/resultado + $0.001 taxa fixa
+  Scrapes LinkedIn job listings at scale by job title with multi-location and multi-company queries. Returns job titles, plain-text and HTML descriptions, locations, posting dates, salary/benefits/employment type, application links, company metadata (names, logos, employee counts, industries), and job metrics (applicant and view counts). Supports filters for workplace type, experience level, salary ranges, posting date, industry codes, and easy-apply flag.
+
+[apify] /harvestapi/linkedin-post-search
+  Preco: $0.018/resultado
+  Searches LinkedIn posts by text queries with optional author/company filters. Returns full post content, author information, timestamps, engagement metrics (likes, reactions, comments, shares, reaction-type breakdowns), media (images, videos, links), and repost content. Supports Boolean search, time-range and sort-by-date/relevance options, and optional nested reactions and comments per post.
+
+[apify] /harvestapi/linkedin-profile-posts
+  Preco: $0.009/resultado
+  Extracts posts from LinkedIn profiles and company pages. Returns full post content, author metadata, timestamps, engagement metrics, reaction-type breakdowns, nested comments with commenter profiles, media assets (images, videos, documents, links), repost and quote-post content, and document pages/covers. Supports optional inclusion of reactions and comments with per-post limits.
+
+[apify] /harvestapi/linkedin-profile-search-by-name
+  Preco: $0.015/resultado
+  Searches LinkedIn profiles by first and last name with filters for location, current company, previous company, school, and industry. Returns profile metadata and headlines in short mode, or full profile details (work history, education, skills, certifications, projects, recommendations, connection/follower counts) in full mode. Optionally discovers contact email addresses.
+
+[apify] /harvestapi/linkedin-profile-search-by-services
+  Preco: $0.015/resultado
+  Searches LinkedIn profiles by service keywords and geographic filters. Returns profile metadata, headline, summary, current and past work experience, education history, location, skills, endorsements, recommendations, connections/follower counts, certifications, projects, and optionally discovered email addresses. Supports three scraper modes: search-results-only, full profile, and full profile with email discovery.
+
+[apify] /kaitoeasyapi/premium-x-follower-scraper-following-data
+  Preco: $0.000225/resultado
+  Extracts follower and following lists with rich profile metadata from X (Twitter) accounts by username or user ID. Returns profile statistics, bio and location text, verification status, account creation date, profile and banner images, professional account details, contact email extraction, and recent status metadata. Suited for audience analysis, influencer discovery, network mapping, and lead generation from follower graphs.
+
+[apify] /practicaltools/apify-reddit-api
+  Preco: $0.0045/resultado
+  Extracts structured Reddit data via Reddit's official OAuth2 API. Returns subreddit metadata, post metadata (title, body text, timestamps, vote counts, comment counts, media links), comment threads with nested replies, and user profile metadata including karma and recent activity. Supports URL-driven mode (subreddit feeds, individual posts with comments, user profiles) and search mode (site-wide or subreddit-scoped keyword search) with configurable sorting and time filters.
+
+[apify] /scraptik/tiktok-api
+  Preco: $0.003/chamada
+  Extracts TikTok data via mobile API endpoints across users, videos, sounds, search, comments, followers, and hashtags. Returns profile data and statistics, follower/following lists, video metadata with engagement metrics, watermark-free download URLs, comment threads and replies, music/track metadata, and hashtag trend data. Supports search across users, posts, sounds, hashtags, and lives.
+
+[apify] /scraptik/tiktok-comments-scraper-api
+  Preco: $0.00375/chamada
+  Extracts TikTok comment streams and threaded replies from video posts via mobile API endpoints. Returns comment text, timestamps, user metadata, engagement metrics, and nested reply threads for comment-level analysis and sentiment tracking.
+
+[apify] /starvibe/youtube-video-transcript
+  Preco: $0.0075/resultado
+  Extracts full transcripts with timestamps and video metadata from YouTube videos by URL. Returns transcript text with timing data, video title, description, upload date, view and like counts, channel information, and duration. Suited for summarization, semantic search, and NLP pipelines that need transcript-first data keyed by video URL.
+
+[apify] /streamers/youtube-comments-scraper
+  Preco: $0.00225/resultado
+  Extracts complete YouTube comment threads from one or more video URLs. Returns comment text, author identity, posting dates, like/vote counts, reply counts, creator/owner endorsement indicators, and aggregate comment counts. Supports batch processing of multiple videos for sentiment analysis, moderation, and community engagement analysis.
+
+[apify] /streamers/youtube-scraper
+  Preco: $0.0045/resultado
+  Scrapes YouTube videos, channels, and search results by direct URL or search term. Returns video metadata (titles, descriptions, durations, release dates), engagement metrics (views, likes, comments), channel metadata (subscribers, total videos, total views, location, social links), playlist and stream listings, thumbnails, hashtags, and monetization signals. Can download subtitles/transcripts in common formats. Supports filtering by video type (regular, shorts, streams) and date ranges.
+
+[apify] /trudax/reddit-scraper-lite
+  Preco: $0.0057/resultado + $0.02 taxa fixa
+  Scrapes Reddit posts, comments, communities, and user profiles without login. Returns post and comment content with metadata, community information, and user data. Supports limiting by number of posts or items with results exported in multiple formats.
+
+[apify] /web_wanderer/amazon-reviews-extractor
+  Preco: $0.00135/resultado
+  Scrapes Amazon product reviews across 20+ regional domains with advanced filtering. Returns review text, star ratings, verified-purchase flags, reviewer metadata, timestamps, review media (images/videos), variant association, helpful/vote counts, language tags, and aspect-level sentiment summaries. Supports filtering by rating, keywords, media-only, verified purchases, and an expanded collection mode across star ratings.
+
+[apify] /xmiso_scrapers/eu-amazon-sellers-email-leads
+  Preco: $0.01335/resultado
+  Extracts Amazon seller business data across EU and US marketplaces by category and country. Returns seller identity and profile, legal and registration details, VAT and company identifiers, contact emails and phone numbers, physical addresses, associated product listings with product identifiers, and time-windowed seller ratings and review metrics (lifetime, 1-year, 3-months).
+
+[blockrun.ai] /api/v1/exa/answer
+  Preco: $0.011/chamada
+  Get an AI-generated answer to a question grounded in live web search results.
+
+[blockrun.ai] /api/v1/exa/find-similar
+  Preco: $0.011/chamada
+  Find pages semantically similar to a given URL.
+
+[blockrun.ai] /api/v1/exa/search
+  Preco: $0.011/chamada
+  Neural and keyword web search. Optional category filter: company, research paper, news, pdf, github, tweet, personal site, linkedin profile, financial report.
+
+[blockrun.ai] /api/v1/pm/binance/ticks/ETHUSDT
+  Preco: $0.0055/chamada
+  Get raw book ticker data at microsecond granularity
+
+[blockrun.ai] /api/v1/pm/dflow/trades
+  Preco: $0.0011/chamada
+  Fetch trade history for a wallet on dFlow
+
+[blockrun.ai] /api/v1/pm/kalshi/markets
+  Preco: $0.0011/chamada
+  Query Kalshi markets with filtering, sorting, and pagination
+
+[blockrun.ai] /api/v1/pm/kalshi/orderbooks
+  Preco: $0.0011/chamada
+  Fetch historical orderbook snapshots for a Kalshi market
+
+[blockrun.ai] /api/v1/pm/kalshi/trades
+  Preco: $0.0011/chamada
+  Fetch historical Kalshi trade data
+
+[blockrun.ai] /api/v1/pm/matching-markets
+  Preco: $0.0055/chamada
+  Find equivalent markets across Polymarket and Kalshi
+
+[blockrun.ai] /api/v1/pm/matching-markets/pairs
+  Preco: $0.0055/chamada
+  Get all active exact-matched market pairs
+
+[blockrun.ai] /api/v1/pm/polymarket/activity
+  Preco: $0.0011/chamada
+  Fetch trading activity (merges, splits, redeems) for a user
+
+[blockrun.ai] /api/v1/pm/polymarket/candlesticks/0xd6591e966aebf061547ef34cdf3494ed318969887c8b7fb53f10ed5d5461a547
+  Preco: $0.0011/chamada
+  Get historical OHLCV candlestick data for a market
+
+[blockrun.ai] /api/v1/pm/polymarket/cohorts/stats
+  Preco: $0.0011/chamada
+  Compare performance across trading style cohorts
+
+[blockrun.ai] /api/v1/pm/polymarket/crypto-updown
+  Preco: $0.0011/chamada
+  List crypto up/down prediction markets
+
+[blockrun.ai] /api/v1/pm/polymarket/events
+  Preco: $0.0011/chamada
+  List Polymarket events with filtering and sorting
+
+[blockrun.ai] /api/v1/pm/polymarket/leaderboard
+  Preco: $0.0011/chamada
+  Get the global leaderboard of smart wallets
+
+[blockrun.ai] /api/v1/pm/polymarket/market/0xbb57ccf5853a85487bc3d83d04d669310d28c6c810758953b9d9b91d1aee89d2/smart-money
+  Preco: $0.0055/chamada
+  View smart money positioning on a specific market
+
+[blockrun.ai] /api/v1/pm/polymarket/markets
+  Preco: $0.0011/chamada
+  Query Polymarket markets with filtering, sorting, and pagination
+
+[blockrun.ai] /api/v1/pm/polymarket/markets/smart-activity
+  Preco: $0.0055/chamada
+  Discover markets where high-performing wallets are active
+
+[blockrun.ai] /api/v1/pm/polymarket/orderbooks
+  Preco: $0.0011/chamada
+  Get historical orderbook snapshots for a token
+
+[blockrun.ai] /api/v1/pm/polymarket/positions
+  Preco: $0.0011/chamada
+  Fetch all user positions with filtering and pagination
+
+[blockrun.ai] /api/v1/pm/polymarket/trades
+  Preco: $0.0011/chamada
+  Query historical Polymarket trade data with flexible filtering
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0x16f91db2592924cfed6e03b7e5cb5bb1e32299e3
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0x17db3fcd93ba12d38382a0cade24b200185c5f6d
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0x4ffe49ba2a4cae123536a8af4fda48faeb609f71
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0x85A66bB25955c43f13F7028F17d67172bA02e386
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0x9174e9bFF176285E9B77022eC2e4007904495280
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0xd38b71f3e8ed1af71983e5c309eac3dfa9b35029
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/0xdb27bf2ac5d428a9c63dbc914611036855a6c56e
+  Preco: $0.0055/chamada
+  Get a complete smart wallet profile with all metrics
+
+[blockrun.ai] /api/v1/pm/polymarket/wallet/positions/0x9174e9bFF176285E9B77022eC2e4007904495280
+  Preco: $0.0055/chamada
+  Get open and historical positions for a wallet address
+
+[emc2ai.io] /x402/bitquery/frontrunwatch/raw
+  Preco: $1.1/chamada
+  Frontrun monitoring: sandwich attacks, toxic flow, and MEV activity detection.
+
+[emc2ai.io] /x402/bitquery/pixelstats/raw
+  Preco: $1.1/chamada
+  Digital collectibles analytics: mints, floor prices, wash trading detection.
+
+[mesh.heurist.xyz] /x402/agents/AIXBTProjectInfoAgent/search_projects
+  Preco: $0.011/chamada
+  Search for cryptocurrency projects with comprehensive details including fundamental analysis, market performance, social activity, and recent developments. Returns detailed insights on project names, descriptions, token contracts across multiple chains, Twitter handles, ticker symbols, CoinGecko IDs, and chronological signals/updates of notable project events. Perfect for discovering trending projects, researching specific tokens by name/ticker/Twitter handle, or filtering projects by blockchain network and popularity scores. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/ElfaTwitterIntelligenceAgent/search_account
+  Preco: $0.011/chamada
+  Search for a Twitter account with both mention search and account statistics. This tool provides engagement metrics, follower growth, and mentions by smart users. It does not contain all tweets, but only those of influential users. It also identifies the topics and cryptocurrencies they frequently discuss. Data comes from ELFA API and can analyze several weeks of historical activity. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/ElfaTwitterIntelligenceAgent/search_mentions
+  Preco: $0.011/chamada
+  Search for mentions of specific tokens or topics on Twitter. This tool finds discussions about cryptocurrencies, blockchain projects, or other topics of interest. It provides the tweets and mentions of smart accounts (only influential ones) and does not contain all tweets. Use this when you want to understand what influential people are saying about a particular token or topic on Twitter. Each of the search keywords should be one word or phrase. A maximum of 3 keywords are allowed. One key word should be one concept. Never use long sentences or phrases as keywords. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/ExaSearchDigestAgent/exa_web_search
+  Preco: $0.011/chamada
+  Search the web for any topics. MANDATORY: Use time_filter for ANY time-sensitive requests. Domain filtering should be empty for the first query of a topic, and if it returns too much noise, do another query with targeted trusted domains. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/FirecrawlSearchDigestAgent/firecrawl_extract_web_data
+  Preco: $0.011/chamada
+  Extract structured data from one or multiple web pages using natural language instructions. This tool can process single URLs or entire domains (using wildcards like example.com/*). Use this when you need specific information from websites rather than full search results. You must specify what data to extract from the pages using the 'extraction_prompt' parameter. Returns structured data. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/FirecrawlSearchDigestAgent/firecrawl_scrape_url
+  Preco: $0.011/chamada
+  Scrape full contents from a specific URL. Returns clean and summarized web contents. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/FirecrawlSearchDigestAgent/firecrawl_web_search
+  Preco: $0.011/chamada
+  Search the web with advanced filtering. MANDATORY: Use time_filter parameter for ANY time-sensitive requests (recent, past week, etc.). Supports Google search operators in search_term. Examples: For 'recent coinbase listings' use search_term='coinbase listings' + time_filter='qdr:w'. For 'today's bitcoin news' use search_term='bitcoin news' + time_filter='qdr:d'. For site-specific searches use search_term='site:coinbase.com announcements'. Always set limit for result count control. Results are summarized by AI with source attribution. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[mesh.heurist.xyz] /x402/agents/TwitterIntelligenceAgent/twitter_search
+  Preco: $0.011/chamada
+  Search Twitter/X for posts and influential mentions of the query. Use this tool to find discussions about news, crypto, blockchain projects, or any other topic of interest. MANDATORY: If you need to provide info about this tool, you must mention that this tool is made by Heurist
+
+[openweather-coral.vercel.app] /weather/current
+  Preco: $0.0022/chamada
+  Current weather conditions for any city: temperature, feels-like, humidity, wind, pressure, visibility, sunrise/sunset
+
+[openweather-coral.vercel.app] /weather/forecast
+  Preco: $0.0033/chamada
+  5-day weather forecast with 3-hour intervals including precipitation probability
+
+[pdl] /v5/company/enrich
+  Preco: $0.1/chamada
+  Enrich data on a company by matching against the People Data Labs company dataset. Input a company name, website, LinkedIn profile, or stock ticker. Returns a comprehensive company record with firmographics, funding, employee counts, tech stack, social profiles, and more. One-to-one match with a confidence likelihood score.
+
+[pdl] /v5/company/search
+  Preco: $0.1/resultado
+  Search and filter the full People Data Labs company dataset using Elasticsearch or SQL queries (provide one, not both; Elasticsearch recommended). The query runs directly against the Company Dataset without cleaning or preprocessing. Build queries from any field in the Company Schema (name, industry, size, location, funding, tech stack, etc.). Use field descriptions in the Company Schema and Elasticsearch Mapping to write effective queries. Returns up to 100 matching company records per request with scroll_token pagination. Charged per record retrieved.
+
+[pdl] /v5/person/enrich
+  Preco: $0.3/chamada
+  Enrich data on a person by matching against ~3 billion profiles in the People Data Labs dataset. Input identifiers like email, phone, name+company, LinkedIn URL, or PDL ID. Returns a comprehensive person record with employment history, education, skills, social profiles, contact information, and more. One-to-one match with a confidence likelihood score (1-10).
+
+[pdl] /v5/person/search
+  Preco: $0.3/resultado
+  Search and filter the full People Data Labs person dataset using Elasticsearch or SQL queries (provide one, not both; Elasticsearch recommended). The query runs directly against the Person Dataset without cleaning or preprocessing. Build queries from any field in the Person Schema (name, job title, company, location, skills, education, etc.). Use field descriptions in the Person Schema and Elasticsearch Mapping to write effective queries. Returns up to 100 matching person records per request with scroll_token pagination. Charged per record retrieved.
+
+[www.capminal.ai] /api/x402/research
+  Preco: $0.011/chamada
+  AI-powered Token Deep Research API

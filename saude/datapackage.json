@@ -1,0 +1,9 @@
+{
+  "name": "saude",
+  "title": "Saude",
+  "resources": [
+    {
+      "path": "data.duckdb"
+    }
+  ]
+}

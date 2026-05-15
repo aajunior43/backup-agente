@@ -1,0 +1,37 @@
+# Dependências
+node_modules/
+.env
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# LaTeX auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# DuckDB (arquivos grandes)
+Prefeitura/data.duckdb
+saude/data.duckdb
+
+# Secrets
+.env.*
+**/.env

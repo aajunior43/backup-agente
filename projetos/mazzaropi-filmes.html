@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amácio Mazzaropi — Filmografia Completa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600&display=swap');
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  :root{
+    --neo-bg:#e8e1d5;
+    --neo-shadow-dark:rgba(156,141,117,.45);
+    --neo-shadow-light:rgba(255,252,247,.85);
+    --text-primary:#3d3528;
+    --text-muted:#8a7e6e;
+    --gold-warm:#b8860b;
+    --accent-red:#a05242;
+    --accent-green:#5a8a6a;
+    --accent-blue:#6082a0;
+    --bg-card:#ece6da;
+    --bg-stat:#e5dfd2;
+  }
+
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--neo-bg);
+    color:var(--text-primary);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 20% 10%,rgba(180,160,130,.12),transparent 50%),
+      radial-gradient(circle at 85% 80%,rgba(180,150,100,.1),transparent 50%);
+  }
+
+  .hero{
+    padding:3.5rem 1.5rem 2.5rem;
+    text-align:center;
+  }
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background:var(--bg-card);
+    color:var(--text-muted);
+    padding:.4rem 1.2rem;
+    border-radius:30px;
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-bottom:1.5rem;
+    box-shadow:
+      5px 5px 12px var(--neo-shadow-dark),
+      -5px -5px 12px var(--neo-shadow-light);
+  }
+  .hero-icon{
+    width:100px;height:100px;
+    margin:0 auto 1.2rem;
+    background:var(--bg-card);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:3rem;
+    box-shadow:
+      8px 8px 18px var(--neo-shadow-dark),
+      -8px -8px 18px var(--neo-shadow-light),
+      inset 2px 2px 4px var(--neo-shadow-dark),
+      inset -2px -2px 4px var(--neo-shadow-light);
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-weight:900;
+    font-size:clamp(2.2rem,5.5vw,3.4rem);
+    color:var(--text-primary);
+    letter-spacing:.01em;
+    line-height:1.1;
+  }
+  .hero h1 span{color:var(--gold-warm)}
+  .hero .sub{
+    color:var(--text-muted);
+    font-size:.9rem;
+    margin-top:.6rem;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .hero .tagline{
+    color:var(--text-muted);
+    font-size:.95rem;
+    margin-top:1rem;
+    font-style:italic;
+    max-width:540px;
+    margin-left:auto;margin-right:auto;
+    line-height:1.7;
+  }
+
+  .stats{
+    display:flex;justify-content:center;
+    gap:1.4rem;flex-wrap:wrap;
+    padding:0 1rem 1rem;
+  }
+  .stat{
+    background:var(--bg-stat);
+    border-radius:14px;
+    padding:1rem 1.5rem;
+    text-align:center;
+    min-width:115px;
+    box-shadow:
+      6px 6px 14px var(--neo-shadow-dark),
+      -6px -6px 14px var(--neo-shadow-light);
+    transition:box-shadow .35s;
+  }
+  .stat:hover{
+    box-shadow:
+      inset 4px 4px 10px var(--neo-shadow-dark),
+      inset -4px -4px 10px var(--neo-shadow-light);
+  }
+  .stat-num{
+    font-family:'Playfair Display',serif;
+    font-weight:700;font-size:1.8rem;
+    color:var(--gold-warm);
+    line-height:1;
+  }
+  .stat-label{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--text-muted);
+    margin-top:.35rem;font-weight:600;
+  }
+
+  .timeline{
+    max-width:760px;
+    margin:2rem auto 0;
+    padding:0 1.2rem 3rem;
+  }
+  .decade{margin-bottom:3rem}
+
+  .decade-divider{
+    display:flex;align-items:center;
+    gap:.75rem;margin-bottom:1.4rem;
+  }
+  .decade-dot{
+    width:46px;height:46px;
+    background:var(--bg-card);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    box-shadow:
+      5px 5px 10px var(--neo-shadow-dark),
+      -5px -5px 10px var(--neo-shadow-light);
+  }
+  .decade-dot span{
+    font-family:'Playfair Display',serif;
+    font-weight:700;font-size:1rem;
+    color:var(--gold-warm);
+  }
+  .decade-line{
+    flex:1;height:3px;
+    border-radius:2px;
+    background:var(--bg-card);
+    box-shadow:
+      inset 1px 1px 3px var(--neo-shadow-dark),
+      inset -1px -1px 3px var(--neo-shadow-light);
+  }
+  .decade-label{
+    font-family:'Playfair Display',serif;
+    font-size:1.3rem;font-weight:700;
+    color:var(--text-primary);
+    white-space:nowrap;
+  }
+
+  .film{
+    background:var(--bg-card);
+    border-radius:18px;
+    padding:1rem 1.3rem;
+    margin-bottom:.75rem;
+    display:flex;align-items:center;
+    gap:1rem;
+    box-shadow:
+      6px 6px 14px var(--neo-shadow-dark),
+      -6px -6px 14px var(--neo-shadow-light);
+    transition:all .35s cubic-bezier(.4,0,.2,1);
+    cursor:pointer;
+  }
+  .film:hover{
+    box-shadow:
+      inset 4px 4px 12px var(--neo-shadow-dark),
+      inset -4px -4px 12px var(--neo-shadow-light);
+  }
+  .film-num{
+    width:38px;height:38px;
+    background:var(--bg-stat);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    font-weight:700;font-size:.82rem;
+    color:var(--gold-warm);
+    box-shadow:
+      4px 4px 8px var(--neo-shadow-dark),
+      -3px -3px 8px var(--neo-shadow-light);
+  }
+  .film-body{flex:1;min-width:0}
+  .film-title{
+    font-weight:600;font-size:1rem;
+    color:var(--text-primary);
+    line-height:1.35;
+  }
+  .film-meta{
+    display:flex;gap:.6rem;
+    margin-top:.3rem;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .film-meta .yr{
+    font-size:.75rem;
+    color:var(--text-muted);
+    font-weight:500;
+  }
+  .film-meta .tag{
+    font-size:.7rem;font-weight:600;
+    padding:.15rem .6rem;
+    border-radius:20px;
+    letter-spacing:.02em;
+    background:var(--bg-stat);
+    color:var(--text-muted);
+    box-shadow:
+      2px 2px 4px var(--neo-shadow-dark),
+      -1px -1px 4px var(--neo-shadow-light);
+  }
+  .tag.vera{color:var(--accent-red)}
+  .tag.pam{color:var(--gold-warm)}
+  .tag.flama{color:var(--accent-blue)}
+  .tag.dir{color:var(--accent-green)}
+  .tag.extra{color:var(--accent-red)}
+
+  .film-year{
+    font-family:'Playfair Display',serif;
+    font-size:1.4rem;font-weight:600;
+    color:var(--gold-warm);
+    opacity:.35;
+    flex-shrink:0;
+    min-width:50px;
+    text-align:right;
+  }
+
+  .film.seen{
+    box-shadow:
+      inset 4px 4px 12px var(--neo-shadow-dark),
+      inset -4px -4px 12px var(--neo-shadow-light);
+  }
+  .film.seen .film-num{
+    background:var(--accent-green);
+    color:#fff;
+    box-shadow:
+      inset 2px 2px 4px rgba(0,0,0,.2),
+      inset -2px -2px 4px rgba(255,255,255,.15);
+  }
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem;
+  }
+  footer .foot-card{
+    display:inline-block;
+    max-width:600px;width:100%;
+    background:var(--bg-card);
+    border-radius:18px;
+    padding:1.5rem 1.8rem;
+    box-shadow:
+      6px 6px 16px var(--neo-shadow-dark),
+      -6px -6px 16px var(--neo-shadow-light);
+  }
+  footer p{
+    color:var(--text-muted);
+    font-size:.8rem;
+    line-height:1.7;
+  }
+  footer .heart{color:var(--accent-red)}
+  footer .unrealized{
+    margin-top:.7rem;
+    padding-top:.7rem;
+    opacity:.65;
+    font-style:italic;
+  }
+
+  @media(max-width:500px){
+    .hero{padding:2.5rem 1rem 2rem}
+    .hero-icon{width:80px;height:80px;font-size:2.4rem}
+    .film{padding:.8rem 1rem;gap:.7rem;border-radius:12px}
+    .film-year{font-size:1.1rem;min-width:38px}
+    .stats{gap:.8rem}
+    .stat{min-width:90px;padding:.75rem 1rem}
+    .decade-label{font-size:1.1rem}
+  }
+
+  @keyframes rise{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .stat,.film,.decade-divider{
+    animation:rise .5s ease both;
+  }
+  .decade:nth-child(1) .film:nth-child(n){animation-delay:calc(var(--i,0)*50ms + 80ms)}
+  .decade:nth-child(2) .film:nth-child(n){animation-delay:calc(var(--i,0)*50ms + 350ms)}
+  .decade:nth-child(3) .film:nth-child(n){animation-delay:calc(var(--i,0)*50ms + 620ms)}
+  .decade:nth-child(4) .film:nth-child(n){animation-delay:calc(var(--i,0)*50ms + 900ms)}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-badge">🎬 Cinema Nacional</div>
+  <div class="hero-icon">🎭</div>
+  <h1>Amácio <span>Mazzaropi</span></h1>
+  <p class="sub">Filmografia Completa &middot; 1952 – 1980</p>
+  <p class="tagline">"O caipira que conquistou o Brasil — ator, diretor, roteirista e produtor que marcou a história do cinema nacional com 32 longas-metragens."</p>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="stat-num">32</div><div class="stat-label">Filmes</div></div>
+  <div class="stat"><div class="stat-num">28</div><div class="stat-label">Anos</div></div>
+  <div class="stat"><div class="stat-num">24</div><div class="stat-label">Dirigidos</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Vera Cruz</div></div>
+</section>
+
+<div class="timeline">
+
+  <div class="decade">
+    <div class="decade-divider">
+      <div class="decade-dot"><span>50</span></div>
+      <span class="decade-label">Década de 1950</span>
+      <div class="decade-line"></div>
+    </div>
+    <div class="film" style="--i:0"><div class="film-num">1</div><div class="film-body"><div class="film-title">Sai da Frente</div><div class="film-meta"><span class="yr">1952</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1952</div></div>
+    <div class="film" style="--i:1"><div class="film-num">2</div><div class="film-body"><div class="film-title">Nadando em Dinheiro</div><div class="film-meta"><span class="yr">1952</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1952</div></div>
+    <div class="film" style="--i:2"><div class="film-num">3</div><div class="film-body"><div class="film-title">Candinho</div><div class="film-meta"><span class="yr">1953</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1953</div></div>
+    <div class="film" style="--i:3"><div class="film-num">4</div><div class="film-body"><div class="film-title">A Carrocinha</div><div class="film-meta"><span class="yr">1955</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1955</div></div>
+    <div class="film" style="--i:4"><div class="film-num">5</div><div class="film-body"><div class="film-title">O Gato de Madame</div><div class="film-meta"><span class="yr">1956</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1956</div></div>
+    <div class="film" style="--i:5"><div class="film-num">6</div><div class="film-body"><div class="film-title">Fuzileiro do Amor</div><div class="film-meta"><span class="yr">1956</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1956</div></div>
+    <div class="film" style="--i:6"><div class="film-num">7</div><div class="film-body"><div class="film-title">O Noivo da Girafa</div><div class="film-meta"><span class="yr">1957</span><span class="tag vera">Vera Cruz</span></div></div><div class="film-year">1957</div></div>
+    <div class="film" style="--i:7"><div class="film-num">8</div><div class="film-body"><div class="film-title">Chico Fumaça</div><div class="film-meta"><span class="yr">1958</span><span class="tag flama">Flama</span></div></div><div class="film-year">1958</div></div>
+    <div class="film" style="--i:8"><div class="film-num">9</div><div class="film-body"><div class="film-title">Chofer de Praça</div><div class="film-meta"><span class="yr">1958</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1958</div></div>
+    <div class="film" style="--i:9"><div class="film-num">10</div><div class="film-body"><div class="film-title">Jeca Tatu</div><div class="film-meta"><span class="yr">1959</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1959</div></div>
+  </div>
+
+  <div class="decade">
+    <div class="decade-divider">
+      <div class="decade-dot"><span>60</span></div>
+      <span class="decade-label">Década de 1960</span>
+      <div class="decade-line"></div>
+    </div>
+    <div class="film" style="--i:0"><div class="film-num">11</div><div class="film-body"><div class="film-title">As Aventuras de Pedro Malasartes</div><div class="film-meta"><span class="yr">1960</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1960</div></div>
+    <div class="film" style="--i:1"><div class="film-num">12</div><div class="film-body"><div class="film-title">Zé do Periquito</div><div class="film-meta"><span class="yr">1960</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1960</div></div>
+    <div class="film" style="--i:2"><div class="film-num">13</div><div class="film-body"><div class="film-title">Tristeza do Jeca</div><div class="film-meta"><span class="yr">1961</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span><span class="tag extra">🏆 Saci</span></div></div><div class="film-year">1961</div></div>
+    <div class="film" style="--i:3"><div class="film-num">14</div><div class="film-body"><div class="film-title">O Vendedor de Linguiça</div><div class="film-meta"><span class="yr">1962</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1962</div></div>
+    <div class="film" style="--i:4"><div class="film-num">15</div><div class="film-body"><div class="film-title">Casinha Pequenina</div><div class="film-meta"><span class="yr">1963</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span><span class="tag extra">🎨 1.º colorido</span></div></div><div class="film-year">1963</div></div>
+    <div class="film" style="--i:5"><div class="film-num">16</div><div class="film-body"><div class="film-title">O Lamparina</div><div class="film-meta"><span class="yr">1964</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1964</div></div>
+    <div class="film" style="--i:6"><div class="film-num">17</div><div class="film-body"><div class="film-title">Meu Japão Brasileiro</div><div class="film-meta"><span class="yr">1964</span><span class="tag pam">PAM</span><span class="tag extra">co-diretor</span></div></div><div class="film-year">1964</div></div>
+    <div class="film" style="--i:7"><div class="film-num">18</div><div class="film-body"><div class="film-title">O Puritano da Rua Augusta</div><div class="film-meta"><span class="yr">1965</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1965</div></div>
+    <div class="film" style="--i:8"><div class="film-num">19</div><div class="film-body"><div class="film-title">O Corintiano</div><div class="film-meta"><span class="yr">1966</span><span class="tag pam">PAM</span></div></div><div class="film-year">1966</div></div>
+    <div class="film" style="--i:9"><div class="film-num">20</div><div class="film-body"><div class="film-title">O Jeca e a Freira</div><div class="film-meta"><span class="yr">1967</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1967</div></div>
+    <div class="film" style="--i:10"><div class="film-num">21</div><div class="film-body"><div class="film-title">No Paraíso das Solteironas</div><div class="film-meta"><span class="yr">1968</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1968</div></div>
+    <div class="film" style="--i:11"><div class="film-num">22</div><div class="film-body"><div class="film-title">Uma Pistola para Djeca</div><div class="film-meta"><span class="yr">1969</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1969</div></div>
+  </div>
+
+  <div class="decade">
+    <div class="decade-divider">
+      <div class="decade-dot"><span>70</span></div>
+      <span class="decade-label">Década de 1970</span>
+      <div class="decade-line"></div>
+    </div>
+    <div class="film" style="--i:0"><div class="film-num">23</div><div class="film-body"><div class="film-title">Betão Ronca Ferro</div><div class="film-meta"><span class="yr">1970</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1970</div></div>
+    <div class="film" style="--i:1"><div class="film-num">24</div><div class="film-body"><div class="film-title">O Grande Xerife</div><div class="film-meta"><span class="yr">1972</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1972</div></div>
+    <div class="film" style="--i:2"><div class="film-num">25</div><div class="film-body"><div class="film-title">Um Caipira em Bariloche</div><div class="film-meta"><span class="yr">1973</span><span class="tag pam">PAM</span><span class="tag extra">co-diretor</span></div></div><div class="film-year">1973</div></div>
+    <div class="film" style="--i:3"><div class="film-num">26</div><div class="film-body"><div class="film-title">Portugal… Minha Saudade</div><div class="film-meta"><span class="yr">1973</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1973</div></div>
+    <div class="film" style="--i:4"><div class="film-num">27</div><div class="film-body"><div class="film-title">O Jeca Macumbeiro</div><div class="film-meta"><span class="yr">1974</span><span class="tag pam">PAM</span><span class="tag extra">co-diretor</span></div></div><div class="film-year">1974</div></div>
+    <div class="film" style="--i:5"><div class="film-num">28</div><div class="film-body"><div class="film-title">Jeca Contra o Capeta</div><div class="film-meta"><span class="yr">1975</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1975</div></div>
+    <div class="film" style="--i:6"><div class="film-num">29</div><div class="film-body"><div class="film-title">Jecão, um Fofoqueiro no Céu</div><div class="film-meta"><span class="yr">1977</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1977</div></div>
+    <div class="film" style="--i:7"><div class="film-num">30</div><div class="film-body"><div class="film-title">O Jeca e o seu Filho Preto</div><div class="film-meta"><span class="yr">1978</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1978</div></div>
+    <div class="film" style="--i:8"><div class="film-num">31</div><div class="film-body"><div class="film-title">A Banda das Velhas Virgens</div><div class="film-meta"><span class="yr">1979</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span></div></div><div class="film-year">1979</div></div>
+  </div>
+
+  <div class="decade">
+    <div class="decade-divider">
+      <div class="decade-dot"><span>80</span></div>
+      <span class="decade-label">Década de 1980</span>
+      <div class="decade-line"></div>
+    </div>
+    <div class="film" style="--i:0"><div class="film-num">32</div><div class="film-body"><div class="film-title">O Jeca e a Égua Milagrosa</div><div class="film-meta"><span class="yr">1980</span><span class="tag pam">PAM</span><span class="tag dir">diretor</span><span class="tag extra">🔚 Último</span></div></div><div class="film-year">1980</div></div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-card">
+    <p>Amácio Mazzaropi (1912–1981) &mdash; <span class="heart">❤</span> O cineasta do povo.<br>
+    Fundador da <strong>PAM Filmes</strong> (Produções Amácio Mazzaropi) em 1958.</p>
+    <p class="unrealized">Filme não realizado: <em>Maria Tomba de Homem</em> (1981) — projeto interrompido pelo falecimento.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.film').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('seen'));
+  });
+</script>
+
+</body>
+</html>

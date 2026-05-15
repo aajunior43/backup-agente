@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 Decolagem do Foguete</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+  }
+
+  canvas {
+    display: block;
+  }
+
+  #info {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #0f0;
+    font-size: 18px;
+    text-align: center;
+    text-shadow: 0 0 10px #0f0;
+    z-index: 10;
+  }
+
+  #altitude {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff0;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff0;
+    z-index: 10;
+  }
+
+  #status {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 0 0 15px #fff;
+    z-index: 10;
+    letter-spacing: 3px;
+  }
+
+  #restart {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 40px;
+    font-size: 22px;
+    font-family: 'Courier New', monospace;
+    background: transparent;
+    color: #0f0;
+    border: 2px solid #0f0;
+    cursor: pointer;
+    z-index: 20;
+    text-shadow: 0 0 10px #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    transition: all 0.3s;
+  }
+
+  #restart:hover {
+    background: #0f0;
+    color: #000;
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<div id="info">🚀 SIMULAÇÃO DE DECOLAGEM</div>
+<div id="altitude">Altitude: 0 m</div>
+<div id="status">PRÉ-LANÇAMENTO</div>
+<button id="restart" onclick="location.reload()">REINICIAR</button>
+
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// --- Stars ---
+const stars = [];
+for (let i = 0; i < 400; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.3,
+    speed: Math.random() * 3 + 0.5,
+    brightness: Math.random()
+  });
+}
+
+// --- Particles (exhaust) ---
+const particles = [];
+
+// --- Rocket ---
+const rocket = {
+  x: canvas.width / 2,
+  y: canvas.height - 180,
+  w: 30,
+  h: 80,
+  vy: 0,
+  thrust: 0,
+  altitude: 0,
+  maxAltitude: 0,
+  phase: 'idle', // idle, countdown, launch, coast, space
+  countdown: 3,
+  shake: 0
+};
+
+// --- Ground ---
+let groundY = canvas.height - 100;
+
+// --- Smoke trail ---
+const smokeTrail = [];
+
+// --- Stars twinkle ---
+let twinkleTimer = 0;
+
+function drawStars() {
+  twinkleTimer++;
+  stars.forEach(s => {
+    const alpha = 0.5 + 0.5 * Math.sin(twinkleTimer * 0.02 + s.brightness * 10);
+    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawGround() {
+  // Ground gradient
+  const grad = ctx.createLinearGradient(0, groundY, 0, canvas.height);
+  grad.addColorStop(0, '#2a1a0a');
+  grad.addColorStop(0.3, '#1a1005');
+  grad.addColorStop(1, '#0a0505');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+
+  // Launch pad
+  ctx.fillStyle = '#444';
+  ctx.fillRect(rocket.x - 50, groundY, 100, 10);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(rocket.x - 60, groundY + 10, 120, 10);
+
+  // Pad details
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 1;
+  for (let i = -40; i <= 40; i += 20) {
+    ctx.beginPath();
+    ctx.moveTo(rocket.x + i, groundY);
+    ctx.lineTo(rocket.x + i, groundY + 10);
+    ctx.stroke();
+  }
+}
+
+function drawRocket() {
+  const x = rocket.x;
+  const y = rocket.y;
+  const shakeX = (Math.random() - 0.5) * rocket.shake;
+  const shakeY = (Math.random() - 0.5) * rocket.shake;
+
+  ctx.save();
+  ctx.translate(shakeX, shakeY);
+
+  // Nose cone
+  ctx.fillStyle = '#ddd';
+  ctx.beginPath();
+  ctx.moveTo(x, y - rocket.h / 2 - 20);
+  ctx.lineTo(x - rocket.w / 2, y - rocket.h / 2 + 10);
+  ctx.lineTo(x + rocket.w / 2, y - rocket.h / 2 + 10);
+  ctx.closePath();
+  ctx.fill();
+
+  // Body
+  const bodyGrad = ctx.createLinearGradient(x - rocket.w / 2, 0, x + rocket.w / 2, 0);
+  bodyGrad.addColorStop(0, '#aaa');
+  bodyGrad.addColorStop(0.3, '#eee');
+  bodyGrad.addColorStop(0.7, '#eee');
+  bodyGrad.addColorStop(1, '#888');
+  ctx.fillStyle = bodyGrad;
+  ctx.fillRect(x - rocket.w / 2, y - rocket.h / 2 + 10, rocket.w, rocket.h - 20);
+
+  // Stripes
+  ctx.fillStyle = '#c00';
+  ctx.fillRect(x - rocket.w / 2, y - 5, rocket.w, 6);
+  ctx.fillRect(x - rocket.w / 2, y + 15, rocket.w, 6);
+
+  // Window
+  ctx.fillStyle = '#4af';
+  ctx.beginPath();
+  ctx.arc(x, y - rocket.h / 2 + 30, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Fins
+  ctx.fillStyle = '#c00';
+  // Left fin
+  ctx.beginPath();
+  ctx.moveTo(x - rocket.w / 2, y + rocket.h / 2 - 20);
+  ctx.lineTo(x - rocket.w / 2 - 18, y + rocket.h / 2 + 10);
+  ctx.lineTo(x - rocket.w / 2, y + rocket.h / 2 - 5);
+  ctx.closePath();
+  ctx.fill();
+  // Right fin
+  ctx.beginPath();
+  ctx.moveTo(x + rocket.w / 2, y + rocket.h / 2 - 20);
+  ctx.lineTo(x + rocket.w / 2 + 18, y + rocket.h / 2 + 10);
+  ctx.lineTo(x + rocket.w / 2, y + rocket.h / 2 - 5);
+  ctx.closePath();
+  ctx.fill();
+
+  // Engine nozzle
+  ctx.fillStyle = '#555';
+  ctx.beginPath();
+  ctx.moveTo(x - 10, y + rocket.h / 2 - 5);
+  ctx.lineTo(x + 10, y + rocket.h / 2 - 5);
+  ctx.lineTo(x + 14, y + rocket.h / 2 + 8);
+  ctx.lineTo(x - 14, y + rocket.h / 2 + 8);
+  ctx.closePath();
+  ctx.fill();
+
+  // Flame
+  if (rocket.thrust > 0) {
+    const flameH = 40 + rocket.thrust * 60 + Math.random() * 20;
+    const flameW = 10 + rocket.thrust * 8;
+
+    // Outer flame
+    const fGrad = ctx.createLinearGradient(x, y + rocket.h / 2 + 8, x, y + rocket.h / 2 + 8 + flameH);
+    fGrad.addColorStop(0, '#fff');
+    fGrad.addColorStop(0.15, '#ff0');
+    fGrad.addColorStop(0.4, '#f80');
+    fGrad.addColorStop(0.7, '#f00');
+    fGrad.addColorStop(1, 'rgba(255,0,0,0)');
+    ctx.fillStyle = fGrad;
+    ctx.beginPath();
+    ctx.moveTo(x - flameW, y + rocket.h / 2 + 8);
+    ctx.quadraticCurveTo(x - flameW * 0.8 + Math.random() * 6, y + rocket.h / 2 + 8 + flameH * 0.5, x, y + rocket.h / 2 + 8 + flameH);
+    ctx.quadraticCurveTo(x + flameW * 0.8 + Math.random() * 6, y + rocket.h / 2 + 8 + flameH * 0.5, x + flameW, y + rocket.h / 2 + 8);
+    ctx.closePath();
+    ctx.fill();
+
+    // Inner bright core
+    const coreH = flameH * 0.5;
+    const coreW = flameW * 0.4;
+    const cGrad = ctx.createLinearGradient(x, y + rocket.h / 2 + 8, x, y + rocket.h / 2 + 8 + coreH);
+    cGrad.addColorStop(0, '#fff');
+    cGrad.addColorStop(0.5, '#ffa');
+    cGrad.addColorStop(1, 'rgba(255,200,0,0)');
+    ctx.fillStyle = cGrad;
+    ctx.beginPath();
+    ctx.moveTo(x - coreW, y + rocket.h / 2 + 8);
+    ctx.quadraticCurveTo(x, y + rocket.h / 2 + 8 + coreH, x + coreW, y + rocket.h / 2 + 8);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function spawnExhaust() {
+  if (rocket.thrust <= 0) return;
+  const count = Math.floor(rocket.thrust * 8);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: rocket.x + (Math.random() - 0.5) * 20,
+      y: rocket.y + rocket.h / 2 + 10,
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 6 + 3,
+      life: 1,
+      decay: Math.random() * 0.02 + 0.01,
+      size: Math.random() * 12 + 4,
+      color: Math.random() > 0.5 ? 'fire' : 'smoke'
+    });
+  }
+}
+
+function updateParticles() {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.05;
+    p.life -= p.decay;
+    p.size *= 1.01;
+    if (p.life <= 0) particles.splice(i, 1);
+  }
+}
+
+function drawParticles() {
+  particles.forEach(p => {
+    if (p.color === 'fire') {
+      const alpha = p.life;
+      ctx.fillStyle = `rgba(255, ${Math.floor(100 + p.life * 155)}, 0, ${alpha})`;
+    } else {
+      const alpha = p.life * 0.5;
+      ctx.fillStyle = `rgba(150, 150, 150, ${alpha})`;
+    }
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawSmokeTrail() {
+  smokeTrail.forEach((s, i) => {
+    s.life -= 0.008;
+    s.size *= 1.005;
+    if (s.life <= 0) {
+      smokeTrail.splice(i, 1);
+      return;
+    }
+    ctx.fillStyle = `rgba(180,180,180,${s.life * 0.3})`;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function addSmokeTrail() {
+  if (rocket.thrust > 0 && Math.random() > 0.5) {
+    smokeTrail.push({
+      x: rocket.x + (Math.random() - 0.5) * 30,
+      y: rocket.y + rocket.h / 2 + 20,
+      life: 1,
+      size: Math.random() * 15 + 10
+    });
+  }
+}
+
+// --- Atmosphere effect ---
+function drawAtmosphere() {
+  const alt = rocket.altitude;
+  if (alt < 5000) {
+    const t = alt / 5000;
+    // Sky gradient from space black to blue
+    const r = Math.floor(0 + t * 10);
+    const g = Math.floor(0 + t * 30);
+    const b = Math.floor(0 + t * 80);
+    const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grad.addColorStop(0, `rgb(${r},${g},${b})`);
+    grad.addColorStop(1, `rgb(${Math.floor(r * 0.5)},${Math.floor(g * 0.5)},${Math.floor(b * 0.8)})`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  } else {
+    // Deep space
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+// --- Stars moving (parallax) ---
+function updateStars() {
+  const speed = Math.max(0.2, rocket.vy * 0.3);
+  stars.forEach(s => {
+    s.y += s.speed * speed * 0.1;
+    if (s.y > canvas.height) {
+      s.y = 0;
+      s.x = Math.random() * canvas.width;
+    }
+  });
+}
+
+// --- Ground scrolling ---
+function updateGround() {
+  if (rocket.vy > 0) {
+    groundY += rocket.vy * 0.5;
+  }
+}
+
+// --- HUD ---
+function drawHUD() {
+  const alt = Math.floor(rocket.altitude);
+  const vel = Math.floor(rocket.vy * 10);
+
+  document.getElementById('altitude').textContent =
+    `Altitude: ${alt.toLocaleString()} m  |  Velocidade: ${vel} m/s`;
+
+  const status = document.getElementById('status');
+  switch (rocket.phase) {
+    case 'idle':
+      status.textContent = 'PRÉ-LANÇAMENTO';
+      status.style.color = '#fff';
+      break;
+    case 'countdown':
+      status.textContent = `⏱ ${rocket.countdown}...`;
+      status.style.color = '#ff0';
+      break;
+    case 'launch':
+      status.textContent = '🔥 LANÇAMENTO!';
+      status.style.color = '#f44';
+      break;
+    case 'coast':
+      status.textContent = '🚀 EM VOO';
+      status.style.color = '#0f0';
+      break;
+    case 'space':
+      status.textContent = '✨ ESPAÇO!';
+      status.style.color = '#88f';
+      break;
+  }
+}
+
+// --- Main loop ---
+let timer = 0;
+let countdownTimer = 0;
+
+function loop() {
+  timer++;
+
+  // Phase management
+  if (rocket.phase === 'idle' && timer > 60) {
+    rocket.phase = 'countdown';
+    countdownTimer = timer;
+  }
+
+  if (rocket.phase === 'countdown') {
+    const elapsed = timer - countdownTimer;
+    rocket.countdown = Math.max(0, 3 - Math.floor(elapsed / 60));
+    if (rocket.countdown <= 0) {
+      rocket.phase = 'launch';
+      rocket.thrust = 1;
+    }
+    rocket.shake = 0.5;
+  }
+
+  if (rocket.phase === 'launch') {
+    rocket.vy += 0.15;
+    rocket.shake = 3 + Math.random() * 2;
+    rocket.altitude += rocket.vy;
+
+    if (rocket.altitude > 20000) {
+      rocket.phase = 'coast';
+      rocket.thrust = 0.3;
+    }
+  }
+
+  if (rocket.phase === 'coast') {
+    rocket.vy += 0.05;
+    rocket.shake = 0.5;
+    rocket.altitude += rocket.vy;
+    rocket.thrust *= 0.995;
+
+    if (rocket.thrust < 0.02) {
+      rocket.phase = 'space';
+      rocket.thrust = 0;
+      rocket.shake = 0;
+    }
+  }
+
+  if (rocket.phase === 'space') {
+    rocket.vy *= 0.999;
+    rocket.altitude += rocket.vy;
+  }
+
+  // Update
+  updateStars();
+  updateGround();
+  spawnExhaust();
+  updateParticles();
+  addSmokeTrail();
+
+  // Draw
+  drawAtmosphere();
+  drawStars();
+  drawSmokeTrail();
+  drawGround();
+  drawParticles();
+  drawRocket();
+  drawHUD();
+
+  // Show restart button when in space for a while
+  if (rocket.phase === 'space' && rocket.altitude > 50000) {
+    document.getElementById('restart').style.display = 'block';
+  }
+
+  requestAnimationFrame(loop);
+}
+
+// Handle resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (rocket.phase === 'idle') {
+    groundY = canvas.height - 100;
+    rocket.x = canvas.width / 2;
+    rocket.y = canvas.height - 180;
+  }
+});
+
+loop();
+</script>
+</body>
+</html>

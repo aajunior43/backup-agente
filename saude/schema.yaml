@@ -1,0 +1,80 @@
+tables:
+- name: medicoes
+  row_count: 21
+  columns:
+  - name: Data
+    type: DATE
+    description: Data da medição
+  - name: Hora
+    type: VARCHAR
+    description: Hora da medição
+  - name: PA Sistolica
+    type: BIGINT
+    description: Pressão arterial sistólica (mmHg)
+  - name: PA Diastolica
+    type: BIGINT
+    description: Pressão arterial diastólica (mmHg)
+  - name: FC (bpm)
+    type: BIGINT
+    description: Frequência cardíaca (bpm)
+  - name: Glicose
+    type: BIGINT
+    description: Glicose em mg/dL (medição casual)
+  - name: Glicose Jejum
+    type: VARCHAR
+    description: Glicose em jejum mg/dL
+  - name: Tipo
+    type: VARCHAR
+    description: 'Tipo de registro: Medicao ou nome do exame'
+  - name: Sodio
+    type: BIGINT
+    description: Sódio em mEq/L
+  - name: Potassio
+    type: DOUBLE
+    description: Potássio em mEq/L
+  - name: Hemoglobina
+    type: DOUBLE
+    description: Hemoglobina em g/dL
+  - name: Hematocrito
+    type: DOUBLE
+    description: Hematócrito em %
+  - name: Colesterol Total
+    type: BIGINT
+    description: Colesterol total em mg/dL
+  - name: HDL
+    type: BIGINT
+    description: HDL (bom colesterol) em mg/dL
+  - name: LDL
+    type: BIGINT
+    description: LDL (mau colesterol) em mg/dL
+  - name: Triglicerideos
+    type: DOUBLE
+    description: Triglicerídeos em mg/dL
+  - name: VLDL
+    type: BIGINT
+    description: VLDL em mg/dL
+  - name: Creatinina
+    type: VARCHAR
+    description: Creatinina em mg/dL
+  - name: Acido Urico
+    type: VARCHAR
+    description: Ácido úrico em mg/dL
+  - name: TGO/AST
+    type: VARCHAR
+    description: TGO/AST em U/L
+  - name: TGP/ALT
+    type: VARCHAR
+    description: TGP/ALT em U/L
+  - name: Leucocitos
+    type: BIGINT
+    description: Leucócitos em células/mm³
+  - name: Plaquetas
+    type: BIGINT
+    description: Plaquetas em células/mm³
+  - name: Observacoes
+    type: VARCHAR
+    description: Observações e fonte dos dados
+  - name: datahora
+    type: TIMESTAMP
+    description: Timestamp combinado Data + Hora
+  description: Registro de medições de saúde — pressão arterial, glicose, exames laboratoriais
