@@ -28,10 +28,6 @@ __pycache__/
 .venv/
 venv/
 
-# DuckDB (arquivos grandes)
-Prefeitura/data.duckdb
-saude/data.duckdb
-
 # Secrets
 .env.*
 **/.env

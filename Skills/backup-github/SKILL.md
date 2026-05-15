@@ -9,67 +9,81 @@ metadata:
   emoji: 🔄
 ---
 
-# GitHub Backup Automático
+# 🔄 GitHub Backup Automático
 
 ## Propósito
 
-Sincroniza todo o workspace (`/home/workspace`) com um repositório no GitHub automaticamente, em intervalos regulares. Útil para:
+Sincroniza todo o workspace (`/home/workspace`) com um repositório no GitHub automaticamente. Ideal para:
 
-- Backup automático de todos os arquivos
-- Histórico de versões (poder voltar no tempo)
-- Acesso aos arquivos de qualquer lugar via GitHub
+- Backup de segurança dos arquivos
+- Histórico de versões de documentos
+- Acesso remoto aos arquivos
+- Integração com ferramentas de CI/CD
 
-## Como configurar pela primeira vez
+## Pré-requisito
 
-A skill já está pronta. Só precisa rodar o script de setup uma vez:
+A autenticação no GitHub é feita via `gh` CLI:
+
+```bash
+gh auth status
+# Deve mostrar "Logged in to github.com account aajunior43"
+```
+
+Se não estiver autenticado, use:
+
+```bash
+gh auth login
+```
+
+Ou cole um token GitHub (começa com `ghp_` ou `github_pat_`):
+
+```bash
+echo "seu_token" | gh auth login --with-token
+gh auth setup-git
+```
+
+## Scripts
+
+### `scripts/setup.ts` — Configuração única
+
+Cria o repositório `workspace-backup`, inicializa git e faz o **primeiro push**.
 
 ```bash
 bun /home/workspace/Skills/backup-github/scripts/setup.ts
 ```
 
-Esse script:
-1. Cria o repositório `workspace-backup` no GitHub (se não existir)
-2. Inicializa o git em `/home/workspace` (se não existir)
-3. Cria um `.gitignore` com exclusões sensatas
-4. Dá o primeiro commit + push
-5. Pronto — as automações seguintes são só `commit && push`
+### `scripts/backup.ts` — Backup incremental
 
-## .gitignore padrão
-
-A skill já cria um `.gitignore` que exclui:
-- `node_modules/`, `Trash/`
-- `.env`, arquivos de ambiente
-- PDFs > 10 MB, imagens > 5 MB
-- Cache do navegador e logs internos do Zo
-
-## Agenda recomendada
-
-| Frequência | Ideal para |
-|------------|-----------|
-| Diária (00:00) | Uso normal — backup noturno |
-| A cada 6h | Uso intenso com alterações frequentes |
-
-## Como agendar o backup automático
-
-Use o script com a flag `--schedule`:
+Commits e envia alterações. Pode ser executado manualmente ou agendado.
 
 ```bash
-bun /home/workspace/Skills/backup-github/scripts/backup.ts --schedule
+bun /home/workspace/Skills/backup-github/scripts/backup.ts         # commit + push
+bun /home/workspace/Skills/backup-github/scripts/backup.ts --status # mostra alterações
+bun /home/workspace/Skills/backup-github/scripts/backup.ts --schedule # instruções p/ agendar
 ```
 
-Isso abre o seletor de frequência no chat. Ou crie manualmente um agente agendado com a instrução:
+## Agendamento automático
 
-> Rode `bun /home/workspace/Skills/backup-github/scripts/backup.ts` e me informe se houve alterações enviadas.
+Para rodar todo dia à meia-noite via Zo Computer Automations:
 
-## Comandos
+No painel de automações, crie uma com:
 
-```bash
-# Setup inicial (uma vez)
-bun /home/workspace/Skills/backup-github/scripts/setup.ts
+- **Comando:** `bun /home/workspace/Skills/backup-github/scripts/backup.ts`
+- **Frequência:** Diariamente, 00:00
+- **Rrule:** `RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0`
+- **Canal:** Nenhum (roda em background)
 
-# Forçar backup agora
-bun /home/workspace/Skills/backup-github/scripts/backup.ts
+Ou peça diretamente: **"Agenda o backup do workspace todo dia"**
 
-# Ver status do repositório
-bun /home/workspace/Skills/backup-github/scripts/backup.ts --status
-```
+## .gitignore
+
+O arquivo `workspace/.gitignore` já ignora:
+
+- `node_modules/`, `.env`, `venv/`, `__pycache__/`
+- Arquivos auxiliares do LaTeX (`*.aux`, `*.log`, `*.out` etc.)
+- `.DS_Store`, `Thumbs.db`
+
+## Repositório
+
+- **GitHub:** https://github.com/aajunior43/workspace-backup
+- **Visibilidade:** Público
