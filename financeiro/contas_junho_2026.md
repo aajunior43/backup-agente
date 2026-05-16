@@ -4,7 +4,7 @@
 
 | Despesa | Valor (R$) |
 |---------|------------|
-| Fatura Inter | 1.150,00 |
+| Fatura Inter | 1.117,00 |
 | Fatura Nubank | 200,00 |
 | Faculdade — Ciências Contábeis | 153,00 |
 | Faculdade — Administração | 153,00 |
@@ -12,15 +12,15 @@
 | Ar condicionado (venc: 10/06) | 170,00 |
 | Extensão Lovable | 39,90 |
 | Bike ergométrica 🎉 FINALIZADA | — |
-| **TOTAL** | **1.925,90** |
+| **TOTAL** | **1.892,90** |
 
 ---
 
 ## Resumo
 
 - **Salário:** R$ 5.000,00
-- **Total contas:** R$ 1.925,90
-- **Sobra:** R$ 3.074,10
+- **Total contas:** R$ 1.892,90
+- **Sobra:** R$ 3.107,10
 
 ---
 
