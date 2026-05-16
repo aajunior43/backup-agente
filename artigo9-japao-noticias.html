@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigo 9 do Japão - Notícias Recentes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e8e6e1;
+            line-height: 1.7;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a0a0a 0%, #0a0a1a 50%, #0a1a0a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '平和';
+            position: absolute;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 25vw;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            color: #f87171;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #f87171 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #dc2626, transparent);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(220, 38, 38, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f87171;
+        }
+
+        .card p, .card li {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+        }
+
+        .article-text {
+            background: rgba(220, 38, 38, 0.05);
+            border-left: 3px solid #dc2626;
+            padding: 2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 3rem 0;
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .article-text h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #f87171;
+        }
+
+        .article-text blockquote {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #d0d0d0;
+            padding: 1rem 0;
+        }
+
+        .article-text blockquote:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(220, 38, 38, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f87171;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #dc2626, transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 1.8rem;
+            width: 10px;
+            height: 10px;
+            background: #dc2626;
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: #f87171;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .sources {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sources a {
+            color: #f87171;
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 1.5rem; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">🔴 Atualizado — Maio 2026</span>
+            <h1>Artigo 9 da Constituição do Japão</h1>
+            <p>O fim do pacifismo? Japão enfrenta o maior debate constitucional em 80 anos</p>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="article-text">
+            <h2>📜 O Texto do Artigo 9</h2>
+            <blockquote>
+                <strong>Parágrafo 1:</strong> O povo japonês renuncia para sempre à guerra como direito soberano da nação e à ameaça ou uso da força como meio de resolver disputas internacionais.
+            </blockquote>
+            <blockquote>
+                <strong>Parágrafo 2:</strong> Para realizar o objetivo do parágrafo anterior, não serão mantidas forças de terra, mar e ar, nem outro potencial de guerra. O direito de beligerância do Estado não será reconhecido.
+            </blockquote>
+        </div>
+
+        <h2 class="section-title">📊 Números que Importam</h2>
+        <div class="stat-grid">
+            <div class="stat">
+                <span class="stat-number">63%</span>
+                <span class="stat-label">Dos japoneses se opõem à mudança do Artigo 9</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">80%</span>
+                <span class="stat-label">Não acham necessário mudar o 1º parágrafo</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">50mil</span>
+                <span class="stat-label">Pessoas protestaram em maio de 2026</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">1947</span>
+                <span class="stat-label">Ano em que a constituição entrou em vigor</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">📰 Últimas Notícias</h2>
+
+        <div class="card">
+            <div class="card-icon">🏛️</div>
+            <h3>PM Takaichi Pressiona pela Revisão</h3>
+            <p>Sanae Takaichi, no cargo desde outubro de 2025, defende que a constituição "deve ser atualizada para refletir as demandas dos tempos". Seu partido (PLD) tem maioria simples, mas perdeu a maioria de 2/3 necessária para propor emendas.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">✊</div>
+            <h3>Maior Protesto Pacifista em Décadas</h3>
+            <p>No dia 3 de maio (Dia da Constituição), cerca de 50 mil pessoas foram às ruas de Tóquio com cartazes "No War". Jovens estão liderando o movimento de proteção à constituição pacifista.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Japão Dispara Mísseis no Exterior pela 1ª Vez desde a WWII</h3>
+            <p>O Japão participou do exercício militar EUA-Filipinas (Balikatan 2026) e disparou mísseis Tipo 88 no exterior — um marco histórico sem precedentes desde o fim da Segunda Guerra Mundial.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚔️</div>
+            <h3>Remilitarização em Curso</h3>
+            <ul>
+                <li>Suspensão das restrições à exportação de armas letais</li>
+                <li>Adoção de patentes estilo militar para as Forças de Autodefesa</li>
+                <li>Maior orçamento de defesa da história do Japão</li>
+                <li>Expansão do papel militar japonês no exterior</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">📅 Linha do Tempo</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">1947</div>
+                <p>Constituição japonesa entra em vigor com o Artigo 9 pacifista</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">1954</div>
+                <p>Criação das Forças de Autodefesa (JSDF) — interpretação de legítima defesa</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Outubro 2025</div>
+                <p>Sanae Takaichi assume como primeira-ministra</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Abril 2026</div>
+                <p>Protestos crescem; jovens se mobilizam contra a revisão constitucional</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Maio 2026</div>
+                <p>50 mil pessoas protestam em Tóquio; Japão dispara mísseis no exterior</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">⚖️ O Processo de Revisão</h2>
+
+        <div class="card">
+            <p>Para alterar a constituição japonesa, é necessário:</p>
+            <ul>
+                <li><strong>Aprovação por 2/3</strong> nas duas casas do parlamento (Dieta)</li>
+                <li><strong>Referendo nacional</strong> com maioria simples dos votantes</li>
+            </ul>
+            <p style="margin-top: 1rem; color: #f87171;">⚠️ O partido da PM Takaichi perdeu a maioria de 2/3, dificultando o processo.</p>
+        </div>
+
+        <div class="sources">
+            <p><strong>Fontes:</strong></p>
+            <ul style="color: #888; font-size: 0.85rem;">
+                <li><a href="https://www.theguardian.com/world/2026/may/04/japan-sees-largest-protest-in-support-of-pacifist-constitution-as-pm-takaichi-pushes-revisions" target="_blank">The Guardian — Maio 2026</a></li>
+                <li><a href="https://www.bbc.com/news/articles/c4g93v8jqnyo" target="_blank">BBC News — Maio 2026</a></li>
+                <li><a href="https://www.japantimes.co.jp/commentary/2026/04/28/japan/revising-article-9-would-be-a-mistake/" target="_blank">Japan Times — Abril 2026</a></li>
+                <li><a href="https://www.csmonitor.com/World/Asia-Pacific/2026/0424/Japan-Takaichi-pacifist-constitution-reform" target="_blank">Christian Science Monitor — Abril 2026</a></li>
+                <li><a href="https://www.cnnbrasil.com.br/blogs/ciro-dias-reis/economia/macroeconomia/a-insustentavel-leveza-do-tema-da-remilitarizacao-divide-o-japao/" target="_blank">CNN Brasil</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>Compilado em 16 de maio de 2026 | Aleksandro Zo Computer</p>
+    </div>
+
+</body>
+</html>
