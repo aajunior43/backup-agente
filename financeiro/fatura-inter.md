@@ -11,13 +11,15 @@
 | **Total** | **918,00** |
 
 ## Junho/2026
-**Valor:** R$ 1.117,00
+**Valor:** R$ 1.384,00
 | Item | Valor (R$) |
 |------|------------|
 | Saldo anterior | 433,97 |
 | Padaria | 22,00 |
 | Outras compras | 661,03 |
-| **Total** | **1.117,00** |
+| Primeira parcela da bolsa da vovó | 200,00 |
+| Compras na cartão da vovó | 267,00 |
+| **Total** | **1.384,00** |
 
 ---
 Anotações e acompanhamentos da fatura do cartão Inter.
@@ -27,4 +29,4 @@ Anotações e acompanhamentos da fatura do cartão Inter.
 | Mês | Valor (R$) |
 |-----|------------|
 | Maio/2026 | 918,00 |
-| Junho/2026 | 1.117,00 |
+| Junho/2026 | 1.384,00 |

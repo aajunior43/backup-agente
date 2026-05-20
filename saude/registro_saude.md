@@ -2,6 +2,21 @@
 
 ## Medições
 
+### 20/05/2026
+- Pressão: 130/90 mmHg | Pulso: 95 bpm
+- Glicose: 269 mg/dL
+- Via: Telegram
+
+### 19/05/2026
+- Pressão: 135/87 mmHg | Pulso: 103 bpm
+- Glicose: 237 mg/dL
+- Via: Telegram
+
+### 19/05/2026 (tarde)
+- Pressão: 131/93 mmHg | Pulso: 108 bpm
+- Glicose: 303 mg/dL
+- Via: Telegram
+
 ### 10/05/2026 (manhã)
 - Pressão: 116/86 mmHg | Pulso: 93 bpm
 - Glicose: 279 mg/dL
