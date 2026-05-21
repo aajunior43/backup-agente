@@ -2,6 +2,12 @@
 
 ## Medições
 
+### 21/05/2026 (manhã)
+- Pressão: 139/83 mmHg | Pulso: 101 bpm
+- Glicose: 266 mg/dL
+- Hora: ~11:59
+- Via: Foto do monitor (Omron + On Call Plus II)
+
 ### 20/05/2026
 - Pressão: 130/90 mmHg | Pulso: 95 bpm
 - Glicose: 269 mg/dL
