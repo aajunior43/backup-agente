@@ -9,8 +9,9 @@
 - Via: Foto do monitor (Omron + On Call Plus II)
 
 ### 21/05/2026 (meio-dia)
+- Pressão: 126/79 mmHg | Pulso: 108 bpm
 - Glicose: 236 mg/dL
-- Via: Telegram
+- Via: Foto Omron + Telegram
 
 ### 20/05/2026
 - Pressão: 130/90 mmHg | Pulso: 95 bpm
