@@ -8,6 +8,10 @@
 - Hora: ~11:59
 - Via: Foto do monitor (Omron + On Call Plus II)
 
+### 21/05/2026 (meio-dia)
+- Glicose: 236 mg/dL
+- Via: Telegram
+
 ### 20/05/2026
 - Pressão: 130/90 mmHg | Pulso: 95 bpm
 - Glicose: 269 mg/dL
