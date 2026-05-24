@@ -1,279 +1,443 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tempo Inajá-PR</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
---bg0:#0a0e1a;--bg1:#0f1629;--bg2:#151d35;
---card:rgba(21,29,53,0.7);--border:rgba(99,140,200,0.12);
---text:#e8edf5;--muted:#8892a8;--accent:#4fc3f7;
---sun:#f5a623;--rain:#4fc3f7;--storm:#7c4dff;--cloud:#90a4ae;
-}
-body{font-family:'DM Mono',monospace;background:var(--bg0);color:var(--text);min-height:100vh;overflow-x:hidden}
-#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
-@keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:1}}
-.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite;animation-delay:var(--del)}
-#app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px}
-header{text-align:center;padding:24px 0 8px}
-header h1{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#4fc3f7,#7c4dff,#f5a623);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-header .sub{color:var(--muted);font-size:0.85rem;margin-top:4px}
-/* HERO */
-.hero{background:linear-gradient(135deg,rgba(79,195,247,0.08),rgba(124,77,255,0.08));border:1px solid var(--border);border-radius:20px;padding:28px;margin:16px 0;backdrop-filter:blur(12px);text-align:center}
-.hero .weather-icon{font-size:4rem;line-height:1;margin-bottom:8px}
-.hero .temp{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;line-height:1}
-.hero .feels{color:var(--muted);font-size:0.85rem;margin-top:4px}
-.hero .desc{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:600;margin:8px 0}
-.hero .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin-top:20px}
-.hero .stat{background:rgba(255,255,255,0.04);border-radius:12px;padding:12px 8px}
-.hero .stat .val{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--accent)}
-.hero .stat .lbl{font-size:0.7rem;color:var(--muted);margin-top:2px}
-/* SECTION TITLE */
-.sec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--border)}
-/* HOURLY */
-.hourly-scroll{display:flex;gap:10px;overflow-x:auto;padding:8px 0 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.hourly-scroll::-webkit-scrollbar{height:4px}
-.hourly-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-.h-card{flex:0 0 72px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 8px;text-align:center;scroll-snap-align:start;backdrop-filter:blur(8px)}
-.h-card .h-time{font-size:0.7rem;color:var(--muted)}
-.h-card .h-icon{font-size:1.5rem;margin:4px 0}
-.h-card .h-temp{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem}
-.h-card .h-rain{font-size:0.65rem;color:var(--rain);margin-top:2px}
-/* DAILY */
-.daily-grid{display:grid;gap:8px}
-.d-card{display:grid;grid-template-columns:40px 36px 1fr 1fr 80px 70px;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;backdrop-filter:blur(8px)}
-.d-card .d-day{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;white-space:nowrap}
-.d-card .d-icon{font-size:1.3rem;text-align:center}
-.d-card .d-temps{font-family:'Syne',sans-serif;font-size:0.85rem}
-.d-card .d-temps .tmax{color:var(--sun)}
-.d-card .d-temps .tmin{color:var(--accent)}
-.d-card .d-rain{text-align:center;font-size:0.75rem;color:var(--rain)}
-.d-card .d-wind{text-align:center;font-size:0.7rem;color:var(--muted)}
-.d-card.today{background:linear-gradient(135deg,rgba(79,195,247,0.1),rgba(124,77,255,.08));border-color:rgba(79,195,247,0.25)}
-/* CHART */
-.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin:16px 0;backdrop-filter:blur(12px)}
-canvas{width:100%!important;height:220px!important}
-/* FOOTER */
-footer{text-align:center;padding:24px 0;color:var(--muted);font-size:0.7rem}
-/* LOADING */
-#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px}
-.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-#error{display:none;text-align:center;padding:40px;color:#ff6b6b}
-@media(max-width:600px){
-header h1{font-size:1.6rem}
-.hero .temp{font-size:3rem}
-.d-card{grid-template-columns:36px 30px 1fr 1fr 60px 50px;padding:10px 10px;gap:4px}
-.d-card .d-day{font-size:0.7rem}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão do Tempo - Inajá, PR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-sun: #f5a623;
+            --accent-rain: #4fc3f7;
+            --accent-storm: #7c4dff;
+            --accent-cloud: #90a4ae;
+            --text-primary: #f5f5f7;
+            --text-secondary: #aaa39a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Mono', monospace;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(to right, #fff, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .current-temp {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            line-height: 1;
+        }
+
+        .current-desc {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .current-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .detail-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* Hourly Forecast */
+        .hourly-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--glass-border) transparent;
+        }
+
+        .hourly-item {
+            min-width: 100px;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+        }
+
+        .hourly-time { font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .hourly-icon { font-size: 1.5rem; margin: 0.5rem 0; }
+        .hourly-temp { font-weight: 700; }
+        .hourly-pop { font-size: 0.7rem; color: var(--accent-rain); }
+
+        /* Daily Forecast */
+        .daily-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .daily-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr 2fr 1fr;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .daily-row { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+            .daily-extra { display: none; }
+        }
+
+        .temp-min { color: var(--text-secondary); }
+        .temp-max { font-weight: 700; }
+
+        /* Chart Area */
+        .chart-container {
+            height: 300px;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--glass-border);
+            border-top: 3px solid var(--accent-rain);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
-<div id="stars"></div>
-<div id="app">
-<div id="loading">
-<div class="spinner"></div>
-<span style="color:var(--muted)">Carregando dados meteorológicos...</span>
-</div>
-<div id="error"></div>
-<div id="content" style="display:none">
-<header>
-<h1>⛅ Tempo Inajá-PR</h1>
-<div class="sub">Previsão em tempo real • Atualizado em <span id="updateTime"></span></div>
-</header>
+    <div id="stars-container"></div>
+    <div id="loading"><div class="spinner"></div></div>
 
-<div class="hero" id="hero"></div>
+    <main id="content" class="hidden">
+        <h1>Inajá, PR</h1>
 
-<div class="sec-title">🕐 Previsão Horária (24h)</div>
-<div class="hourly-scroll" id="hourly"></div>
+        <section class="glass-card hero">
+            <div>
+                <div id="current-icon" style="font-size: 4rem;"></div>
+                <div class="current-temp"><span id="temp-val">--</span>°C</div>
+                <div id="weather-label" class="current-desc">--</div>
+                <div style="margin-top: 0.5rem; color: var(--text-secondary);">
+                    Sensaçâo de <span id="feels-like">--</span>°C
+                </div>
+            </div>
+            <div class="current-details">
+                <div class="detail-item">
+                    <div class="detail-label">Umidade</div>
+                    <div id="humidity-val" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Vento</div>
+                    <div id="wind-val" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Índice UV</div>
+                    <div id="uv-val" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Pressão</div>
+                    <div id="pressure-val" class="detail-value">--</div>
+                </div>
+            </div>
+        </section>
 
-<div class="sec-title">📅 Previsão 7 Dias</div>
-<div class="daily-grid" id="daily"></div>
+        <section class="glass-card">
+            <h2 style="margin-bottom: 1.5rem; font-family: 'Syne';">Próximas 24 Horas</h2>
+            <div id="hourly-list" class="hourly-scroll"></div>
+        </section>
 
-<div class="sec-title">📊 Temperatura & Chuva</div>
-<div class="chart-wrap">
-<canvas id="chart"></canvas>
-</div>
+        <section class="glass-card">
+            <h2 style="margin-bottom: 1.5rem; font-family: 'Syne';">Próximos 7 Dias</h2>
+            <div id="daily-list" class="daily-list"></div>
+        </section>
 
-<footer>
-Fonte: Open-Meteo API • Inajá, Paraná (-22.7758, -51.9011)
-</footer>
-</div>
-</div>
+        <section class="glass-card">
+            <h2 style="margin-bottom: 1.5rem; font-family: 'Syne';">Tendência</h2>
+            <div class="chart-container">
+                <canvas id="weatherChart"></canvas>
+            </div>
+        </section>
+    </main>
 
-<script>
-const LAT=-22.7758,LON=-51.9011;
-const WMO={
-0:{label:'Céu limpo',icon:'☀️'},
-1:{label:'Principalmente limpo',icon:'🌤️'},
-2:{label:'Parcialmente nublado',icon:'⛅'},
-3:{label:'Nublado',icon:'☁️'},
-45:{label:'Neblina',icon:'🌫️'},
-48:{label:'Geada com neblina',icon:'🌫️'},
-51:{label:'Garoa leve',icon:'🌦️'},
-53:{label:'Garoa moderada',icon:'🌦️'},
-55:{label:'Garoa intensa',icon:'🌧️'},
-61:{label:'Chuva leve',icon:'🌧️'},
-63:{label:'Chuva moderada',icon:'🌧️'},
-65:{label:'Chuva forte',icon:'🌧️'},
-80:{label:'Pancadas de chuva',icon:'🌦️'},
-81:{label:'Pancadas moderadas',icon:'🌧️'},
-82:{label:'Pancadas fortes',icon:'⛈️'},
-95:{label:'Tempestade',icon:'⛈️'},
-96:{label:'Tempestade com granizo',icon:'⛈️'},
-99:{label:'Tempestade forte',icon:'🌩️'},
-};
-function wmo(code){return WMO[code]||{label:'Desconhecido',icon:'❓'}}
-function windDir(d){const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];return dirs[Math.round(d/22.5)%16]}
-function dayName(d){return new Date(d+'T12:00:00-03:00').toLocaleDateString('pt-BR',{weekday:'short'}).replace('.','')}
-function todayStr(){return new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+    <footer id="footer">
+        Fonte: Open-Meteo | Atualizado em: <span id="update-time">--</span>
+    </footer>
 
-// Stars
-const starsEl=document.getElementById('stars');
-for(let i=0;i<120;i++){
-const s=document.createElement('div');
-s.className='star';
-const sz=Math.random()*2+1;
-s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*5}s`;
-starsEl.appendChild(s);
-}
+    <script>
+        const LAT = -22.7758, LON = -51.9011;
 
-async function fetchWeather(){
-try{
-const url=`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&timezone=America%2FSao_Paulo&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index,visibility&hourly=temperature_2m,precipitation_probability,weather_code,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max,sunrise,sunset&forecast_days=7&wind_speed_unit=kmh&precipitation_unit=mm`;
-const res=await fetch(url);
-const data=await res.json();
-renderAll(data);
-}catch(e){
-document.getElementById('loading').style.display='none';
-document.getElementById('error').style.display='block';
-document.getElementById('error').innerHTML='⚠️ Não foi possível carregar os dados.<br>Verifique sua conexão.<br><br><button onclick="location.reload()" style="background:var(--accent);color:#000;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:DM Mono">Tentar novamente</button>';
-}
-}
+        const WMO = {
+            0: { label: 'Céu limpo', icon: '☀️' },
+            1: { label: 'Principalmente limpo', icon: '🌤️' },
+            2: { label: 'Parcialmente nublado', icon: '⛅' },
+            3: { label: 'Nublado', icon: '☁️' },
+            45: { label: 'Neblina', icon: '🌫️' },
+            48: { label: 'Geada com neblina', icon: '🌫️' },
+            51: { label: 'Garoa leve', icon: '🌦️' },
+            53: { label: 'Garoa moderada', icon: '🌦️' },
+            55: { label: 'Garoa intensa', icon: '🌧️' },
+            61: { label: 'Chuva leve', icon: '🌧️' },
+            63: { label: 'Chuva moderada', icon: '🌧️' },
+            65: { label: 'Chuva forte', icon: '🌧️' },
+            80: { label: 'Pancadas de chuva', icon: '🌦️' },
+            81: { label: 'Pancadas moderadas', icon: '🌧️' },
+            82: { label: 'Pancadas fortes', icon: '⛈️' },
+            95: { label: 'Tempestade', icon: '⛈️' },
+            96: { label: 'Tempestade com granizo', icon: '⛈️' },
+            99: { label: 'Tempestade forte', icon: '🌩️' },
+        };
 
-function renderAll(data){
-document.getElementById('loading').style.display='none';
-document.getElementById('content').style.display='block';
-document.getElementById('updateTime').textContent=todayStr();
-renderCurrent(data.current);
-renderHourly(data.hourly);
-renderDaily(data.daily);
-renderChart(data.daily);
-}
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                container.appendChild(star);
+            }
+        }
 
-function renderCurrent(c){
-const w=wmo(c.weather_code);
-document.getElementById('hero').innerHTML=`
-<div class="weather-icon">${w.icon}</div>
-<div class="temp">${c.temperature_2m.toFixed(1)}°C</div>
-<div class="feels">Sensação térmica: ${c.apparent_temperature.toFixed(1)}°C</div>
-<div class="desc">${w.label}</div>
-<div class="grid">
-<div class="stat"><div class="val">${c.relative_humidity_2m}%</div><div class="lbl">Umidade</div></div>
-<div class="stat"><div class="val">${c.wind_speed_10m.toFixed(0)} km/h</div><div class="lbl">Vento ${windDir(c.wind_direction_10m)}</div></div>
-<div class="stat"><div class="val">${c.surface_pressure.toFixed(0)} hPa</div><div class="lbl">Pressão</div></div>
-<div class="stat"><div class="val">${c.uv_index.toFixed(1)}</div><div class="lbl">UV</div></div>
-<div class="stat"><div class="val">${(c.visibility/1000).toFixed(0)} km</div><div class="lbl">Visibilidade</div></div>
-<div class="stat"><div class="val">${c.precipitation.toFixed(1)} mm</div><div class="lbl">Precipitação</div></div>
-</div>`;
-}
+        async function fetchWeather() {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&timezone=America%2FSao_Paulo&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index,visibility&hourly=temperature_2m,precipitation_probability,weather_code,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max,sunrise,sunset&forecast_days=7&wind_speed_unit=kmh&precipitation_unit=mm`;
+                const res = await fetch(url);
+                const data = await res.json();
+                renderAll(data);
+            } catch (e) {
+                console.error(e);
+                alert('Erro ao carregar dados do tempo.');
+            }
+        }
 
-function renderHourly(h){
-const now=new Date();
-let html='';
-for(let i=0;i<Math.min(24,h.time.length);i++){
-const t=new Date(h.time[i]);
-if(t<now&&i>0)continue;
-const w=wmo(h.weather_code[i]);
-const hr=t.getHours().toString().padStart(2,'0')+':00';
-html+=`<div class="h-card">
-<div class="h-time">${i===0?'Agora':hr}</div>
-<div class="h-icon">${w.icon}</div>
-<div class="h-temp">${h.temperature_2m[i].toFixed(0)}°</div>
-<div class="h-rain">${h.precipitation_probability[i]}% 💧</div>
-</div>`;
-}
-document.getElementById('hourly').innerHTML=html;
-}
+        function renderAll(data) {
+            // Current
+            const cur = data.current;
+            document.getElementById('temp-val').textContent = cur.temperature_2m;
+            document.getElementById('feels-like').textContent = cur.apparent_temperature;
+            document.getElementById('weather-label').textContent = WMO[cur.weather_code]?.label || 'Desconhecido';
+            document.getElementById('current-icon').textContent = WMO[cur.weather_code]?.icon || '❓';
+            document.getElementById('humidity-val').textContent = `${cur.relative_humidity_2m}%`;
+            document.getElementById('wind-val').textContent = `${cur.wind_speed_10m} km/h`;
+            document.getElementById('uv-val').textContent = cur.uv_index;
+            document.getElementById('pressure-val').textContent = `${cur.surface_pressure} hPa`;
+            document.getElementById('update-time').textContent = new Date().toLocaleTimeString('pt-BR');
 
-function renderDaily(d){
-let html='';
-const days=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-for(let i=0;i<d.time.length;i++){
-const dt=new Date(d.time[i]+'T12:00:00-03:00');
-const w=wmo(d.weather_code[i]);
-const isToday=i===0;
-html+=`<div class="d-card ${isToday?'today':''}">
-<div class="d-day">${isToday?'Hoje':days[dt.getDay()]}</div>
-<div class="d-icon">${w.icon}</div>
-<div class="d-temps"><span class="tmax">${d.temperature_2m_max[i].toFixed(0)}°</span> / <span class="tmin">${d.temperature_2m_min[i].toFixed(0)}°</span></div>
-<div class="d-rain">💧 ${d.precipitation_sum[i].toFixed(1)}mm<br><small>${d.precipitation_probability_max[i]}%</small></div>
-<div class="d-wind">🌬️ ${d.wind_speed_10m_max[i].toFixed(0)} km/h</div>
-</div>`;
-}
-document.getElementById('daily').innerHTML=html;
-}
+            // Hourly
+            const hList = document.getElementById('hourly-list');
+            hList.innerHTML = '';
+            for (let i = 0; i < 24; i++) {
+                const time = new Date(data.hourly.time[i]).getHours() + ':00';
+                const code = data.hourly.weather_code[i];
+                const item = document.createElement('div');
+                item.className = 'hourly-item';
+                item.innerHTML = `
+                    <div class="hourly-time">${time}</div>
+                    <div class="hourly-icon">${WMO[code]?.icon || '❓'}</div>
+                    <div class="hourly-temp">${data.hourly.temperature_2m[i]}°</div>
+                    <div class="hourly-pop">${data.hourly.precipitation_probability[i]}%</div>
+                `;
+                hList.appendChild(item);
+            }
 
-function renderChart(d){
-const c=document.getElementById('chart');
-const ctx=c.getContext('2d');
-const W=c.parentElement.clientWidth-40,H=220;
-c.width=W*2;c.height=H*2;ctx.scale(2,2);
-const days=d.time.map(dt=>dayName(dt));
-const tmax=d.temperature_2m_max,tmin=d.temperature_2m_min,pr=d.precipitation_sum;
-const allTemps=[...tmax,...tmin];
-const tMin=Math.min(...allTemps)-2,tMax=Math.max(...allTemps)+2;
-const pMax=Math.max(...pr,1);
-const pad={t:30,r:20,b:30,l:36},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
-const x=i=>pad.l+(i/(days.length-1))*cW;
-const yT=t=>pad.t+cH-((t-tMin)/(tMax-tMin))*cH;
-const yP=p=>pad.t+cH-(p/pMax)*cH*0.4;
+            // Daily
+            const dList = document.getElementById('daily-list');
+            dList.innerHTML = '';
+            const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            data.daily.time.forEach((dateStr, i) => {
+                const date = new Date(dateStr + 'T00:00:00');
+                const dayName = i === 0 ? 'Hoje' : days[date.getDay()];
+                const code = data.daily.weather_code[i];
+                const row = document.createElement('div');
+                row.className = 'daily-row';
+                row.innerHTML = `
+                    <div style="font-weight: 500;">${dayName}</div>
+                    <div style="font-size: 1.2rem;">${WMO[code]?.icon || '❓'}</div>
+                    <div class="daily-extra" style="color: var(--accent-rain);">${data.daily.precipitation_probability_max[i]}%</div>
+                    <div><span class="temp-max">${data.daily.temperature_2m_max[i]}°</span> <span class="temp-min">${data.daily.temperature_2m_min[i]}°</span></div>
+                    <div class="daily-extra">${data.daily.wind_speed_10m_max[i]}<span style="font-size: 0.7rem;">km/h</span></div>
+                `;
+                dList.appendChild(row);
+            });
 
-// Grid
-ctx.strokeStyle='rgba(99,140,200,0.08)';ctx.lineWidth=1;
-for(let i=0;i<days.length;i++){ctx.beginPath();ctx.moveTo(x(i),pad.t);ctx.lineTo(x(i),pad.t+cH);ctx.stroke();}
+            renderChart(data.daily);
+            
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('content').classList.remove('hidden');
+        }
 
-// Bars
-for(let i=0;i<days.length;i++){
-const bw=cW/days.length*0.5;
-ctx.fillStyle=pr[i]>0?'rgba(79,195,247,0.25)':'rgba(144,164,174,0.1)';
-ctx.fillRect(x(i)-bw/2,yP(pr[i]),bw,pad.t+cH-yP(pr[i]));
-}
+        function renderChart(daily) {
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            const labels = daily.time.map(t => {
+                const d = new Date(t + 'T00:00:00');
+                return d.toLocaleDateString('pt-BR', { weekday: 'short' });
+            });
 
-// Lines
-function drawLine(arr,color,fill){
-ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';
-arr.forEach((v,i)=>{const px=x(i),py=yT(v);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);});
-ctx.stroke();
-if(fill){ctx.lineTo(x(arr.length-1),pad.t+cH);ctx.lineTo(x(0),pad.t+cH);ctx.closePath();ctx.fillStyle=fill;ctx.fill();}
-}
-drawLine(tmax,'#f5a623','rgba(245,166,35,0.06)');
-drawLine(tmin,'#4fc3f7','rgba(79,195,247,0.06)');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Máx (°C)',
+                            data: daily.temperature_2m_max,
+                            borderColor: '#f5a623',
+                            backgroundColor: 'rgba(245, 166, 35, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Mín (°C)',
+                            data: daily.temperature_2m_min,
+                            borderColor: '#4fc3f7',
+                            backgroundColor: 'rgba(79, 195, 247, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#aaa39a', font: { family: 'DM Mono' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#aaa39a', font: { family: 'DM Mono' } }
+                        }
+                    }
+                }
+            });
+        }
 
-// Dots
-tmax.forEach((v,i)=>{ctx.beginPath();ctx.arc(x(i),yT(v),4,0,Math.PI*2);ctx.fillStyle='#f5a623';ctx.fill();});
-tmin.forEach((v,i)=>{ctx.beginPath();ctx.arc(x(i),yT(v),4,0,Math.PI*2);ctx.fillStyle='#4fc3f7';ctx.fill();});
-
-// Labels
-ctx.fillStyle='#8892a8';ctx.font='10px DM Mono';ctx.textAlign='center';
-days.forEach((d,i)=>{ctx.fillText(d,x(i),H-8);});
-ctx.textAlign='right';
-for(let t=Math.ceil(tMin);t<=Math.floor(tMax);t+=Math.max(1,Math.round((tMax-tMin)/5))){
-ctx.fillText(t+'°',pad.l-6,yT(t)+3);
-}
-
-// Legend
-ctx.font='10px DM Mono';ctx.textAlign='left';
-ctx.fillStyle='#f5a623';ctx.fillText('▲ Máx',pad.l,pad.t+12);
-ctx.fillStyle='#4fc3f7';ctx.fillText('▼ Mín',pad.l+50,pad.t+12);
-ctx.fillStyle='rgba(79,195,247,0.5)';ctx.fillText('■ Chuva',pad.l+100,pad.t+12);
-}
-
-fetchWeather();
-</script>
+        createStars();
+        fetchWeather();
+    </script>
 </body>
 </html>
