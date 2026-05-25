@@ -93,3 +93,8 @@
 - Glicose: 240 mg/dL
 - Hora: ~17:55
 - Via: Telegram
+
+### 25/05/2026
+- Pressão: 124/66 mmHg
+- Glicose: 284 mg/dL
+- Via: Telegram
