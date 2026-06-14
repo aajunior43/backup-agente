@@ -1,0 +1,12 @@
+{
+  "name": "youtube-monitor",
+  "description": "Monitora canais YouTube e notifica novos vídeos via WhatsApp/Telegram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}
