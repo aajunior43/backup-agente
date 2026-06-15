@@ -11,9 +11,11 @@ import json
 from datetime import datetime
 
 # Paths
-WORKSPACE = "/home/administrator/workspace"
-DADOS_DIR = f"{WORKSPACE}/dados"
-OBSIDIAN_CREDORES = "/home/administrator/meucofre-vault/PREFEITURA/Credores"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SKILL_DIR = os.path.dirname(SCRIPT_DIR)
+WORKSPACE = "/home/workspace"
+DADOS_DIR = f"{SKILL_DIR}/dados"
+OBSIDIAN_CREDORES = f"{WORKSPACE}/Documentos/Obsidian/Credores"
 
 def encontrar_csv_mais_recente():
     """Encontra o CSV mais recente no diretório de dados."""
