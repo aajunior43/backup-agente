@@ -18,3 +18,4 @@
 - `github` — GitHub CLI interações
 - `plano-estudos` — Plano de estudos
 - `financeiro` — Gestão de contas, faturas e gastos pessoais
+- `auditoria-perguntas` — Prever perguntas difíceis de banca/auditoria/avaliador sobre um documento ou tema, com mapeamento de vulnerabilidades, respostas sugeridas (marcando 🔴 as sem boa resposta) e reforço prioritário
