@@ -2,6 +2,16 @@
 
 ## Medições
 
+### 15/06/2026 (noite)
+- Pressão: 117/67 mmHg | Pulso: 97 bpm
+- Hora: ~21:26
+- Via: Telegram
+
+### 15/06/2026 (noite)
+- Glicose: 280 mg/dL
+- Hora: ~21:25
+- Via: Telegram
+
 ### 21/05/2026 (manhã)
 - Pressão: 139/83 mmHg | Pulso: 101 bpm
 - Glicose: 266 mg/dL
