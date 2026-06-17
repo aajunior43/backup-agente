@@ -15,6 +15,7 @@
 - **Região**: Noroeste do Paraná
 
 ## Skills
+- `calendario` — `file 'Skills/calendario/SKILL.md'` — Criar eventos no Google Calendar com notificações em 3 momentos (1 dia antes, 1 hora antes, na hora). Usar `use_app_google_calendar`.
 - `github` — GitHub CLI interações
 - `plano-estudos` — Plano de estudos
 - `financeiro` — Gestão de contas, faturas e gastos pessoais
