@@ -2,6 +2,16 @@
 
 ## Medições
 
+### 18/06/2026 (tarde)
+- Pressão: 135/72 mmHg | Pulso: 100 bpm
+- Hora: ~16:51
+- Via: Chat
+
+### 18/06/2026 (tarde)
+- Glicose: 300 mg/dL
+- Hora: ~16:52
+- Via: Chat
+
 ### 16/06/2026 (tarde)
 - Pressão: 112/76 mmHg | Pulso: 105 bpm
 - Glicose: 262 mg/dL
