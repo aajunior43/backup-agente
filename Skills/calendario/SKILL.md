@@ -80,6 +80,21 @@ Depois disso, todo evento criado herda as 3 notificações automaticamente.
 
 > Se Aleksandro quiser notificações diferentes para um evento específico (ex: lembrete 10 min antes pra consulta de saúde), é só pedir — eu ajusto criando o evento com `reminders` customizado.
 
+## ⚠️ Limitação conhecida: lembretes via integração Pipedream (atualizado em 2026-06-18)
+
+**A integração `use_app_google_calendar` (Pipedream) NÃO permite configurar lembretes.** Comportamento verificado empiricamente:
+
+- `google_calendar-create-event` e `google_calendar-update-event` **ignoram** o campo `reminders` (tanto `useDefault` quanto `overrides`) enviado em `configured_props`. Sempre aplicam um padrão hardcoded: **1 popup de 30 min antes**.
+- `update-event` também **sobrescreve** os lembretes existentes ao editar qualquer outro campo — mesmo sem passar `reminders`, ele reescreve para 30 min popup. Portanto, ** editar um evento quebra os 3 lembretes que ele tinha**.
+- Só `google_calendar-quick-add-event` cria eventos com `useDefault: true` (herdando os 3 lembretes padrão do calendário). **Porém** o quick-add parseia texto livre e em português/inglês vem interpretando data e título de forma imprevisível (ex.: datas viraram horários aleatórios, sobrou texto no título), além de **não aceitar descrição**.
+
+**Workarounds na prática:**
+
+1. **Para eventos que precisam dos 3 lembretes E descrição/local/data precisa:** criar via `create-event` (descrição e data ficam corretas, mas só 30 min popup). Em seguida, **pedir ao Aleksandro para abrir o evento no Google Calendar e marcar "Usar notificações padrão"** (1 clique) — assim ele herda os 3 lembretes configurados nas Settings do calendário. **Não usar `update-event` depois disso**, pois quebraria os lembretes de novo.
+2. **Para eventos simples sem descrição (ex.: "Lembrete: curso amanhã"):** `quick-add-event` herda os 3 lembretes direto, mas revisar sempre a data/título retornados no JSON de resposta — se errar, deletar e refazer com texto diferente.
+
+> Não vale a pena insistir em `update-event`/`create-event` com `reminders` para forçar os 3 lembretes — o campo é descartado silenciosamente. Tentar de novo não resolve; é limitação da action, não erro transitório.
+
 ## Outros comandos relacionados
 
 | Pedido do Aleksandro | Ferramenta |
