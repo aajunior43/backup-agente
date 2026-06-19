@@ -8,7 +8,7 @@
  * Pré-requisito: gh CLI autenticado (gh auth status)
  */
 
-const REPO = "workspace-backup";
+const REPO = "backup-agente";
 const WORKSPACE = "/home/workspace";
 
 async function run(cmd: string[], cwd = WORKSPACE): Promise<string> {
@@ -38,7 +38,7 @@ async function main() {
   console.log(`✅ GitHub autenticado como: ${user}`);
 
   // 2. Criar repositório
-  console.log("📦 Criando repositório 'workspace-backup'...");
+  console.log("📦 Criando repositório 'backup-agente'...");
   await run([
     "gh", "repo", "create", REPO,
     "--public",

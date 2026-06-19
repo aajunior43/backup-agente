@@ -45,7 +45,7 @@ gh auth setup-git
 
 ### `scripts/setup.ts` — Configuração única
 
-Cria o repositório `workspace-backup`, inicializa git e faz o **primeiro push**.
+Cria o repositório `backup-agente`, inicializa git e faz o **primeiro push**.
 
 ```bash
 bun /home/workspace/Skills/backup-github/scripts/setup.ts
@@ -84,5 +84,5 @@ O arquivo `workspace/.gitignore` já ignora:
 
 ## Repositório
 
-- **GitHub:** https://github.com/aajunior43/workspace-backup
+- **GitHub:** https://github.com/aajunior43/backup-agente
 - **Visibilidade:** Público

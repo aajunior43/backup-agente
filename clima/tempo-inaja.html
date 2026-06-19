@@ -1,883 +1,390 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Previsão do Tempo — Inajá/PR</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Previsão do Tempo — Inajá, PR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100vh; font-family: 'DM Mono', monospace; color: #e8eaf0; overflow-x: hidden; }
+  body {
+    background: linear-gradient(180deg, #0a0e27 0%, #141938 40%, #1a2050 100%);
+    position: relative;
+    padding: 1.5rem;
+  }
+  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .star { position: absolute; background: white; border-radius: 50%; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.9; } }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background: linear-gradient(135deg, #4a90e2 0%, #87ceeb 50%, #ffd89b 100%);
-      min-height: 100vh;
-      color: #1a202c;
-      padding: 16px;
-      -webkit-font-smoothing: antialiased;
-    }
+  .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  header { text-align: center; margin-bottom: 2rem; }
+  header h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    background: linear-gradient(90deg, #4fc3f7, #7c4dff, #f5a623);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    letter-spacing: -0.5px;
+  }
+  header p { color: #8a92a8; font-size: 0.9rem; margin-top: 0.4rem; }
+  .updated { display: inline-block; margin-top: 0.5rem; padding: 0.3rem 0.7rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; font-size: 0.75rem; color: #8a92a8; }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
+  .glass {
+    background: rgba(20, 25, 56, 0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
 
-    .header {
-      text-align: center;
-      color: #fff;
-      padding: 24px 0 16px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
+  .hero { padding: 2rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 720px) { .hero { grid-template-columns: 1.2fr 1fr; align-items: center; } }
+  .hero-main { display: flex; align-items: center; gap: 1.5rem; }
+  .hero-icon { font-size: 5rem; line-height: 1; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
+  .hero-temp { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 4.5rem; line-height: 1; }
+  .hero-temp sup { font-size: 1.8rem; vertical-align: top; opacity: 0.7; }
+  .hero-cond { font-size: 1.1rem; color: #c5cbd9; margin-top: 0.3rem; }
+  .hero-feel { font-size: 0.85rem; color: #8a92a8; margin-top: 0.2rem; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .stat { padding: 0.8rem 1rem; background: rgba(255,255,255,0.04); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+  .stat-label { font-size: 0.7rem; color: #8a92a8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; margin-top: 0.2rem; }
 
-    .header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+  section { margin-bottom: 1.5rem; }
+  .sec-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.9rem; color: #c5cbd9; padding-left: 0.3rem; }
 
-    .header .subtitle {
-      font-size: 14px;
-      opacity: 0.95;
-    }
+  .hourly-wrap { padding: 1.2rem; overflow-x: auto; }
+  .hourly { display: flex; gap: 0.7rem; min-width: max-content; }
+  .hour { flex: 0 0 auto; width: 78px; padding: 0.8rem 0.5rem; background: rgba(255,255,255,0.04); border-radius: 14px; border: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .hour.now { background: rgba(124, 77, 255, 0.18); border-color: rgba(124, 77, 255, 0.4); }
+  .hour h4 { font-size: 0.7rem; color: #8a92a8; font-weight: 400; }
+  .hour .icon { font-size: 1.6rem; margin: 0.3rem 0; }
+  .hour .temp { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
+  .hour .pop { font-size: 0.7rem; color: #4fc3f7; margin-top: 0.3rem; }
 
-    .header .updated {
-      font-size: 11px;
-      opacity: 0.8;
-      margin-top: 4px;
-    }
+  .daily-wrap { padding: 1rem; }
+  .day { display: grid; grid-template-columns: 70px 40px 1fr 90px; align-items: center; gap: 0.8rem; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .day:last-child { border-bottom: none; }
+  .day-name { font-size: 0.85rem; color: #c5cbd9; }
+  .day-name small { display: block; color: #8a92a8; font-size: 0.7rem; margin-top: 0.1rem; }
+  .day-icon { font-size: 1.5rem; text-align: center; }
+  .day-range { display: flex; align-items: center; gap: 0.4rem; }
+  .day-min { color: #4fc3f7; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; width: 40px; text-align: right; }
+  .day-bar { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; position: relative; overflow: hidden; }
+  .day-bar-fill { position: absolute; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #4fc3f7, #f5a623, #ff6b6b); }
+  .day-max { color: #ff8a65; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; width: 40px; }
+  .day-info { font-size: 0.7rem; color: #8a92a8; text-align: right; }
+  .day-info .rain { color: #4fc3f7; }
 
-    .current-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 28px 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-      margin-bottom: 16px;
-      text-align: center;
-    }
+  .chart-wrap { padding: 1.2rem; }
+  canvas { width: 100%; height: 220px; display: block; }
 
-    .current-icon {
-      font-size: 80px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
+  footer { text-align: center; padding: 1.5rem 0 1rem; color: #8a92a8; font-size: 0.75rem; }
+  footer a { color: #4fc3f7; text-decoration: none; }
 
-    .current-temp {
-      font-size: 72px;
-      font-weight: 200;
-      line-height: 1;
-      color: #1a202c;
-    }
-
-    .current-temp .unit {
-      font-size: 36px;
-      font-weight: 300;
-      vertical-align: top;
-      color: #718096;
-    }
-
-    .current-desc {
-      font-size: 22px;
-      font-weight: 500;
-      color: #2d3748;
-      margin-top: 4px;
-    }
-
-    .current-feels {
-      font-size: 14px;
-      color: #718096;
-      margin-top: 4px;
-    }
-
-    .flavor {
-      font-size: 14px;
-      color: #4a5568;
-      margin-top: 12px;
-      padding: 8px 12px;
-      background: #f7fafc;
-      border-radius: 12px;
-      font-style: italic;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .metric {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(20px);
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .metric-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-    }
-
-    .metric-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .metric-label {
-      font-size: 11px;
-      color: #718096;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-
-    .metric-value {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a202c;
-    }
-
-    .metric-sub {
-      font-size: 11px;
-      color: #a0aec0;
-    }
-
-    .section-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a202c;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hourly-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 4px 0 8px;
-      scrollbar-width: thin;
-    }
-
-    .hourly-scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .hourly-scroll::-webkit-scrollbar-thumb {
-      background: #cbd5e0;
-      border-radius: 4px;
-    }
-
-    .hour-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 60px;
-      padding: 12px 8px;
-      border-radius: 12px;
-      background: #f7fafc;
-      gap: 6px;
-    }
-
-    .hour-item.now {
-      background: linear-gradient(135deg, #4299e1, #3182ce);
-      color: #fff;
-    }
-
-    .hour-item.now .hour-temp,
-    .hour-item.now .hour-time,
-    .hour-item.now .hour-rain {
-      color: #fff;
-    }
-
-    .hour-time {
-      font-size: 12px;
-      font-weight: 600;
-      color: #4a5568;
-    }
-
-    .hour-icon {
-      font-size: 20px;
-    }
-
-    .hour-bar-wrap {
-      height: 80px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .hour-bar {
-      width: 6px;
-      background: linear-gradient(180deg, #f6ad55, #ed8936);
-      border-radius: 3px;
-    }
-
-    .hour-item.now .hour-bar {
-      background: rgba(255,255,255,0.9);
-    }
-
-    .hour-temp {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1a202c;
-    }
-
-    .hour-rain {
-      font-size: 10px;
-      color: #3182ce;
-      font-weight: 600;
-    }
-
-    .day-card {
-      background: #f7fafc;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-
-    .day-card.today {
-      background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
-      border: 2px solid #4299e1;
-    }
-
-    .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .day-name {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a202c;
-    }
-
-    .day-date {
-      color: #718096;
-      font-weight: 500;
-      font-size: 13px;
-      margin-left: 6px;
-    }
-
-    .today-badge {
-      background: #4299e1;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    .day-body {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .day-icon {
-      font-size: 32px;
-    }
-
-    .day-desc {
-      font-size: 14px;
-      color: #4a5568;
-      font-weight: 500;
-    }
-
-    .day-temps {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .temp-max {
-      font-size: 22px;
-      font-weight: 700;
-      color: #e53e3e;
-    }
-
-    .temp-min {
-      font-size: 18px;
-      font-weight: 500;
-      color: #3182ce;
-    }
-
-    .day-rain {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: #4a5568;
-    }
-
-    .rain-icon {
-      font-size: 16px;
-    }
-
-    .rain-info {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-    }
-
-    .rain-prob {
-      color: #3182ce;
-      font-weight: 600;
-    }
-
-    .day-bar {
-      height: 4px;
-      background: #e2e8f0;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-
-    .day-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4299e1, #3182ce);
-      border-radius: 2px;
-    }
-
-    .day-extra {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: #718096;
-      margin-bottom: 6px;
-    }
-
-    .day-sun {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #a0aec0;
-      padding-top: 6px;
-      border-top: 1px solid #e2e8f0;
-    }
-
-    .alerts-card {
-      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-      border-left: 4px solid #e53e3e;
-      border-radius: 16px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 20px rgba(229, 62, 62, 0.15);
-    }
-
-    .alerts-card h3 {
-      color: #c53030;
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .alerts-card ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .alerts-card li {
-      color: #742a2a;
-      font-size: 13px;
-      padding: 4px 0;
-      font-weight: 500;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 16px 0 32px;
-      color: rgba(255,255,255,0.8);
-      font-size: 11px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    }
-
-    @media (max-width: 480px) {
-      .current-temp { font-size: 60px; }
-      .current-icon { font-size: 64px; }
-      .metrics { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+  .loading, .error { text-align: center; padding: 3rem 1rem; }
+  .spinner { width: 48px; height: 48px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #4fc3f7; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error-msg { color: #ff6b6b; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>☀️ Previsão do Tempo</h1>
-      <div class="subtitle">📍 Inajá, Paraná</div>
-      <div class="updated">Atualizado em 18/06/2026 às 07:30 • Altitude: 423m</div>
-    </div>
+<canvas id="stars"></canvas>
+<div class="container">
+  <header>
+    <h1>Previsão do Tempo</h1>
+    <p>📍 Inajá, Paraná</p>
+    <span class="updated" id="updated">Carregando…</span>
+  </header>
 
-    <div class="current-card">
-      <div class="current-icon">🌤️</div>
-      <div class="current-temp">13.1<span class="unit">°C</span></div>
-      <div class="current-desc">Principalmente limpo</div>
-      <div class="current-feels">Sensação térmica: 10.9°C</div>
-      <div class="flavor">🧣 Casaco, cachecol, cobertor... Inverno chegou!</div>
-    </div>
-
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-icon">💧</div>
-        <div class="metric-text">
-          <div class="metric-label">Umidade</div>
-          <div class="metric-value">87%</div>
-        </div>
-      </div>
-      <div class="metric">
-        <div class="metric-icon">💨</div>
-        <div class="metric-text">
-          <div class="metric-label">Vento</div>
-          <div class="metric-value">16.7 km/h</div>
-          <div class="metric-sub">Direção: L</div>
-        </div>
-      </div>
-      <div class="metric">
-        <div class="metric-icon">🌧️</div>
-        <div class="metric-text">
-          <div class="metric-label">Precipitação</div>
-          <div class="metric-value">0.0 mm</div>
-        </div>
-      </div>
-      <div class="metric">
-        <div class="metric-icon">☀️</div>
-        <div class="metric-text">
-          <div class="metric-label">UV</div>
-          <div class="metric-value">0.1</div>
-        </div>
-      </div>
-      <div class="metric">
-        <div class="metric-icon">👁️</div>
-        <div class="metric-text">
-          <div class="metric-label">Visibilidade</div>
-          <div class="metric-value">29.3 km</div>
-        </div>
-      </div>
-      <div class="metric">
-        <div class="metric-icon">🌡️</div>
-        <div class="metric-text">
-          <div class="metric-label">Pressão</div>
-          <div class="metric-value">971.7 hPa</div>
-        </div>
-      </div>
-    </div>
-
-    
-    <div class="alerts-card">
-      <h3>⚠️ Alertas</h3>
-      <ul><li>Sáb (20/06): ⛈️ Tempestade com granizo leve — 10.9mm, 61% de chance</li><li>Seg (22/06): ⛈️ Tempestade com granizo leve — 19.2mm, 82% de chance</li><li>Qua (24/06): 🧣 Frio de 6.4°C pela manhã</li></ul>
-    </div>
-
-    <div class="section-card">
-      <div class="section-title">⏰ Próximas 24 horas</div>
-      <div class="hourly-scroll">
-            <div class="hour-item now">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">🌤️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 20px"></div></div>
-              <div class="hour-temp">13.4°</div>
-              <div class="hour-time">08:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 32px"></div></div>
-              <div class="hour-temp">14.7°</div>
-              <div class="hour-time">09:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 44px"></div></div>
-              <div class="hour-temp">16.0°</div>
-              <div class="hour-time">10:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">🌤️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 55px"></div></div>
-              <div class="hour-temp">17.2°</div>
-              <div class="hour-time">11:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 65px"></div></div>
-              <div class="hour-temp">18.3°</div>
-              <div class="hour-time">12:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 74px"></div></div>
-              <div class="hour-temp">19.2°</div>
-              <div class="hour-time">13:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 79px"></div></div>
-              <div class="hour-temp">19.7°</div>
-              <div class="hour-time">14:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 80px"></div></div>
-              <div class="hour-temp">19.8°</div>
-              <div class="hour-time">15:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 76px"></div></div>
-              <div class="hour-temp">19.4°</div>
-              <div class="hour-time">16:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 67px"></div></div>
-              <div class="hour-temp">18.5°</div>
-              <div class="hour-time">17:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 55px"></div></div>
-              <div class="hour-temp">17.2°</div>
-              <div class="hour-time">18:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 52px"></div></div>
-              <div class="hour-temp">16.9°</div>
-              <div class="hour-time">19:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 49px"></div></div>
-              <div class="hour-temp">16.5°</div>
-              <div class="hour-time">20:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 47px"></div></div>
-              <div class="hour-temp">16.3°</div>
-              <div class="hour-time">21:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 44px"></div></div>
-              <div class="hour-temp">16.0°</div>
-              <div class="hour-time">22:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 40px"></div></div>
-              <div class="hour-temp">15.6°</div>
-              <div class="hour-time">23:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 35px"></div></div>
-              <div class="hour-temp">15.1°</div>
-              <div class="hour-time">00:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">🌤️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 33px"></div></div>
-              <div class="hour-temp">14.8°</div>
-              <div class="hour-time">01:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 28px"></div></div>
-              <div class="hour-temp">14.3°</div>
-              <div class="hour-time">02:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 24px"></div></div>
-              <div class="hour-temp">13.9°</div>
-              <div class="hour-time">03:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">🌤️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 21px"></div></div>
-              <div class="hour-temp">13.6°</div>
-              <div class="hour-time">04:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 20px"></div></div>
-              <div class="hour-temp">13.5°</div>
-              <div class="hour-time">05:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">☁️</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 20px"></div></div>
-              <div class="hour-temp">13.5°</div>
-              <div class="hour-time">06:00</div>
-            </div>
-            <div class="hour-item">
-              <div class="hour-rain">0%</div>
-              <div class="hour-icon">⛅</div>
-              <div class="hour-bar-wrap"><div class="hour-bar" style="height: 20px"></div></div>
-              <div class="hour-temp">13.5°</div>
-              <div class="hour-time">07:00</div>
-            </div>
-      </div>
-    </div>
-
-    <div class="section-card">
-      <div class="section-title">📅 Próximos dias</div>
-      
-            <div class="day-card today">
-              <div class="day-header">
-                <div class="day-name">Qui <span class="day-date">18/06</span></div>
-                <div class="today-badge">HOJE</div>
-              </div>
-              <div class="day-body">
-                <div class="day-icon">☁️</div>
-                <div class="day-desc">Nublado</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">19.8°</span>
-                <span class="temp-min">13.0°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>0.0mm</div>
-                  <div class="rain-prob">0%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 0%"></div></div>
-              <div class="day-extra">
-                <span>💨 19.8 km/h</span>
-                <span>☀️ UV 4.7</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:06</span>
-                <span>🌇 17:50</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Sex <span class="day-date">19/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">⛈️</div>
-                <div class="day-desc">Tempestade</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">23.8°</span>
-                <span class="temp-min">13.5°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>4.6mm</div>
-                  <div class="rain-prob">62%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 75%"></div></div>
-              <div class="day-extra">
-                <span>💨 19.3 km/h</span>
-                <span>☀️ UV 4.5</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:06</span>
-                <span>🌇 17:51</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Sáb <span class="day-date">20/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">⛈️</div>
-                <div class="day-desc">Tempestade com granizo leve</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">19.0°</span>
-                <span class="temp-min">11.0°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>10.9mm</div>
-                  <div class="rain-prob">61%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 74%"></div></div>
-              <div class="day-extra">
-                <span>💨 19.5 km/h</span>
-                <span>☀️ UV 2.4</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:06</span>
-                <span>🌇 17:51</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Dom <span class="day-date">21/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">⛅</div>
-                <div class="day-desc">Parcialmente nublado</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">19.1°</span>
-                <span class="temp-min">8.4°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>0.0mm</div>
-                  <div class="rain-prob">4%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 4%"></div></div>
-              <div class="day-extra">
-                <span>💨 15.4 km/h</span>
-                <span>☀️ UV 5.1</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:07</span>
-                <span>🌇 17:51</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Seg <span class="day-date">22/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">⛈️</div>
-                <div class="day-desc">Tempestade com granizo leve</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">21.2°</span>
-                <span class="temp-min">14.4°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>19.2mm</div>
-                  <div class="rain-prob">82%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 100%"></div></div>
-              <div class="day-extra">
-                <span>💨 15.7 km/h</span>
-                <span>☀️ UV 4.7</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:07</span>
-                <span>🌇 17:51</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Ter <span class="day-date">23/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">☁️</div>
-                <div class="day-desc">Nublado</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">17.3°</span>
-                <span class="temp-min">8.9°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>0.0mm</div>
-                  <div class="rain-prob">37%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 45%"></div></div>
-              <div class="day-extra">
-                <span>💨 18.8 km/h</span>
-                <span>☀️ UV 4.8</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:07</span>
-                <span>🌇 17:52</span>
-              </div>
-            </div>
-            <div class="day-card">
-              <div class="day-header">
-                <div class="day-name">Qua <span class="day-date">24/06</span></div>
-                
-              </div>
-              <div class="day-body">
-                <div class="day-icon">☁️</div>
-                <div class="day-desc">Nublado</div>
-              </div>
-              <div class="day-temps">
-                <span class="temp-max">14.2°</span>
-                <span class="temp-min">6.4°</span>
-              </div>
-              <div class="day-rain">
-                <div class="rain-icon">🌧️</div>
-                <div class="rain-info">
-                  <div>0.0mm</div>
-                  <div class="rain-prob">25%</div>
-                </div>
-              </div>
-              <div class="day-bar"><div class="day-bar-fill" style="width: 30%"></div></div>
-              <div class="day-extra">
-                <span>💨 14.8 km/h</span>
-                <span>☀️ UV 1.8</span>
-              </div>
-              <div class="day-sun">
-                <span>🌅 07:07</span>
-                <span>🌇 17:52</span>
-              </div>
-            </div>
-    </div>
-
-    <div class="footer">
-      Dados: Open-Meteo API • Inajá, PR (-22.7417, -51.8835)
+  <div id="app">
+    <div class="loading glass">
+      <div class="spinner"></div>
+      <p>Buscando dados meteorológicos…</p>
     </div>
   </div>
+
+  <footer>
+    Dados: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> · Coordenadas: -22.7758, -51.9011 · Fuso: America/Sao_Paulo
+  </footer>
+</div>
+
+<script>
+const LAT = -22.7758, LON = -51.9011;
+const WMO = {
+  0: { label: 'Céu limpo', icon: '☀️' },
+  1: { label: 'Principalmente limpo', icon: '🌤️' },
+  2: { label: 'Parcialmente nublado', icon: '⛅' },
+  3: { label: 'Nublado', icon: '☁️' },
+  45: { label: 'Neblina', icon: '🌫️' },
+  48: { label: 'Geada com neblina', icon: '🌫️' },
+  51: { label: 'Garoa leve', icon: '🌦️' },
+  53: { label: 'Garoa moderada', icon: '🌦️' },
+  55: { label: 'Garoa intensa', icon: '🌧️' },
+  61: { label: 'Chuva leve', icon: '🌧️' },
+  63: { label: 'Chuva moderada', icon: '🌧️' },
+  65: { label: 'Chuva forte', icon: '🌧️' },
+  80: { label: 'Pancadas de chuva', icon: '🌦️' },
+  81: { label: 'Pancadas moderadas', icon: '🌧️' },
+  82: { label: 'Pancadas fortes', icon: '⛈️' },
+  95: { label: 'Tempestade', icon: '⛈️' },
+  96: { label: 'Tempestade com granizo', icon: '⛈️' },
+  99: { label: 'Tempestade forte', icon: '🌩️' },
+};
+const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+function degToCompass(deg) {
+  const arr = ['N','NE','L','SE','S','SO','O','NO'];
+  return arr[Math.round(deg / 45) % 8];
+}
+
+function buildURL() {
+  const params = new URLSearchParams({
+    latitude: LAT, longitude: LON, timezone: 'America/Sao_Paulo',
+    current: 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index,visibility',
+    hourly: 'temperature_2m,precipitation_probability,weather_code,wind_speed_10m,relative_humidity_2m',
+    daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max,sunrise,sunset',
+    forecast_days: 7, wind_speed_unit: 'kmh', precipitation_unit: 'mm'
+  });
+  return `https://api.open-meteo.com/v1/forecast?${params}`;
+}
+
+async function fetchWeather() {
+  try {
+    const res = await fetch(buildURL());
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    renderAll(data);
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="error glass">
+        <p class="error-msg">⚠️ Não foi possível carregar os dados.</p>
+        <p style="color:#8a92a8;font-size:0.85rem;margin-top:0.5rem;">Verifique sua conexão e tente novamente.</p>
+      </div>`;
+  }
+}
+
+function renderAll(data) {
+  const c = data.current, h = data.hourly, d = data.daily;
+  const now = new Date();
+  const todayIdx = d.time.findIndex(t => t === now.toISOString().slice(0,10));
+  const cond = WMO[c.weather_code] || WMO[3];
+
+  const heroHTML = `
+    <div class="hero glass">
+      <div class="hero-main">
+        <div class="hero-icon">${cond.icon}</div>
+        <div>
+          <div class="hero-temp">${Math.round(c.temperature_2m)}<sup>°C</sup></div>
+          <div class="hero-cond">${cond.label}</div>
+          <div class="hero-feel">Sensação: ${Math.round(c.apparent_temperature)}°C</div>
+        </div>
+      </div>
+      <div class="hero-grid">
+        <div class="stat"><div class="stat-label">💧 Umidade</div><div class="stat-value">${c.relative_humidity_2m}%</div></div>
+        <div class="stat"><div class="stat-label">💨 Vento</div><div class="stat-value">${Math.round(c.wind_speed_10m)} km/h</div></div>
+        <div class="stat"><div class="stat-label">🌡️ Pressão</div><div class="stat-value">${Math.round(c.surface_pressure)} hPa</div></div>
+        <div class="stat"><div class="stat-label">☀️ UV</div><div class="stat-value">${c.uv_index.toFixed(1)}</div></div>
+        <div class="stat"><div class="stat-label">👁️ Visibilidade</div><div class="stat-value">${(c.visibility/1000).toFixed(1)} km</div></div>
+        <div class="stat"><div class="stat-label">🧭 Direção</div><div class="stat-value">${degToCompass(c.wind_direction_10m)} ${Math.round(c.wind_direction_10m)}°</div></div>
+      </div>
+    </div>
+  `;
+
+  // Hourly: pegar a partir da hora atual (próximas 24h)
+  const currentHour = now.getHours();
+  const startIdx = h.time.findIndex(t => new Date(t).getHours() === currentHour && t.startsWith(now.toISOString().slice(0,10)));
+  const start = startIdx >= 0 ? startIdx : 0;
+  const hours = [];
+  for (let i = 0; i < 24; i++) {
+    const idx = start + i;
+    if (idx >= h.time.length) break;
+    const dt = new Date(h.time[idx]);
+    hours.push(`
+      <div class="hour ${i === 0 ? 'now' : ''}">
+        <h4>${i === 0 ? 'Agora' : dt.getHours().toString().padStart(2,'0') + 'h'}</h4>
+        <div class="icon">${(WMO[h.weather_code[idx]] || WMO[3]).icon}</div>
+        <div class="temp">${Math.round(h.temperature_2m[idx])}°</div>
+        <div class="pop">💧 ${h.precipitation_probability[idx] ?? 0}%</div>
+      </div>
+    `);
+  }
+
+  const dailyHTML = d.time.map((t, i) => {
+    const dt = new Date(t + 'T12:00:00');
+    const min = d.temperature_2m_min[i], max = d.temperature_2m_max[i];
+    const allMin = Math.min(...d.temperature_2m_min);
+    const allMax = Math.max(...d.temperature_2m_max);
+    const span = allMax - allMin || 1;
+    const left = ((min - allMin) / span) * 100;
+    const width = ((max - min) / span) * 100;
+    const wmo = WMO[d.weather_code[i]] || WMO[3];
+    const isToday = i === todayIdx;
+    return `
+      <div class="day" style="${isToday ? 'background:rgba(124,77,255,0.08);border-radius:10px;padding:0.8rem;margin:-0.2rem 0;' : ''}">
+        <div class="day-name">${isToday ? 'Hoje' : WEEKDAYS[dt.getDay()]}<small>${dt.getDate()}/${(dt.getMonth()+1).toString().padStart(2,'0')}</small></div>
+        <div class="day-icon">${wmo.icon}</div>
+        <div class="day-range">
+          <span class="day-min">${Math.round(min)}°</span>
+          <div class="day-bar"><div class="day-bar-fill" style="left:${left}%;width:${Math.max(width,5)}%"></div></div>
+          <span class="day-max">${Math.round(max)}°</span>
+        </div>
+        <div class="day-info">${d.precipitation_probability_max[i] > 0 ? `<span class="rain">🌧 ${d.precipitation_sum[i].toFixed(1)}mm ${d.precipitation_probability_max[i]}%</span>` : '—'}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('app').innerHTML = `
+    ${heroHTML}
+    <section>
+      <h2 class="sec-title">⏰ Próximas 24 horas</h2>
+      <div class="hourly-wrap glass"><div class="hourly">${hours.join('')}</div></div>
+    </section>
+    <section>
+      <h2 class="sec-title">📅 Próximos 7 dias</h2>
+      <div class="daily-wrap glass">${dailyHTML}</div>
+    </section>
+    <section>
+      <h2 class="sec-title">📊 Temperatura e chuva (7 dias)</h2>
+      <div class="chart-wrap glass"><canvas id="chart"></canvas></div>
+    </section>
+  `;
+
+  document.getElementById('updated').textContent = 'Atualizado: ' + now.toLocaleString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + ' · ' + now.toLocaleDateString('pt-BR');
+
+  drawChart(d);
+}
+
+function drawChart(d) {
+  const canvas = document.getElementById('chart');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth, h = 220;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const padL = 38, padR = 38, padT = 16, padB = 32;
+  const cw = w - padL - padR, ch = h - padT - padB;
+  const n = d.time.length;
+  const allMin = Math.min(...d.temperature_2m_min);
+  const allMax = Math.max(...d.temperature_2m_max);
+  const tMin = Math.floor((allMin - 2) / 5) * 5;
+  const tMax = Math.ceil((allMax + 2) / 5) * 5;
+  const tRange = tMax - tMin || 1;
+  const maxRain = Math.max(...d.precipitation_sum, 5);
+
+  // Grid + Y labels
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.fillStyle = '#8a92a8';
+  ctx.font = '10px DM Mono';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (ch * i) / 4;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + cw, y); ctx.stroke();
+    const tVal = tMax - (tRange * i) / 4;
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.round(tVal) + '°', padL - 6, y + 3);
+  }
+
+  // Bars (precipitation)
+  const barW = cw / n * 0.5;
+  d.precipitation_sum.forEach((r, i) => {
+    if (r <= 0) return;
+    const x = padL + (cw / n) * i + (cw / n - barW) / 2;
+    const bh = (r / maxRain) * ch;
+    const y = padT + ch - bh;
+    const grad = ctx.createLinearGradient(0, y, 0, y + bh);
+    grad.addColorStop(0, 'rgba(79,195,247,0.7)');
+    grad.addColorStop(1, 'rgba(79,195,247,0.15)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, y, barW, bh);
+  });
+
+  // Min line
+  ctx.strokeStyle = '#4fc3f7';
+  ctx.fillStyle = '#4fc3f7';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  d.temperature_2m_min.forEach((t, i) => {
+    const x = padL + (cw / n) * i + cw / n / 2;
+    const y = padT + ((tMax - t) / tRange) * ch;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  d.temperature_2m_min.forEach((t, i) => {
+    const x = padL + (cw / n) * i + cw / n / 2;
+    const y = padT + ((tMax - t) / tRange) * ch;
+    ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2); ctx.fill();
+  });
+
+  // Max line
+  ctx.strokeStyle = '#ff8a65';
+  ctx.fillStyle = '#ff8a65';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  d.temperature_2m_max.forEach((t, i) => {
+    const x = padL + (cw / n) * i + cw / n / 2;
+    const y = padT + ((tMax - t) / tRange) * ch;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  d.temperature_2m_max.forEach((t, i) => {
+    const x = padL + (cw / n) * i + cw / n / 2;
+    const y = padT + ((tMax - t) / tRange) * ch;
+    ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2); ctx.fill();
+  });
+
+  // X labels
+  ctx.fillStyle = '#c5cbd9';
+  ctx.textAlign = 'center';
+  ctx.font = '11px DM Mono';
+  d.time.forEach((t, i) => {
+    const dt = new Date(t + 'T12:00:00');
+    const x = padL + (cw / n) * i + cw / n / 2;
+    ctx.fillText(WEEKDAYS[dt.getDay()].toUpperCase(), x, h - padB + 14);
+    ctx.fillText(dt.getDate() + '/' + (dt.getMonth()+1), x, h - padB + 26);
+  });
+
+  // Legend
+  ctx.font = '10px DM Mono';
+  ctx.fillStyle = '#ff8a65';
+  ctx.textAlign = 'left';
+  ctx.fillRect(padL, 4, 10, 3); ctx.fillText('Máx', padL + 14, 8);
+  ctx.fillStyle = '#4fc3f7';
+  ctx.fillRect(padL + 50, 4, 10, 3); ctx.fillText('Mín', padL + 64, 8);
+  ctx.fillStyle = 'rgba(79,195,247,0.7)';
+  ctx.fillRect(padL + 100, 4, 10, 3); ctx.fillText('Chuva (mm)', padL + 114, 8);
+}
+
+// Stars background
+(function initStars(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width = window.innerWidth; c.height = window.innerHeight; draw(); }
+  const stars = [];
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s => {
+      ctx.globalAlpha = s.a;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
+    });
+  }
+  for (let i = 0; i < 120; i++) {
+    stars.push({ x: Math.random()*window.innerWidth, y: Math.random()*window.innerHeight, r: Math.random()*1.4, a: 0.2 + Math.random()*0.7 });
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(() => {
+    stars.forEach(s => { s.a += (Math.random() - 0.5) * 0.1; s.a = Math.max(0.1, Math.min(1, s.a)); });
+    draw();
+  }, 1500);
+})();
+
+fetchWeather();
+</script>
 </body>
 </html>

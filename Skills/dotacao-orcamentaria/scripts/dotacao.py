@@ -22,7 +22,7 @@ def encontrar_csv_mais_recente():
     arquivos = [f for f in os.listdir(DADOS_DIR) if f.startswith('orcamento-inaja-2026') and f.endswith('.csv')]
     if not arquivos:
         # Fallback para o CSV principal
-        return f"{DADOS_DIR}/orcamento-inaja-2026-despesas.csv"
+        return f"{DADOS_DIR}/orcamento-inaja-2026.csv"
     
     # Ordena por data (mais recente primeiro)
     arquivos.sort(reverse=True)
@@ -258,6 +258,11 @@ def main():
             idx = sys.argv.index('--item')
             item = sys.argv[idx + 1]
         
+        destino = None
+        if '--destino' in sys.argv:
+            idx = sys.argv.index('--destino')
+            destino = sys.argv[idx + 1]
+
         if valor and item:
             resultado = verificar_cobertura(item, valor)
             if resultado:
@@ -271,29 +276,22 @@ def main():
                     print(f"   Faltam: {formatar_saldo(valor - resultado['saldo'])}")
             else:
                 print(f"❌ Item {item} não encontrado")
+        elif valor and destino:
+            dados, _ = carregar_dados()
+            matches = [r for r in dados if destino.upper() in r.get('Descrição da ação', '').upper()]
+            if not matches:
+                print(f"❌ Nenhuma dotação encontrada com '{destino}'")
+            else:
+                print(f"🔎 {len(matches)} dotação(ões) para '{destino}':\n")
+                for r in matches:
+                    saldo = parse_saldo(r.get('Saldo atual da despesa', '0'))
+                    cobre = saldo >= valor
+                    status = "✅" if cobre else "❌"
+                    print(f"  {status} Item {r.get('Número da despesa', 'N/A')} — {r.get('Descrição da ação', '')[:40]}")
+                    print(f"     Saldo: {formatar_saldo(saldo)} | Valor: R$ {valor:,.2f}")
         else:
             print("Use: dotacao.py verificar --valor <n> --item <n>")
-    
-    elif cmd == 'nota':
-        if '--fornecedor' in sys.argv:
-            idx = sys.argv.index('--fornecedor')
-            nome = sys.argv[idx + 1]
-            dados, arquivo = carregar_dados()
-            
-            # Busca registros do fornecedor
-            registros = [r for r in dados if nome.upper() in r.get('Descrição do organograma', '').upper()]
-            
-            if registros:
-                # Cria nome de arquivo
-                data_hoje = datetime.now().strftime('%Y-%m-%d')
-                nome_arquivo = f"{OBSIDIAN_CREDORES}/{data_hoje}-{nome.lower().replace(' ', '-')}.md"
-                
-                caminho = criar_nota_credor(nome, registros, nome_arquivo)
-                print(f"✅ Nota criada: {caminho}")
-            else:
-                print(f"❌ Nenhum registro encontrado para '{nome}'")
-        else:
-            print("Use: dotacao.py nota --fornecedor <nome>")
+            print("     dotacao.py verificar --valor <n> --destino <texto>")
     
     elif cmd == 'educacao':
         dados, arquivo = carregar_dados()
@@ -307,7 +305,7 @@ def main():
     
     elif cmd == 'saude':
         dados, arquivo = carregar_dados()
-        resultados = buscar_por_funcao('09', dados)
+        resultados = buscar_por_funcao('10', dados)
         print("🏥 DOTACOES DA SAUDE:\n")
         print(f"  Total: {len(resultados)} dotacoes")
         for r in resultados[:10]:
@@ -321,6 +319,67 @@ def main():
         for r in resultados[:10]:
             print(f"    [{r.get('Número da despesa', '')}] {r.get('Descrição da ação', '')[:35]} | {formatar_saldo(parse_saldo(r.get('Saldo atual da despesa', '0')))}")
     
+    elif cmd == 'listar-credores':
+        dados, arquivo = carregar_dados()
+        print(f"📂 CSV: {os.path.basename(arquivo)}")
+        print(f"Total de registros: {len(dados)}\n")
+        orgaos = {}
+        for r in dados:
+            orgao = r.get('Descrição do organograma', 'N/A')
+            if orgao not in orgaos:
+                orgaos[orgao] = {'count': 0, 'saldo': 0}
+            orgaos[orgao]['count'] += 1
+            orgaos[orgao]['saldo'] += parse_saldo(r.get('Saldo atual da despesa', '0'))
+        print("📋 ORGÃOS / CREDORES ENCONTRADOS:")
+        print("-" * 60)
+        for orgao, info in sorted(orgaos.items(), key=lambda x: x[1]['saldo'], reverse=True):
+            print(f"  {orgao[:45]}")
+            print(f"    → {info['count']} dotação(ões) | Saldo: {formatar_saldo(info['saldo'])}")
+            print()
+
+    elif cmd in ('nota-credor', 'nota'):
+        fornecedor_flag = '--fornecedor' in sys.argv
+        if fornecedor_flag:
+            idx = sys.argv.index('--fornecedor')
+            nome = sys.argv[idx + 1]
+            dados, arquivo = carregar_dados()
+            registros = [r for r in dados if nome.upper() in r.get('Descrição do organograma', '').upper()]
+            if registros:
+                os.makedirs(OBSIDIAN_CREDORES, exist_ok=True)
+                data_hoje = datetime.now().strftime('%Y-%m-%d')
+                nome_arquivo = f"{OBSIDIAN_CREDORES}/{data_hoje}-{nome.lower().replace(' ', '-')}.md"
+                caminho = criar_nota_credor(nome, registros, nome_arquivo)
+                print(f"✅ Nota criada: {caminho}")
+            else:
+                print(f"❌ Nenhum registro encontrado para '{nome}'")
+        else:
+            print("Use: dotacao.py nota-credor --fornecedor <nome>")
+
+    elif cmd == 'analisar-credores':
+        dados, arquivo = carregar_dados()
+        print(f"📂 CSV: {os.path.basename(arquivo)}")
+        print(f"Total de registros: {len(dados)}\n")
+        orgaos = {}
+        for r in dados:
+            orgao = r.get('Descrição do organograma', 'N/A')
+            if orgao not in orgaos:
+                orgaos[orgao] = {'count': 0, 'saldo': 0.0, 'funcoes': set(), 'recursos': set()}
+            orgaos[orgao]['count'] += 1
+            orgaos[orgao]['saldo'] += parse_saldo(r.get('Saldo atual da despesa', '0'))
+            orgaos[orgao]['funcoes'].add(r.get('Descrição da função', ''))
+            orgaos[orgao]['recursos'].add(r.get('Descrição do recurso', ''))
+        total_geral = sum(v['saldo'] for v in orgaos.values())
+        print(f"📊 SUMÁRIO — {len(orgaos)} órgãos | Total: {formatar_saldo(total_geral)}\n")
+        print("-" * 70)
+        for orgao, info in sorted(orgaos.items(), key=lambda x: x[1]['saldo'], reverse=True):
+            pct = (info['saldo'] / total_geral * 100) if total_geral else 0
+            print(f"  {orgao[:45]}")
+            print(f"    Dotações: {info['count']} | Saldo: {formatar_saldo(info['saldo'])} ({pct:.1f}%)")
+            funcoes_str = ', '.join(f for f in info['funcoes'] if f)
+            if funcoes_str:
+                print(f"    Funções: {funcoes_str[:60]}")
+            print()
+
     elif cmd == 'dot':
         if len(sys.argv) > 2:
             item = sys.argv[2]
@@ -329,7 +388,7 @@ def main():
             if resultados:
                 r = resultados[0]
                 print(f"📋 Item {item}")
-                print(f"   {r.get('Descrição da organograma', 'N/A')}")
+                print(f"   {r.get('Descrição do organograma', 'N/A')}")
                 print(f"   {r.get('Descrição da ação', 'N/A')}")
                 print(f"   Nat: {r.get('Natureza de Despesa', 'N/A')}")
                 print(f"   Rec: {r.get('Descrição do recurso', 'N/A')}")
