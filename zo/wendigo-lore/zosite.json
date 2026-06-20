@@ -1,0 +1,15 @@
+{
+  "name": "wendigo-lore",
+  "local_port": 54092,
+  "entrypoint": "bun run dev",
+  "publish": {
+    "label": "wendigo-lore",
+    "type": "http",
+    "entrypoint": "bun run prod",
+    "published_port": 58247,
+    "env": {
+      "NODE_ENV": "production",
+      "ZO_CLIENT_IDENTITY_TOKEN": "none"
+    }
+  }
+}

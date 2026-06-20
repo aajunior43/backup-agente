@@ -1,6 +1,6 @@
 ---
 name: backup-github
-description: Faz backup periódico de todo o workspace (/home/workspace) para um repositório GitHub. Cria o repositório se não existir, gerencia .gitignore, commita e faz push automático.
+description: Faz backup periódico de todo o workspace (/home/workspace) para a pasta zo/ do repositório compartilhado backup-agente no GitHub. Repositório usado por múltiplos agentes (zo, openclaw, hermes, odysseu).
 compatibility: Created for Zo Computer
 metadata:
   author: aleksandro.zo.computer
@@ -8,34 +8,41 @@ metadata:
   display-name: 🔄 GitHub Backup Automático
   emoji: 🔄
 ---
-# 🔄 GitHub Backup Automático
+
+# 🔄 GitHub Backup Automático (Zo Computer)
 
 ## Propósito
 
-Sincroniza todo o workspace (`/home/workspace`) com um repositório no GitHub automaticamente. Ideal para:
+Sincroniza o workspace (`/home/workspace`) com a pasta `zo/` do repositório **backup-agente** no GitHub.
 
-- Backup de segurança dos arquivos
-- Histórico de versões de documentos
-- Acesso remoto aos arquivos
-- Integração com ferramentas de CI/CD
+O repositório é **compartilhado** entre múltiplos agentes. Cada um tem sua própria pasta:
+
+```
+backup-agente/
+├── AGENTS.md       ← Instruções para todas as IAs
+├── zo/             ← Zo Computer (este script)
+├── openclaw/       ← OpenClaw / Claude Code
+├── hermes/         ← Hermes Agent
+└── odysseu/        ← Odysseu
+```
+
+⚠️ **Nunca modifique arquivos fora da pasta `zo/`** — cada agente gerencia seus próprios backups.
 
 ## Pré-requisito
 
-A autenticação no GitHub é feita via `gh` CLI:
+Autenticação via `gh` CLI:
 
 ```bash
 gh auth status
 # Deve mostrar "Logged in to github.com account aajunior43"
 ```
 
-Se não estiver autenticado, use:
+Se não estiver autenticado:
 
 ```bash
 gh auth login
 ```
-
-Ou cole um token GitHub (começa com `ghp_` ou `github_pat_`):
-
+Ou com token:
 ```bash
 echo "seu_token" | gh auth login --with-token
 gh auth setup-git
@@ -45,7 +52,7 @@ gh auth setup-git
 
 ### `scripts/setup.ts` — Configuração única
 
-Cria o repositório `backup-agente`, inicializa git e faz o **primeiro push**.
+Cria o repositório `backup-agente`, configura git e faz o primeiro push.
 
 ```bash
 bun /home/workspace/Skills/backup-github/scripts/setup.ts
@@ -53,36 +60,26 @@ bun /home/workspace/Skills/backup-github/scripts/setup.ts
 
 ### `scripts/backup.ts` — Backup incremental
 
-Commits e envia alterações. Pode ser executado manualmente ou agendado.
+Rsync do workspace para `zo/` + commit + push.
 
 ```bash
 bun /home/workspace/Skills/backup-github/scripts/backup.ts         # commit + push
 bun /home/workspace/Skills/backup-github/scripts/backup.ts --status # mostra alterações
-bun /home/workspace/Skills/backup-github/scripts/backup.ts --schedule # instruções p/ agendar
+bun /home/workspace/Skills/backup-github/scripts/backup.ts --schedule # instruções
 ```
 
 ## Agendamento automático
 
-Para rodar todo dia à meia-noite via Zo Computer Automations:
-
-No painel de automações, crie uma com:
+Para rodar todo dia à meia-noite:
 
 - **Comando:** `bun /home/workspace/Skills/backup-github/scripts/backup.ts`
-- **Frequência:** Diariamente, 00:00
+- **Frequência:** Diariamente, 00:00 (horário Inajá)
 - **Rrule:** `RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0`
-- **Canal:** Nenhum (roda em background)
 
-Ou peça diretamente: **"Agenda o backup do workspace todo dia"**
-
-## .gitignore
-
-O arquivo `workspace/.gitignore` já ignora:
-
-- `node_modules/`, `.env`, `venv/`, `__pycache__/`
-- Arquivos auxiliares do LaTeX (`*.aux`, `*.log`, `*.out` etc.)
-- `.DS_Store`, `Thumbs.db`
+Ou peça: **"Agenda o backup do workspace todo dia"**
 
 ## Repositório
 
 - **GitHub:** https://github.com/aajunior43/backup-agente
 - **Visibilidade:** Público
+- **Estrutura:** pastas separadas por agente (`zo/`, `openclaw/`, `hermes/`, `odysseu/`)

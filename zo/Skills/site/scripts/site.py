@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""CLI do skill meus-links (MCP Streamable HTTP).
+"""CLI do skill site (wrapper do MCP meus-links via Streamable HTTP).
 
 Uso:
-    python3 meus-links.py <acao> [args]
+    python3 site.py <acao> [args]
 
 Acoes:
     list-links [--search S] [--folder F] [--favorites] [--archived] [--trash] [--limit N] [--pretty]
@@ -87,7 +87,7 @@ def pretty_table(links):
 
 
 def main():
-    p = argparse.ArgumentParser(prog="meus-links.py")
+    p = argparse.ArgumentParser(prog="site.py")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     # list-links
