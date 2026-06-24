@@ -147,8 +147,8 @@ function renderAll(data) {
 ## Instruções de entrega
 
 1. Gere um **único arquivo `.html`** completo e funcional
-2. Salve em `/mnt/user-data/outputs/tempo-inaja.html`
-3. Use `present_files` para entregar ao usuário
+2. Salve em `/home/workspace/Skills/weather-inaja/outputs/tempo-inaja.html`
+3. Informe o usuário: "Preview gerado em `file 'Skills/weather-inaja/outputs/tempo-inaja.html'`"
 4. O arquivo deve funcionar ao ser aberto diretamente no navegador (sem servidor)
 5. Não use bibliotecas externas exceto Google Fonts e, opcionalmente, Chart.js via CDN do cdnjs.cloudflare.com
 
