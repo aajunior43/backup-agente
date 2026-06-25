@@ -173,8 +173,18 @@ Rrule: RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0
     console.log(`📤 Enviado para GitHub`);
     console.log(`\n✅ Backup concluído em ${new Date().toLocaleString("pt-BR")}`);
   } else {
-    console.error(`❌ Erro no push: ${push.err}`);
-    process.exit(1);
+    // Recuperação: pack corrompido local às vezes falha no unpack remoto.
+    // Repack com gc e tenta de novo com --no-thin (sem delta compression).
+    console.warn(`⚠️ Push falhou (${push.err.slice(0, 120)}...). Repack + retry --no-thin...`);
+    run(["git", "gc", "--prune=now"], BACKUP_DIR);
+    const retry = run(["git", "push", "-u", "origin", BRANCH, "--no-thin"], BACKUP_DIR);
+    if (retry.code === 0) {
+      console.log(`📤 Enviado para GitHub (após gc + --no-thin)`);
+      console.log(`\n✅ Backup concluído em ${new Date().toLocaleString("pt-BR")}`);
+    } else {
+      console.error(`❌ Erro no push (retry): ${retry.err}`);
+      process.exit(1);
+    }
   }
 }
 

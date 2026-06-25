@@ -63,8 +63,10 @@ Quando Aleksandro disser algo como:
 Quando Aleksandro disser "me dá em txt", "exporta":
 
 ```bash
-cp /home/workspace/saude/registro_saude.md /home/workspace/saude/registro_saude.txt
+pandoc /home/workspace/saude/registro_saude.md -t plain -o /home/workspace/saude/registro_saude.txt
 ```
+
+Isso produz um texto limpo (sem `###`, `**`, `-`), legível como TXT de verdade. Se o pandoc não estiver disponível, fallback: `cp /home/workspace/saude/registro_saude.md /home/workspace/saude/registro_saude.txt`.
 
 Informar: "Exportado em `file 'saude/registro_saude.txt'`"
 

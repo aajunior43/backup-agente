@@ -295,7 +295,7 @@ def main():
     
     elif cmd == 'educacao':
         dados, arquivo = carregar_dados()
-        funcoes = ['10', '12']  # Educação
+        funcoes = ['12']  # Educação (10=Saúde, 08=Assistência Social, 12=Educação)
         print("📚 DOTACOES DA EDUCACAO:\n")
         for f in funcoes:
             resultados = buscar_por_funcao(f, dados)

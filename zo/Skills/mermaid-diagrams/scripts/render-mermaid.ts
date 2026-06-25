@@ -127,10 +127,11 @@ let background = "white";
 let layout: string | null = null;
 let cssFile: string | null = null;
 let responsiveSvg = true;
+let outputFile = "";
 
 for (let i = 1; i < args.length; i++) {
   switch (args[i]) {
-    case "--output":    outputDir = args[++i]; break;
+    case "--output":    outputFile = args[++i]; break;
     case "--output-dir": outputDir = args[++i]; break;
     case "--theme":     theme = args[++i]; break;
     case "--format":    format = args[++i]; break;
@@ -303,7 +304,9 @@ if (isInline) {
   const file = inputs[0];
   let outputPath: string;
 
-  if (outputDir) {
+  if (outputFile) {
+    outputPath = resolve(outputFile);
+  } else if (outputDir) {
     const base = basename(file, extname(file));
     outputPath = resolve(outputDir, `${base}.${format}`);
   } else {

@@ -67,6 +67,20 @@ if (!absPath.endsWith(".tex")) {
   process.exit(1);
 }
 
+// Verificar que o compilador existe (independente de --check)
+const whichEngine = (() => {
+  try {
+    execSync(`command -v ${engine}`, { stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+})();
+if (!whichEngine) {
+  console.error(`❌ Compilador "${engine}" não encontrado. Instale com: apt install texlive-full`);
+  process.exit(1);
+}
+
 // Verificar dependências
 if (check) {
   console.log("🔧 Verificando dependências...\n");

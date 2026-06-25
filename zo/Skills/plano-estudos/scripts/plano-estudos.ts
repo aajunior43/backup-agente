@@ -27,6 +27,7 @@ Exemplos:
 
 Opções:
   --output=CAMINHO   Pasta de saída (padrão: /home/workspace/estudos/)
+  --model=...        Override do modelo OpenAI (ou env OPENAI_MODEL; padrão: gpt-4o-mini)
   --help             Mostra esta ajuda
 `);
 }
@@ -90,6 +91,7 @@ Gere o conteúdo completo para cada seção.`;
   }
 
   try {
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -97,13 +99,13 @@ Gere o conteúdo completo para cada seção.`;
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model,
         messages: [
           { role: "system", content: "Você é um especialista em educação e preparação de materiais didáticos para servidores públicos." },
           { role: "user", content: prompt },
         ],
         temperature: 0.7,
-        max_tokens: 4000,
+        max_tokens: 8000,
       }),
     });
 

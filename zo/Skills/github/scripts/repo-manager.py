@@ -16,20 +16,23 @@ import sys
 
 
 def run(cmd, capture=True):
-    result = subprocess.run(cmd, shell=True, capture_output=capture, text=True)
+    # cmd é uma lista de args (sem shell=True) para evitar injeção de shell
+    # e quebrar com aspas no nome/descrição.
+    result = subprocess.run(cmd, capture_output=capture, text=True)
     if result.returncode != 0:
-        print(f"❌ Erro: {result.stderr}", file=sys.stderr)
+        print(f"❌ Erro: {result.stderr.strip()}", file=sys.stderr)
         sys.exit(1)
     return result.stdout
 
 
 def get_user():
-    return run("gh api user --jq '.login'").strip()
+    return run(["gh", "api", "user", "--jq", ".login"]).strip()
 
 
 def list_repos(limit=20):
     user = get_user()
-    data = run(f"gh repo list --limit {limit} --json name,visibility,updatedAt,description")
+    data = run(["gh", "repo", "list", "--limit", str(limit),
+                "--json", "name,visibility,updatedAt,description"])
     repos = json.loads(data)
     print(f"📦 Repositórios de {user} ({len(repos)}):")
     for r in repos:
@@ -41,19 +44,22 @@ def list_repos(limit=20):
 
 def create_repo(name, private=False, desc=""):
     user = get_user()
-    flags = ""
-    if private:
-        flags += " --private"
-    else:
-        flags += " --public"
+    flags = ["--private" if private else "--public"]
     if desc:
-        flags += f' --description "{desc}"'
-    try:
-        output = run(f"gh repo create {user}/{name}{flags}")
+        flags += ["--description", desc]
+    result = subprocess.run(
+        ["gh", "repo", "create", f"{user}/{name}", *flags],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
         print(f"✅ Repositório criado: https://github.com/{user}/{name}")
-    except:
-        # Pode já existir
-        pass
+    else:
+        err = result.stderr.strip()
+        if "already exists" in err or "Name already exists" in err:
+            print(f"⚠️  Repositório {user}/{name} já existe.")
+        else:
+            print(f"❌ Erro ao criar: {err}", file=sys.stderr)
+            sys.exit(1)
 
 
 def delete_repo(name, force=False):
@@ -63,25 +69,22 @@ def delete_repo(name, force=False):
         if confirm.lower() != "s":
             print("Cancelado.")
             return
-    run(f"gh repo delete {user}/{name} --yes")
+    run(["gh", "repo", "delete", f"{user}/{name}", "--yes"])
     print(f"🗑️  Repositório {user}/{name} deletado.")
 
 
 def repo_info(name):
     user = get_user()
-    try:
-        data = run(f"gh repo view {user}/{name} --json name,description,visibility,url,createdAt,updatedAt,defaultBranchRef,stargazerCount,forkCount,issues")
-        r = json.loads(data)
-        print(f"📦 {r['name']}")
-        print(f"   URL: {r['url']}")
-        print(f"   Descrição: {r.get('description', '—')}")
-        print(f"   Visibilidade: {r['visibility']}")
-        print(f"   Branch: {r.get('defaultBranchRef', {}).get('name', '—')}")
-        print(f"   ⭐ {r.get('stargazerCount', 0)} | 🍴 {r.get('forkCount', 0)} | 🐛 {len(r.get('issues', []))} issues open")
-        print(f"   Criado: {r.get('createdAt', '—')} | Atualizado: {r.get('updatedAt', '—')}")
-    except:
-        print(f"❌ Repositório {user}/{name} não encontrado.", file=sys.stderr)
-        sys.exit(1)
+    data = run(["gh", "repo", "view", f"{user}/{name}",
+                "--json", "name,description,visibility,url,createdAt,updatedAt,defaultBranchRef,stargazerCount,forkCount,issues"])
+    r = json.loads(data)
+    print(f"📦 {r['name']}")
+    print(f"   URL: {r['url']}")
+    print(f"   Descrição: {r.get('description', '—')}")
+    print(f"   Visibilidade: {r['visibility']}")
+    print(f"   Branch: {r.get('defaultBranchRef', {}).get('name', '—')}")
+    print(f"   ⭐ {r.get('stargazerCount', 0)} | 🍴 {r.get('forkCount', 0)} | 🐛 {len(r.get('issues', []))} issues open")
+    print(f"   Criado: {r.get('createdAt', '—')} | Atualizado: {r.get('updatedAt', '—')}")
 
 
 def main():

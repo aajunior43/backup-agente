@@ -3,7 +3,7 @@
 
 Uso:
     python3 issue-manager.py list owner/repo [--limit 10] [--state open|closed|all]
-    python3 issue-manager.py create owner/repo --title "título" [--body "descrição"] [--label "bug"]
+    python3 issue-manager.py create owner/repo --title "título" [--body "descrição"] [--label bug]
     python3 issue-manager.py close owner/repo NUMERO
     python3 issue-manager.py view owner/repo NUMERO
     python3 issue-manager.py --help
@@ -16,22 +16,26 @@ import sys
 
 
 def run(cmd, capture=True):
-    result = subprocess.run(cmd, shell=True, capture_output=capture, text=True)
+    # cmd é uma lista de args (sem shell=True) para evitar injeção de shell
+    # e quebrar com aspas no título/corpo.
+    result = subprocess.run(cmd, capture_output=capture, text=True)
     if result.returncode != 0:
-        print(f"❌ Erro: {result.stderr}", file=sys.stderr)
+        print(f"❌ Erro: {result.stderr.strip()}", file=sys.stderr)
         sys.exit(1)
     return result.stdout
 
 
 def list_issues(repo, limit=10, state="open"):
-    data = run(f"gh issue list --repo {repo} --limit {limit} --state {state} --json number,title,state,labels,createdAt,url")
+    data = run(["gh", "issue", "list", "--repo", repo, "--limit", str(limit),
+                "--state", state,
+                "--json", "number,title,state,labels,createdAt,url"])
     issues = json.loads(data)
     state_emoji = {"OPEN": "🟢", "CLOSED": "⚫"}
-    
+
     if not issues:
         print(f"Nenhuma issue {state} em {repo}")
         return
-    
+
     print(f"📋 Issues ({state}) de {repo}")
     for i in issues:
         labels = " ".join(f"[{l['name']}]" for l in i.get("labels", []))
@@ -41,51 +45,52 @@ def list_issues(repo, limit=10, state="open"):
 
 
 def create_issue(repo, title, body="", labels=None):
-    cmd = f'gh issue create --repo {repo} --title "{title}"'
+    cmd = ["gh", "issue", "create", "--repo", repo, "--title", title]
     if body:
-        cmd += f' --body "{body}"'
+        cmd += ["--body", body]
     if labels:
         for label in labels:
-            cmd += f' --label "{label}"'
-    
+            cmd += ["--label", label]
+
     output = run(cmd)
     print(f"✅ Issue criada em {repo}")
     print(output)
 
 
 def close_issue(repo, number, reason=""):
-    reason_arg = ""
+    cmd = ["gh", "issue", "close", str(number), "--repo", repo]
     if reason:
-        reason_arg = f" --reason \"{reason}\""
-    run(f"gh issue close {number} --repo {repo}{reason_arg}")
+        cmd += ["--reason", reason]
+    run(cmd)
     print(f"✅ Issue #{number} fechada em {repo}")
 
 
 def view_issue(repo, number):
-    data = run(f"gh issue view {number} --repo {repo} --json number,title,body,state,labels,assignees,createdAt,closedAt,url,comments")
+    data = run(["gh", "issue", "view", str(number), "--repo", repo,
+                "--json", "number,title,body,state,labels,assignees,createdAt,closedAt,url,comments"])
     issue = json.loads(data)
-    
+
     state_map = {"OPEN": "🟢 Aberta", "CLOSED": "⚫ Fechada"}
     state = state_map.get(issue["state"], issue["state"])
-    
+
     print(f"🐛 #{issue['number']} {issue['title']}")
     print(f"   Estado: {state}")
     print(f"   URL: {issue['url']}")
     print(f"   Criada: {issue['createdAt']}")
     if issue.get("closedAt"):
         print(f"   Fechada: {issue['closedAt']}")
-    
+
     labels = issue.get("labels", [])
     if labels:
         print(f"   Labels: {', '.join(l['name'] for l in labels)}")
-    
+
     assignees = issue.get("assignees", [])
     if assignees:
         print(f"   Atribuída: {', '.join(a['login'] for a in assignees)}")
-    
+
     if issue.get("body"):
         print(f"\n---\n{issue['body']}\n---")
-    
+
     comments = issue.get("comments", [])
     if comments:
         print(f"\n💬 {len(comments)} comentários")
@@ -109,7 +114,8 @@ def main():
     close_p = sub.add_parser("close", help="Fecha issue")
     close_p.add_argument("repo")
     close_p.add_argument("number", type=int)
-    close_p.add_argument("--reason", default="", choices=["", "completed", "not planned"])
+    close_p.add_argument("--reason", default="completed",
+                         choices=["completed", "not_planned"])
 
     view_p = sub.add_parser("view", help="Visualiza issue")
     view_p.add_argument("repo")
@@ -126,7 +132,7 @@ def main():
     elif args.command == "create":
         create_issue(args.repo, args.title, args.body, args.label)
     elif args.command == "close":
-        close_issue(args.repo, args.number, args.reason)
+        close_issue(args.repo, args.number, args.reason if args.reason else "")
     elif args.command == "view":
         view_issue(args.repo, args.number)
 

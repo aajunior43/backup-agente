@@ -181,12 +181,15 @@ def main():
         if args.get("favorite"):
             arguments["is_favorite"] = True
     elif cmd == "update-link":
-        arguments["id"] = args["id"]
-        for k in ("title", "url", "description", "folder"):
-            if args.get(k) is not None:
-                arguments["id" if k == "folder" else k] = args[k] if k != "folder" else None
-                if k == "folder":
-                    arguments["folder_id"] = args[k]
+        arguments = {"id": args["id"]}
+        if args.get("title") is not None:
+            arguments["title"] = args["title"]
+        if args.get("url") is not None:
+            arguments["url"] = args["url"]
+        if args.get("description") is not None:
+            arguments["description"] = args["description"]
+        if args.get("folder") is not None:
+            arguments["folder_id"] = args["folder"]
         if args.get("favorite"):
             arguments["is_favorite"] = True
         if args.get("no_favorite"):
@@ -195,8 +198,6 @@ def main():
             arguments["is_pinned"] = True
         if args.get("no_pinned"):
             arguments["is_pinned"] = False
-        # remove accidental "id" duplication
-        arguments = {k: v for k, v in arguments.items() if v is not None or k == "id"}
     elif cmd == "delete-link":
         arguments["id"] = args["id"]
         arguments["permanent"] = bool(args.get("permanent"))
