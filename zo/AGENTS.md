@@ -1,34 +1,58 @@
-- `saude/registro_saude.md` — Registro de pressão arterial, glicose e medicamentos
-- `financeiro/contas_maio_2026.md` — Contas mensais, saldo e gastos
-- `financeiro/fatura-inter.md` — Detalhamento fatura cartão Inter
-- `Prefeitura/plano_estudos_secretario_financas.md` — Plano de estudos completo do básico ao expert para Secretário Municipal de Finanças
-- `estudos/plano_secretari`
-- `Prefeitura/plano_transparencia_2026.md` — Plano de ação para melhorar nota ITP do Portal da Transparência
+# AGENTS.md — Workspace do Aleksandro
+
+Índice de roteamento do workspace. Ordernado por utilidade. Para detalhes de um projeto, veja o `AGENTS.md` da pasta correspondente quando existir.
+
+## Perfis rápidos
+
+- **Quem**: Aleksandro Alves (Junior) — Secretário Municipal de Finanças / chefe de gabinete em Inajá/PR.
+- **Onde**: Inajá, Paraná (Noroeste do PR).
+- **Como falo**: comandos curtos e diretos, em pt-BR. Prefiro entregas concretas (arquivos, mensagens enviadas, registros atualizados) a explicações longas.
+- **Notificações para mim**: **Telegram** (`send_telegram_message`, comece com meu nome). Nunca WhatsApp, nunca email — exceto pedidos explícitos. Eventos com data/hora → **Google Calendar** nativo (skill `calendario`), nunca WhatsApp.
+
+## Projetos ativos
+
+- **Saúde** — `saude/registro_saude.md` (registro ativo) + `.txt` (export). Medição de glicose, pressão arterial, pulso, medicamentos. Histórico: `medicoes_pressao.md`, artigos `Alimentos_Diabetes_Hipertensao_Ansiedade.{md,pdf}`.
+- **Financeiro** — `financeiro/contas_<mes>_<ano>.md` (contas mensais, saldo, gastos), `financeiro/fatura-inter.md` (fatura cartão Inter). Reconciliação entre faturas e meses éManual e propensa a drift — checar antes de somar.
+- **Prefeitura** — `Prefeitura/plano_estudos_secretario_financas.md`, `Prefeitura/plano_transparencia_2026.md`. Documentos públicos de gestão.
+- **Jornais** — `Jornais/` (PDFs do "O Regional", ~60M). State file `.jornal_regional_estado.json`. Monitor via automação nas ter/quinta/dom.
+- **Blog** — `Blog/posts/` (posts datados `YYYY-MM-DD-slug.md`).
+- **Documentos** — `Documentos/` (orçamento, guias, PDFs-chave BB Inajá), `Documents/` (imagens avulsas).
+- **Sites/projetos web** — `wendigo-lore/` e `simulador-turbina-eolica/` (cada um `zosite.json`, Vite+Bun+TS). Dev preview ao desenvolver; reinstalar deps (`bun install`) se a preview quebrar após limpeza de `node_modules`.
+
+## Pastas secundárias
+
+`Articles/` (artigos salvos), `Assinatura/`, `Refeicoes/`, `Relatorios/`, `Outputs/`, `Images/`, `Projects/`, `clima/`, `projetos/` (offícios/modelos/scripts avulsos), `Logs/` (logs de automações).
+
+> `Trash/` — itens removidos com metadados em `/home/.z/trash.json` (`originalPath`, `trashPath`, `movedAt`). Não listar a menos que o pedido envolva restaurar/auditar.
 
 ## Configurações
-- **OpenAI API Key**: Configurada em `/home/workspace/.env` (OPENAI_API_KEY)
-  - Uso: transcrições de áudio, text-to-speech (TTS), e outras tarefas que exigem API da OpenAI
-  - Permissões restritas (chmod 600)
 
-## Localização
-- **Cidade**: Inajá, Paraná (PR)
-- **Região**: Noroeste do Paraná
+- **OpenAI API Key** — em `/home/workspace/.env` (`OPENAI_API_KEY`). Uso: transcrição de áudio, TTS. Restrito `chmod 600`. **Nunca** comitar `.env` (já no `.gitignore` e excluído do rsync do backup).
+- **GitHub** — autenticado como `aajunior43` (gh CLI). Backup do workspace em `backup-agente` (pasta `zo/`), gerido por `Skills/backup-github`.
 
-## Skills
-- `calendario` — `file 'Skills/calendario/SKILL.md'` — Criar eventos no Google Calendar com notificações em 3 momentos (1 dia antes, 1 hora antes, na hora). Usar `use_app_google_calendar`.
-- `github` — `file 'Skills/github/SKILL.md'` — GitHub CLI: repositórios, issues, PRs, CI/CD, busca.
-- `plano-estudos` — `file 'Skills/plano-estudos/SKILL.md'` — Planos de estudo personalizados para qualquer área.
-- `financeiro` — `file 'Skills/financeiro/SKILL.md'` — Gestão de contas mensais, faturas (Inter, Nubank), gastos e saldo bancário.
-- `auditoria-perguntas` — `file 'Skills/auditoria-perguntas/SKILL.md'` — Simula perguntas de banca/auditoria (TCE, controle interno) sobre documentos para preparação defensiva.
-- `vps` — `file 'Skills/vps/SKILL.md'` — Gerenciar VPS Campinas via SSH: status, Docker, Traefik, Portainer, updates, segurança.
-- `weather-inaja` — `file 'Skills/weather-inaja/SKILL.md'` — Previsão do tempo para Inajá/PR via Open-Meteo. Gera HTML interativo.
-- `backup-github` — `file 'Skills/backup-github/SKILL.md'` — Backup do workspace para repositório compartilhado backup-agente (pasta zo/).
-- `site` — `file 'Skills/site/SKILL.md'` — Gerenciar bookmarks (Supabase MCP): criar, listar, favoritar, arquivar, pastas.
-- `mermaid-diagrams` — `file 'Skills/mermaid-diagrams/SKILL.md'` — Renderizar diagramas Mermaid para PNG/SVG (fluxogramas, sequência, Gantt, ER, etc).
-- `latex-pdf` — `file 'Skills/latex-pdf/SKILL.md'` — Gerar PDFs profissionais (ofícios, relatórios, declarações, atas) com LaTeX.
-- `dotacao-orcamentaria` — `file 'Skills/dotacao-orcamentaria/SKILL.md'` — Consultar dotações orçamentárias de Inajá.
-- `saude` — `file 'Skills/saude/SKILL.md'` — Registrar e consultar medições de saúde (glicose, pressão, pulso).
-- `deepresearch` — `file 'Skills/deepresearch/SKILL.md'` — Pesquisa aprofundada com múltiplas fontes.
-- `firecrawl` — `file 'Skills/firecrawl/SKILL.md'` — Extrair e buscar conteúdo de páginas web.
+## Skills (rotas)
 
-> ⚠️ **WhatsApp API**: Descontinuada. Não usar mais envios via api-whatsapp.api-alisson.com.br. Para notificações pessoais, usar Telegram. Para notificações de eventos, usar Google Calendar nativo.
+Usar conforme a regra condicional correspondente (links, calendário). Demais: invoque só quando o pedido casar.
+
+- `calendario` — `file 'Skills/calendario/SKILL.md'` — Google Calendar (1 dia antes, 1 hora antes, na hora).
+- `site` — `file 'Skills/site/SKILL.md'` — bookmarks (Supabase): criar/listar/favoritar/arquivar. Verificar duplicata antes de criar.
+- `financeiro` — `file 'Skills/financeiro/SKILL.md'` — contas, faturas (Inter/Nubank), saldo.
+- `saude` — `file 'Skills/saude/SKILL.md'` — registro de medições.
+- `weather-inaja` — `file 'Skills/weather-inaja/SKILL.md'` — previsão Inajá via Open-Meteo (HTML interativo).
+- `backup-github` — `file 'Skills/backup-github/SKILL.md'` — backup workspace → repo `backup-agente` (`zo/`).
+- `latex-pdf` — `file 'Skills/latex-pdf/SKILL.md'` — PDFs profissionais (ofícios, relatórios, atas).
+- `mermaid-diagrams` — `file 'Skills/mermaid-diagrams/SKILL.md'` — Mermaid → PNG/SVG.
+- `dotacao-orcamentaria` — `file 'Skills/dotacao-orcamentaria/SKILL.md'` — dotações de Inajá.
+- `auditoria-perguntas` — `file 'Skills/auditoria-perguntas/SKILL.md'` — simula banca/auditoria (TCE) sobre documentos.
+- `github` — `file 'Skills/github/SKILL.md'` — gh CLI (repos, issues, PRs).
+- `plano-estudos` — `file 'Skills/plano-estudos/SKILL.md'` — planos de estudo.
+- `vps` — `file 'Skills/vps/SKILL.md'` — VPS Campinas via SSH (Docker, Traefik, Portainer).
+- `deepresearch` — `file 'Skills/deepresearch/SKILL.md'` — pesquisa aprofundada.
+- `firecrawl` — `file 'Skills/firecrawl/SKILL.md'` — extrair/buscar conteúdo web.
+- `mcp/native-mcp` — `file 'Skills/mcp/native-mcp/SKILL.md'` — configurar MCP servers. (Placeholders `sk-...`/`ghp_...` no arquivo são exemplos, não chaves reais.)
+
+## Avisos fixos
+
+> ⚠️ **WhatsApp API descontinuada** — não usar `api-whatsapp.api-alisson.com.br`. Notificações pessoais → Telegram; eventos → Google Calendar.
+
+> 📧 **E-mails comerciais de orçamento** (pneus, peças, serviços) — não mencionar a cidade onde o usuário mora.
