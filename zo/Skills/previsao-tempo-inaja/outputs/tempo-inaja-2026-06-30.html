@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Previsão do Tempo — Inajá/PR</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Mono', monospace;
+    background: linear-gradient(135deg, #0b1a2e 0%, #1a3a5c 50%, #2a5f8f 100%);
+    color: #e8edf5;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  #stars {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+  }
+  .container {
+    max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .sub { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 24px; }
+  .hero {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 24px;
+    align-items: center;
+  }
+  .hero-icone { font-size: 4rem; grid-row: span 2; }
+  .hero-temp { font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 700; }
+  .hero-cond { font-size: 1.1rem; color: #cbd5e1; }
+  .hero-grid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .hero-item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  .hero-item .val { font-size: 1.2rem; font-weight: 500; color: #f1f5f9; }
+  .hero-item .lab { color: #94a3b8; font-size: 0.75rem; }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    margin: 20px 0 12px;
+    color: #cbd5e1;
+  }
+  .daily-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card .dia { font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px; }
+  .card .icone { font-size: 2rem; margin: 6px 0; }
+  .card .cond { font-size: 0.75rem; color: #cbd5e1; margin-bottom: 6px; }
+  .card .temp { font-family: 'Syne', sans-serif; font-size: 1.2rem; }
+  .card .detalhe { font-size: 0.75rem; color: #94a3b8; margin-top: 3px; }
+  footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-top: 32px;
+    padding: 16px;
+  }
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 1.3rem; }
+    .hero { padding: 16px; gap: 8px; }
+    .hero-temp { font-size: 2.5rem; }
+    .daily-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="container">
+  <h1>🌤️ Inajá/PR</h1>
+  <div class="sub">Previsão do Tempo</div>
+
+  <div class="hero">
+    <div class="hero-icone">☁️</div>
+    <div class="hero-temp">20.1°C</div>
+    <div class="hero-cond">Nublado • Sensação 21.3°C</div>
+    <div class="hero-grid">
+      <div class="hero-item"><div class="val">92%</div><div class="lab">Umidade</div></div>
+      <div class="hero-item"><div class="val">14.1 km/h</div><div class="lab">Vento (Leste (L))</div></div>
+      <div class="hero-item"><div class="val">967.8 hPa</div><div class="lab">Pressão</div></div>
+      <div class="hero-item"><div class="val">0</div><div class="lab">UV • Baixo</div></div>
+      <div class="hero-item"><div class="val">17.4 km</div><div class="lab">Visibilidade</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">📅 Próximos 7 dias</div>
+  <div class="daily-grid">
+      <div class="card">
+        <div class="dia">Seg, 29/06</div>
+        <div class="icone">⛈️</div>
+        <div class="cond">Tempestade</div>
+        <div class="temp">18.3° / 27.6°</div>
+        <div class="detalhe">💧 0.4mm (59%)</div>
+        <div class="detalhe">🌬️ 15.3 km/h</div>
+        <div class="detalhe">☀️ UV 5.15</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Ter, 30/06</div>
+        <div class="icone">🌦️</div>
+        <div class="cond">Garoa moderada</div>
+        <div class="temp">18° / 26.8°</div>
+        <div class="detalhe">💧 0.9mm (28%)</div>
+        <div class="detalhe">🌬️ 17.6 km/h</div>
+        <div class="detalhe">☀️ UV 5.15</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Qua, 01/07</div>
+        <div class="icone">☀️</div>
+        <div class="cond">Céu limpo</div>
+        <div class="temp">17.2° / 27°</div>
+        <div class="detalhe">💧 0mm (0%)</div>
+        <div class="detalhe">🌬️ 13.7 km/h</div>
+        <div class="detalhe">☀️ UV 5.2</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Qui, 02/07</div>
+        <div class="icone">⛅</div>
+        <div class="cond">Parcialmente nublado</div>
+        <div class="temp">16.7° / 27.3°</div>
+        <div class="detalhe">💧 0mm (4%)</div>
+        <div class="detalhe">🌬️ 18 km/h</div>
+        <div class="detalhe">☀️ UV 5.15</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Sex, 03/07</div>
+        <div class="icone">☁️</div>
+        <div class="cond">Nublado</div>
+        <div class="temp">14.8° / 22.2°</div>
+        <div class="detalhe">💧 0mm (4%)</div>
+        <div class="detalhe">🌬️ 15.3 km/h</div>
+        <div class="detalhe">☀️ UV 5</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Sáb, 04/07</div>
+        <div class="icone">☁️</div>
+        <div class="cond">Nublado</div>
+        <div class="temp">14° / 20.1°</div>
+        <div class="detalhe">💧 0mm (4%)</div>
+        <div class="detalhe">🌬️ 19.7 km/h</div>
+        <div class="detalhe">☀️ UV 5.2</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Dom, 05/07</div>
+        <div class="icone">☀️</div>
+        <div class="cond">Céu limpo</div>
+        <div class="temp">11.7° / 21°</div>
+        <div class="detalhe">💧 0mm (2%)</div>
+        <div class="detalhe">🌬️ 18.5 km/h</div>
+        <div class="detalhe">☀️ UV 4.95</div>
+      </div>
+
+      <div class="card">
+        <div class="dia">Seg, 06/07</div>
+        <div class="icone">☁️</div>
+        <div class="cond">Nublado</div>
+        <div class="temp">13.6° / 22.4°</div>
+        <div class="detalhe">💧 0mm (8%)</div>
+        <div class="detalhe">🌬️ 15 km/h</div>
+        <div class="detalhe">☀️ UV 4.9</div>
+      </div></div>
+
+  <footer>
+    Fonte: Open-Meteo • Atualizado em 29/06/2026, 21:08:47
+  </footer>
+</div>
+<script>
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+      s: Math.random() * 0.005 + 0.002,
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const st of stars) {
+      st.a += st.s;
+      const alpha = 0.3 + 0.7 * Math.abs(Math.sin(st.a));
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+</body>
+</html>

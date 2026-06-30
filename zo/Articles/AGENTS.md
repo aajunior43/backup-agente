@@ -38,7 +38,7 @@ Usar conforme a regra condicional correspondente (links, calendário). Demais: i
 - `site` — `file 'Skills/site/SKILL.md'` — bookmarks (Supabase): criar/listar/favoritar/arquivar. Verificar duplicata antes de criar.
 - `financeiro` — `file 'Skills/financeiro/SKILL.md'` — contas, faturas (Inter/Nubank), saldo.
 - `saude` — `file 'Skills/saude/SKILL.md'` — registro de medições.
-- `weather-inaja` — `file 'Skills/weather-inaja/SKILL.md'` — previsão Inajá via Open-Meteo (HTML interativo).
+- `previsao-tempo-inaja` — `file 'Skills/previsao-tempo-inaja/SKILL.md'` — previsão do tempo para Inajá/PR via Open-Meteo. Script `previsao.ts` com saída texto ou HTML.
 - `backup-github` — `file 'Skills/backup-github/SKILL.md'` — backup workspace → repo `backup-agente` (`zo/`).
 - `latex-pdf` — `file 'Skills/latex-pdf/SKILL.md'` — PDFs profissionais (ofícios, relatórios, atas).
 - `mermaid-diagrams` — `file 'Skills/mermaid-diagrams/SKILL.md'` — Mermaid → PNG/SVG.

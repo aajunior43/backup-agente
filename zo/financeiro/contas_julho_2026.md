@@ -4,7 +4,7 @@
 
 | Despesa | Valor (R$) |
 |---------|------------|
-| Fatura Inter | 100,00 |
+| Fatura Inter | 300,00 |
 | Fatura Nubank | — |
 | Faculdade — Ciências Contábeis | 153,00 |
 | Faculdade — Administração | 153,00 |
@@ -15,19 +15,12 @@
 | Claude Pro (mensalidade) | 110,00 |
 | GPT Plus (mensalidade) | 100,00 |
 | Combustível | 100,00 |
-| **TOTAL** | **1.176,00** |
+| **TOTAL** | **1.376,00** |
 
 ---
 
 ## Resumo
 
 - **Salário:** R$ 5.000,00
-- **Total contas:** R$ 1.176,00
-- **Sobra:** R$ 3.824,00
-
----
-
-## ⚡ Observações
-
-- 🎉 Bike ergométrica finalizada — +R$ 100,00 disponível em relação a junho
-- 💳 Cartão PicPay: R$ 50,00 é o **limite total** do cartão
+- **Total contas:** R$ 1.376,00
+- **Sobra:** R$ 3.624,00

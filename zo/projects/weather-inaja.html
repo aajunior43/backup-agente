@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Previsão do Tempo — Inajá/PR</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); color: #e2e8f0; min-height: 100vh; padding: 16px; }
+.container { max-width: 480px; margin: 0 auto; }
+.header { text-align: center; margin-bottom: 16px; }
+.header h1 { font-size: 1.4rem; font-weight: 700; }
+.header p { font-size: 0.8rem; color: #94a3b8; }
+.current-card { background: linear-gradient(135deg, #1e293b, #334155); border: 1px solid #475569; border-radius: 20px; padding: 20px; margin-bottom: 16px; }
+.current-main { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.current-icon { font-size: 3.5rem; }
+.current-temp { font-size: 3rem; font-weight: 700; }
+.current-desc { font-size: 0.95rem; color: #94a3b8; }
+.current-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 10px; }
+.detail-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; }
+.detail-value { font-size: 0.9rem; font-weight: 600; }
+.section-title { font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.hourly-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+.hourly-scroll::-webkit-scrollbar { height: 4px; }
+.hourly-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 2px; }
+.daily-list { display: flex; flex-direction: column; gap: 6px; }
+.footer { text-align: center; margin-top: 20px; font-size: 0.7rem; color: #475569; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🌤️ Previsão do Tempo</h1>
+    <p>Inajá/PR — Atualizado 20:00h</p>
+  </div>
+
+  <div class="current-card">
+    <div class="current-main">
+      <div class="current-icon">☀️</div>
+      <div>
+        <div class="current-temp">20.2°C</div>
+        <div class="current-desc">Céu limpo</div>
+      </div>
+    </div>
+    <div class="current-details">
+      <div class="detail"><div class="detail-label">Sensação</div><div class="detail-value">21.9°C</div></div>
+      <div class="detail"><div class="detail-label">Umidade</div><div class="detail-value">90%</div></div>
+      <div class="detail"><div class="detail-label">Vento</div><div class="detail-value">10.4 km/h E</div></div>
+      <div class="detail"><div class="detail-label">Pressão</div><div class="detail-value">970 hPa</div></div>
+      <div class="detail"><div class="detail-label">UV</div><div class="detail-value">0.0</div></div>
+      <div class="detail"><div class="detail-label">Visibilidade</div><div class="detail-value">27.4 km</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">⏰ Próximas 24 horas</div>
+  <div class="hourly-scroll">
+    <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">20:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">20°</div>
+  <div class="text-xs text-blue-300 w-12">1%</div>
+  <div class="text-xs text-white/50 w-12">10km/h</div>
+  <div class="text-xs text-white/50">90%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">21:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">20°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">11km/h</div>
+  <div class="text-xs text-white/50">91%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">22:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">19°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">12km/h</div>
+  <div class="text-xs text-white/50">92%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">23:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">19°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">13km/h</div>
+  <div class="text-xs text-white/50">93%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">00:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">13km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">01:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">13km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">02:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">14km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">03:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">14km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">04:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">14km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">05:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">14km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">06:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">17°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">15km/h</div>
+  <div class="text-xs text-white/50">95%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">07:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">17°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">16km/h</div>
+  <div class="text-xs text-white/50">95%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">08:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">18°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">16km/h</div>
+  <div class="text-xs text-white/50">94%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">09:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">19°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">14km/h</div>
+  <div class="text-xs text-white/50">90%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">10:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">21°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">12km/h</div>
+  <div class="text-xs text-white/50">82%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">11:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">23°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">10km/h</div>
+  <div class="text-xs text-white/50">76%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">12:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">24°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">11km/h</div>
+  <div class="text-xs text-white/50">72%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">13:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">25°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">13km/h</div>
+  <div class="text-xs text-white/50">67%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">14:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">26°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">13km/h</div>
+  <div class="text-xs text-white/50">64%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">15:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">26°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">12km/h</div>
+  <div class="text-xs text-white/50">64%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">16:00</div>
+  <div class="text-lg">☀️</div>
+  <div class="text-sm font-semibold w-10">26°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">11km/h</div>
+  <div class="text-xs text-white/50">66%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">17:00</div>
+  <div class="text-lg">⛅</div>
+  <div class="text-sm font-semibold w-10">24°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">8km/h</div>
+  <div class="text-xs text-white/50">74%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">18:00</div>
+  <div class="text-lg">☁️</div>
+  <div class="text-sm font-semibold w-10">22°</div>
+  <div class="text-xs text-blue-300 w-12">0%</div>
+  <div class="text-xs text-white/50 w-12">6km/h</div>
+  <div class="text-xs text-white/50">84%</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 shrink-0">
+  <div class="text-xs font-mono text-white/70 w-10">19:00</div>
+  <div class="text-lg">☁️</div>
+  <div class="text-sm font-semibold w-10">22°</div>
+  <div class="text-xs text-blue-300 w-12">5%</div>
+  <div class="text-xs text-white/50 w-12">7km/h</div>
+  <div class="text-xs text-white/50">86%</div>
+</div>
+
+  </div>
+
+  <div class="section-title">📅 Próximos 7 dias</div>
+  <div class="daily-list">
+    <div class="flex items-center gap-3 p-3 rounded-xl border bg-amber-500/15 border-amber-500/30">
+  <div class="text-2xl">🌦️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Hoje 06-27</div>
+    <div class="text-xs text-white/60 truncate">Chuva leve</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">25° <span class="text-white/40">/ 16°</span></div>
+    <div class="text-blue-300">💧 0.1mm (63%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">☁️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Dom 06-28</div>
+    <div class="text-xs text-white/60 truncate">Nublado</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">26° <span class="text-white/40">/ 17°</span></div>
+    <div class="text-blue-300">💧 0.0mm (18%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">🌦️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Seg 06-29</div>
+    <div class="text-xs text-white/60 truncate">Chuva moderada</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">27° <span class="text-white/40">/ 18°</span></div>
+    <div class="text-blue-300">💧 1.5mm (50%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">🌦️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Ter 06-30</div>
+    <div class="text-xs text-white/60 truncate">Chuva leve</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">26° <span class="text-white/40">/ 19°</span></div>
+    <div class="text-blue-300">💧 0.5mm (43%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">☁️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Qua 07-01</div>
+    <div class="text-xs text-white/60 truncate">Nublado</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">27° <span class="text-white/40">/ 17°</span></div>
+    <div class="text-blue-300">💧 0.0mm (0%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">☁️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Qui 07-02</div>
+    <div class="text-xs text-white/60 truncate">Nublado</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">26° <span class="text-white/40">/ 17°</span></div>
+    <div class="text-blue-300">💧 0.0mm (20%)</div>
+  </div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border bg-white/5 border-white/10">
+  <div class="text-2xl">☁️</div>
+  <div class="flex-1 min-w-0">
+    <div class="font-semibold text-sm">Sex 07-03</div>
+    <div class="text-xs text-white/60 truncate">Nublado</div>
+  </div>
+  <div class="text-right text-xs">
+    <div class="font-bold">23° <span class="text-white/40">/ 15°</span></div>
+    <div class="text-blue-300">💧 0.0mm (10%)</div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="footer">Dados: Open-Meteo • Atualizado em 2026-06-27</div>
+</div>
+</body>
+</html>
