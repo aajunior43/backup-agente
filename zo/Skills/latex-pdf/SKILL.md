@@ -1,114 +1,105 @@
 ---
-name: latex-pdf
-description: Cria documentos PDF profissionais usando LaTeX. Templates prontos para ofícios, relatórios, declarações, memorandos e atas de reunião. Compila com lualatex/xelatex/pdflatex. Use quando o usuário pedir qualquer documento oficial em PDF.
+name: html-pdf
+description: Cria documentos PDF bonitos e profissionais a partir de HTML ou Markdown. Converte com weasyprint usando temas prontos (modern, classic, elegant, corporate). Use quando o usuário pedir qualquer documento em PDF — ofícios, relatórios, declarações, memorandos, atas, apresentações ou documentos pessoais.
 compatibility: Created for Zo Computer
 metadata:
   author: aleksandro.zo.computer
   category: Documents
-  display-name: LaTeX PDF Generator
-  emoji: 📜
+  display-name: HTML to PDF Generator
+  emoji: 📄
 ---
 
-# LaTeX PDF Generator
+# HTML to PDF Generator
+
+Gera PDFs com design profissional a partir de arquivos **HTML** ou **Markdown**. Usa `weasyprint` para conversão com suporte completo a CSS (cores, fontes, layouts, cabeçalhos, rodapés, tabelas estilizadas).
 
 ## Quando usar
 
-Use esta skill quando o usuário pedir para **criar um PDF** com formatação profissional — especialmente documentos oficiais como ofícios, relatórios, declarações, memorandos e atas.
+Use esta skill quando o usuário pedir para **criar um PDF** — especialmente:
+- Ofícios, relatórios, declarações, memorandos, atas de reunião
+- Apresentações, currículos, certificados
+- Qualquer documento que precise de aparência profissional
 
 ## Fluxo de trabalho
 
-### Opção A: Gerar a partir de template (rápido)
-
-1. Copie o template para o destino
-2. Preencha os `\newcommand` no topo do .tex
-3. Compile com `gerar-pdf.ts`
-
-### Opção B: Preencher via JSON (automatizado)
-
-1. Crie um JSON com os dados
-2. Use `fill-template.py` para gerar o .tex preenchido
-3. Compile com `gerar-pdf.ts`
-
-## Templates disponíveis
-
-| Template | Arquivo | Uso |
-|----------|---------|-----|
-| Ofício | `references/modelo_oficio.tex` | Comunicação oficial para autoridades |
-| Relatório | `references/modelo_relatorio.tex` | Relatórios técnicos, auditorias |
-| Declaração | `references/modelo_declaracao.tex` | Declarações simples com testemunhas |
-| Memorando | `references/modelo_memorando.tex` | Comunicação interna entre setores |
-| Ata de Reunião | `references/modelo_ata_reuniao.tex` | Registro de deliberações |
-
-## Scripts
-
-### 1. Compilar PDF (`gerar-pdf.ts`)
+### 1. A partir de Markdown (mais simples)
 
 ```bash
-# Compilar
-bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex
-
-# Compilar e limpar auxiliares
-bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --clean
-
-# Usar outro compilador
-bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --engine xelatex
-
-# Verificar dependências antes
-bun scripts/gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --check --clean
+bun Skills/html-pdf/scripts/gerar-pdf.ts documento.md
 ```
 
-Suporta `--engine lualatex` (padrão), `xelatex` ou `pdflatex`.
+O script converte automaticamente MD → HTML → PDF usando pandoc + weasyprint.
 
-### 2. Preencher template (`fill-template.py`)
+### 2. A partir de HTML (mais controle)
 
 ```bash
-# Listar templates
-python3 scripts/fill-template.py --list-templates
-
-# Preencher com JSON
-python3 scripts/fill-template.py references/modelo_oficio.tex dados.json --output /home/workspace/Prefeitura/meu_oficio.tex
+bun Skills/html-pdf/scripts/gerar-pdf.ts pagina.html --theme elegant
 ```
 
-Exemplo de `dados.json`:
-```json
-{
-  "numeroOficio": "042/2026",
-  "destinatarioNome": "Secretário de Saúde",
-  "destinatarioCargo": "Secretário Municipal de Saúde",
-  "assuntoOficio": "Solicitação de materiais",
-  "remetenteNome": "Nome do Remetente",
-  "remetenteCargo": "Cargo do Remetente"
-}
-```
-
-### 3. Diagnóstico (`check-latex.py`)
+### 3. Com tema específico
 
 ```bash
-python3 scripts/check-latex.py
+bun Skills/html-pdf/scripts/gerar-pdf.ts doc.md --theme corporate --output relatorio.pdf
 ```
 
-Verifica compiladores instalados e testa compilação mínima.
+## Temas disponíveis
 
-## Configuração do município
+| Tema | Estilo | Ideal para |
+|------|--------|------------|
+| `modern` | Azul, limpo, sem serifa | Relatórios, documentos gerais |
+| `classic` | Serifado, tons quentes | Documentos formais, acadêmicos |
+| `elegant` | Roxo, minimalista | Apresentações, portfólios |
+| `corporate` | Azul marinho, institucional | Documentos oficiais, contratos |
 
-Os dados do município ficam em `config/municipio.json`:
+Padrão: `modern`.
 
-```json
-{
-  "municipio": "Inajá",
-  "uf": "PR",
-  "prefeitura": "Prefeitura Municipal de Inajá",
-  "prefeito": "João Eder Aguilar",
-  "brasao_path": ""
-}
+## Opções do script
+
+```
+bun gerar-pdf.ts <arquivo> [opções]
+
+  --theme <nome>      modern | classic | elegant | corporate
+  --output <caminho>  PDF de saída (padrão: mesmo nome com .pdf)
+  --css <caminho>     CSS customizado (sobrescreve tema)
+  --title <texto>     Título do documento
 ```
 
-Estes valores são usados como fallback pelo `fill-template.py` — se o JSON não sobrescrever, os valores do município são aplicados automaticamente.
+## CSS customizado
+
+Para total controle visual, crie um CSS e passe com `--css`:
+
+```bash
+bun Skills/html-pdf/scripts/gerar-pdf.ts doc.md --css /home/workspace/meu-estilo.css
+```
+
+Use os arquivos em `themes/` como base.
+
+## Estrutura de arquivos
+
+```
+Skills/html-pdf/
+├── SKILL.md
+├── themes/
+│   ├── modern.css      # Azul, limpo, sem serifa
+│   ├── classic.css     # Serifado, tons quentes
+│   ├── elegant.css     # Roxo, minimalista
+│   └── corporate.css   # Azul marinho, institucional
+├── scripts/
+│   └── gerar-pdf.ts    # Conversor principal
+└── config/
+    └── municipio.json  # Dados do município (fallback)
+```
 
 ## Dicas
 
-- **Timbre/brasão**: use `\includegraphics{caminho/absoluto.png}` no template
-- **Fontes personalizadas**: ad `\usepackage{fontspec}` + `\setmainfont{Nome}` com lualatex
-- **Muitas páginas**: o template de relatório tem numeração automática
-- **Erros de compilação**: verifique o `.log` gerado na mesma pasta
-- **Adicionar templates**: coloque em `references/` e mantenha os `\newcommand` parametrizados
+- **Markdown**: use `#`, `##`, `**negrito**`, `*itálico*`, `- listas`, `> citações`, ` ```código``` `
+- **Tabelas em MD**: tabelas markdown são convertidas e estilizadas automaticamente
+- **Imagens**: use `<img src="/caminho/absoluto.png">` ou `![alt](caminho)` em MD
+- **Cabeçalho/rodapé**: os temas já incluem numeração de páginas no rodapé
+- **Quebras de página**: use `<div style="page-break-before: always">` para forçar nova página
+- **Erros**: se falhar, o HTML intermediário é salvo como `.debug.html` para inspeção
+
+## Dependências
+
+- `pandoc` — converte Markdown para HTML
+- `weasyprint` — converte HTML+CSS para PDF

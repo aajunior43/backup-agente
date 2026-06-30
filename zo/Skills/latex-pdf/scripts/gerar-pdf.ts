@@ -1,175 +1,175 @@
 #!/usr/bin/env bun
 /**
- * gerar-pdf.ts — Compila arquivos .tex para PDF usando lualatex
+ * gerar-pdf.ts — Gera PDFs bonitos a partir de HTML ou Markdown
  *
  * Uso:
- *   bun gerar-pdf.ts <caminho/arquivo.tex> [--clean] [--open] [--engine lualatex|xelatex|pdflatex]
- *
- *   --engine  Compilador a usar (padrão: lualatex)
- *   --clean   Remove arquivos auxiliares (.aux, .log, .out) após compilar
- *   --open    Abre o PDF no visualizador padrão
- *   --check   Verifica dependências antes de compilar
+ *   bun gerar-pdf.ts <arquivo.html|md> [--theme modern|classic|elegant|corporate] [--output caminho] [--css arquivo]
  *
  * Exemplos:
- *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex
- *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --clean
- *   bun gerar-pdf.ts /home/workspace/Prefeitura/oficio.tex --engine xelatex --clean
+ *   bun gerar-pdf.ts doc.md
+ *   bun gerar-pdf.ts doc.md --theme elegant --output relatorio.pdf
+ *   bun gerar-pdf.ts doc.html --css custom.css
  */
 
-import { execSync } from "child_process";
-import * as fs from "fs";
-import * as path from "path";
+import { readFileSync, writeFileSync, existsSync } from "fs";
+import { resolve, extname, basename, join } from "path";
+import { spawnSync } from "child_process";
+
+// ─── Args ───────────────────────────────────────────────
 
 const args = process.argv.slice(2);
-
-if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
+if (args.length === 0 || args.includes("--help")) {
   console.log(`
-📄 LaTeX PDF Generator — Compila .tex para PDF
+� Gerador de PDF — HTML/Markdown → PDF com estilo
 
 Uso:
-  bun gerar-pdf.ts <arquivo.tex> [opções]
+  bun gerar-pdf.ts <arquivo.html|md> [opções]
 
 Opções:
-  --engine <compilador>  lualatex (padrão) | xelatex | pdflatex
-  --clean                Remove .aux, .log, .out após compilar
-  --open                 Abre o PDF após gerar
-  --check                Verifica dependências antes de compilar
-  --help                 Mostra esta ajuda
+  --theme <nome>      modern (padrão) | classic | elegant | corporate
+  --output <caminho>  PDF de saída (padrão: mesmo dir/nome com .pdf)
+  --css <caminho>     CSS customizado (sobrescreve tema)
+  --title <texto>     Título do documento <title>
 
 Exemplos:
-  bun gerar-pdf.ts oficio.tex
-  bun gerar-pdf.ts oficio.tex --clean --open
-  bun gerar-pdf.ts oficio.tex --engine xelatex
+  bun gerar-pdf.ts documento.md
+  bun gerar-pdf.ts pagina.html --theme corporate --output relatorio.pdf
+  bun gerar-pdf.ts doc.md --css meu-estilo.css
 `);
   process.exit(0);
 }
 
-const texPath = args.find((a) => !a.startsWith("--"));
-const clean = args.includes("--clean");
-const openPdf = args.includes("--open");
-const check = args.includes("--check");
-const engineArg = args.findIndex((a) => a === "--engine");
-const engine = engineArg >= 0 ? args[engineArg + 1] || "lualatex" : "lualatex";
+const inputPath = resolve(args[0]);
+let theme = "modern";
+let outputPath = "";
+let customCss = "";
+let docTitle = "";
 
-if (!texPath) {
-  console.error("❌ Especifique o caminho do arquivo .tex");
+for (let i = 1; i < args.length; i++) {
+  if (args[i] === "--theme") theme = args[++i];
+  if (args[i] === "--output") outputPath = resolve(args[++i]);
+  if (args[i] === "--css") customCss = resolve(args[++i]);
+  if (args[i] === "--title") docTitle = args[++i];
+}
+
+if (!existsSync(inputPath)) {
+  console.error(`❌ Arquivo não encontrado: ${inputPath}`);
   process.exit(1);
 }
 
-const absPath = path.resolve(texPath);
-if (!fs.existsSync(absPath)) {
-  console.error(`❌ Arquivo não encontrado: ${absPath}`);
-  process.exit(1);
+if (!outputPath) {
+  outputPath = inputPath.replace(/\.(html|md|markdown)$/i, "") + ".pdf";
 }
 
-if (!absPath.endsWith(".tex")) {
-  console.error(`❌ Arquivo não é .tex: ${absPath}`);
-  process.exit(1);
-}
+const skillDir = resolve(import.meta.dir, "..");
+const themesDir = join(skillDir, "themes");
+const ext = extname(inputPath).toLowerCase();
 
-// Verificar que o compilador existe (independente de --check)
-const whichEngine = (() => {
-  try {
-    execSync(`command -v ${engine}`, { stdio: "pipe" });
-    return true;
-  } catch {
-    return false;
-  }
-})();
-if (!whichEngine) {
-  console.error(`❌ Compilador "${engine}" não encontrado. Instale com: apt install texlive-full`);
-  process.exit(1);
-}
+// ─── Selecionar CSS ─────────────────────────────────────
 
-// Verificar dependências
-if (check) {
-  console.log("🔧 Verificando dependências...\n");
-  try {
-    execSync(`${engine} --version`, { stdio: "pipe" });
-    console.log(`  ✅ ${engine} encontrado`);
-  } catch {
-    console.error(`  ❌ ${engine} não encontrado`);
-    console.error(`     Instale com: sudo apt install texlive-full`);
+let themeCss: string;
+if (customCss && existsSync(customCss)) {
+  themeCss = readFileSync(customCss, "utf-8");
+  console.log(`� CSS customizado: ${basename(customCss)}`);
+} else {
+  const themeFile = join(themesDir, `${theme}.css`);
+  if (!existsSync(themeFile)) {
+    console.error(`❌ Tema "${theme}" não encontrado. Temas disponíveis: modern, classic, elegant, corporate`);
     process.exit(1);
   }
-  console.log("");
+  themeCss = readFileSync(themeFile, "utf-8");
+  console.log(`🎨 Tema: ${theme}`);
 }
 
-const dir = path.dirname(absPath);
-const baseName = path.basename(absPath, ".tex");
-const pdfPath = path.join(dir, `${baseName}.pdf`);
+// ─── Converter input para HTML se necessário ─────────────
 
-console.log(`📄 Compilando: ${path.relative("/home/workspace", absPath)}`);
-console.log(`   Engine: ${engine}`);
-console.log("");
+let htmlContent: string;
 
-// Primeira compilação
-console.log("⏳ Primeira compilação...");
-try {
-  execSync(`${engine} -interaction=nonstopmode -output-directory="${dir}" "${absPath}"`, {
-    stdio: "pipe",
-    cwd: dir,
-  });
-  console.log("   ✅ Concluída");
-} catch {
-  // lualatex retorna exit code > 0 mesmo com warnings
-  console.log("   ⚠️  Concluída (com warnings)");
-}
+if (ext === ".md" || ext === ".markdown") {
+  // Usa pandoc para converter MD → HTML
+  console.log(`📝 Convertendo Markdown → HTML...`);
+  const result = spawnSync("pandoc", [
+    inputPath,
+    "--standalone",
+    "--from", "markdown+smart",
+    "--to", "html",
+    "--wrap=none",
+  ], { encoding: "utf-8" });
 
-// Segunda compilação (referências, sumário, numeração)
-console.log("⏳ Segunda compilação (referências)...");
-try {
-  execSync(`${engine} -interaction=nonstopmode -output-directory="${dir}" "${absPath}"`, {
-    stdio: "pipe",
-    cwd: dir,
-  });
-  console.log("   ✅ Concluída");
-} catch {
-  console.log("   ⚠️  Concluída (com warnings)");
-}
-
-// Verificar se PDF foi gerado
-if (!fs.existsSync(pdfPath)) {
-  console.error("\n❌ PDF não foi gerado. Verifique erros no .log:");
-  const logPath = path.join(dir, `${baseName}.log`);
-  if (fs.existsSync(logPath)) {
-    const log = fs.readFileSync(logPath, "utf-8");
-    const errors = log
-      .split("\n")
-      .filter((l) => l.startsWith("!"))
-      .slice(0, 10);
-    for (const err of errors) {
-      console.error(`   ${err}`);
-    }
+  if (result.status !== 0) {
+    console.error(`❌ Erro no pandoc: ${result.stderr}`);
+    process.exit(1);
   }
+  htmlContent = result.stdout;
+} else {
+  htmlContent = readFileSync(inputPath, "utf-8");
+}
+
+// Se não tem <html>, envolver em template básico
+const isFragment = !htmlContent.includes("<html") && !htmlContent.includes("<!DOCTYPE");
+
+if (isFragment) {
+  // Extrair título do primeiro h1 se não fornecido
+  if (!docTitle) {
+    const titleMatch = htmlContent.match(/<h1[^>]*>(.*?)<\/h1>/i);
+    if (titleMatch) docTitle = titleMatch[1].replace(/<[^>]+>/g, "");
+    else docTitle = basename(inputPath, ext);
+  }
+
+  htmlContent = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>${docTitle}</title>
+</head>
+<body>
+${htmlContent}
+</body>
+</html>`;
+}
+
+// ─── Injetar CSS inline (weasyprint precisa de <style>) ──
+
+// Remover <link rel="stylesheet"> se existir ( vamos injetar inline)
+htmlContent = htmlContent.replace(/<link[^>]*stylesheet[^>]*>/gi, "");
+
+// Injetar CSS no <head> ou criar <head> se não existir
+if (htmlContent.includes("</head>")) {
+  htmlContent = htmlContent.replace("</head>", `<style>\n${themeCss}\n</style>\n</head>`);
+} else if (htmlContent.includes("<body")) {
+  htmlContent = htmlContent.replace("<body>", `<head><style>\n${themeCss}\n</style></head>\n<body`);
+} else {
+  htmlContent = `<html><head><style>\n${themeCss}\n</style></head><body>${htmlContent}</body></html>`;
+}
+
+// ─── Escrever HTML temporário e converter ───────────────
+
+const tmpHtml = join(skillDir, ".tmp-pdf-gen.html");
+writeFileSync(tmpHtml, htmlContent);
+
+console.log(`� Gerando PDF com weasyprint...`);
+
+const result = spawnSync("weasyprint", [
+  tmpHtml,
+  outputPath,
+  "--encoding", "utf-8",
+], { encoding: "utf-8" });
+
+// Limpar tmp
+try { require("fs").unlinkSync(tmpHtml); } catch { /* ignore */ }
+
+if (result.status !== 0) {
+  console.error(`❌ Erro ao gerar PDF:\n${result.stderr}`);
+  // Salvar HTML debug
+  const debugPath = outputPath.replace(/\.pdf$/, ".debug.html");
+  writeFileSync(debugPath, htmlContent);
+  console.log(`   HTML de debug salvo em: ${debugPath}`);
   process.exit(1);
 }
 
-const sizeKB = Math.round(fs.statSync(pdfPath).size / 1024);
-console.log(`\n✅ PDF gerado: ${sizeKB} KB`);
+const stats = require("fs").statSync(outputPath);
+const sizeKB = Math.round(stats.size / 1024);
 
-// Limpar auxiliares
-if (clean) {
-  const auxExts = [".aux", ".log", ".out", ".toc", ".lof", ".lot", ".bbl", ".blg", ".synctex.gz"];
-  for (const ext of auxExts) {
-    const auxPath = path.join(dir, `${baseName}${ext}`);
-    if (fs.existsSync(auxPath)) {
-      fs.unlinkSync(auxPath);
-    }
-  }
-  console.log("🧹 Arquivos auxiliares removidos");
-}
-
-// Abrir PDF
-if (openPdf) {
-  try {
-    execSync(`xdg-open "${pdfPath}"`, { stdio: "ignore" });
-    console.log("📂 PDF aberto");
-  } catch {
-    console.warn("⚠️  Não foi possível abrir o PDF automaticamente");
-  }
-}
-
-console.log("\n" + "=".repeat(50));
-console.log(`📄 Caminho relativo: ${path.relative("/home/workspace", pdfPath)}`);
-console.log("=".repeat(50));
+console.log(`\n✅ PDF gerado com sucesso!`);
+console.log(`📄 ${outputPath}`);
+console.log(`   📏 ${sizeKB} KB`);
