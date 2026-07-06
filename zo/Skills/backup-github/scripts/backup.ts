@@ -5,6 +5,8 @@
  * O workspace é síncrono para a pasta zo/ do repositório backup-agente.
  * Cada agente (openclaw, hermes, odysseu) gerencia sua própria pasta.
  *
+ * Também salva as automações (crons) configuradas no Zo antes do backup.
+ *
  * Uso:
  *   bun backup.ts              → commit + push
  *   bun backup.ts --status     → mostra status sem commitar
@@ -54,6 +56,67 @@ function ensureRepo(): boolean {
   return true;
 }
 
+async function saveZoConfig(): Promise<void> {
+  const token = process.env.ZO_CLIENT_IDENTITY_TOKEN;
+  if (!token) {
+    console.warn("⚠️ ZO_CLIENT_IDENTITY_TOKEN não disponível, pulando backup de automações");
+    return;
+  }
+  try {
+    const url = "https://api.zo.computer/zo/ask";
+    const payload = {
+      input: "List ALL automations configured for this account. Return ONLY a valid JSON array. Each object must have: id, title, active (boolean), rrule, created_at. No markdown, no extra text.",
+      model_name: "byok:d7cd99aa-c33a-4045-9d5a-7ec005150a42",
+    };
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { authorization: token, "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      console.warn(`⚠️ Zo API retornou ${res.status}, pulando backup de automações`);
+      return;
+    }
+    const data: any = await res.json();
+    const raw = data.output || "";
+    if (!raw) {
+      console.warn("⚠️ Zo API retornou output vazio");
+      return;
+    }
+    // O output vem como string com ```json ... ``` ou JSON direto
+    let jsonStr = typeof raw === "string" ? raw : JSON.stringify(raw);
+    // Extrair bloco ```json ... ``` se houver
+    const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+    if (jsonMatch) jsonStr = jsonMatch[1].trim();
+    let automations: any[];
+    try {
+      automations = JSON.parse(jsonStr);
+    } catch {
+      console.warn("⚠️ Não foi possível fazer parse do JSON retornado pela Zo API");
+      return;
+    }
+    if (!Array.isArray(automations) || automations.length === 0) {
+      console.warn("⚠️ Nenhuma automação encontrada ou formato inesperado");
+      return;
+    }
+    // Normalizar: garantir campos essenciais
+    const clean = automations.map((a: any) => ({
+      id: a.id || "",
+      title: a.title || "sem título",
+      active: !!a.active,
+      rrule: a.rrule || "",
+      created_at: a.created_at || "",
+    }));
+    const configDir = "/home/workspace/.zobot/config";
+    run(["mkdir", "-p", configDir]);
+    const outPath = `${configDir}/automacoes.json`;
+    run(["sh", "-c", `cat > '${outPath}' << 'JSONEOF'\n${JSON.stringify(clean, null, 2)}\nJSONEOF`]);
+    console.log(`✅ ${clean.length} automação(ões) salva(s) em .zobot/config/automacoes.json`);
+  } catch (err) {
+    console.warn(`⚠️ Erro ao salvar automações: ${err}`);
+  }
+}
+
 function getTipoArquivo(path: string): string {
   if (path.startsWith("Prefeitura/")) return "📋 ";
   if (path.startsWith("financeiro/")) return "💰 ";
@@ -91,6 +154,9 @@ Rrule: RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0
   if (!ensureRepo()) {
     process.exit(1);
   }
+
+  // Salvar configurações do Zo antes do backup (automações, etc.)
+  await saveZoConfig();
 
   // Sincronizar workspace para a pasta zo/ do repositório
   console.log("🔄 Sincronizando workspace para zo/...");
