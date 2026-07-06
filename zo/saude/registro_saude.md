@@ -2,6 +2,11 @@
 
 ## Medições
 
+### 30/06/2026
+- Pressão: 119/76 mmHg | Pulso: 112 bpm
+- Glicose: 464 mg/dL
+- Via: Chat
+
 ### 28/06/2026
 - Pressão: 140/80 mmHg | Pulso: 87 bpm
 - Glicose: 378 mg/dL
