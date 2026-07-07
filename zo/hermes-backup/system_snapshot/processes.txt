@@ -1,0 +1,4 @@
+root           1  0.0  0.0   2564  1456 ?        Ss   May24   0:04 /usr/bin/tini -g -- /opt/hermes/docker/entrypoint.sh gateway run
+hermes         8  0.0  2.9 906584 239628 ?       Sl   May24   1:13 /opt/hermes/.venv/bin/python3 /opt/hermes/.venv/bin/hermes gateway run
+hermes      1069  9.5  0.0   4576  3476 ?        S    00:04   0:00 /usr/bin/bash /home/hermes/.hermes/scripts/hermes-backup.sh
+hermes      1209  0.0  0.0   6792  4040 ?        R    00:04   0:00 ps aux

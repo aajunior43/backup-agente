@@ -1,0 +1,410 @@
+{
+  "records": [
+    {
+      "timestamp": "2026-04-25T18:52:08.953876+00:00",
+      "type": "pressure",
+      "pressure": {
+        "systolic": 123,
+        "diastolic": 85
+      },
+      "heart_rate": 94,
+      "notes": "Medicao antes do exercicio"
+    },
+    {
+      "timestamp": "2026-04-25T14:31:55.121261+00:00",
+      "type": "glucose",
+      "glucose": 267,
+      "unit": "mg/dL",
+      "timing": "pos-exercicio",
+      "notes": "Após bike ergonomica 30min"
+    },
+    {
+      "timestamp": "2026-04-25T14:30:07.875255Z",
+      "type": "exercise",
+      "exercise": {
+        "duration_min": 30,
+        "intensity": "mixed (15 leve, 10 medio, 5 pesado)",
+        "equipment": "bike ergonomica"
+      },
+      "pressure": {
+        "systolic": 127,
+        "diastolic": 86
+      },
+      "heart_rate": 106,
+      "notes": "Pós-exercício"
+    },
+    {
+      "timestamp": "2026-04-19T23:36:00.000Z",
+      "date": "2026-04-19",
+      "time": "20:36",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 257,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-19T23:34:00.000Z",
+      "date": "2026-04-19",
+      "time": "20:34",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 123,
+      "blood_pressure_diastolic": 78,
+      "heart_rate": 87,
+      "notes": "Via foto do monitor G-TECH"
+    },
+    {
+      "timestamp": "2026-04-19T02:56:00.000Z",
+      "date": "2026-04-19",
+      "time": "02:56",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 84,
+      "heart_rate": 105,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-19T02:55:00.000Z",
+      "date": "2026-04-19",
+      "time": "02:55",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 268,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-02-22T16:30:00.000Z",
+      "date": "2026-02-22",
+      "time": "13:30",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 122,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 91,
+      "notes": "Dados via Telegram"
+    },
+    {
+      "timestamp": "2026-02-22T16:38:08.000Z",
+      "date": "2026-02-22",
+      "time": "13:38",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 209,
+      "notes": "Glicose via Telegram"
+    },
+    {
+      "timestamp": "2026-04-13T15:19:07.000Z",
+      "date": "2026-04-13",
+      "time": "12:19",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 227,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-13T15:19:30.000Z",
+      "date": "2026-04-13",
+      "time": "12:19",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 149,
+      "blood_pressure_diastolic": 94,
+      "heart_rate": 96,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-13T16:43:00.000Z",
+      "date": "2026-04-13",
+      "time": "13:43",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 143,
+      "blood_pressure_diastolic": 89,
+      "heart_rate": 95,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-13T16:45:00.000Z",
+      "date": "2026-04-13",
+      "time": "13:45",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 136,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 103,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-13T18:28:00.000Z",
+      "date": "2026-04-13",
+      "time": "15:28",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 298,
+      "notes": "Glicemia 298 após enjoo no trabalho"
+    },
+    {
+      "timestamp": "2026-04-13T18:28:00.000Z",
+      "date": "2026-04-13",
+      "time": "15:28",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 131,
+      "blood_pressure_diastolic": 95,
+      "heart_rate": 105,
+      "notes": "PA após enjoo no trabalho"
+    },
+    {
+      "timestamp": "2026-03-06T11:22:00.000Z",
+      "date": "2026-03-06",
+      "time": "08:22",
+      "timezone": "America/Sao_Paulo",
+      "exam": "Sangue - Perfil Lipídico",
+      "sodium": 134,
+      "potassium": 3.5,
+      "hemoglobin": 17.2,
+      "hematocrit": 49.9,
+      "erythrocytes": 5.79,
+      "leukocytes": 9700,
+      "platelets": 256000,
+      "cholesterol_total": 217,
+      "cholesterol_hdl": 36,
+      "cholesterol_ldl": 160,
+      "triglycerides": 173.8,
+      "vldl": 57,
+      "cholesterol_non_hdl": 181,
+      "notes": "Exame DASA Cascavel - Colesterol LDL muito alto, HDL baixo"
+    },
+    {
+      "timestamp": "2026-03-06T11:22:00.000Z",
+      "date": "2026-03-06",
+      "time": "08:22",
+      "timezone": "America/Sao_Paulo",
+      "exam": "Sangue Completo",
+      "fasting_glucose": 261,
+      "creatinine": 0.97,
+      "uric_acid": 4.55,
+      "tgo_ast": 16,
+      "tgp_alt": 32,
+      "notes": "GLICEMIA CRITICA 261! Diabetes descompensada. Historico: 229 (2025), 96 (2023)"
+    },
+    {
+      "timestamp": "2026-04-15T15:31:00-03:00",
+      "date": "2026-04-15",
+      "time": "12:31",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 216,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-15T15:32:00-03:00",
+      "date": "2026-04-15",
+      "time": "12:32",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 134,
+      "blood_pressure_diastolic": 79,
+      "heart_rate": 103,
+      "notes": "Via Telegram - imagem"
+    },
+    {
+      "timestamp": "2026-04-16T22:52:00-03:00",
+      "date": "2026-04-16",
+      "time": "19:52",
+      "timezone": "America/Sao_Paulo",
+      "blood_glucose": 278,
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 89,
+      "heart_rate": 90,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-20T01:13:49.155Z",
+      "date": "2026-04-20",
+      "time": "-2:13",
+      "timezone": "America/Sao_Paulo",
+      "blood_pressure_systolic": 133,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 78,
+      "notes": "Via Telegram"
+    }
+  ],
+  "metadata": {
+    "last_update": "2026-04-19T02:56:00.000Z"
+  },
+  "clinical_notes": {
+    "food_intolerances": [
+      {
+        "food": "amendoim",
+        "reported_date": "2026-04-28",
+        "symptoms": ["náusea", "mal-estar geral"],
+        "reported_by": "Professor"
+      }
+    ]
+  },
+  "medications": {},
+  "2026-04-13": {
+    "temperature": {
+      "value": 36.7,
+      "unit": "°C",
+      "time": "16:40 BRT"
+    }
+  },
+  "lastUpdate": "2026-04-28T02:05:00.000Z",
+  "readings": [
+    {
+      "timestamp": "2026-04-19T19:20:00-03:00",
+      "date": "2026-04-19",
+      "time": "19:20",
+      "systolic": 133,
+      "diastolic": 84,
+      "heart_rate": 85,
+      "glucose": null,
+      "notes": "Medição via áudio (Telegram)"
+    },
+    {
+      "timestamp": "2026-04-19T19:21:00-03:00",
+      "date": "2026-04-19",
+      "time": "19:21",
+      "systolic": 133,
+      "diastolic": 84,
+      "heart_rate": 85,
+      "glucose": 331,
+      "notes": "Medição via áudio (Telegram)"
+    },
+    {
+      "timestamp": "2026-04-21T13:27:00-03:00",
+      "date": "2026-04-21",
+      "time": "10:27",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": 488,
+      "notes": "Medição via áudio (Telegram)"
+    },
+    {
+      "timestamp": "2026-04-21T14:49:00-03:00",
+      "date": "2026-04-21",
+      "time": "11:49",
+      "systolic": 131,
+      "diastolic": 93,
+      "heart_rate": 86,
+      "glucose": null,
+      "notes": "Medição via áudio (Telegram)"
+    },
+    {
+      "timestamp": "2026-04-21T14:53:00-03:00",
+      "date": "2026-04-21",
+      "time": "11:53",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": 399,
+      "notes": "Medição via áudio (Telegram)"
+    },
+    {
+      "timestamp": "2026-04-21T23:45:46.399606Z",
+      "date": "2026-04-21",
+      "time": "23:45",
+      "systolic": 120,
+      "diastolic": 78,
+      "heart_rate": 78,
+      "glucose": null,
+      "notes": ""
+    },
+    {
+      "timestamp": "2026-04-21T23:50:54.975275Z",
+      "date": "2026-04-21",
+      "time": "23:50",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": 280,
+      "notes": ""
+    },
+    {
+      "timestamp": "2026-04-23T16:32:00-03:00",
+      "date": "2026-04-23",
+      "time": "16:32",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": 286,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-23T18:38:00-03:00",
+      "date": "2026-04-23",
+      "time": "18:38",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": 233,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-23T18:40:00-03:00",
+      "date": "2026-04-23",
+      "time": "18:40",
+      "systolic": 138,
+      "diastolic": 90,
+      "heart_rate": 102,
+      "glucose": null,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-23T18:49:00-03:00",
+      "date": "2026-04-23",
+      "time": "18:49",
+      "systolic": null,
+      "diastolic": null,
+      "heart_rate": null,
+      "glucose": null,
+      "notes": "35 min de bike: 15min leve, 15min médio, 5min meio pesado"
+    },
+    {
+      "date": "2026-04-24",
+      "time": "11:45",
+      "type": "glicemia",
+      "value": 215,
+      "unit": "mg/dL",
+      "context": "antes do almoço"
+    },
+    {
+      "date": "2026-04-24",
+      "time": "11:46",
+      "type": "temperatura",
+      "value": 36.2,
+      "unit": "°C",
+      "context": ""
+    },
+    {
+      "date": "2026-04-24",
+      "time": "11:47",
+      "type": "pressao",
+      "systolic": 133,
+      "diastolic": 83,
+      "bpm": 98,
+      "context": "1ª medição"
+    },
+    {
+      "date": "2026-04-24",
+      "time": "11:48",
+      "type": "pressao",
+      "systolic": 126,
+      "diastolic": 83,
+      "bpm": 97,
+      "context": "2ª medição"
+    },
+    {
+      "timestamp": "2026-04-26T12:58:00-03:00",
+      "date": "2026-04-26",
+      "time": "09:58",
+      "systolic": 122,
+      "diastolic": 71,
+      "heart_rate": 96,
+      "glucose": 250,
+      "notes": "Via Telegram"
+    },
+    {
+      "timestamp": "2026-04-27T23:01:00-03:00",
+      "date": "2026-04-27",
+      "time": "23:01",
+      "systolic": 148,
+      "diastolic": 95,
+      "heart_rate": 68,
+      "glucose": 273,
+      "notes": "Via foto (Telegram) - Professor"
+    }
+  ],
+  "last_check": "2026-04-27T23:01:00.000Z",
+  "last_update": "2026-04-28T02:05:00.000Z"
+}

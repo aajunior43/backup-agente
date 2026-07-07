@@ -1,0 +1,21 @@
+=== HERMES BACKUP COMPLETO ===
+Data: 2026-05-25 21:04:52
+Host: 1d81060632ea
+Kernel: Linux 1d81060632ea 6.8.0-111-generic #111-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 11 23:16:02 UTC 2026 x86_64 GNU/Linux
+Python: Python 3.13.5
+Node: v20.19.2
+
+=== DIRETÓRIOS ===
+Workspace: /workspace
+Hermes: /home/hermeswebui/.hermes
+Backup: /tmp/hermes-backup
+
+=== DISK ===
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          96G   19G   77G  20% /
+shm              64M     0   64M   0% /dev/shm
+/dev/sda1        96G   19G   77G  20% /opt/hermes
+
+=== WORKSPACE SIZE ===
+
+=== HERMES SIZE ===

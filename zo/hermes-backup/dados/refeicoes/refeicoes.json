@@ -1,0 +1,93 @@
+{
+  "records": [
+    {
+      "date": "2026-03-18",
+      "meals": [
+        {
+          "time": "07:30",
+          "type": "Café da manhã",
+          "items": "2 copos de café com leite (~300-350ml cada)",
+          "notes": "Em casa antes de sair pro trabalho"
+        },
+        {
+          "time": "08:00",
+          "type": "Café da manhã (continuação)",
+          "items": "150ml café puro com açúcar",
+          "notes": "Ao chegar na prefeitura"
+        },
+        {
+          "time": "09:30",
+          "type": "Lanche da manhã",
+          "items": "150ml café puro com açúcar",
+          "notes": "Na prefeitura"
+        },
+        {
+          "time": "10:30",
+          "type": "Lanche",
+          "items": "Sprite Zero, 1 pacote de Lays de cebola, 3 saímos (bala/chiclete)",
+          "notes": "Foi em casa rapidinho"
+        },
+        {
+          "time": "13:00",
+          "type": "Almoço",
+          "items": "3 espumadeira de arroz, 2 bisteca de porco grossa cozida com tomate e cebola, 1 pacote de Lays esfarelado por cima, 2/3 barra de chocolate branco, Sprite Zero",
+          "notes": "Com Lays esfarelado no arroz + 2/3 do chocolate"
+        },
+        {
+          "time": "15:00",
+          "type": "Lanche da tarde",
+          "items": "2 copos de café, 5 chicletes",
+          "notes": "Na prefeitura à tarde"
+        },
+        {
+          "time": "17:00",
+          "type": "Lanche da tarde",
+          "items": "1/3 barra de chocolate branco",
+          "notes": "Ao chegar em casa"
+        },
+        {
+          "time": "22:08",
+          "type": "Observação",
+          "items": "Nada desde as 17h",
+          "notes": "Sem jantar até o momento"
+        }
+      ]
+    },
+    {
+      "date": "2026-04-23",
+      "meals": [
+        {
+          "time": "07:50",
+          "type": "Café da manhã",
+          "items": "Café com açúcar e leite integral",
+          "notes": "Cedo - sem açúcar, leite integral"
+        },
+        {
+          "time": "12:00",
+          "type": "Almoço",
+          "items": "3 escumadeiras de arroz, 2 pedaços grandes de frango cozido, 3 colheres de cebola refogada com o frango, 800ml Coca-Cola Zero",
+          "notes": "Arroz, frango cozido com cebola"
+        },
+        {
+          "time": "??:??",
+          "type": "Lanche da tarde",
+          "items": "1 saquinho inteiro de amendoim doce",
+          "notes": "Na prefeitura após retorno do almoço"
+        },
+        {
+          "time": "??:??",
+          "type": "Lanche da tarde",
+          "items": "2 copos de café com açúcar",
+          "notes": "Na prefeitura à tarde"
+        },
+        {
+          "time": "21:47",
+          "type": "Chá",
+          "items": "200ml de chá de erva cidreira caseiro com pouco açúcar",
+          "notes": "À noite"
+        }
+      ]
+    }
+  ],
+  "notes": "Registro de refeições diárias de Aleksandro. Criado em 18/03/2026."
+}

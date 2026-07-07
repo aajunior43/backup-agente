@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Template estruturado para o Prompt Final gerado pela Skill prompt-engineer.
+  Preencha cada seção com o conteúdo das 7 etapas. Remova comentários antes de usar.
+-->
+<Prompt>
+  <Meta>
+    <Version>1.0</Version>
+    <Author>prompt-engineer skill</Author>
+    <GeneratedAt><!-- ISO 8601 --></GeneratedAt>
+    <FidelityIndex><!-- 0-100 --></FidelityIndex>
+  </Meta>
+
+  <PRISM>
+    <Position><!-- Persona/autoridade exata --></Position>
+    <Role><!-- Papel que o modelo assume --></Role>
+    <Intent><!-- Objetivo único e mensurável --></Intent>
+    <Structure><!-- Formato de saída obrigatório (JSON Schema, Markdown sections, etc.) --></Structure>
+    <Modality><!-- text | code | structured | multimodal --></Modality>
+  </PRISM>
+
+  <Instructions>
+    <!-- Instruções principais, numeradas, imperativas, sem vaguidade -->
+    <Step n="1"><!-- ... --></Step>
+    <Step n="2"><!-- ... --></Step>
+    <!-- ... -->
+  </Instructions>
+
+  <Constraints>
+    <!-- Restrições duras: tokens, formato, proibições, validações -->
+    <Constraint><!-- ex: "Máximo 2000 tokens de saída" --></Constraint>
+    <Constraint><!-- ex: "Saída deve validar contra JSON Schema X" --></Constraint>
+    <Constraint><!-- ex: "Proibido usar 'excelente', 'perfeito', 'incrível'" --></Constraint>
+  </Constraints>
+
+  <Context>
+    <!-- Contexto fixo que o prompt carrega: versões, domínios, definições -->
+    <Item key="language"><!-- ex: TypeScript 5.4 --></Item>
+    <Item key="domain"><!-- ex: Auditoria de código legacy --></Item>
+  </Context>
+
+  <FewShotExamples>
+    <Example n="1">
+      <Input><!-- Entrada realista --></Input>
+      <Output><!-- Saída esperada formatada --></Output>
+    </Example>
+    <Example n="2">
+      <Input><!-- Caso edge ou variação --></Input>
+      <Output><!-- Saída esperada --></Output>
+    </Example>
+  </FewShotExamples>
+
+  <Guardrails>
+    <!-- Armadilhas identificadas e suas correções ativas -->
+    <Guardrail id="1"><!-- Correção para armadilha 1 --></Guardrail>
+    <Guardrail id="2"><!-- Correção para armadilha 2 --></Guardrail>
+    <Guardrail id="3"><!-- Correção para armadilha 3 --></Guardrail>
+  </Guardrails>
+
+  <OutputFormat>
+    <!-- Descrição precisa do formato final esperado -->
+    <!-- Ex: "Markdown com seções: ## Análise, ## Diff, ## Testes" -->
+  </OutputFormat>
+
+  <SelfEvaluation>
+    <!-- Autoavaliação final do próprio prompt (meta) -->
+    <Criteria name="Clareza" score="5"/>
+    <Criteria name="Especificidade" score="5"/>
+    <Criteria name="Completude" score="4"/>
+    <Criteria name="Ação" score="5"/>
+    <Criteria name="Exemplos" score="4"/>
+    <Criteria name="Restrições" score="5"/>
+    <Criteria name="Fundamentação" score="4"/>
+  </SelfEvaluation>
+</Prompt>

@@ -1,0 +1,13 @@
+{
+  "name": "obsidian-notes",
+  "description": "Cria notas no Obsidian com classificação automática (pessoal vs prefeitura). Se começar com 'Nota', analisa conteúdo e decide a pasta adequada.",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {},
+  "openclaw": {
+    "model": "openrouter/auto"
+  }
+}

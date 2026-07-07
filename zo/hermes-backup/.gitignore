@@ -1,0 +1,24 @@
+# Nunca commitar credenciais em texto claro
+.env
+*.env
+.env.*
+credentials/
+*.key
+*.pem
+*.p12
+*.kdbx
+
+# Logs
+*.log
+logs/
+
+# Temporários
+*.tmp
+*.swp
+*.zip
+*.tar.gz
+
+# Node/Python cache
+node_modules/
+__pycache__/
+*.pyc

@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_update": "2026-04-23T19:13:00.000Z"
+  },
+  "transactions": [
+    {
+      "id": "txn_20260421_001",
+      "date": "2026-04-21",
+      "type": "expense",
+      "amount": 405,
+      "description": "Gasto no cartão Nubank",
+      "category": "cartao",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "Primeiro gasto de abril",
+      "created_at": "2026-04-21T14:57:25.505240Z"
+    },
+    {
+      "id": "txn_20260414_001",
+      "date": "2026-04-14",
+      "type": "expense",
+      "amount": 750,
+      "description": "Fatura Cartão Inter — Abril/2026",
+      "category": "cartao",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "",
+      "created_at": "2026-04-14T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_001",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 153,
+      "description": "Faculdade 1",
+      "category": "educacao",
+      "recurrent": true,
+      "due_date": "2026-05-10",
+      "notes": "Mensal",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_002",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 153,
+      "description": "Faculdade 2",
+      "category": "educacao",
+      "recurrent": true,
+      "due_date": "2026-05-10",
+      "notes": "Mensal",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_003",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 60,
+      "description": "Guarda Noturno Doca",
+      "category": "servicos",
+      "recurrent": true,
+      "due_date": "2026-05-10",
+      "notes": "Mensal",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_004",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 88,
+      "description": "Tio - mercado (conta dele)",
+      "category": "outros",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_005",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 100,
+      "description": "Prima - gasolina",
+      "category": "transporte",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_006",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 170,
+      "description": "Ar condicionado (parcela 5/10)",
+      "category": "casa",
+      "recurrent": true,
+      "due_date": "2026-05-10",
+      "notes": "Parcela 5 de 10",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260501_007",
+      "date": "2026-05-01",
+      "type": "expense",
+      "amount": 100,
+      "description": "Bike ergométrica (última parcela)",
+      "category": "casa",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "Última parcela!",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "txn_20260505_001",
+      "date": "2026-05-05",
+      "type": "income",
+      "amount": 5000,
+      "description": "Salário",
+      "category": "salario",
+      "recurrent": true,
+      "notes": "Mensal",
+      "created_at": "2026-05-05T00:00:00Z"
+    },
+    {
+      "id": "txn_20260422_001",
+      "date": "2026-04-22",
+      "type": "expense",
+      "amount": 97.4,
+      "description": "Mercado do Jabá",
+      "category": "alimentacao",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "",
+      "created_at": "2026-04-22T16:51:00Z"
+    },
+    {
+      "id": "txn_20260427_001",
+      "date": "2026-04-27",
+      "type": "expense",
+      "amount": 27,
+      "description": "Mercado do Jabá",
+      "category": "alimentacao",
+      "recurrent": false,
+      "due_date": "2026-05-10",
+      "notes": "",
+      "created_at": "2026-04-23T16:38:00Z"
+    }
+  ],
+  "monthly_summaries": {
+    "2026-04": {
+      "income": 5000,
+      "expense": 531.27,
+      "by_category": {
+        "cartao_inter": {
+          "total": 531.27,
+          "count": 2,
+          "recurrent_total": 0
+        }
+      }
+    },
+    "2026-03": {
+      "income": 3000,
+      "expense": 644.85,
+      "by_category": {
+        "alimentacao": {
+          "total": 27.2,
+          "count": 1,
+          "recurrent_total": 0
+        },
+        "servicos": {
+          "total": 60,
+          "count": 1,
+          "recurrent_total": 60
+        },
+        "educacao": {
+          "total": 278.65,
+          "count": 1,
+          "recurrent_total": 278.65
+        },
+        "outros": {
+          "total": 100,
+          "count": 2,
+          "recurrent_total": 0
+        },
+        "saude": {
+          "total": 179,
+          "count": 1,
+          "recurrent_total": 0
+        }
+      }
+    }
+  },
+  "lastUpdate": "2026-04-23T19:13:00Z"
+}

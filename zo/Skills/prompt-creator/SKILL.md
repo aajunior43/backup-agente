@@ -12,7 +12,6 @@ metadata:
   version: "1.0"
   tags: [prompt, meta-prompt, otimização, engenharia-de-prompts, llm]
 ---
-
 # 🧠 Skill: Prompt Creator
 
 Transforma uma ideia simples do usuário em um prompt de produção otimizado, usando técnicas avançadas de engenharia de prompts.

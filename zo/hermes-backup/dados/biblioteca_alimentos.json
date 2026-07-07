@@ -1,0 +1,998 @@
+{
+  "versao": "2.0",
+  "atualizado": "2026-04-23",
+  "pode_comer": {
+    "verduras_folhas": [
+      {
+        "id": 1,
+        "nome": "Alface",
+        "come": true
+      },
+      {
+        "id": 2,
+        "nome": "Rúcula",
+        "come": true
+      },
+      {
+        "id": 4,
+        "nome": "Couve",
+        "come": true
+      },
+      {
+        "id": 15,
+        "nome": "Repolho",
+        "come": true
+      },
+      {
+        "id": 16,
+        "nome": "Couve-flor",
+        "come": true
+      },
+      {
+        "id": 17,
+        "nome": "Brócolis",
+        "come": true
+      },
+      {
+        "id": 27,
+        "nome": "Salsa/Coentro",
+        "come": true
+      },
+      {
+        "id": 29,
+        "nome": "Cebolinha",
+        "come": true
+      }
+    ],
+    "legumes": [
+      {
+        "id": 36,
+        "nome": "Pepino",
+        "come": true
+      },
+      {
+        "id": 37,
+        "nome": "Tomate",
+        "come": true
+      },
+      {
+        "id": 38,
+        "nome": "Pimentão",
+        "come": true
+      },
+      {
+        "id": 40,
+        "nome": "Vagem",
+        "come": true
+      },
+      {
+        "id": 42,
+        "nome": "Milho",
+        "come": true
+      },
+      {
+        "id": 43,
+        "nome": "Cenoura",
+        "come": true
+      },
+      {
+        "id": 49,
+        "nome": "Cará",
+        "come": true
+      },
+      {
+        "id": 50,
+        "nome": "Batata-doce",
+        "come": true
+      },
+      {
+        "id": 51,
+        "nome": "Batata-baroa/mandioca",
+        "come": true
+      },
+      {
+        "id": 56,
+        "nome": "Couve-rábano",
+        "come": true
+      }
+    ],
+    "feijoes": [],
+    "outros": [
+      {
+        "id": 81,
+        "nome": "Alho",
+        "come": true
+      },
+      {
+        "id": 82,
+        "nome": "Cebola",
+        "come": true
+      },
+      {
+        "id": 83,
+        "nome": "alho-poró",
+        "come": true
+      },
+      {
+        "id": 88,
+        "nome": "Pimenta",
+        "come": true
+      },
+      {
+        "id": 89,
+        "nome": "Azeitona",
+        "come": true
+      },
+      {
+        "id": 90,
+        "nome": "Palmito",
+        "come": true
+      }
+    ],
+    "frutas": [
+      {
+        "id": 1,
+        "nome": "Maçã",
+        "come": true
+      },
+      {
+        "id": 3,
+        "nome": "Laranja",
+        "come": true
+      },
+      {
+        "id": 4,
+        "nome": "Limão",
+        "come": true
+      },
+      {
+        "id": 19,
+        "nome": "Tangerina/Mexerica",
+        "come": true
+      },
+      {
+        "id": 22,
+        "nome": "Abacate",
+        "come": true
+      },
+      {
+        "id": 31,
+        "nome": "Noz",
+        "come": true
+      }
+    ],
+    "proteinas": [
+      {
+        "id": 1,
+        "nome": "Peito de frango",
+        "come": true
+      },
+      {
+        "id": 2,
+        "nome": "Coxa de frango",
+        "come": true
+      },
+      {
+        "id": 3,
+        "nome": "Sobrecoxa de frango",
+        "come": true
+      },
+      {
+        "id": 4,
+        "nome": "Frango inteiro",
+        "come": true
+      },
+      {
+        "id": 5,
+        "nome": "Carne bovina magra",
+        "come": true
+      },
+      {
+        "id": 6,
+        "nome": "Alcatra",
+        "come": true
+      },
+      {
+        "id": 8,
+        "nome": "Contrafilé",
+        "come": true
+      },
+      {
+        "id": 9,
+        "nome": "Coxão mole",
+        "come": true
+      },
+      {
+        "id": 10,
+        "nome": "Coxão duro",
+        "come": true
+      },
+      {
+        "id": 11,
+        "nome": "Maminha",
+        "come": true
+      },
+      {
+        "id": 13,
+        "nome": "Acém",
+        "come": true
+      },
+      {
+        "id": 15,
+        "nome": "Costela bovina",
+        "come": true
+      },
+      {
+        "id": 17,
+        "nome": "Músculo",
+        "come": true
+      },
+      {
+        "id": 18,
+        "nome": "Jaba",
+        "come": true
+      },
+      {
+        "id": 22,
+        "nome": "Ovos",
+        "come": true
+      },
+      {
+        "id": 24,
+        "nome": "Tilápia",
+        "come": true
+      },
+      {
+        "id": 26,
+        "nome": "Sardinha",
+        "come": true
+      },
+      {
+        "id": 42,
+        "nome": "Bacon",
+        "come": true
+      },
+      {
+        "id": 43,
+        "nome": "Pernil",
+        "come": true
+      },
+      {
+        "id": 55,
+        "nome": "Linguiça",
+        "come": true
+      },
+      {
+        "id": 56,
+        "nome": "Salsicha",
+        "come": true
+      },
+      {
+        "id": 57,
+        "nome": "Presunto",
+        "come": true
+      },
+      {
+        "id": 58,
+        "nome": "Salame",
+        "come": true
+      },
+      {
+        "id": 60,
+        "nome": "Bacon",
+        "come": true
+      },
+      {
+        "id": 61,
+        "nome": "Queijo mussarela",
+        "come": true
+      },
+      {
+        "id": 69,
+        "nome": "Leite",
+        "come": true
+      },
+      {
+        "id": 73,
+        "nome": "Manteiga",
+        "come": true
+      },
+      {
+        "id": 85,
+        "nome": "Atum enlatado",
+        "come": true
+      },
+      {
+        "id": 86,
+        "nome": "Sardinha enlatada",
+        "come": true
+      }
+    ],
+    "graos": [
+      {
+        "id": 1,
+        "nome": "Arroz branco",
+        "come": true
+      },
+      {
+        "id": 11,
+        "nome": "Aveia (flocos)",
+        "come": true
+      },
+      {
+        "id": 18,
+        "nome": "Pipoca",
+        "come": true
+      },
+      {
+        "id": 27,
+        "nome": "Farinha de trigo",
+        "come": true
+      },
+      {
+        "id": 30,
+        "nome": "Polvilho",
+        "come": true
+      },
+      {
+        "id": 32,
+        "nome": "Tapioca/goma",
+        "come": true
+      },
+      {
+        "id": 33,
+        "nome": "Massa (espaguete)",
+        "come": true
+      },
+      {
+        "id": 41,
+        "nome": "Pão francês",
+        "come": true
+      },
+      {
+        "id": 43,
+        "nome": "Pão de forma",
+        "come": true
+      },
+      {
+        "id": 47,
+        "nome": "Torrada",
+        "come": true
+      },
+      {
+        "id": 48,
+        "nome": "Bisnaguinha",
+        "come": true
+      },
+      {
+        "id": 49,
+        "nome": "Cuscuz (milho)",
+        "come": true
+      },
+      {
+        "id": 51,
+        "nome": "Farinha de mandioca",
+        "come": true
+      },
+      {
+        "id": 55,
+        "nome": "Granola",
+        "come": true
+      },
+      {
+        "id": 60,
+        "nome": "Barra de cereal",
+        "come": true
+      },
+      {
+        "id": 61,
+        "nome": "Biscoito wafer",
+        "come": true
+      },
+      {
+        "id": 62,
+        "nome": "Biscoito cream cracker",
+        "come": true
+      },
+      {
+        "id": 63,
+        "nome": "Biscoito maizena",
+        "come": true
+      },
+      {
+        "id": 64,
+        "nome": "Biscoito recheado",
+        "come": true
+      },
+      {
+        "id": 78,
+        "nome": "Salgadinho de pacote",
+        "come": true
+      },
+      {
+        "id": 81,
+        "nome": "Castanha de caju",
+        "come": true
+      },
+      {
+        "id": 84,
+        "nome": "Paçoca",
+        "come": true
+      },
+      {
+        "id": 87,
+        "nome": "Chocolate (ao leite)",
+        "come": true
+      },
+      {
+        "id": 88,
+        "nome": "Chocolate (branco)",
+        "come": true
+      },
+      {
+        "id": 89,
+        "nome": "Chocolate (amargo 70%+)",
+        "come": true
+      },
+      {
+        "id": 91,
+        "nome": "Neston",
+        "come": true
+      },
+      {
+        "id": 92,
+        "nome": "Achocolatado",
+        "come": true
+      },
+      {
+        "id": 95,
+        "nome": "Chá (saquinho)",
+        "come": true
+      },
+      {
+        "id": 96,
+        "nome": "Chá (folhas)",
+        "come": true
+      },
+      {
+        "id": 97,
+        "nome": "Mate",
+        "come": true
+      },
+      {
+        "id": 100,
+        "nome": "Suspiro",
+        "come": true
+      }
+    ],
+    "laticinios": [
+      {
+        "id": 1,
+        "nome": "Leite integral",
+        "come": true
+      },
+      {
+        "id": 4,
+        "nome": "Leite condensado",
+        "come": true
+      },
+      {
+        "id": 5,
+        "nome": "Leite em pó",
+        "come": true
+      },
+      {
+        "id": 6,
+        "nome": "Nescau/Nestlé",
+        "come": true
+      },
+      {
+        "id": 7,
+        "nome": "Ninho",
+        "come": true
+      },
+      {
+        "id": 8,
+        "nome": "Toddy",
+        "come": true
+      },
+      {
+        "id": 9,
+        "nome": "Achocolatado",
+        "come": true
+      },
+      {
+        "id": 13,
+        "nome": "Iogurte bebível",
+        "come": true
+      },
+      {
+        "id": 15,
+        "nome": "Creme de leite",
+        "come": true
+      },
+      {
+        "id": 16,
+        "nome": "Manteiga",
+        "come": true
+      },
+      {
+        "id": 17,
+        "nome": "Margarina",
+        "come": true
+      },
+      {
+        "id": 18,
+        "nome": "Queijo mussarela",
+        "come": true
+      },
+      {
+        "id": 35,
+        "nome": "Queijo parmessão ralado",
+        "come": true
+      },
+      {
+        "id": 51,
+        "nome": "Sorvete (nata)",
+        "come": true
+      },
+      {
+        "id": 52,
+        "nome": "Sorvete (creme)",
+        "come": true
+      },
+      {
+        "id": 53,
+        "nome": "Sorvete (chocolate)",
+        "come": true
+      },
+      {
+        "id": 54,
+        "nome": "Sorvete (morango)",
+        "come": true
+      },
+      {
+        "id": 55,
+        "nome": "Açaí com granola",
+        "come": true
+      }
+    ],
+    "bebidas": [
+      {
+        "id": 1,
+        "nome": "Água",
+        "come": true
+      },
+      {
+        "id": 2,
+        "nome": "Água com gás",
+        "come": true
+      },
+      {
+        "id": 3,
+        "nome": "Água de coco",
+        "come": true
+      },
+      {
+        "id": 4,
+        "nome": "Suco de laranja",
+        "come": true
+      },
+      {
+        "id": 5,
+        "nome": "Suco de limão",
+        "come": true
+      },
+      {
+        "id": 6,
+        "nome": "Suco de maracujá",
+        "come": true
+      },
+      {
+        "id": 9,
+        "nome": "Suco de abacaxi",
+        "come": true
+      },
+      {
+        "id": 18,
+        "nome": "Coca-Cola Zero",
+        "come": true
+      },
+      {
+        "id": 28,
+        "nome": "Schweppes",
+        "come": true
+      },
+      {
+        "id": 31,
+        "nome": "Café puro",
+        "come": true
+      },
+      {
+        "id": 32,
+        "nome": "Café com leite",
+        "come": true
+      },
+      {
+        "id": 33,
+        "nome": "Café com açúcar",
+        "come": true
+      },
+      {
+        "id": 35,
+        "nome": "Capuccino",
+        "come": true
+      },
+      {
+        "id": 39,
+        "nome": "Café coado",
+        "come": true
+      },
+      {
+        "id": 50,
+        "nome": "Chocolate quente",
+        "come": true
+      }
+    ]
+  },
+  "nao_pode_comer": {
+    "verduras_folhas": [],
+    "legumes": [],
+    "feijoes": [],
+    "outros": [
+      {
+        "id": 999,
+        "nome": "Catchup",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR_E_SÓDIO"
+      },
+      {
+        "id": 998,
+        "nome": "Maionese",
+        "come": false,
+        "motivo": "MUITA_GORDURA_E_SÓDIO"
+      },
+      {
+        "id": 997,
+        "nome": "Mostarda",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR_E_SÓDIO"
+      },
+      {
+        "id": 88,
+        "nome": "Pimenta",
+        "come": false,
+        "motivo": "PODE_AGRAVAR ANSIEDADE_E_INFLAMAÇÃO"
+      },
+      {
+        "id": 996,
+        "nome": "Geleia de pimenta",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR_E_PIMENTA_AGRAVA_ANSIEDADE"
+      },
+      {
+        "id": 41,
+        "nome": "Pão francês",
+        "come": false,
+        "motivo": "MUITO_CARBOIDRATO_ELEVADO_GLICEMIA"
+      },
+      {
+        "id": 995,
+        "nome": "Pão caseiro",
+        "come": false,
+        "motivo": "MUITO_CARBOIDRATO_ELEVADO_GLICEMIA"
+      },
+      {
+        "id": 995,
+        "nome": "Bacon",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_SATURADA"
+      },
+      {
+        "id": 994,
+        "nome": "Linguiça",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_SATURADA"
+      },
+      {
+        "id": 993,
+        "nome": "Salame",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_SODIO_E_GORDURA"
+      },
+      {
+        "id": 992,
+        "nome": "Presunto",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_SODIO_E_GORDURA"
+      },
+      {
+        "id": 991,
+        "nome": "Salsicha",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_CARNES_PROCESSADAS"
+      },
+      {
+        "id": 990,
+        "nome": "Manteiga",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_SATURADA"
+      },
+      {
+        "id": 989,
+        "nome": "Margarina",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_TRANS"
+      },
+      {
+        "id": 988,
+        "nome": "Fritura",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_TRANS"
+      },
+      {
+        "id": 987,
+        "nome": "Torresmo",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_GORDURA_E_SODIO"
+      },
+      {
+        "id": 986,
+        "nome": "Mortadela",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_CARNE_PROCESSADA"
+      },
+      {
+        "id": 985,
+        "nome": "Alface",
+        "come": false,
+        "motivo": "COLESTEROL_ALTO_VERIFICAR_MODERACAO"
+      },
+      {
+        "id": 984,
+        "nome": "Macarrão instantâneo",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      },
+      {
+        "id": 983,
+        "nome": "Sopa em pó",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      },
+      {
+        "id": 982,
+        "nome": "Molho de soja (shoyu)",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      },
+      {
+        "id": 981,
+        "nome": "Tempero pronto",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      },
+      {
+        "id": 980,
+        "nome": "Enlatados",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      },
+      {
+        "id": 979,
+        "nome": "Azeitona",
+        "come": false,
+        "motivo": "HIPERTENSAO_MUITO_SODIO"
+      }
+    ],
+    "frutas": [],
+    "proteinas": [],
+    "graos": [
+      {
+        "id": 60,
+        "nome": "Barra de cereal",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 61,
+        "nome": "Biscoito wafer",
+        "come": false,
+        "motivo": "AÇÚCAR_ESCONDIDO"
+      },
+      {
+        "id": 62,
+        "nome": "Biscoito cream cracker",
+        "come": false,
+        "motivo": "MUITO_CARBOIDRATO"
+      },
+      {
+        "id": 63,
+        "nome": "Biscoito maizena",
+        "come": false,
+        "motivo": "MUITO_CARBOIDRATO"
+      },
+      {
+        "id": 64,
+        "nome": "Biscoito recheado",
+        "come": false,
+        "motivo": "AÇÚCAR_ESCONDIDO"
+      },
+      {
+        "id": 78,
+        "nome": "Salgadinho de pacote",
+        "come": false,
+        "motivo": "AÇÚCAR_E_SÓDIO"
+      },
+      {
+        "id": 84,
+        "nome": "Paçoca",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 87,
+        "nome": "Chocolate (ao leite)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 88,
+        "nome": "Chocolate (branco)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 91,
+        "nome": "Neston",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 92,
+        "nome": "Achocolatado",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      }
+    ],
+    "laticinios": [
+      {
+        "id": 4,
+        "nome": "Leite condensado",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 6,
+        "nome": "Nescau/Nestlé",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 7,
+        "nome": "Ninho",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 8,
+        "nome": "Toddy",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 9,
+        "nome": "Achocolatado",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 13,
+        "nome": "Iogurte bebível",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 51,
+        "nome": "Sorvete (nata)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 52,
+        "nome": "Sorvete (creme)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 53,
+        "nome": "Sorvete (chocolate)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 54,
+        "nome": "Sorvete (morango)",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 55,
+        "nome": "Açaí com granola",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR_E GRANOLA"
+      }
+    ],
+    "bebidas": [
+      {
+        "id": 18,
+        "nome": "Coca-Cola Zero",
+        "come": false,
+        "motivo": "MUITA_CAFEÍNA_ANSIEDADE"
+      },
+      {
+        "id": 28,
+        "nome": "Schweppes",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      },
+      {
+        "id": 33,
+        "nome": "Café com açúcar",
+        "come": false,
+        "motivo": "AÇÚCAR"
+      },
+      {
+        "id": 35,
+        "nome": "Capuccino",
+        "come": false,
+        "motivo": "AÇÚCAR_E_CAFEÍNA"
+      },
+      {
+        "id": 50,
+        "nome": "Chocolate quente",
+        "come": false,
+        "motivo": "MUITO_AÇÚCAR"
+      }
+    ]
+  },
+  "notas": [
+    "Glicose alta - evitar açúcares e carboidratos simples em excesso",
+    " Pode comer: verduras, legumes, frutas selecionadas, proteínas magras",
+    "Evitar: doces, refrigerantes, frituras, embutidos em excesso"
+  ],
+  "refeicoes": [
+    {
+      "timestamp": "2026-04-22T00:57:30.164570Z",
+      "date": "2026-04-22",
+      "time": "00:57 BRT",
+      "descricao": "2 pães com presunto e mussarela + Coca-Cola Zero",
+      "itens": [
+        "Pão francês (2)",
+        "Presunto",
+        "Queijo mussarela",
+        "Coca-Cola Zero"
+      ],
+      "carboidratos": "alto",
+      "obs": "Pão tem carboidrato alto - notar impacto na glicose"
+    },
+    {
+      "timestamp": "2026-04-22T03:57:00Z",
+      "date": "2026-04-22",
+      "time": "00:57 BRT",
+      "descricao": "2 pães franceses com presunto e mussarela (4 fatias cada) + Coca-Cola Zero",
+      "itens": [
+        "Pão francês (2 unidades)",
+        "Presunto (4 fatias)",
+        "Queijo mussarela (4 fatias)",
+        "Coca-Cola Zero"
+      ],
+      "calorias": 675,
+      "carboidratos_g": 59,
+      "proteina_g": 44,
+      "gordura_g": 30,
+      "impacto_carboidratos": "alto",
+      "obs": "Pães são alto carboidrato - monitoramento de glicose recomendado em ~1h30"
+    }
+  ]
+}
