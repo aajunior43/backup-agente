@@ -170,3 +170,10 @@
 ### 25/05/2026
 - Pressão: 127/73 mmHg | Pulso: 92 bpm
 - Via: Chat
+
+### 06/07/2026 (noite)
+- Glicose: 306 mg/dL
+- Insulina: 3 unidades (correção)
+- Hora: ~23:20
+- Via: Chat
+- Observação: Início do uso de insulina (3 UI para correção da glicose em 306 mg/dL)
