@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação: Colisão a 100 km/h</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0f;
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 1px solid #e94560;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: #e94560;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .main-area {
+            flex: 1;
+            display: flex;
+            position: relative;
+        }
+
+        .simulation {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #0f0f1a 100%);
+            overflow: hidden;
+        }
+
+        .road {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #333;
+        }
+
+        .road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #fff 0, #fff 30px, transparent 30px, transparent 60px);
+            transform: translateY(-50%);
+        }
+
+        .car {
+            position: absolute;
+            bottom: 88px;
+            left: 50px;
+            width: 100px;
+            height: 40px;
+            transition: left 0s;
+        }
+
+        .car-body {
+            position: absolute;
+            bottom: 0;
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(to bottom, #c0392b 0%, #922b21 100%);
+            border-radius: 5px 5px 3px 3px;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+        }
+
+        .car-top {
+            position: absolute;
+            bottom: 20px;
+            left: 25px;
+            width: 50px;
+            height: 20px;
+            background: linear-gradient(to bottom, #c0392b 0%, #a93226 100%);
+            border-radius: 5px 5px 0 0;
+        }
+
+        .car-window {
+            position: absolute;
+            bottom: 22px;
+            left: 28px;
+            width: 44px;
+            height: 15px;
+            background: linear-gradient(to bottom, #1a5276 0%, #154360 100%);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .wheel {
+            position: absolute;
+            bottom: -5px;
+            width: 18px;
+            height: 18px;
+            background: #222;
+            border-radius: 50%;
+            border: 3px solid #444;
+        }
+
+        .wheel.front { right: 10px; }
+        .wheel.rear { left: 10px; }
+
+        .wall {
+            position: absolute;
+            bottom: 60px;
+            right: 80px;
+            width: 25px;
+            height: 120px;
+            background: linear-gradient(to right, #7f8c8d 0%, #bdc3c7 50%, #7f8c8d 100%);
+            border-radius: 3px;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+        }
+
+        .wall::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            right: 5px;
+            bottom: 10px;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0,
+                transparent 10px,
+                #666 10px,
+                #666 12px
+            );
+        }
+
+        .data-panel {
+            width: 320px;
+            background: #1a1a2e;
+            padding: 20px;
+            border-left: 1px solid #333;
+            overflow-y: auto;
+        }
+
+        .data-panel h3 {
+            color: #e94560;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .data-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #16213e;
+            border-radius: 8px;
+            border-left: 3px solid #e94560;
+        }
+
+        .data-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .data-item .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .data-item .unit {
+            font-size: 0.9rem;
+            color: #888;
+            margin-left: 5px;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #1a1a2e;
+            border-top: 1px solid #333;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #e94560;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .crash-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 30%, rgba(255, 100, 50, 0.3) 100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .energy-bar {
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .energy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .glass-particles {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.1s ease-in-out 5;
+        }
+
+        @keyframes particle-fly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Simulação: Colisão a 100 km/h</h1>
+            <p>Visualização da energia cinética e impacto em colisão frontal contra muro rígido</p>
+        </div>
+
+        <div class="main-area">
+            <div class="simulation" id="simulation">
+                <div class="road"></div>
+                <div class="wall" id="wall"></div>
+                <div class="car" id="car">
+                    <div class="car-top"></div>
+                    <div class="car-window"></div>
+                    <div class="car-body"></div>
+                    <div class="wheel front"></div>
+                    <div class="wheel rear"></div>
+                </div>
+                <div class="crash-overlay" id="crashOverlay"></div>
+            </div>
+
+            <div class="data-panel">
+                <h3>Dados do Impacto</h3>
+                
+                <div class="data-item">
+                    <label>Velocidade</label>
+                    <div class="value"><span id="speed">100</span><span class="unit">km/h</span></div>
+                </div>
+
+                <div class="data-item">
+                    <label>Energia Cinética</label>
+                    <div class="value"><span id="kineticEnergy">218.58</span><span class="unit">kJ</span></div>
+                    <div class="energy-bar">
+                        <div class="energy-fill" id="energyBar" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <div class="data-item">
+                    <label>Tempo de Impacto</label>
+                    <div class="value"><span id="impactTime">0.08</span><span class="unit">s</span></div>
+                </div>
+
+                <div class="data-item">
+                    <label>Força do Impacto</label>
+                    <div class="value"><span id="impactForce">68.306</span><span class="unit">kN</span></div>
+                </div>
+
+                <div class="data-item">
+                    <label>Deceleração</label>
+                    <div class="value"><span id="deceleration">347</span><span class="unit">g</span></div>
+                </div>
+
+                <div class="data-item">
+                    <label>Distância de impacto</label>
+                    <div class="value"><span id="crushDistance">0.5</span><span class="unit">m</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="startBtn" onclick="startSimulation()">▶ Iniciar Simulação</button>
+            <button class="btn btn-secondary" onclick="resetSimulation()">↺ Resetar</button>
+            <span style="color: #666; margin-left: auto; font-size: 0.85rem;">
+                ⚠️ Simulação didática — não representa realidade exata
+            </span>
+        </div>
+    </div>
+
+    <script>
+        const car = document.getElementById('car');
+        const wall = document.getElementById('wall');
+        const crashOverlay = document.getElementById('crashOverlay');
+        const startBtn = document.getElementById('startBtn');
+
+        let isRunning = false;
+        let animationId;
+
+        // Physics constants
+        const SPEED_MS = 100 / 3.6; // 27.78 m/s
+        const CAR_MASS = 1500; // kg
+        const crushDistance = 0.5; // m (crumple zone compression)
+        const impactTime = crushDistance / (SPEED_MS / 2); // time for car to stop
+        const kineticEnergy = 0.5 * CAR_MASS * Math.pow(SPEED_MS, 2); // Joules
+        const impactForce = kineticEnergy / crushDistance; // Newtons
+        const deceleration = (SPEED_MS / impactTime) / 9.81; // in g
+
+        function updateData() {
+            document.getElementById('speed').textContent = '100';
+            document.getElementById('kineticEnergy').textContent = (kineticEnergy / 1000).toFixed(2);
+            document.getElementById('impactTime').textContent = impactTime.toFixed(3);
+            document.getElementById('impactForce').textContent = (impactForce / 1000).toFixed(3);
+            document.getElementById('deceleration').textContent = Math.round(deceleration);
+            document.getElementById('crushDistance').textContent = crushDistance;
+        }
+
+        function createGlassParticles(x, y) {
+            const sim = document.getElementById('simulation');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
+                particle.style.setProperty('--ty', (Math.random() * -150 - 50) + 'px');
+                particle.style.animation = 'particle-fly 0.8s ease-out forwards';
+                particle.style.animationDelay = (Math.random() * 0.1) + 's';
+                sim.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        function startSimulation() {
+            if (isRunning) return;
+            isRunning = true;
+            startBtn.disabled = true;
+            startBtn.textContent = '⏳ Simulando...';
+
+            // Move car towards wall
+            let carLeft = 50;
+            const wallLeft = window.innerWidth - 480;
+            const distance = wallLeft - carLeft - 100;
+            
+            car.style.transition = 'none';
+            car.style.left = carLeft + 'px';
+
+            const startTime = performance.now();
+            const duration = (distance / SPEED_MS) * 1000; // ms to reach wall
+
+            function animate(currentTime) {
+                if (!isRunning) return;
+                
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                carLeft = 50 + (distance * progress);
+                car.style.left = carLeft + 'px';
+
+                if (progress < 1) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    // COLLISION
+                    triggerCollision();
+                }
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function triggerCollision() {
+            const sim = document.getElementById('simulation');
+            
+            // Screen shake
+            sim.classList.add('shake');
+            setTimeout(() => sim.classList.remove('shake'), 500);
+
+            // Red flash
+            crashOverlay.style.opacity = '1';
+            setTimeout(() => crashOverlay.style.opacity = '0', 300);
+
+            // Create glass particles
+            const carRect = car.getBoundingClientRect();
+            const simRect = sim.getBoundingClientRect();
+            createGlassParticles(
+                carRect.right - simRect.left - 20,
+                carRect.top - simRect.top + 20
+            );
+
+            // Car deformation - tilt and compress
+            car.style.transform = 'rotate(15deg) scaleX(0.7)';
+            car.style.transition = 'transform 0.3s ease-out';
+
+            // Wall shake
+            wall.style.transition = 'transform 0.1s ease-in-out';
+            wall.style.transform = 'translateX(-10px)';
+            setTimeout(() => wall.style.transform = 'translateX(5px)', 100);
+            setTimeout(() => wall.style.transform = 'translateX(-3px)', 200);
+            setTimeout(() => wall.style.transform = 'translateX(0)', 300);
+
+            // Update data to show post-crash state
+            setTimeout(() => {
+                document.getElementById('speed').textContent = '0';
+                document.getElementById('impactForce').textContent = '0';
+                document.getElementById('deceleration').textContent = '0';
+                document.getElementById('energyBar').style.width = '0%';
+            }, 300);
+        }
+
+        function resetSimulation() {
+            isRunning = false;
+            if (animationId) cancelAnimationFrame(animationId);
+            
+            car.style.transition = 'none';
+            car.style.transform = 'rotate(0deg) scaleX(1)';
+            car.style.left = '50px';
+            
+            wall.style.transition = 'none';
+            wall.style.transform = 'translateX(0)';
+            
+            crashOverlay.style.opacity = '0';
+            
+            startBtn.disabled = false;
+            startBtn.textContent = '▶ Iniciar Simulação';
+            
+            updateData();
+        }
+
+        updateData();
+    </script>
+</body>
+</html>

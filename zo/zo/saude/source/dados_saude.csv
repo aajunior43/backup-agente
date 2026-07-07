@@ -1,0 +1,26 @@
+Data,Hora,PA Sistolica,PA Diastolica,FC (bpm),Glicose,Glicose Jejum,Tipo,Sodio,Potassio,Hemoglobina,Hematocrito,Colesterol Total,HDL,LDL,Triglicerideos,VLDL,Creatinina,Acido Urico,TGO/AST,TGP/ALT,Leucocitos,Plaquetas,Observacoes
+2026-02-22,13:30,122,77,91,,,Medicao,,,,,,,,,,,,,,,,Dados via Telegram
+2026-02-22,13:38,,,,209,,Medicao,,,,,,,,,,,,,,,,Glicose via Telegram
+2026-03-06,08:22,,,,,,Sangue - Perfil Lipídico,134,3.5,17.2,49.9,217,36,160,173.8,57,,,,,9700,256000,"Exame DASA Cascavel - Colesterol LDL muito alto, HDL baixo"
+2026-04-13,12:19,,,,227,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-13,12:19,149,94,96,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-13,13:43,143,89,95,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-13,13:45,136,75,103,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-13,15:28,,,,298,,Medicao,,,,,,,,,,,,,,,,Glicemia 298 após enjoo no trabalho
+2026-04-13,15:28,131,95,105,,,Medicao,,,,,,,,,,,,,,,,PA após enjoo no trabalho
+2026-04-15,12:31,,,,216,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-15,12:32,134,79,103,,,Medicao,,,,,,,,,,,,,,,,Via Telegram - imagem
+2026-04-16,19:52,135,89,90,278,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-19,02:55,,,,268,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-19,02:56,135,84,105,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-19,19:20,133,84,85,,,Medicao,,,,,,,,,,,,,,,,Medição via áudio (Telegram)
+2026-04-19,19:21,133,84,85,331,,Medicao,,,,,,,,,,,,,,,,Medição via áudio (Telegram)
+2026-04-19,20:34,123,78,87,,,Medicao,,,,,,,,,,,,,,,,Via foto do monitor G-TECH
+2026-04-19,20:36,,,,257,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-20,-2:13,133,90,78,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-04-30,20:54,137,88,100,,,Medicao,,,,,,,,,,,,,,,,Via Telegram - Após hospital com avó (episódio avó)
+2026-04-30,20:56,,,,370,,Medicao,,,,,,,,,,,,,,,,Via Telegram - Após estresse/hospital com avó
+2026-05-08,19:49,146,96,111,,,Medicao,,,,,,,,,,,,,,,,Via Telegram
+2026-05-08,23:18,139,85,98,,,Medicao noturna,,,,,,,,,,,,,,,Via Telegram
+2026-05-08,23:22,,,,305,,Glicose medicao noturna,,,,,,,,,,,,,Via Telegram
+2026-05-11,12:35,144,94,102,233,,Medicao,,,,,,,,,,,,,,,,Via Telegram

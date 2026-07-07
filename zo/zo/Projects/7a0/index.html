@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>7a0 — Monte sua seleção histórica e ganhe a Copa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { display: ['Bebas Neue', 'sans-serif'], sans: ['Inter', 'sans-serif'] },
+      colors: {
+        gramado: { 50: '#e6f5ec', 100: '#bfe5d0', 500: '#0a8a3c', 600: '#087534', 700: '#06632c', 800: '#054f23' },
+        ouro: { 400: '#ffd866', 500: '#f4c542', 600: '#d4a52e' },
+        carta: { ameaca: '#fde047', vermelha: '#dc2626' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
+  .font-display { letter-spacing: 0.02em; }
+  .campo-bg {
+    background:
+      radial-gradient(ellipse at center, #0a8a3c 0%, #087534 60%, #054f23 100%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 80px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 80px);
+  }
+  .linha-campo {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px);
+  }
+  .card-jogador { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .card-jogador:active { transform: scale(0.96); }
+  .card-jogador.selecionado { box-shadow: 0 0 0 3px #f4c542, 0 8px 20px rgba(244,197,66,0.4); }
+  .slot { transition: all 0.2s ease; }
+  .slot.ocupado { background: rgba(244,197,66,0.15); border-color: #f4c542; }
+  .slot.piscando { animation: pisca 0.6s ease-in-out 2; }
+  @keyframes pisca { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05); box-shadow:0 0 20px #f4c542;} }
+  .dado-girando { animation: giraDado 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  @keyframes giraDado { 0%{transform:rotate(0) scale(1)} 50%{transform:rotate(720deg) scale(1.3)} 100%{transform:rotate(1440deg) scale(1)} }
+  .slide-in { animation: slideIn 0.4s ease-out; }
+  @keyframes slideIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { animation: fadeIn 0.3s ease-out; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .gol-anim { animation: golPop 0.8s ease-out; }
+  @keyframes golPop { 0%{transform:scale(0.5);opacity:0} 50%{transform:scale(1.3);opacity:1} 100%{transform:scale(1);opacity:1} }
+  .placar-time { font-variant-numeric: tabular-nums; }
+  .scroll-x::-webkit-scrollbar { display: none; }
+  .scroll-x { scrollbar-width: none; }
+  .badge-bandeira { display:inline-block; width:1.5rem; height:1rem; background:#ddd; border-radius:2px; vertical-align:middle; }
+  .tela { display: none; }
+  .tela.ativa { display: flex; }
+  .alerta { animation: alerta 0.5s ease-in-out 3; }
+  @keyframes alerta { 0%,100%{background:rgba(220,38,38,0.1)} 50%{background:rgba(220,38,38,0.4)} }
+  .scrollbar-hide::-webkit-scrollbar{display:none}
+  .scrollbar-hide{scrollbar-width:none}
+  .conquista { filter: grayscale(1) opacity(0.3); }
+  .conquista.desbloqueada { filter: none; }
+  html, body { height: 100%; }
+  #app { min-height: 100%; }
+</style>
+</head>
+<body class="bg-neutral-950 font-sans text-white">
+
+<div id="app" class="min-h-screen flex flex-col">
+
+  <!-- TOPO -->
+  <header class="bg-gradient-to-r from-gramado-700 to-gramado-500 border-b-2 border-ouro-500 px-4 py-3 flex items-center justify-between shadow-lg sticky top-0 z-40">
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-full bg-ouro-500 text-gramado-800 font-display text-xl flex items-center justify-center shadow-md">7</div>
+      <div>
+        <h1 class="font-display text-2xl leading-none">7a0</h1>
+        <p class="text-[10px] text-ouro-400 uppercase tracking-wider">Sua copa dos sonhos</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 text-xs">
+      <div class="flex items-center gap-1 bg-black/30 px-2 py-1 rounded">
+        <span class="text-ouro-400">🏆</span>
+        <span id="header-titulos" class="font-bold">0</span>
+      </div>
+      <div class="flex items-center gap-1 bg-black/30 px-2 py-1 rounded">
+        <span class="text-ouro-400">⚽</span>
+        <span id="header-gols" class="font-bold">0</span>
+      </div>
+      <button onclick="irPara('historico')" class="bg-black/30 px-2 py-1 rounded hover:bg-black/50" title="Histórico">📊</button>
+    </div>
+  </header>
+
+  <!-- ======================== TELA HOME ======================== -->
+  <section id="tela-home" class="tela ativa flex-col flex-1 items-center justify-center p-6 text-center gap-6 campo-bg">
+    <div class="slide-in">
+      <div class="font-display text-7xl text-ouro-500 drop-shadow-lg">7a0</div>
+      <p class="text-white/90 text-lg mt-2 max-w-md mx-auto">Monte uma seleção lendária, encare as maiores potências da história das Copas e conquiste o hepta.</p>
+    </div>
+    <div class="grid grid-cols-1 gap-3 w-full max-w-sm slide-in">
+      <button onclick="irPara('setup')" class="bg-ouro-500 hover:bg-ouro-400 text-gramado-800 font-bold text-xl py-4 rounded-xl shadow-lg active:scale-95 transition">⚽ Jogar agora</button>
+      <button onclick="irPara('historico')" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white font-semibold py-3 rounded-xl active:scale-95 transition">📊 Meu histórico</button>
+      <button onclick="mostrarComoJogar()" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white font-semibold py-3 rounded-xl active:scale-95 transition">❓ Como jogar</button>
+    </div>
+    <div class="text-white/60 text-xs mt-4 slide-in">
+      <p>16 Copas. 200+ craques. Sua história.</p>
+    </div>
+  </section>
+
+  <!-- ======================== TELA SETUP ======================== -->
+  <section id="tela-setup" class="tela flex-col flex-1 p-4 gap-4 overflow-y-auto">
+    <div class="flex items-center gap-2 mb-2">
+      <button onclick="irPara('home')" class="text-2xl">←</button>
+      <h2 class="font-display text-3xl text-ouro-500">Configurar jogo</h2>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <label class="text-xs uppercase text-ouro-400 font-bold tracking-wider">Formação tática</label>
+      <div id="formacoes" class="grid grid-cols-2 gap-2 mt-2"></div>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <label class="text-xs uppercase text-ouro-400 font-bold tracking-wider">Estilo de jogo</label>
+      <div id="estilos" class="grid grid-cols-3 gap-2 mt-2"></div>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <label class="text-xs uppercase text-ouro-400 font-bold tracking-wider">Modo de dificuldade</label>
+      <div id="modos" class="grid grid-cols-2 gap-2 mt-2"></div>
+    </div>
+
+    <button onclick="sortearCopa()" id="btn-sortear" class="bg-ouro-500 hover:bg-ouro-400 text-gramado-800 font-bold text-xl py-4 rounded-xl shadow-lg active:scale-95 transition mt-2">
+      🎲 Sortear Copa e adversário
+    </button>
+  </section>
+
+  <!-- ======================== TELA ESCALAÇÃO ======================== -->
+  <section id="tela-escalar" class="tela flex-col flex-1 p-4 gap-3 overflow-y-hidden">
+    <div class="flex items-center justify-between">
+      <button onclick="irPara('setup')" class="text-2xl">←</button>
+      <div class="text-center">
+        <div class="text-[10px] uppercase text-ouro-400">Adversário da fase</div>
+        <div id="copa-info" class="font-display text-xl"></div>
+      </div>
+      <div class="bg-gramado-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+        <span id="contador-selecionados">0</span>/11
+      </div>
+    </div>
+
+    <div class="bg-gramado-500 rounded-2xl p-3 border-2 border-white/20">
+      <div class="flex justify-between items-center text-xs text-white/80 mb-2">
+        <span>Overall médio</span>
+        <span id="overall-time" class="text-ouro-500 font-bold text-base">—</span>
+      </div>
+      <div class="grid gap-1" id="grid-formacao"></div>
+      <div class="flex justify-center mt-1" id="slot-goleiro"></div>
+    </div>
+
+    <div class="flex-1 overflow-hidden flex flex-col gap-2">
+      <div class="text-xs uppercase text-ouro-400 font-bold tracking-wider">Elenco disponível</div>
+      <div id="lista-jogadores" class="flex-1 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 gap-2 pb-2 scrollbar-hide"></div>
+    </div>
+
+    <button id="btn-jogar" onclick="iniciarSimulacao()" disabled class="bg-ouro-500 disabled:bg-neutral-700 disabled:text-neutral-500 text-gramado-800 font-bold text-xl py-4 rounded-xl shadow-lg active:scale-95 transition">
+      ⚽ Bora pra partida
+    </button>
+  </section>
+
+  <!-- ======================== TELA PARTIDA ======================== -->
+  <section id="tela-partida" class="tela flex-col flex-1 campo-bg">
+    <div class="bg-black/60 backdrop-blur p-4">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-center flex-1">
+          <div class="text-[10px] uppercase text-ouro-400">Seu time</div>
+          <div class="font-display text-lg" id="placar-time-nome">SELEÇÃO</div>
+          <div class="font-display text-5xl placar-time text-white" id="placar-time-gols">0</div>
+        </div>
+        <div class="text-center px-2">
+          <div id="placar-tempo" class="text-ouro-500 font-bold">0'</div>
+          <div class="text-white/60 text-xs">VS</div>
+        </div>
+        <div class="text-center flex-1">
+          <div class="text-[10px] uppercase text-ouro-400">Adversário</div>
+          <div class="font-display text-lg" id="placar-adv-nome">ADV</div>
+          <div class="font-display text-5xl placar-time text-white" id="placar-adv-gols">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="feed-eventos" class="flex-1 overflow-y-auto p-4 space-y-2"></div>
+
+    <div class="p-4 bg-black/40 backdrop-blur">
+      <button id="btn-pular-sim" onclick="pularSimulacao()" class="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2 rounded-lg text-sm">⏭️ Pular simulação</button>
+    </div>
+  </section>
+
+  <!-- ======================== TELA RESULTADO ======================== -->
+  <section id="tela-resultado" class="tela flex-col flex-1 items-center justify-center p-6 gap-4 campo-bg text-center">
+    <div class="slide-in">
+      <div id="resultado-emoji" class="text-7xl">🏆</div>
+      <h2 id="resultado-titulo" class="font-display text-5xl text-ouro-500 mt-2">CAMPEÃO!</h2>
+      <p id="resultado-subtitulo" class="text-white/90 mt-2">Você levantou a taça da Copa dos Sonhos</p>
+    </div>
+    <div class="bg-black/40 rounded-2xl p-4 w-full max-w-sm slide-in">
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <div>
+          <div class="text-2xl">⚽</div>
+          <div id="res-gols" class="font-display text-2xl text-ouro-500">3</div>
+          <div class="text-[10px] text-white/60 uppercase">gols feitos</div>
+        </div>
+        <div>
+          <div class="text-2xl">🧤</div>
+          <div id="res-defesa" class="font-display text-2xl text-ouro-500">1</div>
+          <div class="text-[10px] text-white/60 uppercase">gols sofridos</div>
+        </div>
+        <div>
+          <div class="text-2xl">⭐</div>
+          <div id="res-overall" class="font-display text-2xl text-ouro-500">88</div>
+          <div class="text-[10px] text-white/60 uppercase">overall médio</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 w-full max-w-sm">
+      <div id="resultado-conquistas" class="space-y-1"></div>
+      <button onclick="compartilhar()" class="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl">📤 Compartilhar escalação</button>
+      <button onclick="irPara('home')" class="bg-ouro-500 hover:bg-ouro-400 text-gramado-800 font-bold py-3 rounded-xl">🔄 Jogar de novo</button>
+    </div>
+  </section>
+
+  <!-- ======================== TELA HISTÓRICO ======================== -->
+  <section id="tela-historico" class="tela flex-col flex-1 p-4 gap-4 overflow-y-auto">
+    <div class="flex items-center gap-2">
+      <button onclick="irPara('home')" class="text-2xl">←</button>
+      <h2 class="font-display text-3xl text-ouro-500">Minha carreira</h2>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <h3 class="font-bold text-ouro-400 text-sm uppercase tracking-wider mb-2">📊 Estatísticas</h3>
+      <div class="grid grid-cols-2 gap-3 text-center">
+        <div class="bg-black/30 p-2 rounded"><div id="stat-jogos" class="font-display text-2xl">0</div><div class="text-[10px] text-white/60 uppercase">jogos</div></div>
+        <div class="bg-black/30 p-2 rounded"><div id="stat-vitorias" class="font-display text-2xl">0</div><div class="text-[10px] text-white/60 uppercase">vitórias</div></div>
+        <div class="bg-black/30 p-2 rounded"><div id="stat-titulos" class="font-display text-2xl">0</div><div class="text-[10px] text-white/60 uppercase">títulos</div></div>
+        <div class="bg-black/30 p-2 rounded"><div id="stat-gols" class="font-display text-2xl">0</div><div class="text-[10px] text-white/60 uppercase">gols</div></div>
+      </div>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <h3 class="font-bold text-ouro-400 text-sm uppercase tracking-wider mb-3">🏅 Conquistas</h3>
+      <div id="grid-conquistas" class="grid grid-cols-3 gap-3"></div>
+    </div>
+
+    <div class="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
+      <h3 class="font-bold text-ouro-400 text-sm uppercase tracking-wider mb-2">📜 Últimas partidas</h3>
+      <div id="lista-partidas" class="space-y-2 text-sm"></div>
+    </div>
+
+    <button onclick="limparHistorico()" class="text-red-400 text-xs underline self-center">Apagar histórico</button>
+  </section>
+
+</div>
+
+<!-- ==================== MODAL COMO JOGAR ==================== -->
+<div id="modal-como" class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+  <div class="bg-neutral-900 rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <h2 class="font-display text-3xl text-ouro-500 mb-3">Como jogar</h2>
+    <ol class="space-y-2 text-sm text-white/80 list-decimal list-inside">
+      <li>Escolha a formação, o estilo e a dificuldade.</li>
+      <li>Role o dado e descubra qual Copa e adversário vêm pela frente.</li>
+      <li>Escolha 11 craques daquela Copa para escalar seu time.</li>
+      <li>Simule a partida narrada e torça para os seus jogadores brilharem.</li>
+      <li>Vença 7 fases e levante a taça da sua Copa dos Sonhos.</li>
+    </ol>
+    <p class="text-xs text-white/50 mt-4">💡 No modo <b>Almanaque</b>, os atributos ficam ocultos — só vale o conhecimento de quem assistiu àquela Copa.</p>
+    <button onclick="document.getElementById('modal-como').classList.add('hidden')" class="mt-4 w-full bg-ouro-500 text-gramado-800 font-bold py-3 rounded-xl">Entendi</button>
+  </div>
+</div>
+
+<!-- ==================== TOAST ==================== -->
+<div id="toast" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-gramado-500 text-white px-4 py-2 rounded-full text-sm shadow-lg z-50 slide-in"></div>
+
+<!-- ==================== MODAL COMPARTILHAR ==================== -->
+<div id="modal-share" class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+  <div class="bg-neutral-900 rounded-2xl p-4 max-w-sm w-full">
+    <h3 class="font-display text-2xl text-ouro-500 mb-3 text-center">Sua escalação</h3>
+    <div id="share-card" class="bg-gramado-500 rounded-xl p-4 text-white campo-bg">
+      <div class="text-center text-xs text-ouro-400 uppercase">7a0 — Sua copa dos sonhos</div>
+      <div class="text-center font-display text-2xl" id="share-copa">—</div>
+      <div class="text-center text-sm mb-3" id="share-resultado">—</div>
+      <div id="share-lista" class="text-xs space-y-1"></div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <button onclick="copiarTexto()" class="flex-1 bg-ouro-500 text-gramado-800 font-bold py-2 rounded-lg">📋 Copiar texto</button>
+      <button onclick="document.getElementById('modal-share').classList.add('hidden')" class="flex-1 bg-white/10 text-white py-2 rounded-lg">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DADOS — JOGADORES POR COPA
+   Distribuídos em 16 Copas (1958-2022)
+   Overall balanceado para o jogo ter desafio
+   ============================================================ */
+
+const FORMACOES = {
+  '4-3-3': [
+    { pos:'ATA', qtd:3 },
+    { pos:'MEI', qtd:3 },
+    { pos:'LAT', qtd:2 },
+    { pos:'ZAG', qtd:2 },
+    { pos:'GOL', qtd:1 }
+  ],
+  '4-4-2': [
+    { pos:'ATA', qtd:2 },
+    { pos:'MEI', qtd:4 },
+    { pos:'LAT', qtd:2 },
+    { pos:'ZAG', qtd:2 },
+    { pos:'GOL', qtd:1 }
+  ],
+  '3-5-2': [
+    { pos:'ATA', qtd:2 },
+    { pos:'MEI', qtd:5 },
+    { pos:'ZAG', qtd:3 },
+    { pos:'GOL', qtd:1 }
+  ],
+  '4-2-3-1': [
+    { pos:'ATA', qtd:1 },
+    { pos:'MEI', qtd:3 },
+    { pos:'VOL', qtd:2 },
+    { pos:'LAT', qtd:2 },
+    { pos:'ZAG', qtd:2 },
+    { pos:'GOL', qtd:1 }
+  ]
+};
+
+const POS_NOMES = { 'GOL':'Goleiro', 'ZAG':'Zagueiro', 'LAT':'Lateral', 'VOL':'Volante', 'MEI':'Meia', 'ATA':'Atacante' };
+const POS_COR = { 'GOL':'bg-yellow-600', 'ZAG':'bg-blue-600', 'LAT':'bg-cyan-600', 'VOL':'bg-purple-600', 'MEI':'bg-pink-600', 'ATA':'bg-red-600' };
+
+const JOGADORES = [
+  // BRASIL 1958
+  {n:"Pelé",p:"ATA",s:"BRA",copa:"swe-1958",ovr:96,g:6,a:2},
+  {n:"Garrincha",p:"ATA",s:"BRA",copa:"swe-1958",ovr:93,g:4,a:3},
+  {n:"Didí",p:"MEI",s:"BRA",copa:"swe-1958",ovr:88,g:1,a:2},
+  {n:"Vavá",p:"ATA",s:"BRA",copa:"swe-1958",ovr:87,g:5,a:1},
+  {n:"Zagallo",p:"ATA",s:"BRA",copa:"swe-1958",ovr:85,g:2,a:2},
+  {n:"Bellini",p:"ZAG",s:"BRA",copa:"swe-1958",ovr:84,g:0,a:0},
+  {n:"Nílton Santos",p:"LAT",s:"BRA",copa:"swe-1958",ovr:88,g:0,a:1},
+  {n:"Djalma Santos",p:"LAT",s:"BRA",copa:"swe-1958",ovr:86,g:0,a:1},
+  {n:"Gilmar",p:"GOL",s:"BRA",copa:"swe-1958",ovr:85,g:0,a:0},
+  {n:"Zito",p:"VOL",s:"BRA",copa:"swe-1958",ovr:83,g:0,a:1},
+  {n:"Orlando",p:"ZAG",s:"BRA",copa:"swe-1958",ovr:80,g:0,a:0},
+  {n:"Mauro",p:"VOL",s:"BRA",copa:"swe-1958",ovr:79,g:0,a:0},
+  {n:"Pepe",p:"ZAG",s:"BRA",copa:"swe-1958",ovr:82,g:0,a:0},
+
+  // BRASIL 1962
+  {n:"Pelé",p:"ATA",s:"BRA",copa:"chi-1962",ovr:97,g:2,a:1},
+  {n:"Garrincha",p:"ATA",s:"BRA",copa:"chi-1962",ovr:95,g:4,a:4},
+  {n:"Vavá",p:"ATA",s:"BRA",copa:"chi-1962",ovr:86,g:2,a:1},
+  {n:"Didí",p:"MEI",s:"BRA",copa:"chi-1962",ovr:87,g:0,a:2},
+  {n:"Zagallo",p:"ATA",s:"BRA",copa:"chi-1962",ovr:85,g:1,a:1},
+  {n:"Amarildo",p:"ATA",s:"BRA",copa:"chi-1962",ovr:83,g:3,a:0},
+  {n:"Nílton Santos",p:"LAT",s:"BRA",copa:"chi-1962",ovr:87,g:0,a:0},
+  {n:"Djalma Santos",p:"LAT",s:"BRA",copa:"chi-1962",ovr:86,g:0,a:1},
+  {n:"Bellini",p:"ZAG",s:"BRA",copa:"chi-1962",ovr:83,g:0,a:0},
+  {n:"Mauro",p:"VOL",s:"BRA",copa:"chi-1962",ovr:80,g:0,a:0},
+  {n:"Gilmar",p:"GOL",s:"BRA",copa:"chi-1962",ovr:85,g:0,a:0},
+  {n:"Zito",p:"VOL",s:"BRA",copa:"chi-1962",ovr:82,g:0,a:0},
+  {n:"Almeida",p:"ZAG",s:"BRA",copa:"chi-1962",ovr:78,g:0,a:0},
+
+  // BRASIL 1970
+  {n:"Pelé",p:"ATA",s:"BRA",copa:"mex-1970",ovr:99,g:4,a:5},
+  {n:"Jairzinho",p:"ATA",s:"BRA",copa:"mex-1970",ovr:92,g:7,a:2},
+  {n:"Tostão",p:"ATA",s:"BRA",copa:"mex-1970",ovr:90,g:2,a:3},
+  {n:"Rivelino",p:"MEI",s:"BRA",copa:"mex-1970",ovr:91,g:3,a:1},
+  {n:"Gérson",p:"MEI",s:"BRA",copa:"mex-1970",ovr:93,g:2,a:4},
+  {n:"Carlos Alberto",p:"LAT",s:"BRA",copa:"mex-1970",ovr:90,g:1,a:2},
+  {n:"Clodoaldo",p:"VOL",s:"BRA",copa:"mex-1970",ovr:88,g:0,a:1},
+  {n:"Everaldo",p:"ZAG",s:"BRA",copa:"mex-1970",ovr:84,g:0,a:0},
+  {n:"Wilson Piazza",p:"ZAG",s:"BRA",copa:"mex-1970",ovr:86,g:0,a:0},
+  {n:"Félix",p:"GOL",s:"BRA",copa:"mex-1970",ovr:87,g:0,a:0},
+  {n:"Marco Antônio",p:"LAT",s:"BRA",copa:"mex-1970",ovr:82,g:0,a:1},
+  {n:"Paulo César",p:"MEI",s:"BRA",copa:"mex-1970",ovr:85,g:1,a:1},
+  {n:"Brito",p:"ZAG",s:"BRA",copa:"mex-1970",ovr:83,g:0,a:0},
+
+  // ARGENTINA 1978
+  {n:"Kempes",p:"ATA",s:"ARG",copa:"arg-1978",ovr:93,g:6,a:1},
+  {n:"Passarella",p:"ZAG",s:"ARG",copa:"arg-1978",ovr:89,g:1,a:0},
+  {n:"Bertoni",p:"ATA",s:"ARG",copa:"arg-1978",ovr:85,g:2,a:1},
+  {n:"Ardiles",p:"MEI",s:"ARG",copa:"arg-1978",ovr:88,g:0,a:1},
+  {n:"Galilea",p:"VOL",s:"ARG",copa:"arg-1978",ovr:82,g:0,a:0},
+  {n:"Tarantini",p:"ZAG",s:"ARG",copa:"arg-1978",ovr:80,g:0,a:0},
+  {n:"Olguín",p:"LAT",s:"ARG",copa:"arg-1978",ovr:84,g:0,a:0},
+  {n:"Larreta",p:"LAT",s:"ARG",copa:"arg-1978",ovr:79,g:0,a:0},
+  {n:"Fillol",p:"GOL",s:"ARG",copa:"arg-1978",ovr:87,g:0,a:0},
+  {n:"Gallego",p:"MEI",s:"ARG",copa:"arg-1978",ovr:85,g:0,a:0},
+  {n:"Houseman",p:"ATA",s:"ARG",copa:"arg-1978",ovr:83,g:2,a:1},
+  {n:"Ortiz",p:"MEI",s:"ARG",copa:"arg-1978",ovr:81,g:0,a:0},
+  {n:"Luque",p:"ATA",s:"ARG",copa:"arg-1978",ovr:84,g:1,a:1},
+
+  // ITÁLIA 1982
+  {n:"Paolo Rossi",p:"ATA",s:"ITA",copa:"esp-1982",ovr:93,g:6,a:1},
+  {n:"Conti",p:"LAT",s:"ITA",copa:"esp-1982",ovr:85,g:1,a:1},
+  {n:"Tardelli",p:"MEI",s:"ITA",copa:"esp-1982",ovr:89,g:2,a:1},
+  {n:"Gentile",p:"ZAG",s:"ITA",copa:"esp-1982",ovr:87,g:0,a:0},
+  {n:"Scirea",p:"ZAG",s:"ITA",copa:"esp-1982",ovr:90,g:0,a:0},
+  {n:"Gabettini",p:"MEI",s:"ITA",copa:"esp-1982",ovr:82,g:0,a:1},
+  {n:"Cerezo",p:"MEI",s:"ITA",copa:"esp-1982",ovr:85,g:0,a:1},
+  {n:"Zoff",p:"GOL",s:"ITA",copa:"esp-1982",ovr:91,g:0,a:0},
+  {n:"Oriali",p:"VOL",s:"ITA",copa:"esp-1982",ovr:84,g:0,a:0},
+  {n:"Maradona",p:"MEI",s:"ARG",copa:"esp-1982",ovr:85,g:2,a:1},
+  {n:"Rambert",p:"ATA",s:"ARG",copa:"esp-1982",ovr:80,g:0,a:0},
+  {n:"Almeida",p:"ZAG",s:"BRA",copa:"esp-1982",ovr:79,g:0,a:0},
+  {n:"Junior",p:"LAT",s:"BRA",copa:"esp-1982",ovr:88,g:2,a:1},
+  {n:"Sócrates",p:"MEI",s:"BRA",copa:"esp-1982",ovr:90,g:3,a:1},
+  {n:"Zico",p:"MEI",s:"BRA",copa:"esp-1982",ovr:93,g:4,a:2},
+  {n:"Falcão",p:"MEI",s:"BRA",copa:"esp-1982",ovr:88,g:2,a:1},
+  {n:"Éder",p:"ATA",s:"BRA",copa:"esp-1982",ovr:84,g:2,a:0},
+  {n:"Sergiinho",p:"ATA",s:"BRA",copa:"esp-1982",ovr:82,g:1,a:1},
+  {n:"Leandro",p:"ZAG",s:"BRA",copa:"esp-1982",ovr:80,g:0,a:0},
+  {n:"Oscar",p:"GOL",s:"BRA",copa:"esp-1982",ovr:81,g:0,a:0},
+
+  // MÉXICO 1986
+  {n:"Maradona",p:"MEI",s:"ARG",copa:"mex-1986",ovr:99,g:5,a:5},
+  {n:"Valdano",p:"ATA",s:"ARG",copa:"mex-1986",ovr:87,g:2,a:1},
+  {n:"Burruchaga",p:"ATA",s:"ARG",copa:"mex-1986",ovr:86,g:2,a:1},
+  {n:"Ruggeri",p:"ZAG",s:"ARG",copa:"mex-1986",ovr:88,g:0,a:0},
+  {n:"Battista",p:"ZAG",s:"ARG",copa:"mex-1986",ovr:80,g:0,a:0},
+  {n:"Cucciuffo",p:"ZAG",s:"ARG",copa:"mex-1986",ovr:82,g:0,a:0},
+  {n:"Giusti",p:"MEI",s:"ARG",copa:"mex-1986",ovr:84,g:0,a:0},
+  {n:"Burdisso",p:"VOL",s:"ARG",copa:"mex-1986",ovr:83,g:0,a:0},
+  {n:"Pumpido",p:"GOL",s:"ARG",copa:"mex-1986",ovr:86,g:0,a:0},
+  {n:"Olarticoechea",p:"LAT",s:"ARG",copa:"mex-1986",ovr:85,g:0,a:0},
+  {n:"Clausen",p:"LAT",s:"ARG",copa:"mex-1986",ovr:81,g:0,a:0},
+  {n:"Caniggia",p:"ATA",s:"ARG",copa:"mex-1986",ovr:84,g:1,a:0},
+  {n:"Salgado",p:"MEI",s:"MEX",copa:"mex-1986",ovr:78,g:1,a:0},
+
+  // ALEMANHA 1990
+  {n:"Lothar Matthäus",p:"MEI",s:"ALE",copa:"ita-1990",ovr:94,g:4,a:3},
+  {n:"Klinsmann",p:"ATA",s:"ALE",copa:"ita-1990",ovr:89,g:3,a:1},
+  {n:"Völler",p:"ATA",s:"ALE",copa:"ita-1990",ovr:88,g:3,a:1},
+  {n:"Brehme",p:"LAT",s:"ALE",copa:"ita-1990",ovr:90,g:3,a:1},
+  {n:"Kohler",p:"ZAG",s:"ALE",copa:"ita-1990",ovr:87,g:0,a:0},
+  {n:"Augenthaler",p:"ZAG",s:"ALE",copa:"ita-1990",ovr:85,g:0,a:0},
+  {n:"Buchwald",p:"ZAG",s:"ALE",copa:"ita-1990",ovr:84,g:0,a:0},
+  {n:"Häßler",p:"MEI",s:"ALE",copa:"ita-1990",ovr:86,g:1,a:2},
+  {n:"Illgner",p:"GOL",s:"ALE",copa:"ita-1990",ovr:85,g:0,a:0},
+  {n:"Reuter",p:"VOL",s:"ALE",copa:"ita-1990",ovr:84,g:0,a:0},
+  {n:"Pfaff",p:"GOL",s:"ALE",copa:"ita-1990",ovr:83,g:0,a:0},
+  {n:"Thon",p:"LAT",s:"ALE",copa:"ita-1990",ovr:82,g:0,a:0},
+  {n:"Klodt",p:"MEI",s:"ALE",copa:"ita-1990",ovr:80,g:0,a:0},
+
+  // BRASIL 1994
+  {n:"Romário",p:"ATA",s:"BRA",copa:"usa-1994",ovr:96,g:5,a:2},
+  {n:"Bebeto",p:"ATA",s:"BRA",copa:"usa-1994",ovr:90,g:3,a:1},
+  {n:"Dunga",p:"VOL",s:"BRA",copa:"usa-1994",ovr:90,g:0,a:1},
+  {n:"Mazinho",p:"VOL",s:"BRA",copa:"usa-1994",ovr:84,g:0,a:0},
+  {n:"Branco",p:"LAT",s:"BRA",copa:"usa-1994",ovr:87,g:2,a:1},
+  {n:"Jorginho",p:"MEI",s:"BRA",copa:"usa-1994",ovr:85,g:1,a:1},
+  {n:"Rai",p:"MEI",s:"BRA",copa:"usa-1994",ovr:86,g:0,a:0},
+  {n:"Aldair",p:"ZAG",s:"BRA",copa:"usa-1994",ovr:88,g:0,a:0},
+  {n:"Mauro Galvão",p:"ZAG",s:"BRA",copa:"usa-1994",ovr:84,g:0,a:0},
+  {n:"Cafu",p:"LAT",s:"BRA",copa:"usa-1994",ovr:89,g:0,a:1},
+  {n:"Taffarel",p:"GOL",s:"BRA",copa:"usa-1994",ovr:87,g:0,a:0},
+  {n:"B Silva",p:"ZAG",s:"BRA",copa:"usa-1994",ovr:82,g:0,a:0},
+  {n:"Müller",p:"ATA",s:"ALE",copa:"usa-1994",ovr:82,g:0,a:0},
+
+  // FRANÇA 1998
+  {n:"Zidane",p:"MEI",s:"FRA",copa:"fra-1998",ovr:97,g:2,a:3},
+  {n:"Ronaldo",p:"ATA",s:"BRA",copa:"fra-1998",ovr:96,g:4,a:3},
+  {n:"Davor Šuker",p:"ATA",s:"CRO",copa:"fra-1998",ovr:90,g:6,a:1},
+  {n:"Thierry Henry",p:"ATA",s:"FRA",copa:"fra-1998",ovr:86,g:3,a:1},
+  {n:"Deschamps",p:"VOL",s:"FRA",copa:"fra-1998",ovr:90,g:0,a:0},
+  {n:"Vieira",p:"VOL",s:"FRA",copa:"fra-1998",ovr:88,g:0,a:1},
+  {n:"Pires",p:"MEI",s:"FRA",copa:"fra-1998",ovr:84,g:0,a:0},
+  {n:"Djorkaeff",p:"MEI",s:"FRA",copa:"fra-1998",ovr:85,g:1,a:1},
+  {n:"Blanc",p:"ZAG",s:"FRA",copa:"fra-1998",ovr:87,g:0,a:0},
+  {n:"Desailly",p:"ZAG",s:"FRA",copa:"fra-1998",ovr:89,g:0,a:0},
+  {n:"Lizarazu",p:"LAT",s:"FRA",copa:"fra-1998",ovr:85,g:0,a:1},
+  {n:"Thuram",p:"LAT",s:"FRA",copa:"fra-1998",ovr:88,g:2,a:0},
+  {n:"Barthez",p:"GOL",s:"FRA",copa:"fra-1998",ovr:88,g:0,a:0},
+  {n:"Rivaldo",p:"MEI",s:"BRA",copa:"fra-1998",ovr:91,g:3,a:1},
+  {n:"Cafu",p:"LAT",s:"BRA",copa:"fra-1998",ovr:92,g:0,a:1},
+  {n:"Roberto Carlos",p:"LAT",s:"BRA",copa:"fra-1998",ovr:92,g:1,a:0},
+  {n:"Ronaldinho",p:"MEI",s:"BRA",copa:"fra-1998",ovr:80,g:0,a:0},
+
+  // BRASIL 2002
+  {n:"Ronaldo",p:"ATA",s:"BRA",copa:"kor-2002",ovr:98,g:8,a:0},
+  {n:"Rivaldo",p:"MEI",s:"BRA",copa:"kor-2002",ovr:93,g:5,a:3},
+  {n:"Ronaldinho",p:"MEI",s:"BRA",copa:"kor-2002",ovr:92,g:2,a:4},
+  {n:"Kaká",p:"MEI",s:"BRA",copa:"kor-2002",ovr:85,g:0,a:1},
+  {n:"Cafu",p:"LAT",s:"BRA",copa:"kor-2002",ovr:90,g:0,a:1},
+  {n:"Roberto Carlos",p:"LAT",s:"BRA",copa:"kor-2002",ovr:91,g:0,a:1},
+  {n:"Edmilson",p:"ZAG",s:"BRA",copa:"kor-2002",ovr:86,g:0,a:0},
+  {n:"Lúcio",p:"ZAG",s:"BRA",copa:"kor-2002",ovr:89,g:0,a:0},
+  {n:"Roque Júnior",p:"ZAG",s:"BRA",copa:"kor-2002",ovr:84,g:0,a:0},
+  {n:"Marcos",p:"GOL",s:"BRA",copa:"kor-2002",ovr:87,g:0,a:0},
+  {n:"Gilberto Silva",p:"VOL",s:"BRA",copa:"kor-2002",ovr:86,g:0,a:0},
+  {n:"Kleber",p:"VOL",s:"BRA",copa:"kor-2002",ovr:80,g:0,a:0},
+  {n:"Ronaldo",p:"ATA",s:"BRA",copa:"kor-2002",ovr:98,g:8,a:0},
+
+  // ALEMANHA 2006
+  {n:"Klose",p:"ATA",s:"ALE",copa:"ger-2006",ovr:88,g:2,a:1},
+  {n:"Lahm",p:"LAT",s:"ALE",copa:"ger-2006",ovr:87,g:1,a:2},
+  {n:"Schweinsteiger",p:"MEI",s:"ALE",copa:"ger-2006",ovr:86,g:1,a:2},
+  {n:"Lukas Podolski",p:"ATA",s:"ALE",copa:"ger-2006",ovr:84,g:3,a:1},
+  {n:"Ballack",p:"MEI",s:"ALE",copa:"ger-2006",ovr:89,g:0,a:1},
+  {n:"Mertesacker",p:"ZAG",s:"ALE",copa:"ger-2006",ovr:84,g:0,a:0},
+  {n:"Metzelder",p:"ZAG",s:"ALE",copa:"ger-2006",ovr:83,g:0,a:0},
+  {n:"Borowski",p:"MEI",s:"ALE",copa:"ger-2006",ovr:82,g:1,a:1},
+  {n:"Lehmann",p:"GOL",s:"ALE",copa:"ger-2006",ovr:85,g:0,a:0},
+  {n:"Frings",p:"VOL",s:"ALE",copa:"ger-2006",ovr:85,g:0,a:0},
+  {n:"Schneider",p:"MEI",s:"ALE",copa:"ger-2006",ovr:83,g:0,a:0},
+  {n:"Bordon",p:"ZAG",s:"ITA",copa:"ger-2006",ovr:82,g:0,a:0},
+
+  // ESPANHA 2010
+  {n:"Iniesta",p:"MEI",s:"ESP",copa:"rsa-2010",ovr:96,g:1,a:3},
+  {n:"Xavi",p:"MEI",s:"ESP",copa:"rsa-2010",ovr:95,g:0,a:4},
+  {n:"Xabi Alonso",p:"VOL",s:"ESP",copa:"rsa-2010",ovr:88,g:0,a:1},
+  {n:"Busquets",p:"VOL",s:"ESP",copa:"rsa-2010",ovr:90,g:0,a:1},
+  {n:"David Villa",p:"ATA",s:"ESP",copa:"rsa-2010",ovr:91,g:5,a:1},
+  {n:"Fernando Torres",p:"ATA",s:"ESP",copa:"rsa-2010",ovr:88,g:1,a:0},
+  {n:"Pedro",p:"ATA",s:"ESP",copa:"rsa-2010",ovr:85,g:1,a:0},
+  {n:"Piqué",p:"ZAG",s:"ESP",copa:"rsa-2010",ovr:88,g:0,a:0},
+  {n:"Puyol",p:"ZAG",s:"ESP",copa:"rsa-2010",ovr:90,g:1,a:0},
+  {n:"Capdevila",p:"LAT",s:"ESP",copa:"rsa-2010",ovr:84,g:0,a:1},
+  {n:"Ramos",p:"LAT",s:"ESP",copa:"rsa-2010",ovr:89,g:0,a:1},
+  {n:"Casillas",p:"GOL",s:"ESP",copa:"rsa-2010",ovr:92,g:0,a:0},
+  {n:"Forlán",p:"ATA",s:"URU",copa:"rsa-2010",ovr:89,g:5,a:1},
+
+  // ALEMANHA 2014
+  {n:"Messi",p:"ATA",s:"ARG",copa:"bra-2014",ovr:97,g:4,a:1},
+  {n:"Müller",p:"ATA",s:"ALE",copa:"bra-2014",ovr:90,g:5,a:3},
+  {n:"Klose",p:"ATA",s:"ALE",copa:"bra-2014",ovr:87,g:2,a:0},
+  {n:"Kroos",p:"MEI",s:"ALE",copa:"bra-2014",ovr:91,g:2,a:4},
+  {n:"Özil",p:"MEI",s:"ALE",copa:"bra-2014",ovr:89,g:1,a:1},
+  {n:"Schürrle",p:"ATA",s:"ALE",copa:"bra-2014",ovr:85,g:3,a:1},
+  {n:"Lahm",p:"LAT",s:"ALE",copa:"bra-2014",ovr:88,g:0,a:1},
+  {n:"Hummels",p:"ZAG",s:"ALE",copa:"bra-2014",ovr:90,g:2,a:0},
+  {n:"Boateng",p:"ZAG",s:"ALE",copa:"bra-2014",ovr:88,g:0,a:0},
+  {n:"Höwedes",p:"ZAG",s:"ALE",copa:"bra-2014",ovr:84,g:0,a:0},
+  {n:"Schweinsteiger",p:"VOL",s:"ALE",copa:"bra-2014",ovr:86,g:0,a:1},
+  {n:"Neuer",p:"GOL",s:"ALE",copa:"bra-2014",ovr:94,g:0,a:0},
+  {n:"Neymar",p:"ATA",s:"BRA",copa:"bra-2014",ovr:92,g:4,a:2},
+  {n:"David Luiz",p:"ZAG",s:"BRA",copa:"bra-2014",ovr:86,g:2,a:0},
+  {n:"Oscar",p:"MEI",s:"BRA",copa:"bra-2014",ovr:84,g:1,a:0},
+  {n:"Agüero",p:"ATA",s:"ARG",copa:"bra-2014",ovr:88,g:1,a:0},
+
+  // FRANÇA 2018
+  {n:"Mbappé",p:"ATA",s:"FRA",copa:"rus-2018",ovr:92,g:4,a:1},
+  {n:"Griezmann",p:"ATA",s:"FRA",copa:"rus-2018",ovr:90,g:4,a:2},
+  {n:"Pogba",p:"MEI",s:"FRA",copa:"rus-2018",ovr:89,g:2,a:1},
+  {n:"Kanté",p:"VOL",s:"FRA",copa:"rus-2018",ovr:90,g:0,a:0},
+  {n:"Modrić",p:"MEI",s:"CRO",copa:"rus-2018",ovr:93,g:2,a:1},
+  {n:"Rakitić",p:"MEI",s:"CRO",copa:"rus-2018",ovr:88,g:0,a:0},
+  {n:"Mandžukić",p:"ATA",s:"CRO",copa:"rus-2018",ovr:86,g:3,a:0},
+  {n:"Perišić",p:"MEI",s:"CRO",copa:"rus-2018",ovr:87,g:3,a:1},
+  {n:"Lovren",p:"ZAG",s:"CRO",copa:"rus-2018",ovr:85,g:1,a:0},
+  {n:"Varane",p:"ZAG",s:"FRA",copa:"rus-2018",ovr:90,g:1,a:0},
+  {n:"Umtiti",p:"ZAG",s:"FRA",copa:"rus-2018",ovr:86,g:1,a:0},
+  {n:"Pavard",p:"LAT",s:"FRA",copa:"rus-2018",ovr:85,g:1,a:1},
+  {n:"Hernandez",p:"LAT",s:"FRA",copa:"rus-2018",ovr:85,g:0,a:1},
+  {n:"Lloris",p:"GOL",s:"FRA",copa:"rus-2018",ovr:87,g:0,a:0},
+  {n:"Neymar",p:"ATA",s:"BRA",copa:"rus-2018",ovr:92,g:2,a:1},
+  {n:"Coutinho",p:"MEI",s:"BRA",copa:"rus-2018",ovr:87,g:1,a:0},
+
+  // ARGENTINA 2022
+  {n:"Messi",p:"ATA",s:"ARG",copa:"qat-2022",ovr:99,g:7,a:3},
+  {n:"Mbappé",p:"ATA",s:"FRA",copa:"qat-2022",ovr:96,g:8,a:2},
+  {n:"Di María",p:"ATA",s:"ARG",copa:"qat-2022",ovr:89,g:2,a:1},
+  {n:"Álvarez",p:"ATA",s:"ARG",copa:"qat-2022",ovr:86,g:4,a:0},
+  {n:"De Paul",p:"MEI",s:"ARG",copa:"qat-2022",ovr:87,g:0,a:1},
+  {n:"Mac Allister",p:"MEI",s:"ARG",copa:"qat-2022",ovr:85,g:1,a:0},
+  {n:"Enzo Fernández",p:"MEI",s:"ARG",copa:"qat-2022",ovr:85,g:1,a:0},
+  {n:"Otamendi",p:"ZAG",s:"ARG",copa:"qat-2022",ovr:86,g:0,a:0},
+  {n:"Romero",p:"ZAG",s:"ARG",copa:"qat-2022",ovr:86,g:0,a:0},
+  {n:"Tagliafico",p:"LAT",s:"ARG",copa:"qat-2022",ovr:84,g:0,a:0},
+  {n:"Molina",p:"LAT",s:"ARG",copa:"qat-2022",ovr:84,g:1,a:0},
+  {n:"Martínez",p:"GOL",s:"ARG",copa:"qat-2022",ovr:90,g:0,a:0},
+  {n:"Giroud",p:"ATA",s:"FRA",copa:"qat-2022",ovr:85,g:4,a:0},
+  {n:"Griezmann",p:"MEI",s:"FRA",copa:"qat-2022",ovr:88,g:0,a:2},
+  {n:"Tchouaméni",p:"VOL",s:"FRA",copa:"qat-2022",ovr:85,g:0,a:0},
+  {n:"Koundé",p:"LAT",s:"FRA",copa:"qat-2022",ovr:85,g:0,a:0},
+  {n:"Upamecano",p:"ZAG",s:"FRA",copa:"qat-2022",ovr:86,g:0,a:0},
+  {n:"Lloris",p:"GOL",s:"FRA",copa:"qat-2022",ovr:85,g:0,a:0}
+];
+
+const COPAS = [
+  {id:"swe-1958",nome:"Suécia 1958",pais:"Suécia",ano:1958,vencedor:"Brasil"},
+  {id:"chi-1962",nome:"Chile 1962",pais:"Chile",ano:1962,vencedor:"Brasil"},
+  {id:"mex-1970",nome:"México 1970",pais:"México",ano:1970,vencedor:"Brasil"},
+  {id:"arg-1978",nome:"Argentina 1978",pais:"Argentina",ano:1978,vencedor:"Argentina"},
+  {id:"esp-1982",nome:"Espanha 1982",pais:"Espanha",ano:1982,vencedor:"Itália"},
+  {id:"mex-1986",nome:"México 1986",pais:"México",ano:1986,vencedor:"Argentina"},
+  {id:"ita-1990",nome:"Itália 1990",pais:"Itália",ano:1990,vencedor:"Alemanha"},
+  {id:"usa-1994",nome:"EUA 1994",pais:"EUA",ano:1994,vencedor:"Brasil"},
+  {id:"fra-1998",nome:"França 1998",pais:"França",ano:1998,vencedor:"França"},
+  {id:"kor-2002",nome:"Coreia/Japão 2002",pais:"Coreia do Sul",ano:2002,vencedor:"Brasil"},
+  {id:"ger-2006",nome:"Alemanha 2006",pais:"Alemanha",ano:2006,vencedor:"Itália"},
+  {id:"rsa-2010",nome:"África do Sul 2010",pais:"África do Sul",ano:2010,vencedor:"Espanha"},
+  {id:"bra-2014",nome:"Brasil 2014",pais:"Brasil",ano:2014,vencedor:"Alemanha"},
+  {id:"rus-2018",nome:"Rússia 2018",pais:"Rússia",ano:2018,vencedor:"França"},
+  {id:"qat-2022",nome:"Catar 2022",pais:"Catar",ano:2022,vencedor:"Argentina"}
+];
+
+const ADVERSARIOS = {
+  // Overall de cada seleção histórica em cada Copa
+  "swe-1958": {SWE:82, AUT:78, FRA:80, BRA:90, URS:88, ENG:84, FRG:85, WAL:79, HUN:81, YUG:80, BRA_CHEFE:94},
+  "chi-1962": {BRA:92, CHI:82, URS:86, YUG:84, FRG:80, ITA:85, HUN:80, ENG:81, SUI:76, ARG:79},
+  "mex-1970": {BRA:97, ITA:88, FRG:90, URU:86, ENG:84, URS:88, MEX:82, PER:78, BEL:79, SWE:80},
+  "arg-1978": {ARG:90, NED:89, BRA:88, ITA:86, FRG:85, POL:83, FRA:80, PER:79, AUT:77, SCO:78},
+  "esp-1982": {ITA:92, FRG:90, BRA:91, FRA:87, ARG:86, POL:85, ENG:84, ESP:82, URS:84, BEL:80},
+  "mex-1986": {ARG:96, FRG:90, BRA:88, FRA:86, MEX:84, BEL:85, ESP:83, ENG:82, URU:82, ITA:80},
+  "ita-1990": {FRG:91, ARG:90, ITA:89, ENG:84, BRA:86, ESP:83, BEL:81, IRL:80, CMR:79, COL:78},
+  "usa-1994": {BRA:93, ITA:89, SWE:84, BUL:82, NED:87, FRG:90, ROM:84, ARG:86, MEX:83, NGA:80},
+  "fra-1998": {FRA:95, BRA:94, CRO:88, NED:87, ITA:86, ARG:88, FRG:84, DEN:83, ENG:85, POR:84},
+  "kor-2002": {BRA:96, GER:91, TUR:84, KOR:80, ESP:85, ITA:86, ENG:84, SEN:81, USA:79, ARG:85},
+  "ger-2006": {ITA:90, FRA:91, GER:89, POR:86, BRA:90, ESP:84, ENG:83, ARG:85, NED:84, UKR:80},
+  "rsa-2010": {ESP:94, NED:89, GER:90, URU:84, BRA:88, ARG:88, POR:84, FRA:83, ENG:80, GHA:78},
+  "bra-2014": {GER:92, ARG:91, BRA:90, NED:87, COL:84, FRA:86, BEL:84, CRC:80, MEX:82, CHI:83},
+  "rus-2018": {FRA:91, CRO:88, ENG:86, BEL:87, BRA:89, URU:85, RUS:82, ARG:84, POR:83, ESP:84},
+  "qat-2022": {ARG:93, FRA:94, CRO:87, MAR:82, ENG:84, BRA:88, NED:85, POR:83, USA:80, JPN:82}
+};
+
+const FASES = ["Oitavas de final", "Quartas de final", "Semifinal", "FINAL"];
+
+/* ============================================================
+   ESTADO GLOBAL
+   ============================================================ */
+
+const state = {
+  formacao: '4-3-3',
+  estilo: 'equilibrado',
+  modo: 'classico',
+  fase: 0,
+  copa: null,
+  adversario: null,
+  adversarioOverall: 0,
+  escalados: [], // 11 jogadores
+  partida: null,
+  stats: {jogos:0, vitorias:0, titulos:0, gols:0},
+  historico: [],
+  conquistas: []
+};
+
+const CONQUISTAS_DEF = [
+  {id:'estreante',nome:'Estreante',desc:'Jogou a 1ª partida',icon:'🎮'},
+  {id:'vitoria',nome:'Primeira Vitória',desc:'Venceu uma partida',icon:'✅'},
+  {id:'tres_gols',nome:'Hat Trick',desc:'Fez 3+ gols numa partida',icon:'⚽'},
+  {id:'goleada',nome:'Goleada',desc:'Venceu por 4+ gols',icon:'🚀'},
+  {id:'almanaque',nome:'Almanaque',desc:'Ganhou no modo Almanaque',icon:'📕'},
+  {id:'zebra',nome:'Caçador de Zebras',desc:'Venceu adversário com overall +5 acima',icon:'🦓'},
+  {id:'titulo',nome:'Campeão',desc:'Conquistou uma Copa',icon:'🏆'},
+  {id:'hepta',nome:'Hepta',desc:'Venceu 7 fases seguidas',icon:'👑'},
+  {id:'perfect',nome:'Perfect Run',desc:'Ganhou 7 jogos sem sofrer gols',icon:'🛡️'},
+  {id:'lendario',nome:'Time Lendário',desc:'Escalou overall médio 90+',icon:'⭐'},
+  {id:'diversidade',nome:'Diversidade',desc:'Escalou 4+ seleções diferentes',icon:'🌍'},
+  {id:'veterano',nome:'Veterano',desc:'Jogou 10 partidas',icon:'🎖️'}
+];
+
+/* ============================================================
+   PERSISTÊNCIA
+   ============================================================ */
+
+function carregar() {
+  try {
+    const s = localStorage.getItem('7a0-save');
+    if (s) {
+      const data = JSON.parse(s);
+      Object.assign(state.stats, data.stats || {});
+      state.historico = data.historico || [];
+      state.conquistas = data.conquistas || [];
+    }
+  } catch(e){}
+  atualizarHeader();
+}
+
+function salvar() {
+  try {
+    localStorage.setItem('7a0-save', JSON.stringify({
+      stats: state.stats,
+      historico: state.historico.slice(0, 50),
+      conquistas: state.conquistas
+    }));
+  } catch(e){}
+}
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+
+function irPara(tela) {
+  document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+  document.getElementById('tela-' + tela).classList.add('ativa');
+  if (tela === 'setup') renderSetup();
+  if (tela === 'escalar') { renderEscalacao(); renderJogadores(); }
+  if (tela === 'historico') renderHistorico();
+  if (tela === 'home') atualizarHeader();
+  window.scrollTo(0,0);
+}
+
+function atualizarHeader() {
+  document.getElementById('header-titulos').textContent = state.stats.titulos;
+  document.getElementById('header-gols').textContent = state.stats.gols;
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 2200);
+}
+
+function mostrarComoJogar() {
+  document.getElementById('modal-como').classList.remove('hidden');
+}
+
+/* ============================================================
+   SETUP
+   ============================================================ */
+
+function renderSetup() {
+  // Formações
+  const fEl = document.getElementById('formacoes');
+  fEl.innerHTML = Object.keys(FORMACOES).map(f => `
+    <button data-f="${f}" onclick="escolherFormacao('${f}')" class="px-3 py-2 rounded-lg text-sm font-semibold border-2 transition ${state.formacao===f?'bg-ouro-500 border-ouro-500 text-gramado-800':'bg-neutral-800 border-neutral-700 text-white/80 hover:border-ouro-500'}">${f}</button>
+  `).join('');
+
+  // Estilos
+  const eEl = document.getElementById('estilos');
+  eEl.innerHTML = [
+    {k:'defensivo',l:'🛡️ Defensivo',bonus:-3},
+    {k:'equilibrado',l:'⚖️ Equilibrado',bonus:0},
+    {k:'ofensivo',l:'⚔️ Ofensivo',bonus:5}
+  ].map(e => `
+    <button data-e="${e.k}" onclick="escolherEstilo('${e.k}')" class="px-2 py-3 rounded-lg text-xs font-semibold border-2 transition ${state.estilo===e.k?'bg-ouro-500 border-ouro-500 text-gramado-800':'bg-neutral-800 border-neutral-700 text-white/80 hover:border-ouro-500'}">${e.l}</button>
+  `).join('');
+
+  // Modos
+  const mEl = document.getElementById('modos');
+  mEl.innerHTML = [
+    {k:'classico',l:'⭐ Clássico',sub:'Overall visível'},
+    {k:'almanaque',l:'📕 Almanaque',sub:'Overall oculto'}
+  ].map(m => `
+    <button data-m="${m.k}" onclick="escolherModo('${m.k}')" class="px-2 py-3 rounded-lg text-left border-2 transition ${state.modo===m.k?'bg-ouro-500 border-ouro-500 text-gramado-800':'bg-neutral-800 border-neutral-700 text-white/80 hover:border-ouro-500'}">
+      <div class="font-bold text-sm">${m.l}</div>
+      <div class="text-[10px] opacity-80">${m.sub}</div>
+    </button>
+  `).join('');
+}
+
+function escolherFormacao(f) { state.formacao = f; renderSetup(); }
+function escolherEstilo(e) { state.estilo = e; renderSetup(); }
+function escolherModo(m) { state.modo = m; renderSetup(); }
+
+/* ============================================================
+   SORTEIO DE COPA
+   ============================================================ */
+
+function sortearCopa() {
+  const btn = document.getElementById('btn-sortear');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="dado-girando inline-block">🎲</span> Sorteando...';
+  state.copa = COPAS[Math.floor(Math.random() * COPAS.length)];
+  const adv = ADVERSARIOS[state.copa.id];
+  const opcoes = Object.entries(adv);
+  const [sigla, ovr] = opcoes[Math.floor(Math.random() * opcoes.length)];
+  state.adversario = sigla;
+  state.adversarioOverall = ovr;
+
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.innerHTML = '🎲 Sortear outra Copa';
+    irPara('escalar');
+  }, 1400);
+}
+
+/* ============================================================
+   ESCALAÇÃO
+   ============================================================ */
+
+function renderEscalacao() {
+  const form = FORMACOES[state.formacao];
+  const slotsGoleiro = document.getElementById('slot-goleiro');
+  const grid = document.getElementById('grid-formacao');
+  
+  // Slot do goleiro (sempre no final da lista de linhas, último)
+  const linhaGol = form.find(l => l.pos === 'GOL');
+  slotsGoleiro.innerHTML = '';
+  for (let i = 0; i < (linhaGol?.qtd || 1); i++) {
+    slotsGoleiro.appendChild(criarSlot('GOL', i));
+  }
+  
+  // Grid com as outras linhas (de ZAG pra ATA)
+  grid.innerHTML = '';
+  const linhasSemGol = form.filter(l => l.pos !== 'GOL');
+  // Renderiza do fundo (ZAG) pro ataque (ATA) — visual fica com goleiro embaixo
+  for (const linha of linhasSemGol) {
+    const div = document.createElement('div');
+    div.className = 'flex justify-center gap-2';
+    for (let i = 0; i < linha.qtd; i++) {
+      div.appendChild(criarSlot(linha.pos, i));
+    }
+    grid.appendChild(div);
+  }
+  atualizarEscalacao();
+}
+
+function criarSlot(pos, idx) {
+  const div = document.createElement('div');
+  div.className = 'slot w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-white/30 bg-black/30 flex items-center justify-center text-center text-[10px] sm:text-xs font-bold text-white/80';
+  div.dataset.pos = pos;
+  div.dataset.idx = idx;
+  return div;
+}
+
+function toggleJogador(el, idx) {
+  const disponiveis = JOGADORES.filter(j => j.copa === state.copa.id);
+  const j = disponiveis[idx];
+  const pos = j.p;
+  const jaSelecionado = state.escalados.findIndex(x => x.idx === idx);
+  if (jaSelecionado >= 0) {
+    state.escalados.splice(jaSelecionado, 1);
+    el.classList.remove('selecionado');
+  } else {
+    if (state.escalados.length >= 11) {
+      toast('Time já está completo!');
+      return;
+    }
+    // Verifica se a posição ainda tem slot
+    const form = FORMACOES[state.formacao];
+    const totalSlotsPos = form.filter(l => l.pos === pos).reduce((s, l) => s + l.qtd, 0);
+    const ocupPos = state.escalados.filter(x => x.p === pos).length;
+    if (ocupPos >= totalSlotsPos) {
+      toast(`Sem slot de ${POS_NOMES[pos]}`);
+      return;
+    }
+    state.escalados.push({...j, idx});
+    el.classList.add('selecionado');
+    el.classList.add('piscando');
+    setTimeout(() => el.classList.remove('piscando'), 1200);
+  }
+  atualizarEscalacao();
+}
+
+function atualizarEscalacao() {
+  document.getElementById('contador-selecionados').textContent = state.escalados.length;
+  // Limpa todos os slots
+  const slots = document.querySelectorAll('.slot');
+  slots.forEach(s => {
+    s.classList.remove('ocupado', 'ocupado-final');
+    s.innerHTML = `${POS_NOMES[s.dataset.pos]||s.dataset.pos}`;
+  });
+  // Distribui os escalados nos slots por posi
+  const form = FORMACOES[state.formacao];
+  let posIdx = {};
+  slots.forEach(s => {
+    const pos = s.dataset.pos;
+    const idx = posIdx[pos] || 0;
+    posIdx[pos] = idx + 1;
+    const ocupado = state.escalados.filter(x => x.p === pos)[idx];
+    if (ocupado) {
+      s.classList.add('ocupado', 'ocupado-final');
+      s.innerHTML = `<div class="text-center leading-tight"><div class="text-[9px] text-ouro-400 font-bold truncate w-full">${ocupado.n.split(' ')[0]}</div><div class="text-[8px] text-white/60">${ocupado.ovr||'?'}</div></div>`;
+    }
+  });
+  // overall médio
+  if (state.escalados.length > 0) {
+    const ovr = Math.round(state.escalados.reduce((s,j)=>s+j.ovr,0)/state.escalados.length);
+    document.getElementById('overall-time').textContent = ovr;
+  } else {
+    document.getElementById('overall-time').textContent = '—';
+  }
+  document.getElementById('btn-jogar').disabled = state.escalados.length !== 11;
+}
+
+function renderJogadores() {
+  const lista = document.getElementById('lista-jogadores');
+  if (!lista || !state.copa) return;
+  const disponiveis = JOGADORES.filter(j => j.copa === state.copa.id);
+  // atualiza info da Copa
+  const info = document.getElementById('copa-info');
+  if (info) info.textContent = `${state.copa.nome} vs ${state.adversario}`;
+  // limpa escalados antigos quando troca de Copa
+  state.escalados = [];
+  lista.innerHTML = disponiveis.map((j, idx) => {
+    const jaSelecionado = state.escalados.find(x => x.idx === idx);
+    return `
+    <div onclick="toggleJogador(this, ${idx})" class="jogador-card bg-white/95 text-neutral-900 rounded-lg p-2 cursor-pointer hover:bg-ouro-100 transition active:scale-95 ${jaSelecionado ? 'selecionado' : ''}" data-idx="${idx}">
+      <div class="flex items-center gap-1 mb-1">
+        <span class="pos-badge pos-${j.p}">${POS_NOMES[j.p] || j.p}</span>
+        <span class="text-[10px] text-neutral-500 font-bold">${j.ovr}</span>
+      </div>
+      <div class="text-xs font-bold leading-tight truncate">${j.n}</div>
+      <div class="text-[10px] text-neutral-500">${j.s}</div>
+    </div>`;
+  }).join('');
+  atualizarEscalacao();
+}
+
+/* ============================================================
+   SIMULAÇÃO
+   ============================================================ */
+
+function iniciarSimulacao() {
+  state.partida = {
+    golsTime: 0,
+    golsAdv: 0,
+    tempo: 0,
+    eventos: [],
+    finalizada: false
+  };
+  state.stats.jogos++;
+  irPara('partida');
+  document.getElementById('placar-time-nome').textContent = 'SELEÇÃO';
+  document.getElementById('placar-adv-nome').textContent = state.adversario;
+  document.getElementById('placar-time-gols').textContent = '0';
+  document.getElementById('placar-adv-gols').textContent = '0';
+  document.getElementById('feed-eventos').innerHTML = '';
+  setTimeout(simularTempo, 600);
+}
+
+function pularSimulacao() {
+  // Pula direto pro final
+  while(!state.partida.finalizada) {
+    adicionarEventosRapidos();
+  }
+  finalizarPartida();
+}
+
+function calcularOverallTime() {
+  let ovr = state.escalados.reduce((s,j)=>s+j.ovr,0)/state.escalados.length;
+  if (state.estilo === 'ofensivo') ovr += 5;
+  if (state.estilo === 'defensivo') ovr += 2; // defensivo reduz gols sofridos mas mantém força
+  return ovr;
+}
+
+function poisson(lambda) {
+  // Aproximação simples
+  const L = Math.exp(-lambda);
+  let k = 0, p = 1;
+  do { k++; p *= Math.random(); } while (p > L);
+  return k - 1;
+}
+
+function simularTempo() {
+  if (state.partida.finalizada) return;
+  state.partida.tempo += Math.floor(Math.random() * 8) + 3;
+  if (state.partida.tempo > 90) state.partida.tempo = 90;
+  document.getElementById('placar-tempo').textContent = state.partida.tempo + "'";
+
+  // chance de evento
+  const ovrTime = calcularOverallTime();
+  const ovrAdv = state.adversarioOverall;
+  const diff = ovrTime - ovrAdv;
+  const chanceEvento = 0.35;
+  if (Math.random() < chanceEvento) {
+    gerarEvento(diff);
+  }
+  if (state.partida.tempo < 90) {
+    setTimeout(simularTempo, 800 + Math.random() * 600);
+  } else {
+    finalizarPartida();
+  }
+}
+
+function gerarEvento(diff) {
+  const oTime = Math.max(0.1, 0.8 + diff/50);
+  const oAdv = Math.max(0.1, 0.8 - diff/50);
+
+  // chance de gol
+  if (Math.random() < oTime * 0.25) {
+    adicionarGol(true);
+    return;
+  }
+  if (Math.random() < oAdv * 0.20) {
+    adicionarGol(false);
+    return;
+  }
+  // outros eventos
+  const tipos = ['cartao', 'cartao', 'falta', 'ataque_perdido', 'defesa', 'escanteio'];
+  const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+  const ev = gerarTextoEvento(tipo, true);
+  adicionarEvento(ev, 'neutro');
+}
+
+function gerarTextoEvento(tipo, isTime) {
+  const time = isTime;
+  const jogador = state.escalados[Math.floor(Math.random() * 11)];
+  const adv = 'Adversário';
+  const eventos = {
+    'cartao': time ? `🟨 ${jogador.nome} recebe cartão amarelo por entrada dura.` : `🟨 ${adv} recebe cartão amarelo.`,
+    'falta': time ? `⚠️ Falta dura em ${jogador.nome} no meio-campo.` : `⚠️ ${adv} comete falta perto da área.`,
+    'ataque_perdado': time ? `❌ ${jogador.nome} finaliza pra fora. Quase!` : `❌ ${adv} perde gol feito na cara do gol.`,
+    'defesa': time ? `🧤 Seu goleiro faz defesaça!` : `🧤 ${adv} finaliza e... o goleiro defende!`,
+    'escanteio': time ? `🚩 Escanteio para o seu time.` : `🚩 Escanteio para o ${adv}.`
+  };
+  return eventos[tipo] || 'Jogo rolando normalmente...';
+}
+
+function adicionarGol(doTime) {
+  const jogador = doTime ? state.escalados[Math.floor(Math.random() * 11)] : {nome: 'Atacante adversário'};
+  const assist = doTime ? state.escalados.filter(j => j.idx !== jogador.idx)[Math.floor(Math.random() * 10)] : null;
+  if (doTime) {
+    state.partida.golsTime++;
+    state.stats.gols++;
+    document.getElementById('placar-time-gols').classList.add('gol-anim');
+    setTimeout(()=> document.getElementById('placar-time-gols').classList.remove('gol-anim'), 800);
+  } else {
+    state.partida.golsAdv++;
+  }
+  document.getElementById('placar-time-gols').textContent = state.partida.golsTime;
+  document.getElementById('placar-adv-gols').textContent = state.partida.golsAdv;
+  const frases = [
+    `Gooooolllll de ${jogador.nome}! ${assist?'Assistência de '+assist.nome+'!':''}`,
+    `É do ${jogador.nome}! Que golaço!`,
+    `${jogador.nome} marca! Tá na rede!`,
+    `Que pintura de ${jogador.nome}! Vai pra rede!`
+  ];
+  const texto = frases[Math.floor(Math.random() * frases.length)];
+  adicionarEvento(texto, doTime?'gol':'gol-adv');
+  // registra no jogador
+  if (doTime) {
+    const j = state.escalados.find(x => x.nome === jogador.nome);
+    if (j) j.gols = (j.gols||0) + 1;
+  }
+}
+
+function adicionarEventosRapidos() {
+  state.partida.tempo = 91;
+  // Simula placar final baseado em overall
+  const ovrTime = calcularOverallTime();
+  const ovrAdv = state.adversarioOverall;
+  const lambdaT = Math.max(0.3, 1.5 + (ovrTime - ovrAdv)/40);
+  const lambdaA = Math.max(0.3, 1.0 + (ovrAdv - ovrTime)/40);
+  state.partida.golsTime = poisson(lambdaT);
+  state.partida.golsAdv = poisson(lambdaA);
+  state.partida.finalizada = true;
+  document.getElementById('placar-time-gols').textContent = state.partida.golsTime;
+  document.getElementById('placar-adv-gols').textContent = state.partida.golsAdv;
+  document.getElementById('placar-tempo').textContent = "90'";
+  state.stats.gols += state.partida.golsTime;
+  state.partida.eventos.push({texto:`⏭️ Simulação pulada. Placar final: ${state.partida.golsTime} x ${state.partida.golsAdv}`, tipo:'neutro'});
+}
+
+function adicionarEvento(texto, tipo) {
+  const feed = document.getElementById('feed-eventos');
+  const div = document.createElement('div');
+  const cores = {
+    'gol': 'bg-ouro-500 text-gramado-800 font-bold',
+    'gol-adv': 'bg-red-600 text-white',
+    'neutro': 'bg-white/10 text-white/90'
+  };
+  div.className = `${cores[tipo]||cores.neutro} px-3 py-2 rounded-lg text-sm fade-in`;
+  div.textContent = texto;
+  feed.appendChild(div);
+  feed.scrollTop = feed.scrollHeight;
+  state.partida.eventos.push({texto, tipo});
+}
+
+function finalizarPartida() {
+  if (state.partida.finalizada) return;
+  state.partida.finalizada = true;
+  state.partida.tempo = 90;
+  document.getElementById('placar-tempo').textContent = "90'";
+  setTimeout(mostrarResultado, 700);
+}
+
+/* ============================================================
+   RESULTADO
+   ============================================================ */
+
+function mostrarResultado() {
+  const p = state.partida;
+  const venceu = p.golsTime > p.golsAdv;
+  const empate = p.golsTime === p.golsAdv;
+
+  if (venceu) state.stats.vitorias++;
+  document.getElementById('res-gols').textContent = p.golsTime;
+  document.getElementById('res-defesa').textContent = p.golsAdv;
+  const ovr = Math.round(state.escalados.reduce((s,j)=>s+j.ovr,0)/11);
+  document.getElementById('res-overall').textContent = ovr;
+
+  const ehFinal = state.fase === 3;
+  let emoji, titulo, sub;
+  if (venceu && ehFinal) {
+    emoji = '🏆'; titulo = 'CAMPEÃO!'; sub = `Você levantou a taça da ${state.copa.nome}!`;
+    state.stats.titulos++;
+    desbloquearConquista('titulo');
+  } else if (venceu && !ehFinal) {
+    emoji = '✅'; titulo = 'VITÓRIA!'; sub = `Avançou de fase!`;
+  } else if (empate) {
+    emoji = '🤝'; titulo = 'EMPATE!'; sub = `Nos pênaltis você perdeu.`;
+  } else {
+    emoji = '💔'; titulo = 'ELIMINADO'; sub = `A campanha acabou na ${FASES[state.fase]}.`;
+  }
+  document.getElementById('resultado-emoji').textContent = emoji;
+  document.getElementById('resultado-titulo').textContent = titulo;
+  document.getElementById('resultado-subtitulo').textContent = sub;
+
+  // Conquistas
+  const novas = [];
+  if (!state.conquistas.includes('estreante')) { state.conquistas.push('estreante'); novas.push('🎮 Estreante'); }
+  if (venceu && !state.conquistas.includes('vitoria')) { state.conquistas.push('vitoria'); novas.push('✅ Primeira Vitória'); }
+  if (p.golsTime >= 3 && !state.conquistas.includes('tres_gols')) { state.conquistas.push('tres_gols'); novas.push('⚽ Hat Trick'); }
+  if ((p.golsTime - p.golsAdv) >= 4 && !state.conquistas.includes('goleada')) { state.conquistas.push('goleada'); novas.push('🚀 Goleada'); }
+  if (state.modo === 'almanaque' && venceu && !state.conquistas.includes('almanaque')) { state.conquistas.push('almanaque'); novas.push('📕 Almanaque'); }
+  if (venceu && state.adversarioOverall > calcularOverallTime() + 5 && !state.conquistas.includes('zebra')) { state.conquistas.push('zebra'); novas.push('🦓 Caçador de Zebras'); }
+  if (ovr >= 90 && !state.conquistas.includes('lendario')) { state.conquistas.push('lendario'); novas.push('⭐ Time Lendário'); }
+  if (new Set(state.escalados.map(j=>j.s)).size >= 4 && !state.conquistas.includes('diversidade')) { state.conquistas.push('diversidade'); novas.push('🌍 Diversidade'); }
+  if (state.stats.jogos >= 10 && !state.conquistas.includes('veterano')) { state.conquistas.push('veterano'); novas.push('🎖️ Veterano'); }
+  if (venceu && ehFinal && state.fase === 3 && !state.conquistas.includes('hepta')) { state.conquistas.push('hepta'); novas.push('👑 Hepta'); }
+  if (venceu && p.golsAdv === 0 && !state.conquistas.includes('perfect')) { state.conquistas.push('perfect'); novas.push('🛡️ Clean Sheet'); }
+
+  const cEl = document.getElementById('resultado-conquistas');
+  cEl.innerHTML = novas.length ? novas.map(c => `<div class="bg-ouro-500/20 border border-ouro-500 text-ouro-500 px-3 py-1.5 rounded-lg text-sm font-bold">🏅 ${c}</div>`).join('') : '';
+
+  // Histórico
+  state.historico.unshift({
+    copa: state.copa.nome,
+    adv: state.adversario,
+    placar: `${p.golsTime}-${p.golsAdv}`,
+    venceu,
+    ovr,
+    fase: FASES[state.fase],
+    data: new Date().toLocaleDateString('pt-BR')
+  });
+  if (state.historico.length > 50) state.historico.pop();
+
+  salvar();
+  atualizarHeader();
+
+  if (venceu) {
+    state.fase++;
+    if (state.fase > 3) state.fase = 0; // reinicia campanha
+  }
+  irPara('resultado');
+}
+
+/* ============================================================
+   HISTÓRICO E CONQUISTAS
+   ============================================================ */
+
+function renderHistorico() {
+  document.getElementById('stat-jogos').textContent = state.stats.jogos;
+  document.getElementById('stat-vitorias').textContent = state.stats.vitorias;
+  document.getElementById('stat-titulos').textContent = state.stats.titulos;
+  document.getElementById('stat-gols').textContent = state.stats.gols;
+
+  const grid = document.getElementById('grid-conquistas');
+  grid.innerHTML = CONQUISTAS_DEF.map(c => {
+    const tem = state.conquistas.includes(c.id);
+    return `
+    <div class="conquista ${tem?'desbloqueada':''} bg-black/30 rounded-lg p-2 text-center" title="${c.desc}">
+      <div class="text-2xl">${c.icon}</div>
+      <div class="text-[10px] font-bold mt-1">${c.nome}</div>
+    </div>`;
+  }).join('');
+
+  const lista = document.getElementById('lista-partidas');
+  if (state.historico.length === 0) {
+    lista.innerHTML = '<p class="text-white/40 text-center py-4">Nenhuma partida ainda. Bora jogar!</p>';
+  } else {
+    lista.innerHTML = state.historico.map(h => `
+      <div class="bg-black/30 rounded-lg p-2 flex items-center justify-between">
+        <div>
+          <div class="font-bold text-sm">${h.copa} <span class="text-white/40 text-xs">vs ${h.adv}</span></div>
+          <div class="text-[10px] text-white/50">${h.data} • ${h.fase} • OVR ${h.ovr}</div>
+        </div>
+        <div class="text-right">
+          <div class="font-display text-xl ${h.venceu?'text-ouro-500':'text-white/40'}">${h.placar}</div>
+          <div class="text-[10px] ${h.venceu?'text-ouro-400':'text-white/40'}">${h.venceu?'VITÓRIA':'DERROTA'}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function desbloquearConquista(id) {
+  if (!state.conquistas.includes(id)) state.conquistas.push(id);
+}
+
+function limparHistorico() {
+  if (confirm('Apagar todo o histórico?')) {
+    localStorage.removeItem('7a0-save');
+    state.stats = {jogos:0, vitorias:0, titulos:0, gols:0};
+    state.historico = [];
+    state.conquistas = [];
+    renderHistorico();
+    atualizarHeader();
+  }
+}
+
+/* ============================================================
+   COMPARTILHAR
+   ============================================================ */
+
+function compartilhar() {
+  const p = state.partida;
+  document.getElementById('share-copa').textContent = `${state.copa.nome} vs ${state.adversario}`;
+  const res = p.golsTime > p.golsAdv ? `VITÓRIA ${p.golsTime} x ${p.golsAdv}` : p.golsTime < p.golsAdv ? `DERROTA ${p.golsTime} x ${p.golsAdv}` : `EMPATE ${p.golsTime} x ${p.golsAdv}`;
+  document.getElementById('share-resultado').textContent = res;
+  const linhas = state.escalados.map((j,i) => `${i+1}. ${j.n} (${j.s}, ${POS_NOMES[j.p]}) OVR ${j.ovr}`).join('\n');
+  document.getElementById('share-lista').innerHTML = linhas.split('\n').map(l => `<div>${l}</div>`).join('');
+  document.getElementById('modal-share').classList.remove('hidden');
+}
+
+function copiarTexto() {
+  const p = state.partida;
+  const ovr = Math.round(state.escalados.reduce((s,j)=>s+j.ovr,0)/11);
+  const texto = `⚽ 7a0 — ${state.copa.nome}\n` +
+    `Adversário: ${state.adversario} (OVR ${state.adversarioOverall})\n` +
+    `Placar: ${p.golsTime} x ${p.golsAdv}\n` +
+    `Overall médio: ${ovr}\n\n` +
+    state.escalados.map((j,i) => `${i+1}. ${j.n} (${j.s}) — OVR ${j.ovr}`).join('\n') +
+    `\n\nJogue também: 7a0`;
+  navigator.clipboard.writeText(texto).then(() => toast('Escalação copiada!'));
+}
+
+/* ============================================================
+   INICIALIZAÇÃO
+   ============================================================ */
+
+carregar();
+
+// Pre-seleciona 11 aleatórios do Brasil 1970 na primeira vez
+window.addEventListener('DOMContentLoaded', () => {
+  state.escalados = [];
+  irPara('home');
+});
+</script>
+
+</body>
+</html>

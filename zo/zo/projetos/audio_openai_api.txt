@@ -1,0 +1,27 @@
+Usando a API do OpenAI: um guia prático.
+
+A API do OpenAI permite integrar modelos de inteligência artificial como GPT-4, DALL-E e Whisper diretamente nas suas aplicações. Vamos entender como funciona.
+
+Primeiro, o que é a API do OpenAI? É uma interface de programação que permite enviar requisições para os modelos da OpenAI e receber respostas em tempo real. Você pode usar para gerar texto, traduzir idiomas, criar imagens, transcrever áudio e muito mais.
+
+Passo um: Criando sua conta e obtendo a chave de API. Acesse platform.openai.com, crie uma conta, adicione créditos e gere uma API Key no menu de API Keys. Essa chave é secreta, nunca compartilhe ela publicamente ou coloque em código versionado. Guarde como variável de ambiente.
+
+Passo dois: Instalando a biblioteca. Em Python, basta fazer pip install openai. Em Node.js, npm install openai. A biblioteca oficial cuida da autenticação e do formato das requisições.
+
+Passo três: Fazendo sua primeira chamada. No Python, importe a classe OpenAI, instancie o cliente passando sua API key, e chame client.chat.completions.create com o modelo desejado, como GPT-4o, e uma lista de mensagens. Cada mensagem tem um role: system para instruções de sistema, user para a mensagem do usuário, e assistant para respostas anteriores. A resposta vem no campo choices, com o conteúdo retornado pelo modelo.
+
+Passo quatro: Entendendo os parâmetros principais. O parâmetro model define qual modelo usar. GPT-4o é o mais avançado, GPT-4o mini é mais barato, e GPT-3.5 é o mais econômico. Temperature controla a criatividade: zero é determinístico, um é mais criativo. Max tokens limita o tamanho da resposta. Top-p é uma alternativa ao temperature. Frequency penalty e presence penalty reduzem repetições.
+
+Passo cinco: Streaming de respostas. Para respostas longas, use stream=True. Isso retorna pedaços da resposta conforme são gerados, criando uma experiência em tempo real para o usuário, como no ChatGPT.
+
+Passo seis: Usando outros modelos. O modelo DALL-E gera imagens a partir de texto descritivo. Use client.images.generate com o prompt desejado. O Whisper transcreve áudio com client.audio.transcribe, passando o arquivo de áudio. O TTS gera áudio a partir de texto com client.audio.speech. O modelo de embeddings cria representações vetoriais de texto, útil para busca semântica e recuperação de informação.
+
+Passo sete: Function calling. Um dos recursos mais poderosos. Permite que o modelo chame funções externas. Você define as funções com nome, descrição e parâmetros em formato JSON Schema. O modelo decide quando chamar cada função e retorna um objeto function_call com o nome e argumentos. Sua aplicação executa a função e devolve o resultado para o modelo continuar a conversa.
+
+Passo oito: Boas práticas. Sempre use variáveis de ambiente para a API key, nunca hardcode. Implemente retries com exponential backoff para lidar com erros de rate limit. Monitore o uso de tokens para controlar custos. Use system prompts claros e específicos para guiar o comportamento do modelo. Valide e sanitize as entradas do usuário. Implemente logging para auditoria e debug.
+
+Passo nove: Custos e limites. O preço varia por modelo e por tokens de entrada e saída. Tokens de entrada são mais baratos que tokens de saída. Modelos mais novos e avançados custam mais. Atenção ao limite de contexto: GPT-4o suporta até 128 mil tokens de contexto, GPT-4o mini suporta 128 mil também. Se exceder, a requisição falha.
+
+Passo dez: Assistentes e threads. A OpenAI oferece a API de Assistants, que permite criar agentes com instruções, ferramentas e memória. Você cria um Assistant, depois uma Thread, adiciona mensagens, e executa com tools como code_interpreter e file_search. O assistant mantém o contexto automaticamente.
+
+Em resumo: a API do OpenAI é poderosa, flexível e bem documentada. Comece pelo Chat Completions, explore os outros modelos conforme a necessidade, e sempre monitore seus custos e tokens. Para mais detalhes, acesse platform.openai.com slash docs.

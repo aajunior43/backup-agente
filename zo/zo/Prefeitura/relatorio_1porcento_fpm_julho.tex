@@ -1,0 +1,311 @@
+% ============================================================
+% RELATÓRIO TÉCNICO — 1% ADICIONAL DO FPM DE JULHO (EC 84/2014)
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{enumitem}
+
+\geometry{top=3cm,bottom=2cm,left=3cm,right=2cm}
+\setstretch{1.4}
+
+% Cores institucionais
+\definecolor{primaria}{HTML}{1F3A5F}
+\definecolor{destaque}{HTML}{8B0000}
+\definecolor{cinzaclaro}{HTML}{F2F2F2}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primaria,
+  urlcolor=primaria,
+  citecolor=primaria
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{Relatório Técnico --- FPM 1\% de Julho}}
+\fancyhead[R]{\small\today}
+\fancyfoot[C]{\thepage\ /\ \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth){0.4pt}
+
+%% ── DADOS ──
+\newcommand{\municipio}{Inajá}
+\newcommand{\uf}{PR}
+\newcommand{\tituloRelatorio}{O Adicional de 1\% do FPM de Julho:\\Fundamentos, Funcionamento e Impacto Municipal}
+\newcommand{\responsavel}{Secretaria Municipal de Finanças}
+\newcommand{\periodo}{Julho de 2015 a Julho de 2026}
+
+\begin{document}
+
+%% ── CAPA ──
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2.5cm}
+    {\large\textbf{PREFEITURA MUNICIPAL DE \MakeUppercase{\municipio} -- \uf}}\\[0.3cm]
+    {\normalsize Secretaria Municipal de Finanças}\\[0.6cm]
+    \rule{\textwidth}{0.6pt}\\[1cm]
+    {\LARGE\textbf{\tituloRelatorio}}\\[1.5cm]
+    {\large\textbf{Período de análise:} \periodo}\\[0.6cm]
+    {\large\textbf{Base legal:} Emenda Constitucional nº 84/2014}\\[0.6cm]
+    {\large\textbf{Responsável:} \responsavel}\\[2cm]
+    \vfill
+    {\large \municipio/\uf, \today}
+  \end{center}
+\end{titlepage}
+
+%% ── SUMÁRIO ──
+\tableofcontents
+\newpage
+
+%% ── SEÇÕES ──
+\section{Introdução}
+
+O Fundo de Participação dos Municípios (FPM) é uma das principais fontes de receita dos municípios brasileiros, constituído por parcela da arrecadação federal do Imposto de Renda (IR) e do Imposto sobre Produtos Industrializados (IPI). Além da cota regular --- repassada decendialmente (a cada 10 dias) ---, os municípios recebem \textbf{três repasses adicionais de 1\% ao longo do ano}: em julho, setembro e dezembro, totalizando 25,5\% do montante anual do FPM.
+
+Este relatório concentra-se no \textbf{adicional de 1\% creditado em julho}, instituído pela \textbf{Emenda Constitucional nº 84, de 2 de dezembro de 2014} (EC 84/2014). O objetivo é apresentar, de forma técnica e aplicável à gestão municipal, o marco legal, o mecanismo de cálculo, a forma de distribuição entre os entes, as regras contábeis de aplicação e a evolução histórica dos valores repassados --- com atenção às implicações para a Receita Corrente Líquida (RCL) e aos mínimos constitucionais de educação.
+
+\section{Marco Legal --- EC 84/2014}
+
+\subsection{Origem e tramitação}
+
+A EC 84/2014 decorreu da \textbf{Proposta de Emenda à Constituição (PEC) nº 39/2013}, de autoria da Senadora Ana Amélia e outros, promulgada em 2 de dezembro de 2014 e publicada em 3 de dezembro de 2014. A emenda altera o art. 159 da Constituição Federal para prever que \textbf{1\% do produto da arrecadação do IR e do IPI seja destinado ao FPM}, com crédito no primeiro decêndio do mês de julho de cada ano.
+
+\subsection{Implantação gradual}
+
+O art. 2º da EC 84/2014 estabeleceu \textbf{rampa de implantação}:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item \textbf{2015:} 0,5\% da arrecadação líquida de IR e IPI, acumulados de janeiro a junho e creditados no primeiro decêndio de julho;
+  \item \textbf{2016 em diante:} 1\% fixo, com acumulação do primeiro decêndio de julho de um exercício até o terceiro decêndio de junho do exercício seguinte, repassado no primeiro decêndio de julho subsequente.
+\end{itemize}
+
+Os efeitos financeiros tiveram início em \textbf{1º de janeiro do exercício subsequente à promulgação} (ou seja, 2015).
+
+\subsection{Finalidade compensatória}
+
+Julho é tradicionalmente um mês de \textbf{queda sazonal da arrecadação do FPM}, em razão do calendário econômico e do comportamento da arrecadação de IR e IPI. O adicional de 1\% tem caráter \textbf{compensatório}, oferecendo fôlego financeiro às prefeituras justamente no momento de menor fluxo regular do fundo.
+
+\section{Como Funciona o Cálculo}
+
+\subsection{Base de cálculo}
+
+O adicional de 1\% incide sobre a \textbf{arrecadação acumulada do Imposto de Renda (IR) e do Imposto sobre Produtos Industrializados (IPI)} nos 12 meses anteriores ao repasse. Para o 1\% de julho, considera-se a arrecadação apurada \textbf{do primeiro decêndio de julho do ano anterior até o terceiro decêndio de junho do ano corrente}.
+
+\subsection{Fórmula geral}
+
+\begin{center}
+\textbf{Adicional de 1\% de julho = 1\% $\times$ (Arrecadação líquida de IR + IPI nos 12 meses anteriores)}
+\end{center}
+
+A ``arrecadação líquida'' corresponde à arrecadação bruta deduzida das transferências constitucionais e legais previstas (como as destinadas ao FPE, ao próprio FPM regular, ao FUNDEB e outras).
+
+\subsection{Momento do crédito}
+
+O valor é creditado em \textbf{cota única}, no \textbf{primeiro decêndio de julho} de cada ano, junto com a primeira cota decendial regular do FPM do mês. Em 2025, por exemplo, o crédito ocorreu no dia 10 de julho.
+
+\section{Distribuição entre os Municípios}
+
+A partilha do adicional de 1\% entre os 5.570 municípios brasileiros segue os \textbf{mesmos coeficientes do FPM}, fixados anualmente nas \textbf{Decisões Normativas do Tribunal de Contas da União (TCU)}. Os coeficientes consideram:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item \textbf{População} do município, distribuída em faixas populacionais (até 10.188 hab.; de 10.189 a 13.584 hab.; e faixas superiores);
+  \item \textbf{Renda per capita} do estado ao qual o município pertence;
+  \item \textbf{Coeficiente individual} atribuído a cada município conforme os critérios acima.
+\end{itemize}
+
+O resultado prático é que \textbf{municípios menores e de estados com menor renda per capita tendem a receber coeficientes mais elevados por habitante}, enquanto municípios maiores recebem volumes absolutos maiores. Para o Paraná, os 399 municípios são distribuídos por coeficiente, com tabela específica divulgada pela Confederação Nacional dos Municípios (CNM) e pela Associação dos Municípios do Paraná (AMP).
+
+\section{Regras Contábeis de Aplicação}
+
+\subsection{Não incidência de retenção do FUNDEB}
+
+Diferentemente da cota regular do FPM --- que sofre retenção de 20\% para o Fundo de Manutenção e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação (FUNDEB) ---, o \textbf{adicional de 1\% de julho NÃO sofre retenção do FUNDEB}. O município recebe o valor integral, conforme a redação da EC 84/2014.
+
+\subsection{Integração à Receita Corrente Líquida (RCL)}
+
+Apesar de não sofrer retenção do FUNDEB, o adicional de 1\% é uma \textbf{transferência constitucional} e, portanto, deve \textbf{integrar a Receita Corrente Líquida (RCL) do município}. A inclusão na RCL tem três implicações principais:
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item \textbf{Mínimo constitucional de educação (MDE):} como transferência constitucional, deve ser aplicado em Manutenção e Desenvolvimento de Ensino (MDE), no percentual mínimo de \textbf{25\%};
+  \item \textbf{Limite com pessoal:} integra a base de cálculo para o limite de gastos com pessoal (Lei de Responsabilidade Fiscal --- LRF);
+  \item \textbf{Base para demais limites fiscais:} afeta o cálculo de limites de despesa total, renúncia de receita e outras exigências da LRF.
+\end{enumerate}
+
+\subsection{Polêmica sobre vinculação à Saúde}
+
+Existe \textbf{debate técnico} sobre a eventual vinculação do adicional de 1\% ao mínimo de aplicação em Saúde (Lei Complementar nº 141/2012). A discussão gira em torno de se os recursos entram na base de cálculo das transferências que compõem a apuração do mínimo de 15\% da RCL em ações e serviços públicos de saúde. A orientação predominante, sustentada pela CNM e por consultorias municipais, é de que o 1\% deve ser computado para fins de RCL --- o que pode elevar a base e, consequentemente, o valor absoluto do mínimo de saúde ---, mas \textbf{não há consenso definitivo} entre os Tribunais de Contas.
+
+\section{Evolução Histórica dos Valores}
+
+A tabela abaixo apresenta a evolução do montante total repassado nacionalmente pelo adicional de 1\% de julho, desde a implantação plena (1\%) em 2016 até 2025:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c c c@{}}
+\toprule
+\textbf{Ano} & \textbf{Alíquota vigente} & \textbf{Valor repassado (R\$)} \\
+\midrule
+2015 & 0,5\% (transição) & $\approx$ 1,7 bilhão \\
+2016 & 1,0\% & $\approx$ 3,4 bilhões \\
+2017 & 1,0\% & $\approx$ 3,9 bilhões \\
+2018 & 1,0\% & $\approx$ 4,2 bilhões \\
+2019 & 1,0\% & $\approx$ 4,5 bilhões \\
+2020 & 1,0\% & $\approx$ 4,8 bilhões \\
+2021 & 1,0\% & $\approx$ 5,8 bilhões \\
+2022 & 1,0\% & $\approx$ 7,5 bilhões \\
+2023 & 1,0\% & $\approx$ 7,9 bilhões \\
+2024 & 1,0\% & 8,089 bilhões \\
+\textbf{2025} & \textbf{1,0\%} & \textbf{9,158 bilhões} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip
+\textit{Fontes: Confederação Nacional dos Municípios (CNM), Tesouro Transparente e Secretarias Estaduais de Fazenda. Valores arredondados; 2015 refere-se à fase de transição (0,5\%).}
+
+\subsection{Volume histórico acumulado}
+
+Ao longo de 11 anos (2015--2025), os municípios brasileiros receberam aproximadamente \textbf{R\$ 56,98 bilhões} por meio do adicional de 1\% de julho instituído pela EC 84/2014, fortalecendo a autonomia financeira e os investimentos locais.
+
+\subsection{Crescimento entre 2024 e 2025}
+
+O repasse de julho de 2025, de \textbf{R\$ 9.158.061.553,01}, representou \textbf{aumento de 13,2\%} em relação ao mesmo repasse de 2024 (R\$ 8,089 bilhões). A CNM havia estimado R\$ 9,58 bilhões --- o valor efetivo ficou \textbf{4,4\% abaixo} da projeção, porém dentro da margem de consistência técnica (98,7\% em casos anteriores).
+
+\section{Estimativa do Repasse para Inajá/PR}
+
+Com base na tabela oficial divulgada pela Confederação Nacional dos Municípios (CNM) referente ao \textbf{1\% extra de julho de 2025} (EC 84/2014), é possível estimar com precisão o valor a ser recebido pelo Município de Inajá/PR. Os parâmetros de partilha do Município são:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item \textbf{População (Censo 2022):} 2.536 habitantes;
+  \item \textbf{Faixa populacional:} até 10.188 habitantes (primeira faixa do FPM);
+  \item \textbf{Coeficiente do FPM:} \textbf{0,6} (coeficiente da primeira faixa);
+  \item \textbf{Perda de quota (LC 198/2023):} nenhuma (Inajá integra o grupo sem perda).
+\end{itemize}
+
+\subsection{Valores previstos --- julho de 2025}
+
+A tabela a seguir apresenta os valores brutos e líquidos do repasse extra de 1\% de julho de 2025 para um município paranaense com coeficiente 0,6 e sem perda de quota --- exatamente o perfil de Inajá/PR:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}l r@{}}
+\toprule
+\textbf{Componente} & \textbf{Valor (R\$)} \\
+\midrule
+Parcela regular & 805.898,08 \\
+Parcela LC 198/2023 & 2.927,50 \\
+\textbf{Valor BRUTO do decêndio} & \textbf{808.825,58} \\
+Retenção PASEP (1\%) & (8.088,26) \\
+\textbf{Valor LÍQUIDO creditado} & \textbf{800.737,32} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip
+\textit{Fonte: CNM --- Nota Decendial ``FPM 1\% extra de julho de 2025'', tabela do estado do Paraná/PR. O crédito foi efetuado em cota única no primeiro decêndio de julho (09/07/2025).}
+
+\subsection{Derivações e obrigações de aplicação}
+
+A partir do valor líquido creditado (\textbf{R\$ 800.737,32}), aplicam-se as seguintes derivações:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}l c r@{}}
+\toprule
+\textbf{Item} & \textbf{Percentual} & \textbf{Valor (R\$)} \\
+\midrule
+Valor líquido creditado & 100\% & 800.737,32 \\
+Retenção FUNDEB & isento (EC 84/2014) & 0,00 \\
+Mínimo de Manutenção e Desenvolvimento de Ensino (MDE) & 25\% & 200.184,33 \\
+Disponível para as demais áreas & 75\% & 600.552,99 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip
+Vale destacar:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item \textbf{FUNDEB:} o adicional de 1\% \textbf{não sofre retenção} do FUNDEB, ingressando integralmente na conta do Município --- diferentemente da cota regular do FPM;
+  \item \textbf{PASEP:} incide a retenção de 1\% (R\$ 8.088,26), já deduzida do valor líquido;
+  \item \textbf{Educação (MDE):} como transferência constitucional, exige aplicação mínima de 25\% (\textbf{R\$ 200.184,33}) em Manutenção e Desenvolvimento de Ensino;
+  \item \textbf{Receita Corrente Líquida (RCL):} o valor integra a RCL, impactando os limites da LRF (pessoal, despesa total e renúncia de receita);
+  \item \textbf{Contexto estadual:} o Paraná, com seus 399 municípios, recebeu no total \textbf{R\$ 616.289.063,72} (líquido) do 1\% extra de julho de 2025.
+\end{itemize}
+
+\subsection{Comparação com 2024}
+
+Considerando o crescimento nominal nacional de \textbf{13,2\%} entre o 1\% de julho de 2024 e o de julho de 2025, estima-se que Inajá/PR tenha recebido, em julho de 2024, aproximadamente \textbf{R\$ 707.368,00} (líquido) --- valor que serve de referência para projeção do repasse de julho de 2026, condicionado à evolução da arrecadação federal de IR e IPI.
+
+\section{Quadro das Três Parcelas Adicionais do FPM}
+
+Para fins de contextualização, o quadro a seguir resume as três parcelas adicionais de 1\% que compõem, somadas à cota regular (22,5\%), o total de 25,5\% do IR+IPI repassado anualmente:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+\textbf{Mês} & \textbf{Emenda Constitucional} & \textbf{Vigência plena} & \textbf{Observação} \\
+\midrule
+Julho & EC 84/2014 & 2016 (1\%) & Objeto deste relatório \\
+Setembro & EC 112/2021 & 2025 (1\%) & Rampa: 0,25\% (2022) até 1\% (2025) \\
+Dezembro & EC 55/2007 & 2007 & Em vigor há 18 anos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Recomendações para a Gestão Municipal}
+
+\begin{enumerate}[leftmargin=2.5em]
+  \item \textbf{Planejamento orçamentário:} incorporar a previsão do 1\% de julho no orçamento anual, tratando-o como receita extra e não como fonte recorrente de custeio, dada a dependência da arrecadação federal;
+  \item \textbf{Classificação contábil adequada:} registrar como transferência constitucional do FPM, integrando a RCL e respeitando o mínimo de 25\% em MDE;
+  \item \textbf{Acompanhamento da previsão da CNM:} monitorar as estimativas divulgadas pela CNM ao longo do ano, com base no Relatório de Avaliação Fiscal do governo federal, para ajustar projeções;
+  \item \textbf{Cautela em ano eleitoral / transição de mandato:} em anos de eleição municipal, redobrar a atenção à alocação do adicional de julho, evitando comprometimento de caixa em despesas que onerem a gestão seguinte;
+  \item \textbf{Transparência:} divulgar no Portal da Transparência o valor recebido, a destinação e a comprovação da aplicação em MDE --- item relevante para a nota do Índice de Transparência Pública (ITP) do TCE-PR;
+  \item \textbf{Documentação para auditoria:} manter memória de cálculo, comunicação do Tesouro Nacional e comprovação da aplicação em MDE para fins de prestação de contas ao TCE-PR e ao TCU.
+\end{enumerate}
+
+\section{Conclusão}
+
+O adicional de 1\% do FPM de julho, instituído pela EC 84/2014, consolidou-se como instrumento relevante de reforço financeiro dos municípios, com volume acumulado próximo a R\$ 57 bilhões em 11 anos. Sua natureza de transferência constitucional impõe obrigações de aplicação --- destacadamente o mínimo de 25\% em Manutenção e Desenvolvimento de Ensino --- e exige rigorosa classificação contábil para fins de Receita Corrente Líquida.
+
+A correta gestão desse recurso, aliada à transparência ativa e ao alinhamento com os limites da Lei de Responsabilidade Fiscal, contribui para a saúde das contas municipais e para o atendimento das exigências dos órgãos de controle, sobretudo do TCE-PR e do TCU.
+
+\section{Referências}
+
+\begin{itemize}[leftmargin=2.5em,itemsep=0.2em]
+  \item BRASIL. \textbf{Emenda Constitucional nº 84, de 2 de dezembro de 2014}. Altera a distribuição de recursos do Fundo de Participação dos Municípios. Diário Oficial da União, 3 dez. 2014.
+  \item BRASIL. Constituição Federal de 1988, \textbf{art. 159}.
+  \item Confederação Nacional dos Municípios (CNM). \textit{FPM --- 1\% extra de julho de 2025}. Nota Decendial, jul. 2025.
+  \item Confederação Nacional dos Municípios (CNM). \textit{Perguntas e Respostas sobre repasses extras do FPM}.
+  \item Tesouro Nacional. \textit{Cartilha FPM}. Secretaria do Tesouro Nacional.
+  \item Tesouro Transparente. \textit{Comunicado de repasse do FPM --- EC 84/2014}, anos 2015 a 2025.
+  \item Associação dos Municípios do Paraná (AMP). Comunicados sobre o 1\% extra do FPM.
+\end{itemize}
+
+\section{Assinatura}
+
+\vspace{1.5cm}
+\begin{center}
+\rule{8cm}{0.4pt}\\[0.2cm]
+\textbf{\responsavel}\\[0.1cm]
+\textit{Prefeitura Municipal de \municipio/\uf}
+\end{center}
+
+\end{document}

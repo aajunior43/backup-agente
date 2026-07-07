@@ -2,6 +2,12 @@ Registro de Saúde
 
 Medições
 
+30/06/2026
+
+-   Pressão: 119/76 mmHg | Pulso: 112 bpm
+-   Glicose: 464 mg/dL
+-   Via: Chat
+
 28/06/2026
 
 -   Pressão: 140/80 mmHg | Pulso: 87 bpm
@@ -187,3 +193,12 @@ resultados dos exames
 
 -   Pressão: 127/73 mmHg | Pulso: 92 bpm
 -   Via: Chat
+
+06/07/2026 (noite)
+
+-   Glicose: 306 mg/dL
+-   Insulina: 3 unidades (correção)
+-   Hora: ~23:20
+-   Via: Chat
+-   Observação: Início do uso de insulina (3 UI para correção da glicose
+    em 306 mg/dL)

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Dorks Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .input-style {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+        .input-style:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                Google Dorks Creator
+            </h1>
+            <p class="text-slate-400">Gere pesquisas avançadas no Google de forma simples e visual.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Form Side -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-search-plus mr-3 text-blue-400"></i> Parâmetros de Busca
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- Termos Principais -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Palavras-chave / Termos</label>
+                            <input type="text" id="keywords" placeholder="ex: admin login" class="w-full p-3 rounded-lg input-style">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Site -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-1">Site específico (site:)</label>
+                                <input type="text" id="site" placeholder="ex: gov.br" class="w-full p-3 rounded-lg input-style">
+                            </div>
+                            <!-- Filetype -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-1">Tipo de arquivo (filetype:)</label>
+                                <select id="filetype" class="w-full p-3 rounded-lg input-style appearance-none">
+                                    <option value="">Qualquer um</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="doc">Word (DOC)</option>
+                                    <option value="docx">Word (DOCX)</option>
+                                    <option value="xls">Excel (XLS)</option>
+                                    <option value="xlsx">Excel (XLSX)</option>
+                                    <option value="ppt">PowerPoint</option>
+                                    <option value="txt">Texto (TXT)</option>
+                                    <option value="env">Arquivos ENV</option>
+                                    <option value="log">Logs (LOG)</option>
+                                    <option value="sql">SQL / Database</option>
+                                    <option value="php">PHP</option>
+                                    <option value="js">JavaScript</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- In Title -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-1">No Título (intitle:)</label>
+                                <input type="text" id="intitle" placeholder="ex: index of" class="w-full p-3 rounded-lg input-style">
+                            </div>
+                            <!-- In URL -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-1">Na URL (inurl:)</label>
+                                <input type="text" id="inurl" placeholder="ex: backup" class="w-full p-3 rounded-lg input-style">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">No Texto da Página (intext:)</label>
+                            <input type="text" id="intext" placeholder="ex: confidential" class="w-full p-3 rounded-lg input-style">
+                        </div>
+
+                        <!-- Excluir termos -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Excluir termos (-termo)</label>
+                            <input type="text" id="exclude" placeholder="ex: html css" class="w-full p-3 rounded-lg input-style">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dorks Prontas -->
+                <div class="glass p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-lightbulb mr-3 text-yellow-400"></i> Modelos Rápidos
+                    </h2>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setTemplate('index-of')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm transition border border-slate-700">Index of /</button>
+                        <button onclick="setTemplate('config-files')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm transition border border-slate-700">Arquivos de Config</button>
+                        <button onclick="setTemplate('login-pages')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm transition border border-slate-700">Páginas de Login</button>
+                        <button onclick="setTemplate('db-files')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm transition border border-slate-700">Bancos de Dados</button>
+                        <button onclick="setTemplate('public-docs')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm transition border border-slate-700">Documentos Públicos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Side -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="glass p-6 rounded-2xl shadow-xl sticky top-10">
+                    <h2 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-terminal mr-3 text-green-400"></i> Resultado
+                    </h2>
+                    
+                    <div class="bg-black/40 p-4 rounded-xl border border-slate-700 min-h-[100px] mb-6 font-mono text-sm break-all" id="query-result">
+                        Clique em gerar para ver o resultado...
+                    </div>
+
+                    <div class="space-y-3">
+                        <button onclick="copyToClipboard()" id="copy-btn" class="w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition flex items-center justify-center">
+                            <i class="fas fa-copy mr-2"></i> Copiar Query
+                        </button>
+                        
+                        <button onclick="searchOnGoogle()" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium shadow-lg shadow-blue-500/20 transition flex items-center justify-center">
+                            <i class="fab fa-google mr-2"></i> Pesquisar no Google
+                        </button>
+
+                        <button onclick="resetForm()" class="w-full py-2 px-4 text-slate-400 hover:text-slate-200 text-sm transition">
+                            Limpar tudo
+                        </button>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-700/50">
+                        <p class="text-xs text-slate-500 text-center">
+                            Dica: Use aspas "" para termos exatos.<br>
+                            Use | para buscas do tipo OU.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputs = ['keywords', 'site', 'filetype', 'intitle', 'inurl', 'intext', 'exclude'];
+        
+        // Atualizar em tempo real
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', generateDork);
+        });
+
+        function generateDork() {
+            let dork = [];
+            
+            const keywords = document.getElementById('keywords').value.trim();
+            const site = document.getElementById('site').value.trim();
+            const filetype = document.getElementById('filetype').value;
+            const intitle = document.getElementById('intitle').value.trim();
+            const inurl = document.getElementById('inurl').value.trim();
+            const intext = document.getElementById('intext').value.trim();
+            const exclude = document.getElementById('exclude').value.trim();
+
+            if (site) dork.push(`site:${site}`);
+            if (filetype) dork.push(`filetype:${filetype}`);
+            if (intitle) dork.push(`intitle:"${intitle}"`);
+            if (inurl) dork.push(`inurl:${inurl}`);
+            if (intext) dork.push(`intext:"${intext}"`);
+            
+            if (keywords) dork.push(keywords);
+            
+            if (exclude) {
+                exclude.split(' ').forEach(term => {
+                    if (term) dork.push(`-${term}`);
+                });
+            }
+
+            const finalQuery = dork.join(' ');
+            const resultElement = document.getElementById('query-result');
+            
+            if (finalQuery) {
+                resultElement.innerText = finalQuery;
+                resultElement.classList.remove('text-slate-500');
+            } else {
+                resultElement.innerText = 'Preencha os campos para gerar a dork...';
+                resultElement.classList.add('text-slate-500');
+            }
+        }
+
+        function setTemplate(type) {
+            resetForm();
+            switch(type) {
+                case 'index-of':
+                    document.getElementById('intitle').value = 'index of /';
+                    break;
+                case 'config-files':
+                    document.getElementById('inurl').value = 'config';
+                    document.getElementById('filetype').value = 'env';
+                    break;
+                case 'login-pages':
+                    document.getElementById('inurl').value = 'login';
+                    document.getElementById('intitle').value = 'login';
+                    break;
+                case 'db-files':
+                    document.getElementById('filetype').value = 'sql';
+                    document.getElementById('keywords').value = '"db_password"';
+                    break;
+                case 'public-docs':
+                    document.getElementById('filetype').value = 'pdf';
+                    document.getElementById('intitle').value = 'confidencial';
+                    break;
+            }
+            generateDork();
+        }
+
+        function searchOnGoogle() {
+            const query = document.getElementById('query-result').innerText;
+            if (query && !query.includes('Preencha')) {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+            }
+        }
+
+        function copyToClipboard() {
+            const query = document.getElementById('query-result').innerText;
+            if (query && !query.includes('Preencha')) {
+                navigator.clipboard.writeText(query).then(() => {
+                    const btn = document.getElementById('copy-btn');
+                    const originalContent = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
+                    btn.classList.replace('bg-slate-700', 'bg-green-600');
+                    setTimeout(() => {
+                        btn.innerHTML = originalContent;
+                        btn.classList.replace('bg-green-600', 'bg-slate-700');
+                    }, 2000);
+                });
+            }
+        }
+
+        function resetForm() {
+            inputs.forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            generateDork();
+        }
+    </script>
+</body>
+</html>

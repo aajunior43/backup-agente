@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RETENÇÃO DE CONTRIBUIÇÃO PREVIDENCIÁRIA — Casos TCE e Análise Jurídica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0c0c0e;
+      color: #e3e0db;
+      line-height: 1.6;
+      padding: 0;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0f0f12 0%, #1a1a1e 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 48px 0 40px;
+    }
+    header .tag {
+      display: inline-block;
+      background: rgba(220, 120, 68, 0.15);
+      color: #dc7844;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #f5f1e8;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    header h1 span { color: #dc7844; }
+    header p {
+      font-size: 16px;
+      color: #8a8680;
+      max-width: 640px;
+    }
+    header p strong { color: #b5b0a8; }
+    .header-meta {
+      margin-top: 24px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .header-meta-item {
+      font-size: 13px;
+      color: #6b6863;
+    }
+    .header-meta-item span {
+      color: #a5a099;
+    }
+
+    /* TOC */
+    .toc {
+      background: #121216;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .toc h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #8a8680;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+    }
+    .toc ol li {
+      counter-increment: toc-counter;
+      padding: 6px 0;
+    }
+    .toc ol li::before {
+      content: counter(toc-counter) ".";
+      color: #dc7844;
+      font-weight: 600;
+      margin-right: 10px;
+      font-size: 13px;
+    }
+    .toc ol li a {
+      color: #c5c0b8;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+    .toc ol li a:hover { color: #dc7844; }
+
+    /* SECTIONS */
+    .section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f5f1e8;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section h2 .num {
+      background: #dc7844;
+      color: #0c0c0e;
+      font-size: 13px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .section h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #e8e4dc;
+      margin: 24px 0 8px;
+    }
+    .section h3:first-of-type { margin-top: 0; }
+    .section h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #c5c0b8;
+      margin: 16px 0 6px;
+    }
+    .section p {
+      font-size: 14.5px;
+      color: #a5a099;
+      margin-bottom: 12px;
+    }
+    .section strong { color: #e3e0db; }
+
+    /* CARDS */
+    .card {
+      background: #151518;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f0ece4;
+      margin-bottom: 8px;
+    }
+    .card .city {
+      color: #dc7844;
+      font-weight: 600;
+    }
+    .card ul, .card ol {
+      list-style: none;
+      padding: 0;
+    }
+    .card li {
+      font-size: 14px;
+      color: #a5a099;
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    .card li::before {
+      content: "·";
+      position: absolute;
+      left: 4px;
+      color: #dc7844;
+      font-weight: 700;
+    }
+
+    /* TAG BADGES */
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-right: 6px;
+    }
+    .badge-arrest { background: rgba(200, 50, 50, 0.2); color: #ef6b6b; }
+    .badge-convicted { background: rgba(220, 120, 68, 0.15); color: #dc7844; }
+    .badge-alert { background: rgba(220, 180, 50, 0.15); color: #dbb43c; }
+    .badge-info { background: rgba(80, 140, 220, 0.12); color: #6ba3e0; }
+
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      background: #18181c;
+      color: #8a8680;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      color: #b5b0a8;
+    }
+    tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* CRIME BOX */
+    .crime-box {
+      background: rgba(200, 50, 50, 0.06);
+      border-left: 3px solid #dc4444;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .crime-box.code {
+      background: rgba(80, 140, 220, 0.05);
+      border-left-color: #6ba3e0;
+    }
+    .crime-box .crime-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e8e4dc;
+    }
+    .crime-box .crime-penalty {
+      font-size: 12px;
+      color: #a5a099;
+      margin-top: 4px;
+    }
+
+    /* EXTRA */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(220, 120, 68, 0.08), rgba(220, 120, 68, 0.02));
+      border: 1px solid rgba(220, 120, 68, 0.15);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .highlight-box p { margin-bottom: 0; font-size: 14px; }
+
+    ul.bullet {
+      list-style: none;
+      padding: 0;
+    }
+    ul.bullet li {
+      font-size: 14px;
+      color: #a5a099;
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    ul.bullet li::before {
+      content: "·";
+      position: absolute;
+      left: 4px;
+      color: #dc7844;
+      font-weight: 700;
+    }
+    ul.bullet li strong { color: #d8d4cc; }
+
+    /* BOTTOM NAV */
+    .footer {
+      background: #0a0a0c;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 32px 0;
+      text-align: center;
+      font-size: 13px;
+      color: #5a5650;
+    }
+    .footer strong { color: #8a8680; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      header h1 { font-size: 24px; }
+      header { padding: 32px 0 28px; }
+      .toc { padding: 20px; }
+      .card { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="tag">Pesquisa Jurídica e Administrativa</div>
+    <h1>Retenção de <span>Contribuição Previdenciária</span> — Casos dos TCEs e Análise Completa</h1>
+    <p>Municípios que <strong>descontaram</strong> a contribuição previdenciária dos servidores e <strong>não repassaram</strong> ao RPPS / caixa de previdência. Inclui decisões do TCE-PR, outros tribunais, jurisprudência do STJ e análise de caso concreto com responsabilização criminal, improbidade e consequências no Tribunal de Contas.</p>
+    <div class="header-meta">
+      <div class="header-meta-item">Base de dados: <span>junho/2026</span></div>
+      <div class="header-meta-item">Jurisdições: <span>PR, PB, PE, CE, MG, RJ, SP, MT, SC, RN, PI, AM + STJ</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ===== TOC ===== -->
+<nav class="toc">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#sec1">TCE-PR — Casos Concretos</a></li>
+    <li><a href="#sec2">Outros Tribunais — Panorama Nacional</a></li>
+    <li><a href="#sec3">Crimes e Responsabilidade</a></li>
+    <li><a href="#sec4">Prisões e Condenações Reais</a></li>
+    <li><a href="#sec5">Análise de Caso (Prefeitura X — 3 meses, tesoureira)</a></li>
+    <li><a href="#sec6">Consequências no TCE-PR</a></li>
+    <li><a href="#sec7">Responsabilidade por agente</a></li>
+    <li><a href="#sec8">Defesas que (não) funcionam</a></li>
+    <li><a href="#sec9">Recomendações Práticas</a></li>
+  </ol>
+</nav>
+
+<!-- ===== SEC 1 ===== -->
+<section class="section" id="sec1">
+  <h2><span class="num">1</span> TCE-PR — Casos Concretos</h2>
+
+  <div class="card">
+    <div class="card-title"><span class="city">Curitiba / IPMC</span></div>
+    <ul>
+      <li>Processo: Petição Interventiva 590482/20</li>
+      <li>Irregularidade: retenção indevida de valores para o IPMC (RPPS) desde 2015/2016</li>
+      <li>Dívida confessada: R$ 233 milhões (somente um dos parcelamentos)</li>
+      <li>TJ-PR manteve liminar do Sigmuc impedindo saque de R$ 600 mi do IPMC pela prefeitura</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="city">Paranaguá</span></div>
+    <ul>
+      <li>Ausência de aportes ao RPPS desde 2015</li>
+      <li>Termo de Ajustamento de Gestão (TAG) homologado pelo TCE-PR</li>
+      <li>Prazo: 60 dias para consultoria, 180 dias para integrar servidores</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">10 municípios sob recomendação do TCE-PR (2025)</div>
+    <ul>
+      <li>Auditorias fevereiro-dezembro/2025 → <strong>20 acórdãos</strong></li>
+      <li>Chopinzinho, Francisco Beltrão, Imbituva, Iporã, Itaúna do Sul, Matelândia, Moreira Sales, Palmeira, Querência do Norte e Terra Roxa</li>
+      <li>Falhas: atraso repasses, cálculos atuariais, irregularidades no CADPREV</li>
+      <li>Risco de perda do CRP e bloqueio de transferências voluntárias</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Demais julgados do TCE-PR</div>
+    <ul>
+      <li>Processo 556826/2011: "não repasse de contribuições retidas configura crime de apropriação indébita previdenciária"</li>
+      <li>Instrução Normativa 28/2024: limites, alíquotas, governança dos RPPS</li>
+      <li>Prejulgado 28: regras de aposentadoria (ECs 41/03, 47/05, 70/12 e 103/19)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SEC 2 ===== -->
+<section class="section" id="sec2">
+  <h2><span class="num">2</span> Outros Tribunais — Panorama Nacional</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tribunal</th>
+          <th>Municípios / Casos</th>
+          <th>Destaque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TCE-PB</strong></td>
+          <td>São Bento, Juru, Alagoinha (2018), Serra Grande (2016), Belém do Brejo do Cruz (2015), Cacimbas (2014), Piancó</td>
+          <td>Contas rejeitadas; ex-prefeito condenado</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-CE</strong></td>
+          <td>Caucaia; R$ 67 milhões pendentes (2016)</td>
+          <td>Sistematicamente tipifica como 168-A</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-MG</strong></td>
+          <td>Consulta 1119826 — tese normativa</td>
+          <td>Prescrição tributária não extingue obrigação financeira</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-RJ</strong></td>
+          <td>Japeri (Previ), Duque de Caxias (2017), Meriti (2017)</td>
+          <td>Apropriação indébita + comunicação ao MP</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-PI</strong></td>
+          <td>Nota Técnica da Comissão Permanente RPPS</td>
+          <td>Multa, imputação de débito, MP de Contas</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-RN</strong></td>
+          <td>Ceará-Mirim — multa a ex-prefeitos</td>
+          <td>Não podem suspender desconto</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-MT</strong></td>
+          <td>Processo 148202/2018; Resolução 35/2010</td>
+          <td>Direito a devolução; prescrição quinquenal</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-PE</strong></td>
+          <td>Carpina (IPMC), Brejo da Madre de Deus</td>
+          <td>Comunicação obrigatória ao MP</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-SP</strong></td>
+          <td>Artigo técnico (2015)</td>
+          <td>"Crime comum e ato de improbidade"</td>
+        </tr>
+        <tr>
+          <td><strong>TCE-AM</strong></td>
+          <td>Processo 11743/2022</td>
+          <td>Contas irregulares do Fundo de Previdência</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SEC 3 ===== -->
+<section class="section" id="sec3">
+  <h2><span class="num">3</span> Crimes e Responsabilidade</h2>
+
+  <div class="crime-box">
+    <div class="crime-title">Art. 168-A — Apropriação indébita previdenciária</div>
+    <div class="crime-penalty">"Deixar de repassar à entidade previdenciária" — Pena: 2 a 5 anos + multa</div>
+  </div>
+  <div class="crime-box">
+    <div class="crime-title">Art. 312 — Peculato</div>
+    <div class="crime-penalty">"Apropriar-se funcionário público de dinheiro, de que tem posse em razão do cargo" — Pena: 2 a 12 anos + multa</div>
+  </div>
+  <div class="crime-box code">
+    <div class="crime-title">Lei 8.429/1992 — Improbidade Administrativa (arts. 10 e 11)</div>
+    <div class="crime-penalty">Enriquecimento ilícito + violação de princípios — perda da função, inelegibilidade, multa civil</div>
+  </div>
+  <div class="crime-box code">
+    <div class="crime-title">Lei 8.137/1990 — Sonegação previdenciária</div>
+    <div class="crime-penalty">Pena: 2 a 5 anos + multa</div>
+  </div>
+
+  <div class="card" style="margin-top: 20px;">
+    <div class="card-title">Quadro de penas máximas</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Crime</th>
+            <th>Pena</th>
+            <th>Prescrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Apropriação indébita (168-A)</td><td>2-5 anos</td><td>8 anos</td></tr>
+          <tr><td>Peculato (312)</td><td>2-12 anos</td><td>16 anos</td></tr>
+          <tr><td>Sonegação (337-A)</td><td>2-5 anos</td><td>8 anos</td></tr>
+          <tr><td>Improbidade (8.429/92)</td><td>Multa civil + perda função</td><td>5-10 anos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEC 4 ===== -->
+<section class="section" id="sec4">
+  <h2><span class="num">4</span> Prisões e Condenações Reais</h2>
+
+  <div class="card">
+    <div class="card-title"><span class="badge badge-arrest">PRESO</span> <span class="city">Edson Moura</span> — ex-prefeito de Paulínia/SP</div>
+    <ul>
+      <li><strong>Preso em 18/06/2026</strong> no Guarujá (condomínio fechado) pela PM</li>
+      <li>Pena: 2 anos e 7 meses em regime semiaberto</li>
+      <li>Crime: sonegação de contribuição previdenciária (R$ 443,1 mil)</li>
+      <li>Trânsito em julgado em 22/05/2026 — sem mais recursos</li>
+      <li>Defesa pediu prisão domiciliar (76 anos, problemas de saúde) — <strong>negado</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge badge-convicted">CONDENADO</span> <span class="city">José Pavan Junior</span> — ex-prefeito de Paulínia/SP</div>
+    <ul>
+      <li>Condenação: 4 anos e 11 meses em semiaberto</li>
+      <li>Gestão fraudulenta do Pauliprev (RPPS municipal)</li>
+      <li>Prejuízo de R$ 35,4 milhões aos cofres da previdência</li>
+      <li>Status: cabe recurso ao TRF-3 (ainda não preso)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge badge-convicted">CONDENADO (STJ)</span> <span class="city">Araguatins/TO</span></div>
+    <ul>
+      <li>Retenção de contribuição de 1.200 servidores entre 2005-2012 (<strong>R$ 3,2 milhões</strong>)</li>
+      <li>STJ: simples retenção já configura crime, mesmo sem dano imediato ao INSS</li>
+      <li>Multa pode chegar a 10% do valor retido</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge badge-alert">EM ANDAMENTO</span> Outros casos</div>
+    <ul>
+      <li><strong>MPF/PI</strong> — ex-prefeito condenado por não repassar contribuição de 5 conselheiros tutelares</li>
+      <li><strong>São Domingos/GO</strong> — Gervásio Gonçalves da Silva — denunciado pelo MP-GO</li>
+      <li><strong>Piancó/PB</strong> — Francisco Sales de Lima Lacerda — improbidade confirmada</li>
+      <li><strong>Brejo da Madre de Deus/PE</strong> — determinação judicial de regularização (30 dias)</li>
+      <li><strong>Santa Maria da Boa Vista/PE</strong> — MPPE investiga (R$ 9,1 mi ao RPPS + R$ 369 mil ao RGPS não repassados)</li>
+      <li><strong>Ceará-Mirim/RN</strong> — ex-prefeitos multados, prazo de 90 dias para regularizar CADPREV</li>
+      <li><strong>Marã/AM</strong> — MPAM investiga suposta apropriação indébita + improbidade</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Tese consolidada do STJ:</strong> o pagamento <strong>integral</strong> do débito (com correção) extingue a punibilidade do crime de apropriação indébita previdenciária, mesmo após o trânsito em julgado. Essa é a saída mais eficiente para gestores que queiram evitar a prisão.</p>
+  </div>
+</section>
+
+<!-- ===== SEC 5 ===== -->
+<section class="section" id="sec5">
+  <h2><span class="num">5</span> Análise de Caso: Prefeitura reteve 3 meses e tesoureira usou para pagar credores</h2>
+
+  <div class="highlight-box">
+    <p><strong>Cenário:</strong> Prefeitura X reteve 3 meses de contribuição previdenciária dos servidores. A tesoureira não repassou ao RPPS/INSS e usou os valores para pagar outros credores (fornecedores, despesas correntes).</p>
+  </div>
+
+  <h3>Crimes configurados</h3>
+  <ul class="bullet">
+    <li><strong>Apropriação indébita previdenciária</strong> (art. 168-A) — 2 a 5 anos — por ter retido e não repassado</li>
+    <li><strong>Peculato</strong> (art. 312) — 2 a 12 anos — por ser funcionária pública que desviou valores em proveito alheio (credores)</li>
+    <li><strong>Sonegação previdenciária</strong> (art. 337-A) — 2 a 5 anos — em concurso material</li>
+  </ul>
+
+  <h3>Improbidade administrativa (Lei 8.429/92)</h3>
+  <ul class="bullet">
+    <li><strong>Art. 10</strong> — enriquecimento ilícito (enriquecimento do ente ao pagar credores com dinheiro vinculado)</li>
+    <li><strong>Art. 11</strong> — violação dos princípios da Administração Pública</li>
+    <li><strong>Sanções:</strong> perda da função, suspensão dos direitos políticos (5-14 anos), multa civil de até 24x a vantagem</li>
+  </ul>
+
+  <h3>O que o TCE-PR faz com o caso</h3>
+  <ul class="bullet">
+    <li>Rejeita as contas anuais do exercício.</li>
+    <li>Aplica multa pessoal (pode chegar a R$ 50 mil+ por agente).</li>
+    <li>Imputa débito com atualização monetária + juros.</li>
+    <li>Comunica <strong>obrigatoriamente</strong> ao Ministério Público Estadual e/ou Federal.</li>
+    <li>MPC-PR também atua no processo.</li>
+  </ul>
+
+  <h3>E o servidor que contribuiu?</h3>
+  <ul class="bullet">
+    <li><strong>Tempo de contribuição é preservado</strong> — mesmo sem repasse, o desconto em folha vale.</li>
+    <li>Mas a aposentadoria pode ser negada pelo RPPS se o CRP não for emitido.</li>
+    <li>O servidor tem direito a ação judicial contra o município (art. 37, §6º, CF).</li>
+  </ul>
+</section>
+
+<!-- ===== SEC 6 ===== -->
+<section class="section" id="sec6">
+  <h2><span class="num">6</span> Consequências no TCE-PR</h2>
+
+  <div class="card">
+    <div class="card-title">Efeitos diretos para o gestor</div>
+    <ul>
+      <li><strong>Rejeição das contas anuais</strong> — art. 16 Lei 8.443/1992</li>
+      <li><strong>Multa pessoal</strong> — arts. 87+ do Regimento Interno TCE-PR</li>
+      <li><strong>Imputação de débito</strong> — débito atualizado + juros, inscrito em dívida ativa</li>
+      <li><strong>Comunicação ao MP</strong> — para ação penal (168-A) e improbidade (8.429/92)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Inelegibilidade (Lei Complementar 64/1990, art. 1º, I, "g")</div>
+    <ul>
+      <li>Contas rejeitadas por irregularidade insanável que configure ato doloso de improbidade</li>
+      <li>Inelegível por <strong>8 anos</strong></li>
+      <li>Aplica-se mesmo que o gestor já tenha saído do cargo</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Prazo importante:</strong> TCE-PR concedeu prazo de 6 meses (a partir de 22/01/2026) para municípios com RPPS adequarem normas à EC 103/2019 — cerca de 1.100 atos com análise interrompida. Pode negar registro de aposentadorias se não regularizar.</p>
+  </div>
+</section>
+
+<!-- ===== SEC 7 ===== -->
+<section class="section" id="sec7">
+  <h2><span class="num">7</span> Responsabilidade por Agente</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Agente</th>
+          <th>Penal</th>
+          <th>Improbidade</th>
+          <th>TCE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tesoureira</strong></td>
+          <td>Autora direta (168-A, 312, 337-A)</td>
+          <td>Sim — arts. 10 e 11</td>
+          <td>Sim</td>
+        </tr>
+        <tr>
+          <td><strong>Prefeito</strong></td>
+          <td>Omissão imprópria (art. 13 CP) — coautor</td>
+          <td>Sim — dolo específico</td>
+          <td>Sim — solidário</td>
+        </tr>
+        <tr>
+          <td><strong>Sec. Finanças</strong></td>
+          <td>Omissão imprópria / ordem eventual</td>
+          <td>Sim</td>
+          <td>Sim — direta</td>
+        </tr>
+        <tr>
+          <td><strong>Contador</strong></td>
+          <td>Somente se participou dolosamente</td>
+          <td>Eventual</td>
+          <td>Eventual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SEC 8 ===== -->
+<section class="section" id="sec8">
+  <h2><span class="num">8</span> Defesas que (não) Funcionam</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tese de defesa</th>
+          <th>Funciona?</th>
+          <th>Por quê</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Cumpri ordem do prefeito"</td>
+          <td style="color:#ef6b6b;"><strong>NÃO</strong></td>
+          <td>Não exime — art. 22 da LIA não afasta dolo</td>
+        </tr>
+        <tr>
+          <td>"Não sabia que era crime"</td>
+          <td style="color:#ef6b6b;"><strong>NÃO</strong></td>
+          <td>Erro de proibição não escusa se evitável</td>
+        </tr>
+        <tr>
+          <td>"Achei que era o mesmo caixa"</td>
+          <td style="color:#ef6b6b;"><strong>NÃO</strong></td>
+          <td>Erro grosseiro sobre norma não exime</td>
+        </tr>
+        <tr>
+          <td>"Usei para pagar credores por necessidade"</td>
+          <td style="color:#dbb43c;"><strong>MITIGA</strong></td>
+          <td>Pode abrandar a pena, mas não elimina o crime</td>
+        </tr>
+        <tr>
+          <td>"Fui coagida"</td>
+          <td style="color:#6ba3e0;"><strong>TALVEZ</strong></td>
+          <td>Se coação moral irresistível — exclui ilicitude (art. 23, CP)</td>
+        </tr>
+        <tr>
+          <td>"O prefeito não sabia"</td>
+          <td style="color:#dbb43c;"><strong>RARO</strong></td>
+          <td>Precisa provar que não havia omissão dolosa</td>
+        </tr>
+        <tr>
+          <td><strong>"Pagamento integral do débito"</strong></td>
+          <td style="color:#6bce6b;"><strong>SIM</strong></td>
+          <td>Extingue punibilidade (STJ — AgRg REsp 1.814.484/SP)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box" style="margin-top: 16px;">
+    <p><strong>A melhor defesa é o pagamento integral.</strong> A tese mais eficiente para evitar a prisão (ou extingui-la) é pagar o valor devido ao RPPS/INSS com correção. O STJ é firme: o pagamento integral extingue a punibilidade, mesmo depois de condenado.</p>
+  </div>
+</section>
+
+<!-- ===== SEC 9 ===== -->
+<section class="section" id="sec9">
+  <h2><span class="num">9</span> Recomendações Práticas (Prevenção)</h2>
+
+  <div class="card">
+    <div class="card-title">1. Segregação de funções</div>
+    <ul>
+      <li>Quem elabora a folha não pode emitir GPS/GRPS.</li>
+      <li>Quem autoriza o pagamento não pode conferir o crédito no RPPS.</li>
+      <li>Funções críticas exigem ao menos <strong>2 pessoas distintas</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">2. Conciliação bancária diária</div>
+    <ul>
+      <li>Comparar valor retido em folha com o creditado na conta do RPPS/INSS <strong>todo dia</strong>.</li>
+      <li>Divergência justificada por escrito no mesmo dia.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">3. Conta transitória específica e bloqueada</div>
+    <ul>
+      <li>Valor retido cai em conta própria, <strong>bloqueada para outras finalidades</strong>.</li>
+      <li>O sistema bancário deve gerar a GPS/GRPS automaticamente.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">4. Ordem cronológica de pagamento</div>
+    <ul>
+      <li>Retenções previdenciárias são <strong>a primeira prioridade</strong> (art. 38 da LRF).</li>
+      <li>Documentar formalmente essa prioridade no fluxo de caixa.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">5. Auditoria interna mensal</div>
+    <ul>
+      <li>Cruzamento mensal entre: <strong>folha × guias × extrato do RPPS × saídas do caixa</strong>.</li>
+      <li>Relatório assinado pelo controlador e enviado ao prefeito.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">6. Termo de ciência do tesoureiro</div>
+    <ul>
+      <li>Tesoureiro assina <strong>termo mensal</strong> declarando que todos os repasses foram efetuados.</li>
+      <li>Se não foram, explica por escrito <strong>no mesmo dia</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">7. Capacitação da equipe</div>
+    <ul>
+      <li>Tesoureiros, contadores e ordenadores devem saber: valores retidos de servidores <strong>nunca são do município</strong>.</li>
+      <li>Usar para outra finalidade = crime + improbidade + rejeição de contas.</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Regra de ouro:</strong> em dificuldade financeira, o repasse previdenciário é a primeira despesa a pagar — antes de folha de comissionados, fornecedores, contratos. Dinheiro retido do servidor não é verba orçamentária do gestor, é dinheiro alheio em trânsito.</p>
+  </div>
+</section>
+
+<!-- ===== QUADRO RESUMO ===== -->
+<section class="section">
+  <h2><span class="num">—</span> Quadro Resumo — Casos com prisão/condenação</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Casos</th>
+          <th>UF</th>
+          <th>Gestor</th>
+          <th>Situação</th>
+          <th>Pena / Sanção</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Paulínia — Edson Moura</td>
+          <td>SP</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-arrest">PRESO</span></td>
+          <td>2a7m semiaberto</td>
+        </tr>
+        <tr>
+          <td>Paulínia — Pavan Jr.</td>
+          <td>SP</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-convicted">CONDENADO</span></td>
+          <td>4a11m semiaberto + R$ 35,4mi</td>
+        </tr>
+        <tr>
+          <td>Araguatins</td>
+          <td>TO</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-convicted">CONDENADO (STJ)</span></td>
+          <td>2-5a + multa 10% valor</td>
+        </tr>
+        <tr>
+          <td>MPF/PI</td>
+          <td>PI</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-convicted">CONDENADO</span></td>
+          <td>168-A (AP. INDÉBITA)</td>
+        </tr>
+        <tr>
+          <td>São Domingos</td>
+          <td>GO</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-alert">DENUNCIADO</span></td>
+          <td>Em instrução</td>
+        </tr>
+        <tr>
+          <td>Piancó</td>
+          <td>PB</td>
+          <td>Ex-prefeito</td>
+          <td><span class="badge badge-convicted">IMPROBIDADE</span></td>
+          <td>Embargos negados</td>
+        </tr>
+        <tr>
+          <td>Brejo da Madre de Deus</td>
+          <td>PE</td>
+          <td>Ex-gestão</td>
+          <td><span class="badge badge-alert">DECISÃO JUDICIAL</span></td>
+          <td>Regularizar em 30 dias</td>
+        </tr>
+        <tr>
+          <td>Marã</td>
+          <td>AM</td>
+          <td>Ex-gestão</td>
+          <td><span class="badge badge-alert">APURANDO</span></td>
+          <td>MPAM investiga</td>
+        </tr>
+        <tr>
+          <td>Santa Maria Boa Vista</td>
+          <td>PE</td>
+          <td>Ex-gestão</td>
+          <td><span class="badge badge-alert">APURANDO</span></td>
+          <td>MPPE investiga R$ 9,5mi</td>
+        </tr>
+        <tr>
+          <td>Ceará-Mirim</td>
+          <td>RN</td>
+          <td>Ex-prefeitos</td>
+          <td><span class="badge badge-convicted">MULTADOS</span></td>
+          <td>Multa + prazo 90 dias</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>Pesquisa jurídico-administrativa para <strong>Aleksandro</strong> — Secretário de Finanças &middot; Inajá/PR &middot; <strong>junho/2026</strong></p>
+    <p style="margin-top: 4px;">Fontes: TCE-PR, TCE-PB, TCE-PE, TCE-CE, TCE-MG, TCE-RJ, TCE-PI, TCE-RN, TCE-MT, TCE-SP, TCE-AM, STJ, G1, MPF, MP-GO, TJPB, TJ-PR</p>
+  </div>
+</footer>
+
+</body>
+</html>

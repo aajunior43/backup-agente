@@ -1,0 +1,133 @@
+﻿Código Fonte,Origem,Aplicação,Desdobramento,Detalhamento,Descrição da Fonte,Código STN,Descrição STN
+001,01,07,00,00,Recursos do Tesouro (Descentralizados),501,Outros Recursos não Vinculados
+040,08,03,00,00,Regime Próprio de Previdência Social,800,Recursos Vinculados ao RPPS - Fundo em Capitalização (Plano Previdenciário)
+068,01,99,00,00,Fundo Especial da Câmara Municipal,759,Recursos Vinculados a Fundos
+069,01,99,00,00,Receitas Intraorçamentárias P869/05STN,501,Outros Recursos não Vinculados
+075,10,01,00,00,Operações de Crédito por Antecipação da Receita Orçamentária – ARO,869,Outros Recursos Extraorçamentários
+075,10,02,00,00,Operações de Crédito por Antecipação da Receita Orçamentária – ARO,869,Outros Recursos Extraorçamentários
+075,10,99,00,00,Operações de Crédito por Antecipação da Receita Orçamentária – ARO,869,Outros Recursos Extraorçamentários
+094,94,99,00,00,Retenções em Caráter Consignatório,869,Outros Recursos Extraorçamentários
+100,08,03,00,00,Recursos Vinculados ao RPPS - Taxa de Administração,802,Recursos Vinculados ao RPPS - Taxa de Administração
+101,02,01,00,00,Fundeb 60% / Fundeb mínimo 70% - inciso XI do art. 212-A da CF,540,Transferências do FUNDEB - Impostos e Transferências de Impostos
+102,02,01,00,00,Fundeb 40% / Fundeb máximo 30% - inciso XI do art. 212-A da CF,540,Transferências do FUNDEB - Impostos e Transferências de Impostos
+103,01,01,00,00,5% Sobre Transferências Constitucionais FUNDEB,500,Recursos não Vinculados de Impostos
+104,01,01,00,00,Demais impostos vinculados à educação básica (25%),500,Recursos não Vinculados de Impostos
+105,04,01,00,00,Alienação de Ativos da Educação/Indenização de Sinistros,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+107,99,01,00,00,Salário Educação,550,Transferência do Salário-Educação
+303,01,02,00,00,Saúde - Receitas Vinculadas (EC 29/00 - 15%),500,Recursos não Vinculados de Impostos
+304,04,02,00,00,Receitas de alienação de Ativos da Saúde/Indenização de Sinistros,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+369,09,02,05,20,Serviços Prestados SUS / Faturamentos AIHs (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+369,09,02,06,20,Serviços Prestados SUS / Faturamentos AIHs (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+369,09,02,07,20,Serviços Prestados SUS / Faturamentos AIH (Outros),659,Outros Recursos Vinculados à Saúde
+494,09,02,05,20,Bloco de Custeio das Ações e Serviços Públicos de Saúde (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+494,09,02,06,20,Bloco de Custeio das Ações e Serviços Públicos de Saúde (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+495,09,02,05,20,Atenção Básica (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+495,09,02,06,20,Atenção Básica (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+495,09,02,07,20,Atenção Básica (Outros),659,Outros Recursos Vinculados à Saúde
+496,09,02,05,20,Atenção de Média e Alta Complexidade Ambulatorial e Hospitalar (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+496,09,02,06,20,Atenção de Média e Alta Complexidade Ambulatorial e Hospitalar (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+496,09,02,07,20,Atenção de Média e Alta Complexidade Ambulatorial e Hospitalar (Outros),659,Outros Recursos Vinculados à Saúde
+497,09,02,05,20,Vigilância em Saúde (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+497,09,02,06,20,Vigilância em Saúde (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+497,09,02,07,20,Vigilância em Saúde (Outros),659,Outros Recursos Vinculados à Saúde
+498,09,02,05,20,Assistência Farmacêutica (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+498,09,02,06,20,Assistência Farmacêutica (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+498,09,02,07,20,Assistência Farmacêutica (Outros),659,Outros Recursos Vinculados à Saúde
+499,09,02,05,20,Gestão do SUS (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+499,09,02,06,20,Gestão do SUS (Federal),600,Transferências Fundo a Fundo de Recursos do SUS - Governo Federal - Bloco de Manutenção
+499,09,02,07,20,Gestão do SUS (Outros),659,Outros Recursos Vinculados à Saúde
+500,09,02,05,20,Bloco de Investimentos na Rede de Serviços de Saúde (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+500,09,02,06,20,Bloco de Investimentos na Rede de Serviços de Saúde (Federal),601,Transferências Fundo a Fundo do SUS - Governo Federal - Bloco de Estruturação
+500,09,02,07,20,Bloco de Investimentos na Rede de Serviços de Saúde (Outros),659,Outros Recursos Vinculados à Saúde
+501,04,99,00,00,Receitas de Alienações de Ativos,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+502,04,99,00,00,Receitas de Alienações de Ativos - COSIP,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+503,04,04,00,00,Receitas de Alienações de Ativos - ECA/FMDCA,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+504,99,99,00,00,Outros Royalties e Compensações Financeiras e Patrimoniais Não Previdenciárias,704,Transferência da União Referente a Royalties do Petróleo e Gás Natural
+505,99,99,00,00,Royalties Tratado de Itaipu Binacional,709,Transferência da União referente à Compensação Financeira de Recursos Hídricos
+506,04,99,00,00,Receitas de Alienações de Ativos – FUNREBOM,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+507,99,99,00,00,"COSIP - Contribuição de Iluminação Pública, Art. 149-A, CF",751,Recursos da Contribuição para o Custeio do Serviço de Iluminação Pública – COSIP
+508,99,99,00,00,"Fundo de Reserva Depósitos Judiciais (Lei 10819/03, art. 3º e LC 151/2015)",757,Recursos de Depósitos Judiciais - Lides das quais o Ente faz parte
+509,99,99,00,00,Gerenciamento do Trânsito,752,Recursos Vinculados ao Trânsito
+510,01,07,00,00,Taxas - Exercício Poder de Polícia,753,Recursos provenientes de taxas e contribuições
+511,01,07,00,00,Taxas - Prestação de Serviços,753,Recursos provenientes de taxas e contribuições
+512,99,99,00,00,"CIDE (Lei 10866/04, art. 1ºB)",750,Recursos da Contribuição de Intervenção no Domínio Econômico – CIDE
+513,99,04,00,00,Penalidades Administrativas Lei n. 8069/90 - Art. 214-ECA/FMDCA,669,Outros Recursos Vinculados à Assistência Social
+514,99,99,00,00,Indenizações Recebidas por bens sinistrados de outras áreas,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+515,99,99,00,00,FUNREBOM,759,Recursos Vinculados a Fundos
+516,01,07,00,00,Precatórios - E.C. 062/2009,799,Outras Vinculações Legais
+517,99,01,00,00,ROYALTIES/ANP - Produção de Petróleo e Gás Natural (Educação),573,Royalties do Petróleo e Gás Natural Vinculados à Educação
+517,99,02,00,00,ROYALTIES/ANP - Produção de Petróleo e Gás Natural (Saúde),635,Royalties do Petróleo e Gás Natural vinculados à Saúde
+518,09,02,05,20,Bloco de Investimento na Rede de Serviços Públicos de Saúde (Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+518,09,02,06,20,Bloco de Investimento na Rede de Serviços Públicos de Saúde (Federal),601,Transferências Fundo a Fundo do SUS - Governo Federal - Bloco de Estruturação
+550,08,03,00,00,Receita de Extinção da Entidade Previdenciária,801,Recursos Vinculados ao RPPS - Fundo em Repartição (Plano Financeiro)
+551,08,03,00,00,Compensação entre Regimes Previdenciários,800,Recursos Vinculados ao RPPS - Fundo em Capitalização (Plano Previdenciário)
+552,04,99,00,00,Alienação de Ativos para amortização dívida/capitalização do RPPS,755,Recursos de Alienação de Bens/Ativos - Administração Direta
+555,99,99,00,00,SANEPAR - Compensação Financeira ao MEIO AMBIENTE do Município,799,Outras Vinculações Legais
+556,99,99,00,00,Transferências Lei 9615/98,749,Outras vinculações de transferências
+879,09,04,05,04,Transf. Voluntárias de Entidades Gov. Nacionais - ECA/FMDCA (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+879,09,04,06,04,Transf. Voluntárias de Entidades Gov. Nacionais - ECA/FMDCA (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+879,09,04,07,04,Transf. Voluntárias de Entidades Gov. Nacionais - ECA/FMDCA (Outros),669,Outros Recursos Vinculados à Assistência Social
+880,03,04,02,10,Contribuições e Legados de Entidades não Gover. ECA/FMDCA,665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+900,03,06,02,11,Fundo do Idoso (Doações),665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+900,09,06,05,05,Fundo do Idoso (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+900,09,06,06,05,Fundo do Idoso (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+900,09,06,07,05,Fundo do Idoso (Outros),669,Outros Recursos Vinculados à Assistência Social
+932,09,06,06,19,IGDMSuas (3% Conselho de Assistência Social),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+933,09,06,06,19,IGDSuas (3% Conselho de Assistência Social),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+934,09,06,05,06,Bloco de financiamento da Proteção Social Básica - SUAS (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+934,09,06,06,06,Bloco de financiamento da Proteção Social Básica - SUAS (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+934,09,06,07,06,Bloco de financiamento da Proteção Social Básica - SUAS (Outros),669,Outros Recursos Vinculados à Assistência Social
+935,09,06,05,07,Bloco de financiamento da Proteção Social Especial - SUAS (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+935,09,06,06,07,Bloco de financiamento da Proteção Social Especial - SUAS (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+935,09,06,07,07,Bloco de financiamento da Proteção Social Especial - SUAS (Outros),669,Outros Recursos Vinculados à Assistência Social
+936,09,06,05,08,Componente para Qualificação da Gestão - SUAS (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+936,09,06,06,08,Componente para Qualificação da Gestão - SUAS (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+936,09,06,07,08,Componente para Qualificação da Gestão - SUAS (Outros),669,Outros Recursos Vinculados à Assistência Social
+937,09,06,05,09,Bloco de Investimentos - SUAS (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+937,09,06,06,09,Bloco de Investimentos - SUAS (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+937,09,06,07,09,Bloco de Investimentos - SUAS (Outros),669,Outros Recursos Vinculados à Assistência Social
+938,09,06,05,23,Proteção Social Especial de Média Complexidade (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+938,09,06,06,23,Proteção Social Especial de Média Complexidade (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+939,09,06,05,24,Proteção Social Especial de Alta Complexidade (Estadual),661,Transferência de Recursos dos Fundos Estaduais de Assistência Social
+939,09,06,06,24,Proteção Social Especial de Alta Complexidade (Federal),660,Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS
+999,01,01,00,00,Reservas de Contingências (Educação),599,Outros Recursos Vinculados à Educação
+999,01,02,00,00,Reservas de Contingências (Saúde),659,Outros Recursos Vinculados à Saúde
+999,01,99,00,00,Reservas de Contingências (Outros),799,Outras Vinculações Legais
+1000,06,05,00,00,Recursos de Contratos de Rateio dos Consórcios - Pessoal e Encargos Sociais,880,Recursos Próprios dos Consórcios
+1001,06,05,00,00,Recursos de Contratos de Rateio dos Consórcios - Juros e Encargos da Dívida,880,Recursos Próprios dos Consórcios
+1002,06,05,00,00,Recursos de Contratos de Rateio dos Consórcios - Outras Despesas Correntes,880,Recursos Próprios dos Consórcios
+1003,06,05,00,00,Recursos de Contratos de Rateio dos Consórcios - Investimentos,880,Recursos Próprios dos Consórcios
+1004,06,05,00,00,Recursos de Contratos de Rateio dos Consórcios - Inversões Financeiras,880,Recursos Próprios dos Consórcios
+1005,03,01,01,01,Transferências Voluntárias Públicas Estaduais (Educação),571,Transferências do Estado referentes a Convênios e Instrumentos Congêneres vinculados à Educação
+1005,03,02,01,01,Transferências Voluntárias Públicas Estaduais (Saúde),632,Transferências do Estado referentes a Convênios e Instrumentos Congêneres vinculados à Saúde
+1005,03,04,01,01,Transferências Voluntárias Públicas Estaduais (Assistência Social),665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+1005,03,05,01,01,Transferências Voluntárias Públicas Estaduais (Outros),701,Outras Transferências de Convênios ou Instrumentos Congêneres dos Estados
+1006,03,01,01,02,Transferências Voluntárias Públicas Federais (Educação),570,Transferências do Governo Federal referentes a Convênios e Instrumentos Congêneres vinculados à Educação
+1006,03,02,01,02,Transferências Voluntárias Públicas Federais (Saúde),631,Transferências do Governo Federal referentes a Convênios e Instrumentos Congêneres vinculados à Saúde
+1006,03,04,01,02,Transferências Voluntárias Públicas Federais (Assistência Social),665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+1006,03,05,01,02,Transferências Voluntárias Públicas Federais (Outros),700,Outras Transferências de Convênios ou Instrumentos Congêneres da União
+1007,03,01,01,03,Outras Transferências Voluntárias Públicas (Educação),572,Transferências de Municípios referentes a Convênios e Instrumentos Congêneres vinculados à Educação
+1007,03,02,01,03,Outras Transferências Voluntárias Públicas (Saúde),633,Transferências de Municípios referentes a Convênios Instrumentos Congêneres vinculados à Saúde
+1007,03,04,01,03,Outras Transferências Voluntárias Públicas (Assistência Social),665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+1008,03,01,02,12,Transferências Voluntárias Privadas Internas (Educação),575,Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Educação
+1008,03,02,02,12,Transferências Voluntárias Privadas Internas (Saúde),636,Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Saúde
+1008,03,04,02,12,Transferências Voluntárias Privadas Internas (Assistência Social),665,Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social
+1009,05,01,03,15,Operações de Crédito Internas - Contratos (Educação),574,Operações de Crédito Vinculadas à Educação
+1009,05,02,03,15,Operações de Crédito Internas - Contratos (Saúde),634,Operações de Crédito vinculadas à Saúde
+1009,05,05,03,15,Operações de Crédito Internas - Contratos (Outros),754,Recursos de Operações de Crédito
+1010,05,01,04,17,Operações de Crédito Externas - Contratos (Educação),574,Operações de Crédito Vinculadas à Educação
+1010,05,02,04,17,Operações de Crédito Externas - Contratos (Saúde),634,Operações de Crédito vinculadas à Saúde
+1010,05,05,04,17,Operações de Crédito Externas - Contratos (Outros),754,Recursos de Operações de Crédito
+1011,09,01,05,18,Transferências de Outros Programas (Educação/Estadual),576,Transferências de Recursos dos Estados para programas de educação
+1011,09,01,06,18,Transferências de Outros Programas (Educação/Federal),599,Outros Recursos Vinculados à Educação
+1011,09,02,05,18,Transferências de Outros Programas (Saúde/Estadual),621,Transferências Fundo a Fundo de Recursos do SUS - Governo Estadual
+1011,09,02,06,18,Transferências de Outros Programas (Saúde/Federal),659,Outros Recursos Vinculados à Saúde
+1011,09,04,06,18,Transferências de Outros Programas (Assistência Social),669,Outros Recursos Vinculados à Assistência Social
+1011,09,05,05,18,Transferências de Outros Programas (Outros/Estadual),749,Outras vinculações de transferências
+1011,09,05,06,18,Transferências de Outros Programas (Outros/Federal),749,Outras vinculações de transferências
+1012,03,01,02,13,Transferências Voluntárias Privadas Externas (Educação),575,Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Educação
+1012,03,02,02,13,Transferências Voluntárias Privadas Externas (Saúde),636,Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Saúde
+1013,09,01,05,18,Transferências de Outros Programas (Educação/Estadual),576,Transferências de Recursos dos Estados para programas de educação
+1014,11,01,07,21,Programas/Transferências Voluntárias Anteriores a 2013 Reclassificados (Educação),599,Outros Recursos Vinculados à Educação
+1014,11,02,07,21,Programas/Transferências Voluntárias Anteriores a 2013 Reclassificados (Saúde),659,Outros Recursos Vinculados à Saúde
+1014,11,99,07,21,Programas/Transferências Voluntárias Anteriores a 2013 Reclassificados (Outros),749,Outras vinculações de transferências

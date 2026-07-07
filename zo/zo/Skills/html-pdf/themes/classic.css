@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════════════════════════
+   Tema Clássico — Serifado, elegante, tonalidade quente
+   ═══════════════════════════════════════════════════════════ */
+
+@page {
+  size: A4;
+  margin: 2.5cm 2.8cm;
+
+  @bottom-center {
+    content: counter(page);
+    font-family: "DejaVu Serif", Georgia, serif;
+    font-size: 9pt;
+    color: #8b7355;
+    padding-top: 10px;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 11pt; }
+
+body {
+  font-family: "DejaVu Serif", Georgia, "Times New Roman", serif;
+  line-height: 1.75;
+  color: #2d2d2d;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Títulos ──────────────────────────────────────────── */
+
+h1 {
+  font-size: 24pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #d4c5a9;
+  letter-spacing: 0.5px;
+  page-break-after: avoid;
+}
+
+h2 {
+  font-size: 16pt;
+  font-weight: 600;
+  color: #3d2e1f;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  font-variant: small-caps;
+  letter-spacing: 0.8px;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  color: #4a3728;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  font-style: italic;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 11pt;
+  font-weight: 600;
+  color: #555;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  page-break-after: avoid;
+}
+
+/* ── Texto ───────────────────────────────────────────── */
+
+p {
+  margin: 0 0 14px 0;
+  text-align: justify;
+  text-indent: 1.5em;
+  orphans: 3;
+  widows: 3;
+  hyphens: auto;
+}
+
+h1 + p, h2 + p, h3 + p { text-indent: 0; }
+
+strong { color: #1a1a2e; }
+em { color: #5a4a3a; }
+
+/* ── Listas ──────────────────────────────────────────── */
+
+ul, ol {
+  margin: 10px 0 18px 0;
+  padding-left: 28px;
+}
+
+li {
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+ul li::marker { color: #8b6914; font-size: 8pt; }
+ol li::marker { color: #8b6914; font-weight: 600; }
+
+/* ── Código ──────────────────────────────────────────── */
+
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 9pt;
+  background: #faf6f0;
+  color: #3d2e1f;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+pre {
+  background: #faf8f4;
+  border: 1px solid #d4c5a9;
+  border-radius: 3px;
+  padding: 14px 18px;
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 9pt;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 16px 0;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ── Citações ────────────────────────────────────────── */
+
+blockquote {
+  margin: 20px 0;
+  padding: 14px 24px;
+  background: #faf6f0;
+  border-left: 3px solid #8b6914;
+  font-style: italic;
+  color: #4a3f35;
+}
+
+blockquote p { text-indent: 0; margin: 0; }
+
+/* ── Tabelas ─────────────────────────────────────────── */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 10pt;
+}
+
+thead {
+  border-top: 2px solid #8b6914;
+  border-bottom: 1px solid #d4c5a9;
+}
+
+th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #3d2e1f;
+}
+
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #e8dcc8;
+}
+
+tbody tr:nth-child(even) { background: #faf8f4; }
+
+/* ── Linha horizontal ────────────────────────────────── */
+
+hr {
+  border: none;
+  text-align: center;
+  margin: 30px 0;
+  height: 1px;
+}
+
+hr::after {
+  content: "�";
+  color: #d4c5a9;
+  font-size: 14pt;
+  position: relative;
+  top: -10px;
+}
+
+/* ── Links ───────────────────────────────────────────── */
+
+a { color: #8b6914; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Imagens ─────────────────────────────────────────── */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+
+/* ── Drop cap no primeiro parágrafo após h1 ──────────── */
+
+h1 + p::first-letter,
+.title-page + p::first-letter {
+  font-size: 32pt;
+  float: left;
+  line-height: 0.8;
+  padding-right: 8px;
+  padding-top: 4px;
+  color: #8b6914;
+  font-weight: 700;
+}

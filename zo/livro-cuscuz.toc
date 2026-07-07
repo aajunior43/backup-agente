@@ -1,0 +1,48 @@
+\babel@toc {portuguese}{}\relax 
+\contentsline {chapter}{Introdução}{5}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}As Origens: O Cuscuz no Magrebe}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Os Primórdios Berberes}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}O Primeiro Registo Escrito}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}O Cuscuz no Mundo Árabe e no Mediterrâneo}{8}{section.1.3}%
+\contentsline {chapter}{\numberline {2}O Cuscuz no Brasil: Uma História de Adaptação}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}A Chegada com os Portugueses}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}A Contribuição Indígena e Africana}{10}{section.2.2}%
+\contentsline {section}{\numberline {2.3}O Cuscuz pelo Brasil}{10}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Cuscuz Nordestino: O Rei do Café da Manhã}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}História e Origem}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Ingredientes e Preparo}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Modos de Servir}{12}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Cuscuz Paulista: História, Polémica e Sabor}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Origens Bandeirantes}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}O Papel das Quitandeiras}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Características e Ingredientes}{14}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Importância Cultural}{15}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Cuscuz Marroquino: O Património da Humanidade}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}História Milenar}{17}{section.5.1}%
+\contentsline {section}{\numberline {5.2}O Preparo Tradicional}{17}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Variações Regionais}{17}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Reconhecimento Mundial}{19}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Cuscuz de Tapioca: A Sobremesa que Veio da Cozinha das Escravas}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Origem Baiana}{21}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Características e Preparo}{22}{section.6.2}%
+\contentsline {section}{\numberline {6.3}O Cuscuz de Tapioca Salgado}{22}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Outras Variações Regionais no Brasil}{23}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Cuscuz Campeiro (Rio Grande do Sul)}{23}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Cuscuz Mineiro}{23}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Bijajica (Santa Catarina)}{23}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Mandipuva (Paraná)}{23}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Cuscuz de Inhame (Bahia)}{23}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Cuscuz de Arroz e Tapioca (Maranhão)}{24}{section.7.6}%
+\contentsline {chapter}{\numberline {8}O Cuscuz pelo Mundo}{25}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Cabo Verde}{25}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Sicília e Sul da Itália}{25}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Israel e Mundo Judeu}{25}{section.8.3}%
+\contentsline {section}{\numberline {8.4}França}{25}{section.8.4}%
+\contentsline {chapter}{\numberline {9}Receitas}{27}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Receita de Cuscuz Nordestino}{27}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Receita de Cuscuz Paulista}{27}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Receita de Cuscuz Marroquino}{28}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Receita de Cuscuz de Tapioca (Doce)}{29}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Receita de Cuscuz de Tapioca Salgado}{30}{section.9.5}%
+\contentsline {chapter}{Conclusão}{31}{chapter*.3}%
+\contentsline {chapter}{Referências}{33}{chapter*.4}%

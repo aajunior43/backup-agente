@@ -1,0 +1,57 @@
+Polymarket -- Esportes (27/06/2026)
+========================================
+Mercados analisados: 20 | Competitive: 1
+
+JOGOS DE HOJE (27/06):
+------------------------------
+Will Portugal win on 2026-06-27?
+  Yes: 46.5% | No: 53.5% | Vol 24h: $14.8M
+Will DR Congo win on 2026-06-27?
+  Yes: 29.5% | No: 70.5% | Vol 24h: $5.9M
+Will Colombia win on 2026-06-27?
+  Yes: 27.5% | No: 72.5% | Vol 24h: $3.2M
+
+COPA DO MUNDO 2026 -- Principais:
+------------------------------
+Will Egypt win the 2026 FIFA World Cup?
+  Yes: 0.1% | Vol Total: $89.3M
+Will Canada win the 2026 FIFA World Cup?
+  Yes: 0.1% | Vol Total: $80.2M
+Will Austria win the 2026 FIFA World Cup?
+  Yes: 0.1% | Vol Total: $73.1M
+Will Croatia win the 2026 FIFA World Cup?
+  Yes: 0.5% | Vol Total: $85.4M
+Will Argentina win the 2026 FIFA World Cup?
+  Yes: 17.9% | Vol Total: $78.5M
+Will Colombia win the 2026 FIFA World Cup?
+  Yes: 1.9% | Vol Total: $76.4M
+Will USA win the 2026 FIFA World Cup?
+  Yes: 2.2% | Vol Total: $106.8M
+Will Ecuador win the 2026 FIFA World Cup?
+  Yes: 0.7% | Vol Total: $89.3M
+Will Portugal win the 2026 FIFA World Cup?
+  Yes: 8.3% | Vol Total: $72.8M
+Will Netherlands win the 2026 FIFA World Cup?
+  Yes: 4.8% | Vol Total: $70.8M
+Will Belgium win the 2026 FIFA World Cup?
+  Yes: 1.4% | Vol Total: $78.3M
+Will Mexico win the 2026 FIFA World Cup?
+  Yes: 1.1% | Vol Total: $93.4M
+Will Japan win the 2026 FIFA World Cup?
+  Yes: 1.4% | Vol Total: $84.5M
+Will Ghana win the 2026 FIFA World Cup?
+  Yes: 0.1% | Vol Total: $68.1M
+
+COMPETITIVOS (35-65%):
+------------------------------
+Will Portugal win on 2026-06-27?
+  Yes: 46.5% | No: 53.5% | Vol 24h: $14.8M
+
+Outros mercados no top 20:
+------------------------------
+Will Benjamin Netanyahu enter Iran by June 30?
+  Yes: 0.1% | Vol 24h: $6.5M
+Will Gedion Timothewos be the next Prime Minister of Ethiopia?
+  Yes: 0.1% | Vol 24h: $2.4M
+Will Laura Siegemund be the 2026 Women’s Wimbledon Winner?
+  Yes: 0.1% | Vol 24h: $2.2M

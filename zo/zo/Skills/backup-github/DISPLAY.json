@@ -1,0 +1,5 @@
+{
+  "name": "backup-github",
+  "displayName": "🔄 GitHub Backup Automático",
+  "description": "Backup periódico do workspace para o GitHub — setup, commit e push automáticos"
+}

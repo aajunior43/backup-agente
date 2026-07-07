@@ -1,0 +1,7 @@
+{
+  "name": "proactive",
+  "version": "1.0.0",
+  "description": "OpenClaw skill: proactive",
+  "main": "index.js",
+  "openclaw": { "skill": true }
+}

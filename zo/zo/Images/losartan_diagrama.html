@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            background: #1a1a2e;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <pre class="mermaid">
+flowchart TD
+    A[💊 Losartana<br>Ingestão Oral] --> B[Fígado<br>Metabolização]
+    B --> C[Norartasartana<br>Metabolito Ativo]
+    C --> D{Bloqueio do<br>Receptor AT1}
+    
+    D --> E[Angiotensina II<br>Não pode agir]
+    D --> F[Vasodilatação<br>Periférica]
+    D --> G[↓ Secreção de<br>Aldosterona]
+    D --> H[↓ Reabsorção de<br>Sódio e Água]
+    
+    E --> I[Sem vasoconstrição]
+    F --> J[↓ Pressão<br>Arterial]
+    G --> K[↓ Retenção de<br>Líquidos]
+    H --> J
+    
+    J --> L[❤️↓ Carga<br>Cardíaca]
+    J --> M[✔ Proteção<br>Renal]
+    
+    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style B fill:#2196F3,stroke:#1565C0,color:#fff
+    style C fill:#00BCD4,stroke:#006064,color:#fff
+    style D fill:#FF9800,stroke:#E65100,color:#fff
+    style J fill:#9C27B0,stroke:#6A1B9A,color:#fff
+    style L fill:#f44336,stroke:#B71C1C,color:#fff
+    style M fill:#4CAF50,stroke:#2E7D32,color:#fff
+    </pre>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

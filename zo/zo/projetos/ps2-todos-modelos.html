@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todos os Modelos do PlayStation 2 — Catálogo Completo</title>
+<style>
+:root {
+  --bg: #0a0a0e; --bg2: #111118; --card: #181820; --card-hover: #1e1e2a;
+  --border: #2a2a3a; --text: #e4e4e8; --muted: #8888a0; --accent: #2563eb;
+  --accent2: #1e40af; --ps-blue: #003791; --ps-light: #006fcf;
+  --fat: #f59e0b; --slim: #10b981; --psx: #8b5cf6; --special: #ef4444; --tag-special: #f97316;
+}
+.light {
+  --bg: #f8f8fc; --bg2: #eeeef4; --card: #ffffff; --card-hover: #f4f4f8;
+  --border: #d4d4dc; --text: #1a1a24; --muted: #6a6a7a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; transition: background .3s, color .3s; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+header { background: linear-gradient(135deg, #003791 0%, #001a4a 50%, #0a0a14 100%); padding: 3rem 1.5rem 2.5rem; text-align: center; border-bottom: 3px solid var(--ps-light); }
+header h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight:900; color:#fff; letter-spacing:-0.5px; text-shadow:0 2px 12px rgba(0,111,207,0.4); }
+header p { color:rgba(255,255,255,0.7); font-size:1.1rem; margin-top:0.5rem; }
+nav { position:sticky; top:0; z-index:100; background:var(--bg2); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+nav .nav-inner { display:flex; gap:0; overflow-x:auto; max-width:1400px; margin:0 auto; padding:0 1rem; -webkit-overflow-scrolling:touch; }
+nav a { display:block; padding:0.75rem 1rem; text-decoration:none; color:var(--muted); font-weight:600; font-size:0.85rem; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+nav a:hover, nav a.active { color:var(--accent); border-bottom-color:var(--accent); }
+.toolbar { display:flex; justify-content:flex-end; gap:0.5rem; padding:0.75rem 1.5rem; max-width:1400px; margin:0 auto; }
+.toolbar button { padding:0.4rem 1rem; border:1px solid var(--border); border-radius:8px; background:var(--card); color:var(--text); cursor:pointer; font-size:0.8rem; font-weight:600; transition:all .2s; }
+.toolbar button:hover { background:var(--card-hover); border-color:var(--accent); color:var(--accent); }
+section { padding:2rem 0; }
+.section-header { margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border); }
+.section-header h2 { font-size:1.6rem; font-weight:800; display:flex; align-items:center; gap:0.6rem; }
+.badge { display:inline-block; padding:0.15rem 0.6rem; border-radius:999px; font-size:0.7rem; font-weight:700; letter-spacing:0.3px; }
+.badge-fat { background:rgba(245,158,11,0.15); color:var(--fat); }
+.badge-slim { background:rgba(16,185,129,0.15); color:var(--slim); }
+.badge-psx { background:rgba(139,92,246,0.15); color:var(--psx); }
+.badge-special { background:rgba(239,68,68,0.15); color:var(--special); }
+.badge-limited { background:rgba(249,115,22,0.15); color:var(--tag-special); }
+.badge-japan { background:rgba(220,38,38,0.12); color:#dc2626; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.25rem; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:transform .2s,box-shadow .2s,border-color .2s; }
+.card:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.3); border-color:var(--accent); }
+.card-img { width:100%; height:220px; object-fit:contain; background:#0a0a12; padding:1rem; cursor:pointer; }
+.card-body { padding:1rem 1.1rem 1.2rem; }
+.card-body h3 { font-size:1rem; font-weight:700; margin-bottom:0.3rem; }
+.card-body .subtitle { font-size:0.8rem; color:var(--muted); margin-bottom:0.5rem; }
+.card-body .meta { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.6rem; }
+.card-body .desc { font-size:0.8rem; color:var(--muted); line-height:1.5; }
+.card-body .price { font-weight:700; color:var(--accent); font-size:0.85rem; margin-top:0.4rem; }
+.stats-bar { display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; padding:1.5rem; background:var(--bg2); border:1px solid var(--border); border-radius:14px; margin-bottom:1.5rem; }
+.stat { text-align:center; }
+.stat-value { font-size:1.8rem; font-weight:900; color:var(--accent); }
+.stat-label { font-size:0.75rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+.lightbox { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.92); z-index:9999; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s; }
+.lightbox.open { opacity:1; pointer-events:auto; }
+.lightbox img { max-width:90%; max-height:85vh; object-fit:contain; border-radius:8px; }
+.lightbox .close { position:absolute; top:1.5rem; right:1.5rem; font-size:2rem; color:#fff; cursor:pointer; background:rgba(255,255,255,0.1); border:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background .2s; }
+.lightbox .close:hover { background:rgba(255,255,255,0.2); }
+footer { text-align:center; padding:2rem; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:2rem; }
+footer a { color:var(--accent); }
+.color-dot { display:inline-block; width:12px; height:12px; border-radius:50%; border:1px solid rgba(255,255,255,0.2); vertical-align:middle; margin-right:3px; }
+@media (max-width:640px) { .grid { grid-template-columns:1fr; } .stats-bar { gap:1rem; } nav a { padding:0.6rem 0.75rem; font-size:0.75rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PlayStation 2</h1>
+  <p>Catálogo completo de todos os modelos, revisões de hardware, cores e edições limitadas • 2000–2013</p>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#stats">Visão Geral</a>
+    <a href="#fat">Fat</a>
+    <a href="#slim">Slim</a>
+    <a href="#psx">PSX DESR</a>
+    <a href="#cores-fat">Cores Fat</a>
+    <a href="#automobile">Automobile</a>
+    <a href="#cores-slim">Cores Slim</a>
+    <a href="#especiais">Especiais</a>
+  </div>
+</nav>
+
+<div class="container">
+<div class="toolbar">
+  <button onclick="document.body.classList.toggle('light');this.textContent=document.body.classList.contains('light')?'🌙 Modo Escuro':'☀️ Modo Claro'">☀️ Modo Claro</button>
+</div>
+</div>
+
+<div class="container">
+
+<section id="stats">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-value">13</div><div class="stat-label">Revisões Hardware</div></div>
+    <div class="stat"><div class="stat-value">21</div><div class="stat-label">Modelos SCPH</div></div>
+    <div class="stat"><div class="stat-value">30+</div><div class="stat-label">Variações de Cor</div></div>
+    <div class="stat"><div class="stat-value">13</div><div class="stat-label">Anos de Produção</div></div>
+    <div class="stat"><div class="stat-value">155M+</div><div class="stat-label">Unidades Vendidas</div></div>
+  </div>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;">O console mais vendido da história. Da pré-venda japonesa em março de 2000 até a última unidade em 2013, a Sony produziu <strong>5 formatos distintos</strong> de PS2 e dezenas de variações de cor e edições limitadas. As revisões são identificadas pelo código <strong>SCPH-XXXXX</strong> (Sony Computer PlayStation Hardware), onde os últimos dígitos indicam a região: 00 = Japão, 01 = América do Norte, 02 = Austrália, 04 = Europa.</p>
+</section>
+
+<section id="fat">
+  <div class="section-header">
+    <h2><span class="badge badge-fat">FAT</span> PlayStation 2 "Fat" — Revisões de Hardware</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1rem;font-size:0.85rem;">Design original com bandeja de DVD, 2 portas USB, 2 slots de memory card, porta i.LINK (até SCPH-3900x), bay de expansão (a partir do SCPH-3000x) e fonte interna.</p>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-scph-10000-model.png" alt="SCPH-10000" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-10000</h3>
+        <div class="subtitle">Primeiro modelo — Japão apenas</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Lançamento original em 4 de março de 2000. Sem bay de expansão — usava slot PCMCIA. Vinha com memory card incluso. Conhecido como "ProtoKernel".</div>
+        <div class="price">¥39.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-15000-front.png" alt="SCPH-15000" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-15000</h3>
+        <div class="subtitle">Segunda revisão — Japão apenas</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Lançado em 15 de junho de 2000. Mudanças internas mínimas. Ainda vinha com memory card incluso.</div>
+        <div class="price">¥39.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-18000-box.png" alt="SCPH-18000" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-18000</h3>
+        <div class="subtitle">Terceira revisão — Japão apenas</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">8 de dezembro de 2000. Primeiro a incluir DVD Remote Control + IR Receiver. Memory card removido do bundle.</div>
+        <div class="price">¥39.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-30000-front.png" alt="SCPH-3000x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-3000x</h3>
+        <div class="subtitle">Primeira versão mundial — 30000 (JP), 30001/30001R (EUA)</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Abril de 2001. Introduziu o bay de expansão para HDD/Network Adapter. EUA: US$299. Preço japonês caiu para ¥29.800 em novembro de 2001.</div>
+        <div class="price">¥39.800 → ¥29.800 / US$299</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-35001.png" alt="SCPH-3500x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-3500x</h3>
+        <div class="subtitle">Revisão menor mundial — 35000 (JP), 35001 (EUA)</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">2001–2002. Mudanças internas sutis. Versão americana veio em bundle especial com Gran Turismo 3: A-Spec por US$299.</div>
+        <div class="price">US$299 / ¥29.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-39001-front.png" alt="SCPH-3900x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-3900x</h3>
+        <div class="subtitle">O "melhor Fat" — última revisão com porta i.LINK</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">2002–2003. Muito elogiado pelos colecionadores. Último modelo com porta i.LINK (FireWire) para jogos em LAN. Refrigeração melhorada, fan mais barulhento.</div>
+        <div class="price">US$199 / ¥25.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-500001-front.png" alt="SCPH-5000x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-5000x</h3>
+        <div class="subtitle">Último Fat — leitor silencioso, IR embutido</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">2003–2004. Removida a porta i.LINK. Adicionado receptor IR integrado. Laser melhorado, fan mais silencioso, carregamento mais rápido.</div>
+        <div class="price">US$179 / ¥19.800</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="slim">
+  <div class="section-header">
+    <h2><span class="badge badge-slim">SLIM</span> PlayStation 2 Slim — Revisões de Hardware</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1rem;font-size:0.85rem;">Lançado no final de 2004, o Slim é 70% menor, muito mais leve e com fonte externa (até 7900x). Abertura flip-top em vez de bandeja. Porta Ethernet integrada.</p>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-700001.png" alt="SCPH-7000x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-7000x</h3>
+        <div class="subtitle">Primeiro Slim — 70000 (JP), 70001/70012 (EUA)</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Novembro de 2004. 70% menor que o Fat. Introduziu porta Ethernet integrada. Bay de expansão removido. Alguns jogos incompatíveis por falta de HDD.</div>
+        <div class="price">US$149 / ¥39.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-slim-scph-700001.png" alt="SCPH-7500x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-7500x</h3>
+        <div class="subtitle">Segunda revisão Slim — HDD completamente removido</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">2005–2006. Suporte a HDD completamente removido do hardware. Pequenas otimizações internas. Mesma aparência externa.</div>
+        <div class="price">US$129</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-slim-scph-700001.png" alt="SCPH-7700x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-7700x</h3>
+        <div class="subtitle">Terceira revisão — melhor compatibilidade PS1</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">2006–2007. Melhorias de software que aprimoraram a retrocompatibilidade com jogos de PS1. Popular na cena homebrew.</div>
+        <div class="price">US$129</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-slim-scph-700001.png" alt="SCPH-7900x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-7900x</h3>
+        <div class="subtitle">O menor e mais leve de todos os PS2</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">2007. Revisão que reduziu ainda mais peso e tamanho. Placa-mãe redesenhada. Último modelo com fonte externa.</div>
+        <div class="price">US$99</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/scph-90001.png" alt="SCPH-9000x" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>SCPH-9000x</h3>
+        <div class="subtitle">Revisão final — fonte interna, produzido até 2013</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Novembro de 2007. Fonte de alimentação voltou a ser interna. Acabamento levemente revisado. Confiabilidade aprimorada. O último PS2 fabricado.</div>
+        <div class="price">US$99 / ¥16.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="psx">
+  <div class="section-header">
+    <h2><span class="badge badge-psx">PSX</span> PSX DESR — DVR com PS2 Integrado (Japão)</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1rem;font-size:0.85rem;">O PSX DESR foi um híbrido de DVR gravador de DVD com PlayStation 2 integrado, vendido exclusivamente no Japão (2003–2005). Teve 7 revisões antes de ser descontinuado.</p>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/psx-desr-.png" alt="DESR-5000" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>DESR-5000</h3>
+        <div class="subtitle">DVR gravador de DVD + PS2 — Japão apenas</div>
+        <div class="meta"><span class="badge badge-psx">PSX DESR</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Dezembro de 2003. Combinava PS2 com gravador de DVD digital. 160GB HDD. Interface XrossMediaBar (precursora da XMB do PS3/PSP). Preço altíssimo.</div>
+        <div class="price">¥79.800 (~US$622)</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/psx-desr-.png" alt="DESR-5100 / 5500 / 5700" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>DESR-5100 / 5500 / 5700</h3>
+        <div class="subtitle">Revisões da série 5000</div>
+        <div class="meta"><span class="badge badge-psx">PSX DESR</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Revisões incrementais com melhorias de software, correções de bugs e ajustes de performance. HDD de 160GB mantido.</div>
+        <div class="price">¥79.800 ~ ¥59.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/psx-desr-.png" alt="DESR-7000 / 7100 / 7500 / 7700" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>DESR-7000 / 7100 / 7500 / 7700</h3>
+        <div class="subtitle">Série 7000 — HDD de 250GB</div>
+        <div class="meta"><span class="badge badge-psx">PSX DESR</span> <span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Segunda geração do PSX. HDD expandido para 250GB. Design levemente revisado. Descontinuado em 2005 após 7 revisões totais.</div>
+        <div class="price">¥59.800 ~ ¥45.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cores-fat">
+  <div class="section-header">
+    <h2>🎨 Variações de Cor — Modelos Fat (SCPH-37000 / 39000 / 50000)</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-ocean-blue.png" alt="Ocean Blue" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#1e90ff;"></span>Ocean Blue</h3>
+        <div class="subtitle">SCPH-37000 L — Japão, julho 2002</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-limited">Edição Limitada</span></div>
+        <div class="desc">Azul translúcido — uma das primeiras cores especiais do PS2. Apenas 250.000 unidades produzidas. Extremamente desejado por colecionadores.</div>
+        <div class="price">¥25.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-toys-blue-black.png" alt="Black" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#1a1a1a;"></span>Black</h3>
+        <div class="subtitle">SCPH-39000 — Japão, dezembro 2002</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Preto padrão com acabamento revisado.</div>
+        <div class="price">¥26.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-toys-r-us-blue.png" alt="Toys Blue" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#3b82f6;"></span>Toys Blue</h3>
+        <div class="subtitle">SCPH-39000 TB — Exclusivo Toys"R"Us Japão</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-limited">Edição Limitada</span></div>
+        <div class="desc">Dezembro de 2002. Azul exclusivo da rede Toys"R"Us no Japão.</div>
+        <div class="price">¥26.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-silver.png" alt="Silver" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#c0c0c0;"></span>Silver</h3>
+        <div class="subtitle">SCPH-39000 S — Japão, fevereiro 2003</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Prata metálico elegante.</div>
+        <div class="price">¥25.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-sakura-purple.png" alt="Sakura Purple" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#c084fc;"></span>Sakura Purple</h3>
+        <div class="subtitle">SCPH-39000 SA — Japão, fevereiro 2003</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Roxo cerejeira — cor japonesa icônica.</div>
+        <div class="price">¥25.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-aqua.png" alt="Aqua / Metallic Blue" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#06b6d4;"></span>Aqua / Metallic Blue</h3>
+        <div class="subtitle">SCPH-39000 AQ — Japão, fevereiro 2003</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Azul metálico esverdeado, muito bonito.</div>
+        <div class="price">¥25.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-midnight-black.png" alt="Midnight Black" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#0a0a0a;"></span>Midnight Black</h3>
+        <div class="subtitle">SCPH-50000 NB — Japão, novembro 2003</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Preto opaco da série 50000, com novo acabamento.</div>
+        <div class="price">¥19.799</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-satin-silver.png" alt="Satin Silver" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#a8a8a8;"></span>Satin Silver</h3>
+        <div class="subtitle">SCPH-50000 TSS — Exclusivo Toys"R"Us Japão</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span> <span class="badge badge-limited">Edição Limitada</span></div>
+        <div class="desc">Novembro de 2003. Prata acetinado exclusivo da Toys"R"Us.</div>
+        <div class="price">¥19.799</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-snow-white.png" alt="Ceramic White" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#f5f5f0;"></span>Ceramic White</h3>
+        <div class="subtitle">SCPH-50000 CW — Japão, março 2004</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Branco cerâmica elegante. Um dos mais bonitos da série 50000.</div>
+        <div class="price">¥19.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-scph-50000-sa.png" alt="Sakura Purple" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#c084fc;"></span>Sakura Purple</h3>
+        <div class="subtitle">SCPH-50000 SA — Japão, março 2004</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Versão Sakura Purple na série 50000. Tom levemente diferente do 39000 SA.</div>
+        <div class="price">¥19.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-pearl-white.png" alt="Pearl White" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#fafaf5;"></span>Pearl White</h3>
+        <div class="subtitle">SCPH-50000 PW — Japão, julho 2004</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Branco perolado com brilho sutil.</div>
+        <div class="price">¥19.800</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-midnight-blue-.png" alt="Midnight Blue" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#1e3a5f;"></span>Midnight Blue</h3>
+        <div class="subtitle">SCPH-50000 MB — Japão, novembro 2004</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span></div>
+        <div class="desc">Azul meia-noite escuro e sofisticado.</div>
+        <div class="price">¥24.800</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gundam" style="padding-top:0;">
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-gundam.png" alt="Gundam Gold" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#d4a843;"></span>Gundam Type-100 Gold</h3>
+        <div class="subtitle">SCPH-55000 GU — Japão, dezembro 2003</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Edição Limitada</span><span class="badge badge-japan">Japão Exclusivo</span></div>
+        <div class="desc">Edição comemorativa de Mobile Suit Zeta Gundam. Console dourado com desenho do Type-100. Um dos PS2 mais raros e valiosos do mundo.</div>
+        <div class="price">¥35.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="automobile">
+  <div class="section-header">
+    <h2>🚗 European Automobile Color Collection — Edição Limitadíssima (2002)</h2>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1rem;font-size:0.85rem;">Criada para celebrar 20 milhões de PS2 vendidos. Apenas <strong>2.000 unidades de cada cor</strong> (666 por região: Japão, EUA, Europa). Pintura automotiva de alto brilho. Era possível comprar o kit completo com as 5 cores por ¥250.000 no Japão. Considerada a coleção mais rara e valiosa do PS2.</p>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://cdn.consolevariations.com/928/playstation-2-automotive-edition-astral-blue.webp" alt="Astral Blue" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#3b82f6;"></span>Astral Blue</h3>
+        <div class="subtitle">SCPH-30000 RAB — 2.000 unidades</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Automobile Collection</span><span class="badge badge-japan">Japão/EUA/Europa</span></div>
+        <div class="desc">Azul metálico inspirado em pintura automotiva europeia.</div>
+        <div class="price">¥50.000 (cada)</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://cdn.consolevariations.com/924/playstation-2-automotive-edition-light-yellow.webp" alt="Light Yellow" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#fde047;"></span>Light Yellow</h3>
+        <div class="subtitle">SCPH-30000 RLY — 2.000 unidades</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Automobile Collection</span><span class="badge badge-japan">Japão/EUA/Europa</span></div>
+        <div class="desc">Amarelo claro metálico automotivo.</div>
+        <div class="price">¥50.000 (cada)</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://cdn.consolevariations.com/926/playstation-2-automotive-edition-metallic-silver.webp" alt="Metallic Silver" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#c0c0c0;"></span>Metallic Silver</h3>
+        <div class="subtitle">SCPH-30000 RMS — 2.000 unidades</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Automobile Collection</span><span class="badge badge-japan">Japão/EUA/Europa</span></div>
+        <div class="desc">Prata metálico automotivo.</div>
+        <div class="price">¥50.000 (cada)</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://cdn.consolevariations.com/927/playstation-2-automotive-edition-snow-white-aka-ceramic-white.webp" alt="Snow White" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#f5f5f0;"></span>Snow White</h3>
+        <div class="subtitle">SCPH-30000 RSW — 2.000 unidades</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Automobile Collection</span><span class="badge badge-japan">Japão/EUA/Europa</span></div>
+        <div class="desc">Branco brilhante automotivo.</div>
+        <div class="price">¥50.000 (cada)</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://cdn.consolevariations.com/931/playstation-2-automotive-edition-super-red.webp" alt="Super Red" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#dc2626;"></span>Super Red</h3>
+        <div class="subtitle">SCPH-30000 RSR — 2.000 unidades</div>
+        <div class="meta"><span class="badge badge-fat">Fat</span><span class="badge badge-limited">Automobile Collection</span><span class="badge badge-japan">Japão/EUA/Europa</span></div>
+        <div class="desc">Vermelho intenso automotivo — o mais raro da coleção.</div>
+        <div class="price">¥50.000 (cada)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cores-slim">
+  <div class="section-header">
+    <h2>🎨 Variações de Cor — Modelos Slim</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-charcoal-black.png" alt="Charcoal Black" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#2a2a2a;"></span>Charcoal Black</h3>
+        <div class="subtitle">SCPH-70000 CB — Japão, maio 2005</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Preto carvão do primeiro Slim.</div>
+        <div class="price">¥16.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-scph-7000-cw.png" alt="Ceramic White" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#f5f5f0;"></span>Ceramic White</h3>
+        <div class="subtitle">SCPH-70000 CW — Japão, maio 2005</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Branco cerâmica para o Slim.</div>
+        <div class="price">¥16.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-scph-75000-ff.png" alt="Final Fantasy XII" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#d4a843;"></span>Final Fantasy XII</h3>
+        <div class="subtitle">SCPH-75000 FF — Japão, março 2006</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span> <span class="badge badge-limited">Edição Limitada</span></div>
+        <div class="desc">Edição limitada temática de Final Fantasy XII. Bundle com o jogo incluso.</div>
+        <div class="price">¥28.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/01/ps2-pink.png" alt="Pink" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#f472b6;"></span>Pink</h3>
+        <div class="subtitle">SCPH-77000 PK — Japão, novembro 2006</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Rosa — uma das cores mais inusitadas do Slim.</div>
+        <div class="price">¥16.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/02/ps2-slim-satin-silver.png" alt="Satin Silver" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#a8a8a8;"></span>Satin Silver</h3>
+        <div class="subtitle">SCPH-90000 SS — Japão, novembro 2007</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Prata acetinado da série 90000.</div>
+        <div class="price">¥16.000</div>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img" src="https://assets.altarofgaming.com/wp-content/uploads/2023/02/ps2-crimson-red.png" alt="Cinnabar Red" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3><span class="color-dot" style="background:#dc2626;"></span>Cinnabar Red</h3>
+        <div class="subtitle">SCPH-90000 CR — Japão, julho 2008</div>
+        <div class="meta"><span class="badge badge-slim">Slim</span></div>
+        <div class="desc">Vermelho cinabre vibrante da última série Slim.</div>
+        <div class="price">¥16.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="especiais">
+  <div class="section-header">
+    <h2><span class="badge badge-special">ESPECIAIS</span> Modelos Únicos e Integrações</h2>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/SonyBRAVIA_PS2.png" alt="BRAVIA KDL22PX300" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>Sony BRAVIA KDL22PX300</h3>
+        <div class="subtitle">TV 22" 720p com PS2 Slim embutido — Reino Unido, 2010</div>
+        <div class="meta"><span class="badge badge-slim">Slim Integrado</span><span class="badge badge-special">Especial</span></div>
+        <div class="desc">TV LCD de 22 polegadas com um PS2 (SCPH-9000x) integrado na base. 4 portas HDMI. Fruto da parceria entre Sony e a loja britânica Richer Sounds. Um dos itens mais curiosos da história do PS2.</div>
+        <div class="price">£200 (~US$258)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://i.ytimg.com/vi/yPWEMk4elxc/maxresdefault.jpg" alt="Audiovox VOD10PS2" loading="lazy" onclick="openLightbox(this.src)">
+      <div class="card-body">
+        <h3>Audiovox VOD10PS2</h3>
+        <div class="subtitle">Sistema automotivo com PS2 Slim — 2009</div>
+        <div class="meta"><span class="badge badge-slim">Slim Integrado</span><span class="badge badge-special">Especial</span></div>
+        <div class="desc">Monitor de teto automotivo de 10.2" com PS2 SCPH-90000 integrado. 2 controles wireless Katana, 2 fones de ouvido IR, modulador FM, leitor de DVD incluso. Oficialmente licenciado pela Sony.</div>
+        <div class="price">US$799</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>Catálogo compilado a partir de fontes oficiais da Sony, <a href="https://en.wikipedia.org/wiki/PlayStation_2_models" target="_blank">Wikipedia</a>, <a href="https://altarofgaming.com/playstation-2-models-color-variations-limited-editions/" target="_blank">Altar of Gaming</a> e <a href="https://consolevariations.com/database/sony-playstation-2" target="_blank">ConsoleVariations</a>. | Imagens © seus respectivos autores.</p>
+  <p style="margin-top:0.5rem;">PS2 • 2000–2013 • O console mais vendido de todos os tempos</p>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Highlight active nav section
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
