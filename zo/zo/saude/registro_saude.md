@@ -2,6 +2,21 @@
 
 ## Medições
 
+### 08/07/2026
+- Pressão: 140/85 mmHg | Pulso: 98 bpm
+- Hora: ~02:00
+- Via: Telegram
+
+### 08/07/2026
+- Glicose: 349 mg/dL
+- Hora: ~12:00
+- Via: Telegram
+
+### 08/07/2026
+- Glicose: 250 mg/dL
+- Hora: ~17:57
+- Via: Telegram
+
 ### 30/06/2026
 - Pressão: 119/76 mmHg | Pulso: 112 bpm
 - Glicose: 464 mg/dL
@@ -177,6 +192,12 @@
 - Hora: ~15:44
 - Via: Telegram
 - Observação: Comeu chocolate, salgados, pães e salgadinho. Já estava usando insulina (3 unidades na noite anterior).
+
+### 07/07/2026 (noite)
+- Insulina: 5 unidades
+- Hora: ~22:00
+- Via: Telegram
+- Observação: Aumentou dose de insulina de 3 para 5 unidades.
 
 ### 07/07/2026
 - Glicose: 290 mg/dL
