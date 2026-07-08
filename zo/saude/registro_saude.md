@@ -2,6 +2,12 @@
 
 ## Medições
 
+### 08/07/2026
+- Glicose: 250 mg/dL
+- Hora: ~07:00
+- Via: Chat
+- Observação: Na noite anterior (07/07) tomou 5 unidades de insulina.
+
 ### 07/07/2026 (tarde)
 - Pressão: 130/80 mmHg (1ª) | 120/80 mmHg (2ª) | Pulso: 115 bpm
 - Glicose: 250 mg/dL

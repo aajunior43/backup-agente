@@ -171,6 +171,11 @@ Rrule: RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0
     "--exclude=*.pyc",
     "--exclude=.parcel-cache",
     "--exclude=Trash",
+    // Arquivos com secrets detectados pelo GitHub push protection
+    "--exclude=hermes-backup/scripts/openai_tts.sh",
+    "--exclude=hermes-backup/scripts/whisper_openai.sh",
+    "--exclude=hermes-backup/skills/autonomous-ai-agents/ai-agent-migration/references/session-openclaw-backup-analysis.md",
+    "--exclude=hermes-backup/skills/handling-sensitive-data/references/api-keys-in-chat-pattern.md",
     `${WORKSPACE}/`, `${BACKUP_DIR}/zo/`,
   ]);
   if (rsync.code !== 0) {
