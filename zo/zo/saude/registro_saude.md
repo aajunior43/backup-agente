@@ -17,6 +17,17 @@
 - Hora: ~17:57
 - Via: Telegram
 
+### 08/07/2026
+- Insulina: 6 unidades
+- Hora: ~22:48
+- Via: Telegram
+- Observação: Aumentou dose de 5 para 6 unidades.
+
+### 09/07/2026
+- Glicose: 330 mg/dL
+- Hora: ~08:00
+- Via: Telegram
+
 ### 30/06/2026
 - Pressão: 119/76 mmHg | Pulso: 112 bpm
 - Glicose: 464 mg/dL
