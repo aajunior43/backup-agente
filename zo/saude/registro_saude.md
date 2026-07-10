@@ -6,6 +6,7 @@
 - Glicose: 240 mg/dL
 - Hora: ~07:30
 - Via: Chat
+- Insulina: 8 unidades às ~19:08
 
 ### 08/07/2026
 - Glicose: 250 mg/dL

@@ -2,6 +2,21 @@
 
 ## Medições
 
+### 10/07/2026
+- Pressão: 134/84 mmHg | Pulso: 94 bpm
+- Hora: ~11:43
+- Via: Telegram
+
+### 10/07/2026
+- Pressão: 120/70 mmHg | Pulso: 97 bpm
+- Hora: ~16:23
+- Via: Telegram
+
+### 10/07/2026
+- Glicose: 300 mg/dL
+- Hora: ~16:30
+- Via: Telegram
+
 ### 08/07/2026
 - Pressão: 140/85 mmHg | Pulso: 98 bpm
 - Hora: ~02:00
