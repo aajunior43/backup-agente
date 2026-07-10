@@ -28,6 +28,28 @@
 - Hora: ~08:00
 - Via: Telegram
 
+### 09/07/2026
+- Glicose: 250 mg/dL
+- Hora: ~12:02
+- Via: Telegram
+- Observação: Antes do almoço.
+
+### 09/07/2026
+- Glicose: 282 mg/dL
+- Hora: ~21:30
+- Via: Telegram
+
+### 09/07/2026
+- Pressão: 125/87 mmHg | Pulso: 80 bpm
+- Hora: ~21:30
+- Via: Telegram
+
+### 09/07/2026
+- Insulina: 7 unidades (na perna)
+- Hora: ~22:18
+- Via: Telegram
+- Observação: Comeu 2 tapiocas. Aplicou insulina na perna (mudou local de aplicação).
+
 ### 30/06/2026
 - Pressão: 119/76 mmHg | Pulso: 112 bpm
 - Glicose: 464 mg/dL
