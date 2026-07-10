@@ -2,6 +2,11 @@
 
 ## Medições
 
+### 10/07/2026
+- Glicose: 240 mg/dL
+- Hora: ~07:30
+- Via: Chat
+
 ### 08/07/2026
 - Glicose: 250 mg/dL
 - Hora: ~07:00
