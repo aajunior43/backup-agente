@@ -3,8 +3,9 @@
 > Aqui vou anotando tudo que comprei, dia a dia.
 
 | Data | Descrição | Categoria | Valor | Pagamento | Obs |
-|------|-----------|-----------|-------|-----------|-----|
-| 31/07 | Marmita G - Panificadora da Vanilda | Alimentação | R$ 26,00 | — | — |
+| --- | --- | --- | --- | --- | --- |
+| 31/07 | Mercado do Jaba | Alimentação | R$ 246,00 | — | — |
+| 31/07 | Compra de alimentos | Alimentação | R$ 100,00 | Pix | Pix para Myllena Cristiny Rodrigues da Silva (Nubank) - comprovante Bradesco 31/07/2026 17:05 |
 | 30/07 | Marmita G - Panificadora da Vanilda | Alimentação | R$ 26,00 | — | — |
 | 30/07 | Pedágio EPR - Castelo Branco (Norte) - AXD2872 | Transporte | R$ 13,50 | Pix | Trânsito em 16/07 |
 | 30/07 | Pedágio EPR - Castelo Branco (Sul) - AXD2872 | Transporte | R$ 13,50 | Pix | Trânsito em 14/07 |
@@ -14,12 +15,12 @@
 
 ## Totais por mês
 
-- **Julho/2026:** R$ 179,00 + USD 11,00
+- **Julho/2026:** R$ 499,00 + USD 11,00
 - **Agosto/2026:** R$ 100,00
 
 ### Por categoria
 
-- **Alimentação:** R$ 152,00
+- **Alimentação:** R$ 472,00
 - **Assinatura/Serviço:** USD 11,00 + R$ 100,00
 - **Transporte:** R$ 27,00
 
