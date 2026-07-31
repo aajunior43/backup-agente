@@ -1,0 +1,45 @@
+# Prompt: Responsividade Mobile — Sistema Prefeitura de Inajá/PR
+
+Você é um desenvolvedor front-end especialista em design responsivo mobile-first.
+Sua tarefa é adaptar o sistema municipal da Prefeitura de Inajá/PR para funcionar
+perfeitamente em smartphones de 375–428px de largura (incluindo orientação paisagem).
+
+## Critérios de aceite
+
+1. ☐ Leiturabilidade sem zoom — fonte mínima: 14px parágrafos, 16px títulos
+2. ☐ Alvos de toque ≥ 44×44px — botões, links, abas e elementos clicáveis
+3. ☐ Zero scroll horizontal — nada estoura a largura da tela
+4. ☐ Sidebar/menu de navegação vira drawer retrátil (hamburger) em mobile
+5. ☐ Grids e tabelas adaptativos — empilhar colunas em 1 em telas pequenas
+6. ☐ Tabelas largas com overflow-x:auto e indicador visual de scroll
+7. ☐ Formulários e inputs com tamanho adequado para toque
+8. ☐ Preservar identidade visual (cores, fontes, brasão, tema escuro)
+
+## Instruções técnicas
+
+- **Mobile-first:** estilos base para mobile, media queries `min-width` para desktop
+- **Breakpoints:** 480px (smartphone pequeno), 768px (tablet), 1024px (desktop)
+- **Unidades relativas:** usar `rem`, `clamp()`, `%`, `vw` em vez de px fixos
+- **Safe areas:** considerar `env(safe-area-inset-*)` se houver elementos fixos
+- **Hamburger menu:** JavaScript vanilla (~15 linhas), sem frameworks
+- **Não quebrar desktop:** media queries só afetam ≤ 768px
+
+## O que adaptar (preencha com os detalhes do seu sistema)
+
+- [ ] Layout principal (sidebar + conteúdo, grid de cards, etc.)
+- [ ] Navegação / menu
+- [ ] Tabelas de dados
+- [ ] Formulários e inputs
+- [ ] Gráficos ou dashboards (se houver)
+- [ ] Botões e CTAs
+- [ ] Header / topo
+- [ ] Footer com brasão e informações
+
+## Formato da resposta
+
+Organize em 3 seções: 🔍 Diagnóstico → 🛠️ Alterações realizadas → ✅ Checklist
+
+Após implementar, leia o arquivo final e verifique se nenhum conteúdo foi perdido,
+o CSS/HTML original (desktop) continua intacto e as media queries estão corretas.
+
+IMPORTANTE: Aplicar antes de finalizar.

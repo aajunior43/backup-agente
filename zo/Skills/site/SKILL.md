@@ -4,6 +4,9 @@ description: Gerencia os links e pastas do Aleksandro no serviço "meus-links" (
 compatibility: Created for Zo Computer
 metadata:
   author: aleksandro.zo.computer
+  display-name: 🔗 Meus Links
+  version: "1.0"
+  tags: [links, bookmarks, favoritos, site, supabase]
 ---
 ## O que faz
 

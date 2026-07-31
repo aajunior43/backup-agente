@@ -1,85 +1,69 @@
 ---
 name: backup-github
 description: Faz backup periódico de todo o workspace (/home/workspace) para a pasta zo/ do repositório compartilhado backup-agente no GitHub. Repositório usado por múltiplos agentes (zo, openclaw, hermes, odysseu).
-compatibility: Created for Zo Computer
+compatibility: Requer bun, gh CLI autenticado, rsync e git instalados. Variável ZO_CLIENT_IDENTITY_TOKEN necessária para notificação de falha por Telegram.
 metadata:
   author: aleksandro.zo.computer
-  category: Automation
-  display-name: 🔄 GitHub Backup Automático
-  emoji: 🔄
 ---
 
-# 🔄 GitHub Backup Automático (Zo Computer)
+# Backup GitHub — Workspace Zo
 
-## Propósito
+Backup automatizado do workspace para o GitHub. Cada agente escreve **apenas na sua pasta** (`zo/`, `openclaw/`, `hermes/`, `odysseu/`). O Zo é responsável exclusivamente por `zo/`.
 
-Sincroniza o workspace (`/home/workspace`) com a pasta `zo/` do repositório **backup-agente** no GitHub.
+## 🎯 Comandos
 
-O repositório é **compartilhado** entre múltiplos agentes. Cada um tem sua própria pasta:
-
-```
-backup-agente/
-├── AGENTS.md       ← Instruções para todas as IAs
-├── zo/             ← Zo Computer (este script)
-├── openclaw/       ← OpenClaw / Claude Code
-├── hermes/         ← Hermes Agent
-└── odysseu/        ← Odysseu
-```
-
-⚠️ **Nunca modifique arquivos fora da pasta `zo/`** — cada agente gerencia seus próprios backups.
-
-## Pré-requisito
-
-Autenticação via `gh` CLI:
-
+### Fazer backup (commit + push)
 ```bash
-gh auth status
-# Deve mostrar "Logged in to github.com account aajunior43"
+bun Skills/backup-github/scripts/backup.ts
 ```
 
-Se não estiver autenticado:
-
+### Verificar status (sem commitar)
 ```bash
-gh auth login
+bun Skills/backup-github/scripts/backup.ts --status
 ```
-Ou com token:
+
+### Instruções de agendamento
 ```bash
-echo "seu_token" | gh auth login --with-token
-gh auth setup-git
+bun Skills/backup-github/scripts/backup.ts --schedule
 ```
 
-## Scripts
+## ⚙️ Configuração
 
-### `scripts/setup.ts` — Configuração única
+### Exclusões
+Os padrões de exclusão ficam em `scripts/exclusions.txt` (sintaxe rsync, um por linha, `#` para comentários). Edite esse arquivo para incluir/remover exclusões **sem alterar o script**.
 
-Cria o repositório `backup-agente`, configura git e faz o primeiro push.
+### Variáveis de ambiente
+| Variável | Uso |
+|----------|-----|
+| `ZO_CLIENT_IDENTITY_TOKEN` | Necessária para notificar falha por Telegram (opcional, best-effort) |
+| `ZO_BACKUP_MODEL` | Modelo usado na notificação via `/zo/ask` (opcional) |
 
-```bash
-bun /home/workspace/Skills/backup-github/scripts/setup.ts
+## 🛡️ Melhorias de robustez
+
+- **Lock file** (`/tmp/zo-backup.lock`) — impede execuções simultâneas; detecta e sobrescreve locks órfãos.
+- **Notificação de falha por Telegram** — se qualquer etapa falhar, o Aleksandro é avisado automaticamente.
+- **Recuperação de conflito de rebase** — se `git pull --rebase` falhar, aborta o rebase e reseta para a origem (seguro: o backup é regenerado do workspace a cada run).
+- **Detecção de arquivos grandes** — avisa sobre arquivos >50MB e remove automaticamente os >100MB (limite duro do GitHub) para não travar o push.
+- **Verificação pós-push** — confirma via `git ls-remote` que o commit local realmente chegou ao remote.
+- **`--status` detalhado** — mostra contagem de alterações, tamanho total do backup e último commit.
+
+## 🔄 Agendamento
+
+Roda via Automation do Zo Computer, diariamente às 00:00 (America/Sao_Paulo). Ajuste a frequência pedindo ao Zo ("mude o backup para rodar a cada 12 horas").
+
+## 📁 Estrutura
+
+```
+Skills/backup-github/
+├── SKILL.md
+└── scripts/
+    ├── backup.ts          # script principal
+    └── exclusions.txt     # padrões de exclusão (editável)
 ```
 
-### `scripts/backup.ts` — Backup incremental
+## 🔒 Regras do repositório compartilhado
 
-Rsync do workspace para `zo/` + commit + push.
-
-```bash
-bun /home/workspace/Skills/backup-github/scripts/backup.ts         # commit + push
-bun /home/workspace/Skills/backup-github/scripts/backup.ts --status # mostra alterações
-bun /home/workspace/Skills/backup-github/scripts/backup.ts --schedule # instruções
-```
-
-## Agendamento automático
-
-Para rodar todo dia à meia-noite:
-
-- **Comando:** `bun /home/workspace/Skills/backup-github/scripts/backup.ts`
-- **Frequência:** Diariamente, 00:00 (horário Inajá)
-- **Rrule:** `RRULE:FREQ=DAILY;BYHOUR=0;BYMINUTE=0`
-
-Ou peça: **"Agenda o backup do workspace todo dia"**
-
-## Repositório
-
-- **GitHub:** https://github.com/aajunior43/backup-agente
-- **Visibilidade:** Público
-- **Estrutura:** pastas separadas por agente (`zo/`, `openclaw/`, `hermes/`, `odysseu/`)
+- Cada agente escreve **somente na sua pasta** (`zo/` para o Zo).
+- Nunca force push na branch principal sem instrução explícita.
+- Commits com mensagens descritivas em português.
+- `AGENTS.md` da raiz é editado apenas pelo usuário.

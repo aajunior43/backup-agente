@@ -1,0 +1,67 @@
+# IA na Gestão Pública Municipal - fields.yaml
+
+field_categories:
+  - name: "Informações Básicas"
+    description: "Dados fundamentais sobre a solução/aplicação"
+    fields:
+      - name: "nome"
+        description: "Nome da solução ou iniciativa"
+        detail_level: "brief"
+      - name: "orgao_responsavel"
+        description: "Órgão ou entidade responsável pela implementação"
+        detail_level: "brief"
+      - name: "municipio_uf"
+        description: "Município e UF onde foi implementado"
+        detail_level: "brief"
+      - name: "ano_implementacao"
+        description: "Ano de início da implementação"
+        detail_level: "brief"
+
+  - name: "Características Técnicas"
+    description: "Aspectos tecnológicos da solução"
+    fields:
+      - name: "tipo_solucao"
+        description: "Tipo: chatbot, análise preditiva, automação documental, etc"
+        detail_level: "moderate"
+      - name: "tecnologias_utilizadas"
+        description: "Tecnologias base (IA generativa, NLP, machine learning, OCR)"
+        detail_level: "moderate"
+      - name: "provedor_tecnologia"
+        description: "Empresa/provedor da solução (Microsoft, Google, IPM, govtechs)"
+        detail_level: "moderate"
+      - name: "nivel_maturidade"
+        description: "Estágio: piloto, implementado, expandido"
+        detail_level: "moderate"
+
+  - name: "Resultados e Impacto"
+    description: "Métricas de sucesso e indicadores"
+    fields:
+      - name: "reducao_custos"
+        description: "Percentual de redução de custos operacionais"
+        detail_level: "detailed"
+      - name: "aumento_eficiencia"
+        description: "Ganhos de produtividade ou eficiência"
+        detail_level: "detailed"
+      - name: "taxa_acerto"
+        description: "Taxa de acerto ou precisão da solução"
+        detail_level: "detailed"
+      - name: "numero_usuarios"
+        description: "Número de usuários ou cidadãos atendidos"
+        detail_level: "detailed"
+
+  - name: "Desafios e Riscos"
+    description: "Barreiras identificadas na implementação"
+    fields:
+      - name: "principal_desafio"
+        description: "Maior barreira encontrada"
+        detail_level: "moderate"
+      - name: "questoes_eticas"
+        description: "Preocupações éticas ou de governança"
+        detail_level: "detailed"
+      - name: "requisitos_capacitacao"
+        description: "Necessidades de treinamento identificadas"
+        detail_level: "moderate"
+
+uncertain:
+  - "custo_implementacao"
+  - "retorno_investimento_longo_prazo"

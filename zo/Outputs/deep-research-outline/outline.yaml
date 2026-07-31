@@ -1,0 +1,33 @@
+# IA na Gestão Pública Municipal - outline.yaml
+
+topic: "Inteligência Artificial na Gestão Pública Municipal no Brasil"
+items:
+  - name: "Chatbots e Assistentes Virtuais"
+    category: "Aplicações"
+    description: "Soluções de IA para atendimento ao cidadão em prefeituras, como o assistente Dara (São José/SC) e ChatTCU"
+  - name: "IA na Saúde Municipal"
+    category: "Aplicações"
+    description: "Uso de IA para agendamento de consultas, alertas de vacinação, análise de prontuários em municípios"
+  - name: "IA na Educação Municipal"
+    category: "Aplicações"
+    description: "Sistemas de IA para combate à evasão escolar, planejamento de vagas, como o caso de Rio do Sul/SC"
+  - name: "IA na Tributação e Finanças"
+    category: "Aplicações"
+    description: "Automação de emissão de guias IPTU, análise fiscal, auditoria de licitações com IA"
+  - name: "Marco Regulatório PBIA"
+    category: "Políticas Públicas"
+    description: "Plano Brasileiro de IA 2024-2028, R$ 23 bi, formação de 115 mil servidores, Portaria MCID 1.012/2025"
+  - name: "LGPD e Governança de IA"
+    category: "Políticas Públicas"
+    description: "Desafios de proteção de dados, ética algorítmica, transparência em decisões automatizadas"
+  - name: "Prefeituras de Pequeno Porte"
+    category: "Desafios"
+    description: "Dificuldades específicas de adoção de IA em municípios com menos de 50 mil habitantes"
+  - name: "Capacitação de Servidores"
+    category: "Desafios"
+    description: "Treinamento, cultura digital, resistência à mudança na administração pública municipal"
+
+execution:
+  batch_size: 4
+  items_per_agent: 2
+  output_dir: "./results"

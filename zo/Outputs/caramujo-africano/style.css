@@ -1,0 +1,557 @@
+/* ─── Custom CSS for Caramujo Africano Report ─── */
+/* Nature color palette: green, brown, beige, red (alerts only) */
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+@page {
+  size: A4;
+  margin: 2.5cm 2cm 2.5cm 2cm;
+  @top-center {
+    content: element(pageHeader);
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 9pt;
+    color: #8B7355;
+  }
+}
+
+@page cover {
+  margin: 0;
+  @bottom-center { content: none; }
+  @top-center { content: none; }
+}
+
+@page :first {
+  @bottom-center { content: none; }
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: #3D2B1F;
+}
+
+/* ─── Cover Page ─── */
+.cover-page {
+  page: cover;
+  width: 21cm;
+  height: 29.7cm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2D5016 0%, #4A7C2E 40%, #6B8F3A 100%);
+  color: white;
+  text-align: center;
+  padding: 3cm;
+  margin: -2.5cm -2cm;
+  position: relative;
+  page-break-after: always;
+}
+
+.cover-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.03) 20px,
+    rgba(255,255,255,0.03) 40px
+  );
+}
+
+.cover-icon {
+  font-size: 72pt;
+  margin-bottom: 1cm;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-title {
+  font-family: 'Merriweather', serif;
+  font-size: 26pt;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 0.8cm;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12pt;
+  font-weight: 300;
+  max-width: 14cm;
+  line-height: 1.5;
+  margin-bottom: 1.5cm;
+  position: relative;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.cover-divider {
+  width: 5cm;
+  height: 2px;
+  background: rgba(255,255,255,0.5);
+  margin-bottom: 1.5cm;
+  position: relative;
+  z-index: 1;
+}
+
+.cover-meta {
+  font-size: 10pt;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+  line-height: 2;
+}
+
+.cover-meta strong {
+  font-weight: 600;
+}
+
+/* ─── General Styles ─── */
+h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 18pt;
+  font-weight: 700;
+  color: #2D5016;
+  border-bottom: 3px solid #6B8F3A;
+  padding-bottom: 4pt;
+  margin-top: 1.5cm;
+  margin-bottom: 0.5cm;
+  page-break-before: always;
+}
+
+h1:first-of-type {
+  page-break-before: avoid;
+}
+
+h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 14pt;
+  font-weight: 700;
+  color: #4A7C2E;
+  margin-top: 0.8cm;
+  margin-bottom: 0.3cm;
+}
+
+h3 {
+  font-family: 'Merriweather', serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #6B4F2E;
+  margin-top: 0.5cm;
+  margin-bottom: 0.2cm;
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 0.3cm;
+}
+
+/* ─── Executive Summary Box ─── */
+.executive-summary {
+  background: #F5F0E1;
+  border-left: 5px solid #4A7C2E;
+  padding: 0.5cm 0.7cm;
+  margin: 0.5cm 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.executive-summary h2 {
+  color: #2D5016;
+  margin-top: 0;
+}
+
+/* ─── Alert Boxes ─── */
+.alert-box {
+  background: #FFF0F0;
+  border: 1.5px solid #C0392B;
+  border-left: 6px solid #C0392B;
+  padding: 0.4cm 0.6cm;
+  margin: 0.4cm 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.alert-box h3 {
+  color: #C0392B;
+  margin: 0 0 0.15cm 0;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.info-box {
+  background: #E8F5E9;
+  border: 1.5px solid #4A7C2E;
+  border-left: 6px solid #4A7C2E;
+  padding: 0.4cm 0.6cm;
+  margin: 0.4cm 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.info-box h3 {
+  color: #2D5016;
+  margin: 0 0 0.15cm 0;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.warning-box {
+  background: #FFF8E1;
+  border: 1.5px solid #E67E22;
+  border-left: 6px solid #E67E22;
+  padding: 0.4cm 0.6cm;
+  margin: 0.4cm 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.warning-box h3 {
+  color: #E67E22;
+  margin: 0 0 0.15cm 0;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+/* ─── Tables ─── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.4cm 0;
+  font-size: 9.5pt;
+}
+
+table caption {
+  font-weight: 700;
+  font-size: 10pt;
+  color: #2D5016;
+  margin-bottom: 0.15cm;
+  text-align: left;
+}
+
+th {
+  background: #4A7C2E;
+  color: white;
+  padding: 6pt 8pt;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9pt;
+}
+
+td {
+  padding: 5pt 8pt;
+  border-bottom: 1px solid #D4C9A8;
+}
+
+tr:nth-child(even) {
+  background: #F5F0E1;
+}
+
+tr:nth-child(odd) {
+  background: #FFFFFF;
+}
+
+/* ─── Comparison Table (nativo vs africano) ─── */
+.comparison-table th:first-child {
+  background: #6B4F2E;
+}
+
+.comparison-table th:last-child {
+  background: #2D5016;
+}
+
+.comparison-table td:first-child {
+  font-weight: 600;
+  background: #FAF7F0;
+}
+
+/* ─── "O que você precisa saber" box ─── */
+.what-you-need {
+  background: #2D5016;
+  color: white;
+  padding: 0.5cm 0.7cm;
+  margin: 0.5cm 0;
+  border-radius: 8px;
+}
+
+.what-you-need h2 {
+  color: white;
+  margin-top: 0;
+  font-family: 'Merriweather', serif;
+}
+
+.what-you-need ul {
+  margin: 0.2cm 0;
+  padding-left: 0.5cm;
+}
+
+.what-you-need li {
+  margin-bottom: 0.1cm;
+  line-height: 1.5;
+}
+
+/* ─── Infographic / Life Cycle ─── */
+.infographic {
+  background: #F5F0E1;
+  border: 2px solid #6B8F3A;
+  border-radius: 10px;
+  padding: 0.5cm;
+  margin: 0.5cm 0;
+  text-align: center;
+}
+
+.infographic h3 {
+  color: #2D5016;
+  margin-top: 0;
+}
+
+.step-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2cm;
+}
+
+.step {
+  background: white;
+  border: 1.5px solid #6B8F3A;
+  border-radius: 8px;
+  padding: 0.25cm 0.4cm;
+  flex: 0 0 auto;
+  width: 3cm;
+  text-align: center;
+  font-size: 9pt;
+}
+
+.step-icon {
+  font-size: 18pt;
+  display: block;
+  margin-bottom: 0.1cm;
+}
+
+.step-arrow {
+  font-size: 18pt;
+  color: #4A7C2E;
+  align-self: center;
+}
+
+/* ─── Checklist ─── */
+.checklist {
+  background: #E8F5E9;
+  border: 2px solid #4A7C2E;
+  border-radius: 8px;
+  padding: 0.5cm;
+  margin: 0.5cm 0;
+}
+
+.checklist h3 {
+  color: #2D5016;
+  margin-top: 0;
+}
+
+.checklist li {
+  margin-bottom: 0.15cm;
+  list-style-type: none;
+}
+
+.checklist li::before {
+  content: '☐ ';
+  color: #4A7C2E;
+  font-weight: bold;
+}
+
+/* ─── Images ─── */
+.figure {
+  text-align: center;
+  margin: 0.5cm 0;
+}
+
+.figure img {
+  max-width: 100%;
+  max-height: 8cm;
+  border: 1px solid #D4C9A8;
+  border-radius: 4px;
+}
+
+.figure-caption {
+  font-size: 9pt;
+  color: #6B4F2E;
+  font-style: italic;
+  margin-top: 0.15cm;
+}
+
+/* ─── References ─── */
+.references {
+  font-size: 9pt;
+  line-height: 1.8;
+}
+
+.references li {
+  margin-bottom: 0.2cm;
+}
+
+/* ─── TOC ─── */
+.toc {
+  page-break-after: always;
+}
+
+.toc h2 {
+  color: #2D5016;
+  border-bottom: 3px solid #6B8F3A;
+  padding-bottom: 4pt;
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.3cm;
+}
+
+.toc li {
+  margin-bottom: 0.15cm;
+  font-size: 10pt;
+  line-height: 1.8;
+}
+
+.toc a {
+  color: #3D2B1F;
+  text-decoration: none;
+}
+
+.toc .toc-l1 {
+  font-weight: 600;
+  font-size: 11pt;
+  margin-top: 0.3cm;
+  color: #2D5016;
+}
+
+.toc .toc-l2 {
+  padding-left: 0.5cm;
+}
+
+.toc .toc-l3 {
+  padding-left: 1cm;
+  font-size: 9.5pt;
+  color: #6B4F2E;
+}
+
+/* ─── Page Header ─── */
+.page-header {
+  position: running(pageHeader);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8pt;
+  color: #8B7355;
+  border-bottom: 0.5px solid #D4C9A8;
+  padding-bottom: 2pt;
+}
+
+/* ─── Blockquote ─── */
+blockquote {
+  border-left: 4px solid #6B8F3A;
+  padding: 0.2cm 0.5cm;
+  margin: 0.4cm 0;
+  background: #F5F0E1;
+  font-style: italic;
+  color: #5A4A3A;
+}
+
+/* ─── Lists ─── */
+ul, ol {
+  padding-left: 0.6cm;
+  margin-bottom: 0.3cm;
+}
+
+li {
+  margin-bottom: 0.1cm;
+}
+
+/* ─── Flowchart (text-based) ─── */
+.flowchart {
+  background: #FAF7F0;
+  border: 2px solid #6B4F2E;
+  border-radius: 8px;
+  padding: 0.4cm;
+  margin: 0.4cm 0;
+  font-size: 9pt;
+  text-align: center;
+  line-height: 2;
+}
+
+.flow-step {
+  display: inline-block;
+  background: #4A7C2E;
+  color: white;
+  padding: 0.15cm 0.4cm;
+  border-radius: 6px;
+  margin: 0.05cm;
+  font-weight: 600;
+  font-size: 8.5pt;
+}
+
+.flow-step.alert {
+  background: #C0392B;
+}
+
+.flow-step.caution {
+  background: #E67E22;
+}
+
+.flow-step.info {
+  background: #6B4F2E;
+}
+
+.flow-arrow {
+  color: #4A7C2E;
+  font-size: 12pt;
+  margin: 0 0.1cm;
+}
+
+/* ─── Quotes ─── */
+.scientific-name {
+  font-style: italic;
+}
+
+/* ─── Footer note ─── */
+.page-footer-note {
+  font-size: 7pt;
+  color: #8B7355;
+  text-align: center;
+  margin-top: 0.5cm;
+}
+
+/* ─── Print adjustments ─── */
+@media print {
+  .cover-page {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .what-you-need {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  tr:nth-child(even) {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .executive-summary,
+  .alert-box,
+  .info-box,
+  .warning-box,
+  .infographic,
+  .checklist {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

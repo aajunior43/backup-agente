@@ -86,6 +86,20 @@ Quando Aleksandro perguntar "como está minha pressão/glicose", "histórico":
      - Pressão diastólica > 90: 🔴 Atenção
      - Pulso > 100: 🟡 Taquicardia leve
 
+## Scripts
+
+A skill inclui um script CLI em `scripts/registro-saude.ts` para registro rápido:
+
+```bash
+bun run Skills/saude/scripts/registro-saude.ts --help
+bun run Skills/saude/scripts/registro-saude.ts registrar --glicose 95 --sistolica 12 --diastolica 8 --pulso 72
+bun run Skills/saude/scripts/registro-saude.ts export
+```
+
+Comandos:
+- `registrar` — Adiciona linha ao `registro_saude.md`
+- `export` — Gera `registro_saude.txt` a partir do markdown
+
 ## Valores de referência (para contexto)
 
 | Medida | Normal | Pré-alerta | Alerta |

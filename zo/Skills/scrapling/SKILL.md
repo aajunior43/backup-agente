@@ -8,6 +8,9 @@ description: >-
 compatibility: Created for Zo Computer — requer Python 3.10+ e `pip install scrapling` (ou `scrapling[fetchers]` para HTTP)
 metadata:
   author: aleksandro.zo.computer
+  display-name: 🕷️ Scrapling Web Scraper
+  version: "1.0"
+  tags: [web-scraping, python, scrapling, crawler, extração]
 ---
 
 # Scrapling Skill

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfumes Originais — Lojas Confiáveis</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #08070d;
+      --fg: #f5f3ff;
+      --muted: #a1a1aa;
+      --accent-purple: #a855f7;
+      --accent-fuchsia: #d946ef;
+      --accent-pink: #ec4899;
+    }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background orbs */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -160px; left: -160px;
+      width: 384px; height: 384px;
+      background: rgba(168, 85, 247, 0.2);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 33%; right: -160px;
+      width: 384px; height: 384px;
+      background: rgba(217, 70, 239, 0.2);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-orb-bottom {
+      position: fixed;
+      bottom: 0; left: 33%;
+      width: 384px; height: 384px;
+      background: rgba(236, 72, 153, 0.1);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* Avatar */
+    .avatar-wrap {
+      position: relative;
+      width: 112px; height: 112px;
+      margin: 0 auto 24px;
+    }
+    .avatar-glow {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.3);
+      filter: blur(24px);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .avatar-blur {
+      position: absolute; inset: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #d946ef, #ec4899);
+      filter: blur(8px);
+      opacity: 0.6;
+    }
+    .avatar {
+      position: relative;
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #d946ef, #ec4899);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Title */
+    h1 {
+      font-size: 30px; font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #d8b4fe, #f5d0fe, #fbcfe8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      max-width: 280px;
+      margin: 8px auto 32px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Stats badges */
+    .stats {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .stat {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .stat-purple {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+    }
+    .stat-fuchsia {
+      background: rgba(217, 70, 239, 0.1);
+      border: 1px solid rgba(217, 70, 239, 0.2);
+      color: #f5d0fe;
+    }
+    .stat-pink {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.2);
+      color: #fbcfe8;
+    }
+
+    /* Highlight card */
+    .highlight {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.05), transparent);
+      text-align: left;
+    }
+    .highlight::before {
+      content: "";
+      position: absolute;
+      top: -32px; right: -32px;
+      width: 128px; height: 128px;
+      background: rgba(251, 191, 36, 0.1);
+      border-radius: 50%;
+      filter: blur(32px);
+    }
+    .highlight-content { position: relative; }
+    .highlight-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.15);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #fcd34d;
+      margin-bottom: 8px;
+    }
+    .highlight h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fef3c7;
+      margin-bottom: 6px;
+    }
+    .highlight p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #d4d4d8;
+    }
+    .highlight .score { color: #4ade80; font-weight: 600; }
+
+    /* Section */
+    section { margin-bottom: 24px; }
+    .section-title {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #52525b;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    /* Card */
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(24, 24, 27, 0.5);
+      text-decoration: none;
+      color: inherit;
+      text-align: left;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(168, 85, 247, 0.4);
+      background: rgba(24, 24, 27, 0.8);
+    }
+    .icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 22px;
+    }
+    .info { flex: 1; min-width: 0; }
+    .name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .name { font-weight: 600; font-size: 14px; color: #f5f3ff; }
+    .badge {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px; border-radius: 999px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+    }
+    .desc {
+      font-size: 12px;
+      color: #a1a1aa;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+    .rep {
+      font-size: 11px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-top: 2px;
+    }
+    .rep-otimo { color: #4ade80; }
+    .rep-bom { color: #a1a1aa; }
+    .ext-link { width: 16px; height: 16px; flex-shrink: 0; color: #52525b; }
+
+    /* Dicas */
+    .tips {
+      margin-top: 32px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(4px);
+      text-align: left;
+    }
+    .tips-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .tips-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(217, 70, 239, 0.2));
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      font-size: 16px;
+    }
+    .tips h2 { font-size: 15px; font-weight: 600; color: #f5f3ff; }
+    .tips li {
+      list-style: none;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 13px;
+      color: #d4d4d8;
+      line-height: 1.5;
+    }
+    .tips li + li { margin-top: 12px; }
+    .tip-num {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #d946ef);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .footer-meta {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 10px; color: #52525b;
+    }
+    .dot { width: 4px; height: 4px; border-radius: 50%; background: #3f3f46; }
+    .footer-credit { font-size: 10px; color: #52525b; }
+  </style>
+</head>
+<body>
+  <div class="bg-orb-bottom"></div>
+  <div class="container">
+
+    <!-- Avatar -->
+    <div class="avatar-wrap">
+      <div class="avatar-glow"></div>
+      <div class="avatar-blur"></div>
+      <div class="avatar">🍃</div>
+    </div>
+
+    <h1>Perfumes Originais</h1>
+    <p class="subtitle">Sua curadoria de lojas confiáveis para comprar perfumes verdadeiros e decants.</p>
+
+    <!-- Stats -->
+    <div class="stats">
+      <span class="stat stat-purple">✦ 16 lojas verificadas</span>
+      <span class="stat stat-fuchsia">✦ Reputação RA 2026</span>
+      <span class="stat stat-pink">✦ Sem falsificação</span>
+    </div>
+
+    <!-- Destaque -->
+    <div class="highlight">
+      <div class="highlight-content">
+        <span class="highlight-label">★ Destaque da curadoria</span>
+        <h3>The King of Decants</h3>
+        <p>
+          A melhor reputação entre todas: <span class="score">Ótimo ★ 8,7/10</span> no Reclame Aqui, com <span class="score">90,9%</span> das reclamações resolvidas e <span class="score">84,8%</span> voltariam a comprar.
+        </p>
+      </div>
+    </div>
+
+    <!-- Perfumes em frasco -->
+    <section>
+      <h2 class="section-title">Perfumes em frasco</h2>
+
+      <a class="card" href="https://www.sephora.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🌸</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Sephora</span><span class="badge">Original</span></div>
+          <div class="desc">Loja oficial de marcas importadas.</div>
+          <div class="rep rep-bom">RA: Bom ★ 7,2/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.belezanaweb.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">✨</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Beleza na Web</span><span class="badge">Original</span></div>
+          <div class="desc">Grupo Boticário. Produtos com caixa e tampa.</div>
+          <div class="rep rep-bom">RA: Bom ★ 7,7/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.epocacosmeticos.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🌹</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Época Cosméticos</span><span class="badge">Original</span></div>
+          <div class="desc">Grupo Magazine Luiza. Nacionais e importados.</div>
+          <div class="rep rep-bom">RA: Bom ★ 7,7/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.beautybox.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">💎</div>
+        <div class="info">
+          <div class="name-row"><span class="name">The Beauty Box</span><span class="badge">Original</span></div>
+          <div class="desc">Grupo Boticário. +100 marcas premium.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.boticario.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🌿</div>
+        <div class="info">
+          <div class="name-row"><span class="name">O Boticário</span><span class="badge">Original</span></div>
+          <div class="desc">Site oficial. Perfumes próprios.</div>
+          <div class="rep rep-bom">RA: Bom ★ 7,1/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.natura.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🌺</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Natura</span><span class="badge">Original</span></div>
+          <div class="desc">Site oficial. Perfumes próprios.</div>
+          <div class="rep rep-otimo">RA: Ótimo ★ 8,3/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.eudora.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🌟</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Eudora</span><span class="badge">Original</span></div>
+          <div class="desc">Grupo Boticário.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.quemdisseberenice.com.br/perfumes" target="_blank" rel="noreferrer">
+        <div class="icon">🎀</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Quem Disse, Berenice?</span><span class="badge">Original</span></div>
+          <div class="desc">Site oficial. Perfumes próprios e colaborações.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </section>
+
+    <!-- Decants -->
+    <section>
+      <h2 class="section-title">Decants &amp; amostras</h2>
+
+      <a class="card" href="https://www.perfumeshopping.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">🧪</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Perfume Shopping</span><span class="badge">Original</span></div>
+          <div class="desc">Especialista em decants. Referência há +10 anos.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.thekingofdecants.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">👑</div>
+        <div class="info">
+          <div class="name-row"><span class="name">The King of Decants</span><span class="badge">Original</span></div>
+          <div class="desc">Decants com borrifador, caixa e tampa.</div>
+          <div class="rep rep-otimo">RA: Ótimo ★ 8,7/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://guidodecants.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">🎯</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Guido Decants</span><span class="badge">Original</span></div>
+          <div class="desc">Mais de 3 mil fragrâncias. Desde 2016.</div>
+          <div class="rep rep-bom">RA: Bom ★ 7,5/10</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://bhdecants.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">🏔️</div>
+        <div class="info">
+          <div class="name-row"><span class="name">BH Decants</span><span class="badge">Original</span></div>
+          <div class="desc">Decants de perfumes importados originais.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.miniperfumados.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">🧴</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Mini Perfumados</span><span class="badge">Original</span></div>
+          <div class="desc">Decants, miniaturas e perfumes lacrados.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.mundodosdecants.com.br" target="_blank" rel="noreferrer">
+        <div class="icon">🌍</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Mundo dos Decants</span><span class="badge">Original</span></div>
+          <div class="desc">Perfumes de nicho e designer em decants.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://decantstore.com" target="_blank" rel="noreferrer">
+        <div class="icon">🌐</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Decant Store</span><span class="badge">Original</span></div>
+          <div class="desc">Internacional. Amostras de nicho e designer.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+
+      <a class="card" href="https://www.scentsplit.com" target="_blank" rel="noreferrer">
+        <div class="icon">🌐</div>
+        <div class="info">
+          <div class="name-row"><span class="name">Scent Split</span><span class="badge">Original</span></div>
+          <div class="desc">Internacional. Catálogo enorme de decants de nicho.</div>
+        </div>
+        <svg class="ext-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </section>
+
+    <!-- Dicas -->
+    <div class="tips">
+      <div class="tips-header">
+        <span class="tips-icon">🛡️</span>
+        <h2>Como evitar perfumes falsos</h2>
+      </div>
+      <ul>
+        <li><span class="tip-num">1</span>Compre no site oficial da marca ou em distribuidoras autorizadas.</li>
+        <li><span class="tip-num">2</span>Desconfie de preços muito abaixo do mercado.</li>
+        <li><span class="tip-num">3</span>Verifique selos da ADIPEC, ANVISA e o código de autenticidade.</li>
+        <li><span class="tip-num">4</span>Decants devem vir de frascos originais lacrados — a loja precisa informar.</li>
+        <li><span class="tip-num">5</span>Exija nota fiscal com CNPJ e garantia de autenticidade por escrito.</li>
+        <li><span class="tip-num">6</span>Consulte a reputação da loja no Reclame Aqui antes de finalizar.</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-meta">
+        <span class="dot"></span>
+        <span>Reputações baseadas no Reclame Aqui</span>
+        <span class="dot"></span>
+        <span>2026</span>
+      </div>
+      <p class="footer-credit">Feito com cuidado para os amantes de perfume</p>
+    </div>
+  </div>
+</body>
+</html>

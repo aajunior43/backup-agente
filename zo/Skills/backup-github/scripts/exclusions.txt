@@ -1,0 +1,19 @@
+# exclusions.txt — padrões de exclusão do backup do Zo (sintaxe rsync)
+# Uma regra por linha. Linhas começando com # são ignoradas.
+# Edite este arquivo para adicionar/remover exclusões sem mexer no backup.ts.
+
+# ── Lixo comum / arquivos gerados ──
+.git
+node_modules
+.env
+__pycache__
+*.pyc
+.parcel-cache
+Trash
+
+# ── Arquivos com secrets detectados pelo GitHub push protection ──
+# (mantidos fora do backup para não travar o push — pertencem ao Hermes)
+hermes-backup/scripts/openai_tts.sh
+hermes-backup/scripts/whisper_openai.sh
+hermes-backup/skills/autonomous-ai-agents/ai-agent-migration/references/session-openclaw-backup-analysis.md
+hermes-backup/skills/handling-sensitive-data/references/api-keys-in-chat-pattern.md

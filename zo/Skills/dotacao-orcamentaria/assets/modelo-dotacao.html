@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 2cm 2.5cm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+
+  /* ===== Cabeçalho ===== */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #003366;
+    margin-bottom: 20px;
+  }
+  .header img {
+    width: 65px;
+    height: auto;
+  }
+  .header-text {
+    text-align: center;
+  }
+  .header-text .municipio {
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #003366;
+  }
+  .header-text .orgao {
+    font-size: 10pt;
+    color: #555;
+  }
+
+  /* ===== Título ===== */
+  .titulo {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Tabela de dados ===== */
+  table.dados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  table.dados td {
+    padding: 6px 10px;
+    border: 1px solid #999;
+    vertical-align: top;
+  }
+  table.dados .label {
+    font-weight: bold;
+    background: #e8f0fe;
+    width: 28%;
+    color: #003366;
+    font-size: 10pt;
+  }
+  table.dados .valor {
+    width: 22%;
+  }
+  table.dados .destaque {
+    font-weight: bold;
+    font-size: 12pt;
+    color: #003366;
+  }
+  table.dados .saldo {
+    font-weight: bold;
+    font-size: 12pt;
+    color: #006600;
+  }
+
+  /* ===== Finalidade ===== */
+  .finalidade {
+    margin-bottom: 25px;
+  }
+  .finalidade label {
+    font-weight: bold;
+    color: #003366;
+    font-size: 10pt;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .finalidade .box {
+    border: 1px solid #999;
+    min-height: 60px;
+    padding: 8px 10px;
+    font-size: 10pt;
+  }
+
+  /* ===== Rodapé ===== */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #666;
+    border-top: 1px solid #ccc;
+    padding-top: 8px;
+    margin-top: 30px;
+  }
+
+  /* ===== Observações ===== */
+  .obs {
+    font-size: 9pt;
+    color: #888;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  .obs strong {
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="{{BRASAO_PATH}}" alt="Brasão de Inajá">
+  <div class="header-text">
+    <div class="municipio">Prefeitura Municipal de Inajá</div>
+    <div class="orgao">Av. Antônio Veiga Martins, 80 — Centro — Inajá/PR</div>
+    <div class="orgao">CNPJ: 76.988.787/0001-84</div>
+  </div>
+</div>
+
+<div class="titulo">Informação de Dotação Orçamentária</div>
+
+<table class="dados">
+  <tr>
+    <td class="label">Órgão</td>
+    <td colspan="3">{{ORGAO}}</td>
+  </tr>
+  <tr>
+    <td class="label">Unidade</td>
+    <td colspan="3">{{UNIDADE}}</td>
+  </tr>
+  <tr>
+    <td class="label">Programa</td>
+    <td colspan="3">{{PROGRAMA}}</td>
+  </tr>
+  <tr>
+    <td class="label">Ação</td>
+    <td colspan="3">{{ACAO}} — {{DESC_ACAO}}</td>
+  </tr>
+  <tr>
+    <td class="label">Natureza da Despesa</td>
+    <td colspan="3">{{CLASSIFICACAO}} — {{DESC_NATUREZA}}</td>
+  </tr>
+  <tr>
+    <td class="label">Identificador da Dotação</td>
+    <td class="destaque">{{ID_DOTACAO}}</td>
+    <td class="label">Fonte de Recurso</td>
+    <td class="valor">{{FONTE}} — {{DESC_FONTE}}</td>
+  </tr>
+  <tr>
+    <td class="label">Saldo Atual da Despesa</td>
+    <td class="saldo" colspan="3">{{SALDO}}</td>
+  </tr>
+</table>
+
+<div class="finalidade">
+  <label>FINALIDADE / HISTÓRICO</label>
+  <div class="box">{{FINALIDADE}}</div>
+</div>
+
+<div class="obs">
+  <strong>Observações:</strong> Informação gerada com base na Lei Orçamentária Anual (LOA) {{ANO}} do Município de Inajá/PR. O saldo apresentado refere-se ao momento da consulta e está sujeito a alterações conforme empenhos e liquidações realizados.
+</div>
+
+<div class="footer">
+  <span>Inajá/PR, {{DATA}}</span>
+  <span>Documento de Consulta Interna</span>
+</div>
+
+</body>
+</html>

@@ -13,6 +13,8 @@ metadata:
   tags: [prompt, meta-prompt, engenharia-de-prompts, otimização, llm, prism, opro, self-refine]
 ---
 
+> **⚠️ Nota:** Esta skill tem funcionalidade similar à `prompt-creator`. Use esta para o fluxo completo de 7 etapas com validação quantitativa (prompts de produção/críticos); use `prompt-creator` para gerar um prompt pronto em uma única passada rápida (uso no dia a dia).
+
 # ⚙️ Skill: Prompt Engineer
 
 Transforma uma ideia/pedido do usuário em um prompt de produção otimizado, seguindo metodologia rigorosa de engenharia de prompts com validação quantitativa.
