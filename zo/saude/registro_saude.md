@@ -120,6 +120,12 @@
 | 72 | 22/02/2026 | 13:38 | **209** 🟠 | PA 122/77, pulso 91 às 13:30. | saude_junior.csv |
 
 ## Medições completas (pressão, pulso e glicose)
+### 31/07/2026
+- Insulina: **15 unidades NPH**
+- Hora: 22:10
+- Contexto: glicose 333 mg/dL antes da janta; PA 130/77, pulso 104
+- Via: Telegram
+- Fonte: registro_saude.md
 
 ### 30/07/2026
 - Glicose: **257 mg/dL** 🟡
@@ -772,3 +778,5 @@
 ---
 
 *Registro unificado pelo Zo Computer em 26/07/2026. Próxima medição deve ser adicionada ao topo da seção "Medições completas".*
+| 2026-08-01 | 0 | 130 × 77 | 104 |
+| 2026-08-01 | 333 | 0 × 0 | 0 |
