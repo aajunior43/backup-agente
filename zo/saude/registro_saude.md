@@ -46,6 +46,7 @@
 
 | # | Data | Hora | mg/dL | Contexto | Fonte |
 |--:|------|------|------:|----------|-------|
+| 0 | 01/08/2026 | 09:46 | **252** 🟡 | Sábado. | registro_saude.md |
 | 1 | 30/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
 | 2 | 28/07/2026 | 12:03 | **213** 🟠 | Antes do almoço. | registro_saude.md |
 | 3 | 28/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
@@ -120,6 +121,19 @@
 | 72 | 22/02/2026 | 13:38 | **209** 🟠 | PA 122/77, pulso 91 às 13:30. | saude_junior.csv |
 
 ## Medições completas (pressão, pulso e glicose)
+### 01/08/2026 (sábado)
+- Glicose: **252 mg/dL** 🟡
+- Hora: 09:46
+- Contexto: Antes do café da manhã.
+- Via: Chat
+- Fonte: registro_saude.md
+- ---
+- Glicose: **261 mg/dL** 🟡
+- Hora: 13:10
+- Contexto: Antes do almoço.
+- Via: Telegram
+- Fonte: registro_saude.md
+
 ### 31/07/2026
 - Insulina: **15 unidades NPH**
 - Hora: 22:10
