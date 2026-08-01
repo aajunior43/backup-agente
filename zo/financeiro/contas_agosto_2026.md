@@ -4,8 +4,8 @@
 | --- | --- | --- | --- |
 | Fatura Inter | R$ 500,00 | Cartão de crédito | Pendente |
 | Fatura Nubank | R$ 655,00 | Cartão de crédito | Pendente |
-| Faculdade — Ciências Contábeis | R$ 153,00 | — | Pendente |
-| Faculdade — Administração | R$ 153,00 | — | Pendente |
+| Faculdade — Ciências Contábeis | R$ 153,00 | — | ✅ Pago (06/08) |
+| Faculdade — Administração | R$ 153,00 | — | ✅ Pago (06/08) |
 | Guarda Noturno Doca | R$ 60,00 | Serviço de segurança noturno | ✅ Pago (31/07) |
 | Cartão PicPay | R$ 50,00 | Cartão de crédito | Pendente |
 | Mercado Jabá | R$ 246,00 | — | ✅ Pago (31/07) |
