@@ -1,25 +1,20 @@
-# Contas — Agosto 2026
+# 💳 Contas a Pagar — Agosto 2026
 
-> Renda: R$ 5.000,00 (salário base)
+| Despesa | Valor | Info | Status |
+| --- | --- | --- | --- |
+| Fatura Inter | R$ 500,00 | Cartão de crédito | Pendente |
+| Fatura Nubank | R$ 655,00 | Cartão de crédito | Pendente |
+| Faculdade — Ciências Contábeis | R$ 153,00 | — | Pendente |
+| Faculdade — Administração | R$ 153,00 | — | Pendente |
+| Guarda Noturno Doca | R$ 60,00 | Serviço de segurança noturno | ✅ Pago (31/07) |
+| Cartão PicPay | R$ 50,00 | Cartão de crédito | Pendente |
+| Mercado Jabá | R$ 246,00 | — | ✅ Pago (31/07) |
+| Claude Pro | R$ 110,00 | Assinatura IA | Pendente |
+| GPT Plus | R$ 100,00 | Assinatura IA | Pendente |
+| Combustível | R$ 100,00 | Gasolina | Pendente |
+| Mãe Cida | R$ 59,00 | Repasse/ajuda familiar | Pendente |
+| **TOTAL** | **R$ 2.186,00** |  |  |
 
-| Despesa | Valor (R$) | Status |
-|---------|-----------:|--------|
-| Fatura Inter | 500,00 | Pendente |
-| Fatura Nubank | 655,00 | Pendente |
-| Faculdade — Ciências Contábeis | 153,00 | Pendente |
-| Faculdade — Administração | 153,00 | Pendente |
-| Guarda Noturno Doca | 60,00 | Pendente |
-| Cartão PicPay | 50,00 | Pendente |
-| Mercado Jabá (~) | 150,00 | Pendente |
-| Claude Pro | 110,00 | Pendente |
-| GPT Plus | 100,00 | Pendente |
-| Combustível | 100,00 | Pendente |
-| Mãe Cida | 59,00 | Pendente |
-| **TOTAL** | **2.190,00** | |
+---
 
-## Resumo
-- **Total despesas:** R$ 2.190,00
-- **Sobra:** R$ 2.810,00
-- Fatura Inter: R$ 500,00 (valor real)
-- Nubank: R$ 655,00 (VPS contratada)
-- Mercado Jabá é estimativa
+*Renda mensal: R$ 5.000,00 | Sobram: R$ 2.814,00*
