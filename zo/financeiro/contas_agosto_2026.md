@@ -2,8 +2,8 @@
 
 | Despesa | Valor | Info | Status |
 | --- | --- | --- | --- |
-| Fatura Inter | R$ 500,00 | Cartão de crédito | Pendente |
-| Fatura Nubank | R$ 655,00 | Cartão de crédito | Pendente |
+| Fatura Inter | R$ 498,78 | Cartão de crédito | ✅ Pago (06/08) |
+| Fatura Nubank | R$ 654,38 | Cartão de crédito | ✅ Pago (06/08) |
 | Faculdade — Ciências Contábeis | R$ 153,00 | — | ✅ Pago (06/08) |
 | Faculdade — Administração | R$ 153,00 | — | ✅ Pago (06/08) |
 | Guarda Noturno Doca | R$ 60,00 | Serviço de segurança noturno | ✅ Pago (31/07) |
@@ -13,8 +13,8 @@
 | GPT Plus | R$ 100,00 | Assinatura IA | Pendente |
 | Combustível | R$ 100,00 | Gasolina | Pendente |
 | Mãe Cida | R$ 59,00 | Repasse/ajuda familiar | Pendente |
-| **TOTAL** | **R$ 2.163,45** |  |  |
+| **TOTAL** | **R$ 2.160,98** |  |  |
 
 ---
 
-*Renda mensal: R$ 5.000,00 | Sobram: R$ 2.836,55*
+*Renda mensal: R$ 5.000,00 | Sobram: R$ 2.839,02*
