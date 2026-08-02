@@ -4,7 +4,7 @@
 
 | Data | Descrição | Categoria | Valor | Pagamento | Obs |
 | --- | --- | --- | --- | --- | --- |
-| 31/07 | Parcela ar condicionado | Moradia | R$ 170,00 | Cartão da vó | Parcela do ar comprado no crédito da vó |
+| 02/08 | Parcela ar condicionado (8/10) | Moradia | R$ 170,00 | Cartão da vó | Parcela 8/10 do ar comprado no crédito da vó |
 | 06/08 | Coca-Cola | Alimentação | R$ 15,00 | — | às 21:33 |
 | 31/07 | Pagamento dívida Myllena | Pagamentos | R$ 287,00 | — | — |
 | 31/07 | Guarda Noturno Doca | Moradia | R$ 60,00 | — | — |
@@ -19,8 +19,8 @@
 
 ## Totais por mês
 
-- **Julho/2026:** R$ 1.016,00 + USD 11,00
-- **Agosto/2026:** R$ 115,00
+- **Julho/2026:** R$ 846,00 + USD 11,00
+- **Agosto/2026:** R$ 285,00
 
 ### Por categoria
 
