@@ -133,6 +133,18 @@
 - Contexto: Antes do almoço.
 - Via: Telegram
 - Fonte: registro_saude.md
+- ---
+- Glicose: **288 mg/dL** 🟡
+- Hora: 21:45
+- Contexto: Antes da janta.
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+- Insulina: **15 unidades NPH**
+- Hora: 21:45
+- Contexto: Antes da janta; glicose 288 mg/dL.
+- Via: Telegram
+- Fonte: registro_saude.md
 
 ### 31/07/2026
 - Insulina: **15 unidades NPH**

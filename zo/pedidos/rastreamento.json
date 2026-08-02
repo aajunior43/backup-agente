@@ -5,12 +5,18 @@
       "descricao": "iPhone 16 Pro Max",
       "transportadora": "correios-pac",
       "adicionado_em": "2026-07-28T00:21:30.696Z",
-      "ultima_atualizacao": "2026-07-29T15:55:38.827378+00:00",
-      "status_atual": "Objeto em transferência",
-      "ultima_posicao": "De Unidade de Tratamento, Contagem - MG para Unidade de Tratamento, Londrina - PR",
-      "data_ultima_movimentacao": "2026-07-29T10:43:00",
+      "ultima_atualizacao": "2026-08-01T21:03:45Z",
+      "status_atual": "Objeto em transferência - por favor aguarde",
+      "ultima_posicao": "CONTAGEM/MG → LONDRINA/PR",
+      "data_ultima_movimentacao": "2026-07-29T10:43:32",
       "previsao_entrega": "2026-08-10",
       "historico": [
+        {
+          "data": "2026-08-01T21:03:45Z",
+          "status": "Objeto em transferência - por favor aguarde",
+          "local": "CONTAGEM/MG → LONDRINA/PR",
+          "fonte": "API Seu Rastreio"
+        },
         {
           "data": "2026-07-29T10:43:00",
           "status": "Objeto em transferência - por favor aguarde",
@@ -39,12 +45,12 @@
       ],
       "entregue": false,
       "entregue_em": null,
-      "ultima_notificacao": "2026-07-29T11:07:51.737279.000Z"
+      "ultima_notificacao": "2026-08-01T21:03:45Z"
     }
   ],
   "pacotes": [
     {
-      "ultima_checagem": "2026-08-01T11:05:00Z"
+      "ultima_checagem": "2026-08-01T21:03:54Z"
     }
   ]
 }
