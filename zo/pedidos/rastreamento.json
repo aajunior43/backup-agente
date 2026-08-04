@@ -5,12 +5,30 @@
       "descricao": "iPhone 16 Pro Max",
       "transportadora": "correios-pac",
       "adicionado_em": "2026-07-28T00:21:30.696Z",
-      "ultima_atualizacao": "2026-08-04T11:04:54Z",
-      "status_atual": "Objeto em transferência - por favor aguarde",
-      "ultima_posicao": "LONDRINA/PR → INAJA/PR",
-      "data_ultima_movimentacao": "2026-08-03T17:11:42",
-      "previsao_entrega": "2026-08-10",
+      "ultima_atualizacao": "2026-08-04T21:09:35Z",
+      "status_atual": "Objeto entregue ao destinatário",
+      "ultima_posicao": "INAJA/PR (Agência dos Correios)",
+      "data_ultima_movimentacao": "2026-08-04T16:11:00",
+      "previsao_entrega": null,
       "historico": [
+        {
+          "data": "2026-08-04T16:11:00",
+          "status": "Objeto entregue ao destinatário",
+          "local": "INAJA/PR (Pela Agência dos Correios)",
+          "fonte": "Correios (browser)"
+        },
+        {
+          "data": "2026-08-04T15:44:00",
+          "status": "Objeto aguardando retirada no endereço indicado",
+          "local": "Av. Antonio Veiga Martins, 46, INAJA/PR",
+          "fonte": "Correios (browser)"
+        },
+        {
+          "data": "2026-08-04T15:43:00",
+          "status": "Direcionado para entrega em unidade dos Correios a pedido do cliente",
+          "local": "INAJA/PR",
+          "fonte": "Correios (browser)"
+        },
         {
           "data": "2026-08-03T17:11:42",
           "status": "Objeto em transferência - por favor aguarde",
@@ -49,14 +67,14 @@
           "local": "BR - Aguardando postagem pelo remetente"
         }
       ],
-      "entregue": false,
-      "entregue_em": null,
-      "ultima_notificacao": "2026-08-04T11:04:54Z"
+      "entregue": true,
+      "entregue_em": "2026-08-04T16:11:00",
+      "ultima_notificacao": "2026-08-04T21:09:35Z"
     }
   ],
   "pacotes": [
     {
-      "ultima_checagem": "2026-08-04T11:04:54Z"
+      "ultima_checagem": "2026-08-04T21:09:35Z"
     }
   ]
 }

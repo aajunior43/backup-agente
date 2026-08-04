@@ -2,3 +2,4 @@
 {"timestamp":"2026-07-28T14:05:39.551Z","codigo":"AP272328771BR","tipo":"checado","status":"Objeto em transferência"}
 {"timestamp":"2026-07-28T17:00:00.000Z","codigo":"AP272328771BR","tipo":"checado","status":"Objeto em transferência"}
 {"timestamp":"2026-07-28T23:05:00.000Z","codigo":"AP272328771BR","tipo":"checado","status":"Objeto em transferência"}
+{"timestamp": "2026-08-04T21:09:35Z", "codigo": "AP272328771BR", "tipo": "entregue", "status": "Objeto entregue ao destinatário", "posicao": "INAJA/PR (Agência dos Correios)", "fonte": "Correios (browser)"}
