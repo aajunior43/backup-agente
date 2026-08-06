@@ -10,7 +10,7 @@ metadata:
   author: aleksandro.zo.computer
   display-name: 💰 Dotação Orçamentária
   output-format: dotacao-com-id
-  version: "2.2"
+  version: "2.3"
   tags: [orcamento, prefeitura, inaja, loa, ldo, ppa, tributario, despesas, empenho]
 ---
 # Skill: Dotação Orçamentária
@@ -59,6 +59,7 @@ Onde a classificação segue a estrutura:
 5. Ao final, perguntar: *"Qual destes você quer empenhar?"*
 6. Se só tiver uma dotação, já retornar o ID + confirmação sem perguntar
 7. **Nunca omitir o ID nem a classificação completa**
+8. **Natureza correta da despesa**: antes de buscar a dotação, identifique a natureza adequada para a despesa descrita (seção *Natureza da despesa — identificar a correta*). Em caso de dúvida, pesquise para confirmar (TCE-PR / MCASP / julgados) e sempre diga na resposta qual natureza escolheu e por quê
 
 ### Quando a dotação não existe
 
@@ -230,6 +231,49 @@ python3 /home/workspace/Skills/dotacao-orcamentaria/scripts/gerar-pdf-dotacao.py
 | 3.1.90.11 | VENCIMENTOS E VANTAGENS FIXAS-PESSOAL CIVIL |
 | 3.1.90.13 / 3.1.91.13 | CONTRIBUIÇÕES PATRONAIS |
 | 4.4.90.52 | EQUIPAMENTOS E MATERIAL PERMANENTE |
+| 3.3.90.33 | PASSAGENS E DESPESAS COM LOCOMOÇÃO |
+| 3.3.90.40 | SERVIÇOS DE TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO - PESSOA JURÍDICA |
+| 3.3.71.70 | TRANSFERÊNCIAS A CONSÓRCIOS PÚBLICOS |
+| 4.4.90.51 | OBRAS E INSTALAÇÕES |
+
+## Natureza da despesa — identificar a correta (obrigatório)
+
+Quando Aleksandro descreve a despesa (ex: "lavagem de veículo", "peças", "curso", "combustível"),
+**antes de buscar a dotação no CSV, identifique a natureza de despesa correta**:
+
+### Guia rápido
+
+| Tipo de despesa | Natureza |
+|-----------------|----------|
+| Serviços prestados por empresas (lavagem, manutenção de veículos, cursos/treinamentos, locação, limpeza, seguros, monitoramento) | `3.3.90.39` OUTROS SERVIÇOS DE TERCEIROS-PESSOA JURÍDICA |
+| Serviços prestados por pessoa física | `3.3.90.36` OUTROS SERVIÇOS DE TERCEIROS-PESSOA FÍSICA |
+| Material de consumo (combustível, gêneros alimentícios, material de expediente, peças de reposição, material de limpeza) | `3.3.90.30` MATERIAL DE CONSUMO |
+| Informática/software/serviços de TI | `3.3.90.40` |
+| Equipamentos e material permanente (computadores, mobiliário, veículos) | `4.4.90.52` |
+| Obras e construções | `4.4.90.51` |
+| Diárias de servidores | `3.3.90.14` DIÁRIAS-CIVIL |
+| Passagens e locomoção | `3.3.90.33` |
+| Subvenções sociais | `3.3.50.43` |
+| Repasse a consórcio público | `3.3.71.70` |
+
+### Casos que exigem pesquisa antes de responder
+
+- **Peça + instalação juntas** (contrato misto): regra geral — se o material predomina, `3.3.90.30`; se o serviço predomina, `3.3.90.39`; na dúvida, classifique pelo objeto principal/maior valor do contrato.
+- **Locação de veículo com motorista**, **outsourcing**, **terceirizações**: confirmar se é serviço (3.3.90.39) ou outra rubrica.
+- Qualquer despesa atípica: **pesquise para confirmar** antes de afirmar.
+
+### Fontes de pesquisa para a natureza correta
+
+1. **TCE-PR — Classificação Padrão do PIT** (consulta por palavra-chave):
+   `https://pit.tce.pr.gov.br/Despesa/DespesaConsultaClassificacaoPadrao/ClassificacaoPadrao`
+2. **MCASP** (Manual de Contabilidade Aplicada ao Setor Público — STN): partes sobre elementos de despesa
+3. `web_search` com termos: `"<despesa>" natureza de despesa TCE-PR classificação`
+4. Julgados do TCE-PR sobre a despesa específica
+
+### Regra final
+
+Sempre informar na resposta **qual natureza foi escolhida e em uma linha o motivo**
+(ex: "Lavagem de veículo = serviço prestado por empresa → `3.3.90.39`").
 
 ## Dicas importantes
 
@@ -237,3 +281,9 @@ python3 /home/workspace/Skills/dotacao-orcamentaria/scripts/gerar-pdf-dotacao.py
 - Uma mesma ação + natureza pode ter **duas linhas**: uma para Recursos Ordinários (00000) e outra para fonte vinculada (EC 29/00, 00104, etc.)
 - Para saber se o saldo é suficiente, compare o valor a empenhar com o `Saldo atual da despesa`
 - O `manual_empenho_liquidacao_pagamento_inaja.pdf` explica o fluxo completo de empenho
+
+## Referências
+
+- **TCE-PR PIT — Classificação padrão de despesa:** https://pit.tce.pr.gov.br/Despesa/DespesaConsultaClassificacaoPadrao/ClassificacaoPadrao
+- **MCASP (STN):** https://www.gov.br/tesouronacional/pt-br/contabilidade/manual-de-contabilidade-aplicada-ao-setor-publico
+- **Consulta TCE-PR Acórdão 1725/25** (gastos complementares na educação): https://www.tce.pr.gov.br/noticias/consulta-gasto-com-seguranca-escolar-pode-integrar-indice-constitucional-da-educacao/12394/N.htm
