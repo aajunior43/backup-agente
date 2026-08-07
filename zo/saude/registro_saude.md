@@ -23,12 +23,12 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de medições de glicose (capilar)** | 84 |
+| **Total de medições de glicose (capilar)** | 85 |
 | **Exames laboratoriais de glicemia no histórico** | 4 |
-| **Período coberto** | 28/06/2016 → 05/08/2026 |
+| **Período coberto** | 28/06/2016 → 06/08/2026 |
 | **Mínima (capilar)** | 126 mg/dL (14/07/2026 12:26 — antes do almoço) |
 | **Máxima (capilar)** | 488 mg/dL (21/04/2026 10:27) |
-| **Média (capilar)** | 272 mg/dL |
+| **Média (capilar)** | 271 mg/dL |
 | **Leituras ≥ 300 mg/dL** | 22 (26.8%) |
 | **Leituras ≥ 400 mg/dL** | 3 (488, 452, 400) |
 | **Leituras < 180 mg/dL** | 2 (2.4%) |
@@ -46,92 +46,132 @@
 
 | # | Data | Hora | mg/dL | Contexto | Fonte |
 |--:|------|------|------:|----------|-------|
-| 0 | 05/08/2026 | 22:00 | **247** 🟡 | Quarta-feira, antes da janta. Aplicou 15 UI de insulina (~22:15). | registro_saude.md |
-| 1 | 05/08/2026 | 08:14 | **214** 🟠 | Quarta-feira, antes do café. | registro_saude.md |
-| 2 | 04/08/2026 | 21:06 | **324** 🔴 | Terça-feira, antes da janta. PA 125/90, pulso 88 (21:03). Aplicou 15 UI de insulina às 21:17. | registro_saude.md |
-| 3 | 04/08/2026 | 17:42 | **199** 🟠 | Terça-feira, fim de tarde. PA 127/87, pulso 100. | registro_saude.md |
-| 4 | 04/08/2026 | 13:26 | **284** 🟡 | Terça-feira, após o almoço. PA 120/80, pulso 102. | registro_saude.md |
-| 5 | 04/08/2026 | 08:00 | **234** 🟠 | Terça-feira, antes do café. | registro_saude.md |
-| 6 | 03/08/2026 | 22:19 | **305** 🔴 | Segunda-feira, antes da janta. | registro_saude.md |
-| 7 | 03/08/2026 | 12:49 | **229** 🟠 | Segunda-feira, antes do almoço. | registro_saude.md |
-| 8 | 03/08/2026 | 08:07 | **214** 🟠 | Segunda-feira, manhã. | registro_saude.md |
-| 9 | 02/08/2026 | 18:52 | **250** 🟡 | Domingo, fim de tarde. | registro_saude.md |
-| 10 | 02/08/2026 | 10:56 | **241** 🟠 | Domingo, antes do café da manhã. | registro_saude.md |
-| 11 | 01/08/2026 | 09:46 | **252** 🟡 | Sábado. | registro_saude.md |
-| 12 | 30/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
-| 13 | 28/07/2026 | 12:03 | **213** 🟠 | Antes do almoço. | registro_saude.md |
-| 14 | 28/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
-| 15 | 28/07/2026 | 08:00 | **207** 🟠 | Manhã. | registro_saude.md |
-| 16 | 26/07/2026 | 23:33 | **319** 🔴 | Noite. | registro_saude.md |
-| 17 | 26/07/2026 | 14:00 | **240** 🟠 | Domingo. | registro_saude.md |
-| 18 | 26/07/2026 | 10:00 | **232** 🟠 | PA 110/70, pulso 90. Domingo. | registro_saude.md |
-| 19 | 25/07/2026 | 07:30 | **300** 🔴 | Chat. | registro_saude.md |
-| 20 | 24/07/2026 | 12:00 | **187** 🟠 | PA 120/80, pulso 97. | registro_saude.md |
-| 21 | 23/07/2026 | 17:20 | **254** 🟡 | PA 129/72, pulso 100 às 17:16. | registro_saude.md |
-| 22 | 23/07/2026 | 08:13 | **200** 🟠 | PA 130/97, pulso 105. | registro_saude.md |
-| 23 | 22/07/2026 | 22:34 | **345** 🔴 | PA 124/83, pulso 98 às 22:35. | registro_saude.md |
-| 24 | 22/07/2026 | 12:16 | **276** 🟡 | PA 130/84, pulso 117 (fotos). | registro_saude.md |
-| 25 | 22/07/2026 | 07:42 | **244** 🟠 | PA 142/90, pulso 110 (G-TECH). | registro_saude.md |
-| 26 | 21/07/2026 | 21:28 | **237** 🟠 | Aplicou 10 UI NPH ~21:30. | registro_saude.md |
-| 27 | 21/07/2026 | 13:10 | **176** 🟢 | PA 123/82, pulso 124. | registro_saude.md |
-| 28 | 21/07/2026 | 08:00 | **298** 🟡 | PA 110/70, pulso 111. | registro_saude.md |
-| 29 | 20/07/2026 | 23:12 | **400** 🔴 | Aplicou 10 UI NPH. | registro_saude.md |
-| 30 | 20/07/2026 | 12:33 | **211** 🟠 | Aparelho OKmeter Match II (foto). | registro_saude.md |
-| 31 | 18/07/2026 | 08:00 | **250** 🟡 | Recuperado de áudio (converted27). | transcricoes-audio |
-| 32 | 14/07/2026 | 15:00 | **338** 🔴 | — | registro_saude.md |
-| 33 | 14/07/2026 | 12:26 | **126** ✅ | Antes do almoço. Recuperado de áudio (converted25). | transcricoes-audio |
-| 34 | 14/07/2026 | 08:00 | **250** 🟡 | — | registro_saude.md |
-| 35 | 13/07/2026 | 16:54 | **250** 🟡 | Recuperado de áudio (converted24). | transcricoes-audio |
-| 36 | 13/07/2026 | 07:30 | **240** 🟠 | — | registro_saude.md |
-| 37 | 12/07/2026 | 10:00 | **272** 🟡 | PA 130/80. Domingo. | transcricoes-audio |
-| 38 | 11/07/2026 | 20:00 | **345** 🔴 | Sábado à noite. | transcricoes-audio |
-| 39 | 11/07/2026 | 09:36 | **250** 🟡 | PA 108/69 (esq) e 117/75 (dir). Jejum; 8 UI insulina noite anterior. | transcricoes-audio |
-| 40 | 10/07/2026 | 07:30 | **240** 🟠 | — | registro_saude.md |
-| 41 | 09/07/2026 | 21:30 | **382** 🔴 | PA 125/87, pulso 80. | transcricoes-audio |
-| 42 | 09/07/2026 | 12:02 | **250** 🟡 | Antes do almoço. | transcricoes-audio |
-| 43 | 09/07/2026 | 08:00 | **338** 🔴 | Áudio "3308" → 338. | transcricoes-audio |
-| 44 | 08/07/2026 | 17:57 | **250** 🟡 | — | transcricoes-audio |
-| 45 | 08/07/2026 | 14:00 | **349** 🔴 | PA 140/85, pulso 98. Noite anterior 5 UI insulina. | transcricoes-audio |
-| 46 | 08/07/2026 | 07:00 | **250** 🟡 | Noite anterior (07/07) 5 UI insulina. | registro_saude.md |
-| 47 | 07/07/2026 | 15:44 | **250** 🟡 | PA 130/80 + 120/80, pulso 115. Comeu besteira. 3 UI noite anterior. | registro_saude.md |
-| 48 | 07/07/2026 | 07:00 | **290** 🟡 | Glicemia de jejum. 3 UI insulina noite anterior (06/07). | registro_saude.md |
-| 49 | 06/07/2026 | 23:20 | **306** 🔴 | **Início do uso de insulina** (3 UI NPH correção). | registro_saude.txt |
-| 50 | 24/06/2026 | 17:50 | **278** 🟡 | PA 130/83, pulso 106 às 17:40. | registro_saude.txt |
-| 51 | 20/06/2026 | 12:05 | **250** 🟡 | PA 120/75, pulso 87. | registro_saude.txt |
-| 52 | 19/06/2026 | 11:59 | **300** 🔴 | PA 130/73, pulso 80. | registro_saude.txt |
-| 53 | 18/06/2026 | 16:52 | **300** 🔴 | PA 135/72, pulso 100 às 16:51. | registro_saude.txt |
-| 54 | 16/06/2026 | 17:45 | **262** 🟡 | PA 112/76, pulso 105. Ansiedade intensa no dia. | registro_saude.txt |
-| 55 | 15/06/2026 | 18:25 | **280** 🟡 | PA 117/67, pulso 97 às 18:26. | registro_saude.txt |
-| 56 | 25/05/2026 | 20:00 | **306** 🔴 | Chat. Noite. | registro_saude.txt |
-| 57 | 21/05/2026 | 12:30 | **236** 🟠 | PA 126/79, pulso 108 (Omron). | registro_saude.txt |
-| 58 | 21/05/2026 | 11:59 | **266** 🟡 | PA 139/83, pulso 101 (Omron + On Call Plus II). | registro_saude.txt |
-| 59 | 19/05/2026 | 16:00 | **303** 🔴 | PA 131/93, pulso 108. Tarde. | registro_saude.txt |
-| 60 | 10/05/2026 | 22:00 | **233** 🟠 | PA 133/87, pulso 97. Noite tardia. | registro_saude.txt |
-| 61 | 10/05/2026 | 20:20 | **452** 🔴 | PA 140/90, pulso 80. Glicose muito elevada. | registro_saude.txt |
-| 62 | 10/05/2026 | 08:52 | **279** 🟡 | PA 116/86, pulso 93 (G-TECH). | registro_saude.txt |
-| 63 | 09/05/2026 | 17:55 | **240** 🟠 | PA 130/90, pulso 82. | registro_saude.txt |
-| 64 | 08/05/2026 | 23:18 | **305** 🔴 | PA 139/85, pulso 98 (G-TECH). | registro_saude.txt |
-| 65 | 30/04/2026 | 20:56 | **370** 🔴 | Após estresse/hospital com avó. | saude_junior.csv |
-| 66 | 27/04/2026 | 23:01 | **273** 🟡 | PA 148/95, pulso 68 (foto). | health_tracker.json |
-| 67 | 26/04/2026 | 09:58 | **250** 🟡 | PA 122/71, pulso 96. | health_tracker.json |
-| 68 | 25/04/2026 | 11:30 | **267** 🟡 | Após bike 30min (pós-exercício). | health_tracker.json |
-| 69 | 24/04/2026 | 11:45 | **215** 🟠 | Antes do almoço. | health_tracker.json |
-| 70 | 23/04/2026 | 18:38 | **233** 🟠 | PA 138/90, pulso 102 às 18:40. | health_tracker.json |
-| 71 | 23/04/2026 | 16:32 | **286** 🟡 | — | health_tracker.json |
-| 72 | 21/04/2026 | 23:50 | **280** 🟡 | — | health_tracker.json |
-| 73 | 21/04/2026 | 11:53 | **399** 🔴 | PA 131/93, pulso 86 às 11:49. | health_tracker.json |
-| 74 | 21/04/2026 | 10:27 | **488** 🔴 | **Pico máximo histórico**. | health_tracker.json |
-| 75 | 19/04/2026 | 20:36 | **257** 🟡 | PA 123/78, pulso 87 (G-TECH). | saude_junior.csv |
-| 76 | 19/04/2026 | 19:21 | **331** 🔴 | PA 133/84, pulso 85 (áudio). | saude_junior.csv |
-| 77 | 19/04/2026 | 02:55 | **268** 🟡 | PA 135/84, pulso 105 às 02:56. | saude_junior.csv |
-| 78 | 16/04/2026 | 19:52 | **278** 🟡 | PA 135/89, pulso 90. | saude_junior.csv |
-| 79 | 15/04/2026 | 12:31 | **216** 🟠 | PA 134/79, pulso 103 às 12:32. | saude_junior.csv |
-| 80 | 13/04/2026 | 15:28 | **298** 🟡 | Após enjoo no trabalho. PA 131/95, pulso 105. | saude_junior.csv |
-| 81 | 13/04/2026 | 12:19 | **227** 🟠 | PA 149/94, pulso 96. | saude_junior.csv |
-| 82 | 06/03/2026 | 08:22 | **261** 🔴 | **Exame laboratorial DASA** — jejum. | exame_sangue_completo |
-| 83 | 22/02/2026 | 13:38 | **209** 🟠 | PA 122/77, pulso 91 às 13:30. | saude_junior.csv |
+| 0 | 06/08/2026 | 18:10 | **345** 🔴 | Quinta-feira, fim de tarde. | registro_saude.md |
+| 1 | 06/08/2026 | 07:57 | **240** 🟠 | Quinta-feira, antes do café. | registro_saude.md |
+| 2 | 05/08/2026 | 22:00 | **247** 🟡 | Quarta-feira, antes da janta. Aplicou 15 UI de insulina (~22:15). | registro_saude.md |
+| 3 | 05/08/2026 | 08:14 | **214** 🟠 | Quarta-feira, antes do café. | registro_saude.md |
+| 4 | 04/08/2026 | 21:06 | **324** 🔴 | Terça-feira, antes da janta. PA 125/90, pulso 88 (21:03). Aplicou 15 UI de insulina às 21:17. | registro_saude.md |
+| 5 | 04/08/2026 | 17:42 | **199** 🟠 | Terça-feira, fim de tarde. PA 127/87, pulso 100. | registro_saude.md |
+| 6 | 04/08/2026 | 13:26 | **284** 🟡 | Terça-feira, após o almoço. PA 120/80, pulso 102. | registro_saude.md |
+| 7 | 04/08/2026 | 08:00 | **234** 🟠 | Terça-feira, antes do café. | registro_saude.md |
+| 8 | 03/08/2026 | 22:19 | **305** 🔴 | Segunda-feira, antes da janta. | registro_saude.md |
+| 9 | 03/08/2026 | 12:49 | **229** 🟠 | Segunda-feira, antes do almoço. | registro_saude.md |
+| 10 | 03/08/2026 | 08:07 | **214** 🟠 | Segunda-feira, manhã. | registro_saude.md |
+| 11 | 02/08/2026 | 18:52 | **250** 🟡 | Domingo, fim de tarde. | registro_saude.md |
+| 12 | 02/08/2026 | 10:56 | **241** 🟠 | Domingo, antes do café da manhã. | registro_saude.md |
+| 13 | 01/08/2026 | 09:46 | **252** 🟡 | Sábado. | registro_saude.md |
+| 14 | 30/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
+| 15 | 28/07/2026 | 12:03 | **213** 🟠 | Antes do almoço. | registro_saude.md |
+| 16 | 28/07/2026 | 08:30 | **257** 🟡 | Manhã. | registro_saude.md |
+| 17 | 28/07/2026 | 08:00 | **207** 🟠 | Manhã. | registro_saude.md |
+| 18 | 26/07/2026 | 23:33 | **319** 🔴 | Noite. | registro_saude.md |
+| 19 | 26/07/2026 | 14:00 | **240** 🟠 | Domingo. | registro_saude.md |
+| 20 | 26/07/2026 | 10:00 | **232** 🟠 | PA 110/70, pulso 90. Domingo. | registro_saude.md |
+| 21 | 25/07/2026 | 07:30 | **300** 🔴 | Chat. | registro_saude.md |
+| 22 | 24/07/2026 | 12:00 | **187** 🟠 | PA 120/80, pulso 97. | registro_saude.md |
+| 23 | 23/07/2026 | 17:20 | **254** 🟡 | PA 129/72, pulso 100 às 17:16. | registro_saude.md |
+| 24 | 23/07/2026 | 08:13 | **200** 🟠 | PA 130/97, pulso 105. | registro_saude.md |
+| 25 | 22/07/2026 | 22:34 | **345** 🔴 | PA 124/83, pulso 98 às 22:35. | registro_saude.md |
+| 26 | 22/07/2026 | 12:16 | **276** 🟡 | PA 130/84, pulso 117 (fotos). | registro_saude.md |
+| 27 | 22/07/2026 | 07:42 | **244** 🟠 | PA 142/90, pulso 110 (G-TECH). | registro_saude.md |
+| 28 | 21/07/2026 | 21:28 | **237** 🟠 | Aplicou 10 UI NPH ~21:30. | registro_saude.md |
+| 29 | 21/07/2026 | 13:10 | **176** 🟢 | PA 123/82, pulso 124. | registro_saude.md |
+| 30 | 21/07/2026 | 08:00 | **298** 🟡 | PA 110/70, pulso 111. | registro_saude.md |
+| 31 | 20/07/2026 | 23:12 | **400** 🔴 | Aplicou 10 UI NPH. | registro_saude.md |
+| 32 | 20/07/2026 | 12:33 | **211** 🟠 | Aparelho OKmeter Match II (foto). | registro_saude.md |
+| 33 | 18/07/2026 | 08:00 | **250** 🟡 | Recuperado de áudio (converted27). | transcricoes-audio |
+| 34 | 14/07/2026 | 15:00 | **338** 🔴 | — | registro_saude.md |
+| 35 | 14/07/2026 | 12:26 | **126** ✅ | Antes do almoço. Recuperado de áudio (converted25). | transcricoes-audio |
+| 36 | 14/07/2026 | 08:00 | **250** 🟡 | — | registro_saude.md |
+| 37 | 13/07/2026 | 16:54 | **250** 🟡 | Recuperado de áudio (converted24). | transcricoes-audio |
+| 38 | 13/07/2026 | 07:30 | **240** 🟠 | — | registro_saude.md |
+| 39 | 12/07/2026 | 10:00 | **272** 🟡 | PA 130/80. Domingo. | transcricoes-audio |
+| 40 | 11/07/2026 | 20:00 | **345** 🔴 | Sábado à noite. | transcricoes-audio |
+| 41 | 11/07/2026 | 09:36 | **250** 🟡 | PA 108/69 (esq) e 117/75 (dir). Jejum; 8 UI insulina noite anterior. | transcricoes-audio |
+| 42 | 10/07/2026 | 07:30 | **240** 🟠 | — | registro_saude.md |
+| 43 | 09/07/2026 | 21:30 | **382** 🔴 | PA 125/87, pulso 80. | transcricoes-audio |
+| 44 | 09/07/2026 | 12:02 | **250** 🟡 | Antes do almoço. | transcricoes-audio |
+| 45 | 09/07/2026 | 08:00 | **338** 🔴 | Áudio "3308" → 338. | transcricoes-audio |
+| 46 | 08/07/2026 | 17:57 | **250** 🟡 | — | transcricoes-audio |
+| 47 | 08/07/2026 | 14:00 | **349** 🔴 | PA 140/85, pulso 98. Noite anterior 5 UI insulina. | transcricoes-audio |
+| 48 | 08/07/2026 | 07:00 | **250** 🟡 | Noite anterior (07/07) 5 UI insulina. | registro_saude.md |
+| 49 | 07/07/2026 | 15:44 | **250** 🟡 | PA 130/80 + 120/80, pulso 115. Comeu besteira. 3 UI noite anterior. | registro_saude.md |
+| 50 | 07/07/2026 | 07:00 | **290** 🟡 | Glicemia de jejum. 3 UI insulina noite anterior (06/07). | registro_saude.md |
+| 51 | 06/07/2026 | 23:20 | **306** 🔴 | **Início do uso de insulina** (3 UI NPH correção). | registro_saude.txt |
+| 52 | 24/06/2026 | 17:50 | **278** 🟡 | PA 130/83, pulso 106 às 17:40. | registro_saude.txt |
+| 53 | 20/06/2026 | 12:05 | **250** 🟡 | PA 120/75, pulso 87. | registro_saude.txt |
+| 54 | 19/06/2026 | 11:59 | **300** 🔴 | PA 130/73, pulso 80. | registro_saude.txt |
+| 55 | 18/06/2026 | 16:52 | **300** 🔴 | PA 135/72, pulso 100 às 16:51. | registro_saude.txt |
+| 56 | 16/06/2026 | 17:45 | **262** 🟡 | PA 112/76, pulso 105. Ansiedade intensa no dia. | registro_saude.txt |
+| 57 | 15/06/2026 | 18:25 | **280** 🟡 | PA 117/67, pulso 97 às 18:26. | registro_saude.txt |
+| 58 | 25/05/2026 | 20:00 | **306** 🔴 | Chat. Noite. | registro_saude.txt |
+| 59 | 21/05/2026 | 12:30 | **236** 🟠 | PA 126/79, pulso 108 (Omron). | registro_saude.txt |
+| 60 | 21/05/2026 | 11:59 | **266** 🟡 | PA 139/83, pulso 101 (Omron + On Call Plus II). | registro_saude.txt |
+| 61 | 19/05/2026 | 16:00 | **303** 🔴 | PA 131/93, pulso 108. Tarde. | registro_saude.txt |
+| 62 | 10/05/2026 | 22:00 | **233** 🟠 | PA 133/87, pulso 97. Noite tardia. | registro_saude.txt |
+| 63 | 10/05/2026 | 20:20 | **452** 🔴 | PA 140/90, pulso 80. Glicose muito elevada. | registro_saude.txt |
+| 64 | 10/05/2026 | 08:52 | **279** 🟡 | PA 116/86, pulso 93 (G-TECH). | registro_saude.txt |
+| 65 | 09/05/2026 | 17:55 | **240** 🟠 | PA 130/90, pulso 82. | registro_saude.txt |
+| 66 | 08/05/2026 | 23:18 | **305** 🔴 | PA 139/85, pulso 98 (G-TECH). | registro_saude.txt |
+| 67 | 30/04/2026 | 20:56 | **370** 🔴 | Após estresse/hospital com avó. | saude_junior.csv |
+| 68 | 27/04/2026 | 23:01 | **273** 🟡 | PA 148/95, pulso 68 (foto). | health_tracker.json |
+| 69 | 26/04/2026 | 09:58 | **250** 🟡 | PA 122/71, pulso 96. | health_tracker.json |
+| 70 | 25/04/2026 | 11:30 | **267** 🟡 | Após bike 30min (pós-exercício). | health_tracker.json |
+| 71 | 24/04/2026 | 11:45 | **215** 🟠 | Antes do almoço. | health_tracker.json |
+| 72 | 23/04/2026 | 18:38 | **233** 🟠 | PA 138/90, pulso 102 às 18:40. | health_tracker.json |
+| 73 | 23/04/2026 | 16:32 | **286** 🟡 | — | health_tracker.json |
+| 74 | 21/04/2026 | 23:50 | **280** 🟡 | — | health_tracker.json |
+| 75 | 21/04/2026 | 11:53 | **399** 🔴 | PA 131/93, pulso 86 às 11:49. | health_tracker.json |
+| 76 | 21/04/2026 | 10:27 | **488** 🔴 | **Pico máximo histórico**. | health_tracker.json |
+| 77 | 19/04/2026 | 20:36 | **257** 🟡 | PA 123/78, pulso 87 (G-TECH). | saude_junior.csv |
+| 78 | 19/04/2026 | 19:21 | **331** 🔴 | PA 133/84, pulso 85 (áudio). | saude_junior.csv |
+| 79 | 19/04/2026 | 02:55 | **268** 🟡 | PA 135/84, pulso 105 às 02:56. | saude_junior.csv |
+| 80 | 16/04/2026 | 19:52 | **278** 🟡 | PA 135/89, pulso 90. | saude_junior.csv |
+| 81 | 15/04/2026 | 12:31 | **216** 🟠 | PA 134/79, pulso 103 às 12:32. | saude_junior.csv |
+| 82 | 13/04/2026 | 15:28 | **298** 🟡 | Após enjoo no trabalho. PA 131/95, pulso 105. | saude_junior.csv |
+| 83 | 13/04/2026 | 12:19 | **227** 🟠 | PA 149/94, pulso 96. | saude_junior.csv |
+| 84 | 06/03/2026 | 08:22 | **261** 🔴 | **Exame laboratorial DASA** — jejum. | exame_sangue_completo |
+| 85 | 22/02/2026 | 13:38 | **209** 🟠 | PA 122/77, pulso 91 às 13:30. | saude_junior.csv |
 
 ## Medições completas (pressão, pulso e glicose)
+### 06/08/2026 (quinta-feira)
+- Temperatura: 36,4 °C ✅
+- Hora: ~15:15
+- Contexto: Tarde.
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+
+- Pressão: 117/74 mmHg | Pulso: 86 bpm
+- Hora: ~18:15
+- Contexto: Fim de tarde (3ª medição, segundo esfigmomanômetro).
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+- Pressão: 126/84 mmHg | Pulso: 86 bpm
+- Hora: ~18:15
+- Contexto: Fim de tarde (2ª medição, outro esfigmomanômetro; confirma PA 125/72).
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+- Pressão: 125/72 mmHg | Pulso: 89 bpm
+- Hora: 18:10
+- Contexto: Fim de tarde.
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+- Glicose: **345 mg/dL** 🔴
+- Hora: 18:10
+- Contexto: Fim de tarde.
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
+- Glicose: **240 mg/dL** 🟠
+- Hora: 07:57
+- Contexto: Antes do café.
+- Via: Telegram
+- Fonte: registro_saude.md
+- ---
 ### 05/08/2026 (quarta-feira)
 - Glicose: **214 mg/dL** 🟠
 - Hora: 08:14
