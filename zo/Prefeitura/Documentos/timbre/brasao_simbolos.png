@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBPD3CGMWB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BBPD3CGMWB');
+</script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>Símbolos municipais</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="/assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="/assets/css/flaticon.css" rel="stylesheet">
+<link href="/assets/css/owl.css" rel="stylesheet">
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
+<link href="/assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="/assets/css/animate.css" rel="stylesheet">
+<link href="/assets/css/nice-select.css" rel="stylesheet">
+<link href="/assets/css/jquery-ui.css" rel="stylesheet">
+<link href="/assets/css/color.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        if (document.addEventListener) {
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+            }, false);
+        } else {
+            document.attachEvent('oncontextmenu', function () {
+                window.event.returnValue = false;
+            });
+        }
+    </script>
+	
+	
+	
+	
+	</head>
+
+
+<!-- page wrapper -->
+<body onmousedown = 'return false' onselectstart = 'return false'>
+
+    <div class="boxed_wrapper">
+
+
+                <!-- preloader -->
+        <div class="loader-wrap">
+            <div class="preloader">                
+                <!--<div class="preloader-close">Fechar</div>-->
+                <div id="handle-preloader" class="handle-preloader">
+                    <div class="animation-preloader">
+                        <div class="spinner"></div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="s" class="letters-loading">
+                                s
+                            </span>
+                            <span data-text-preloader="í" class="letters-loading">
+                                í
+                            </span>
+                            <span data-text-preloader="m" class="letters-loading">
+                                m
+                            </span>
+                            <span data-text-preloader="b" class="letters-loading">
+                                b
+                            </span>
+                            <span data-text-preloader="o" class="letters-loading">
+                                o
+                            </span>
+                            <span data-text-preloader="l" class="letters-loading">
+                                l
+                            </span>
+                            <span data-text-preloader="o" class="letters-loading">
+                                o
+                            </span>
+                            <span data-text-preloader="s" class="letters-loading">
+                                s
+                            </span>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+
+        <!-- main header -->
+        <header class="main-header style-three style-five">
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left clearfix">
+                        <div class="logo-box">
+                            <figure class="logo"><a href="/"><img src="/assets/images/logo-3.png" alt=""></a></figure>
+                        </div>
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="current"><a href="/">Home</a></li>									
+                                    <li><a href="/sobre">Sobre</a></li>
+                                    <li><a href="/blog">Blog</a></li>
+                                    <li><a href="/colabore"><strong>Colabore</strong></a></li>
+									                                    <li><a href="/servicos">Serviços</a></li>
+                                    <li><a href="/contato">Contato</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="auto-container">
+                    <div class="outer-box">
+                        <div class="logo-box">
+                            <figure class="logo"><a href="/"><img src="/assets/images/logo.png" alt=""></a></figure>
+                        </div>
+                        <div class="menu-area">
+                            <nav class="main-menu clearfix">
+                                <!--Keep This Empty / Menu will come through Javascript-->
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->
+
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+            
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="/"><img src="/assets/images/logo-2.png" alt="" title=""></a></div>
+                <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+                <div class="contact-info">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>Brasília - DF</li>
+                        <li><a href="http://wa.me/556141419911" target = "_blank">+55 (61) 4141-9911</a></li>
+                        <li><a href="mailto:contato@simbolosmunicipais.com.br">contato@simbolosmunicipais.com.br</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <ul class="clearfix">
+                        <li><a href="/"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+						<li><a href="#"><span class="fab fa-instagram"></span></a></li>
+						<li><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+						<li><a href="#"><span class="fab fa-twitter"></span></a></li>
+						<li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+
+        <!-- Page Title -->
+        <section class="page-title centred" style="background-image: url(assets/images/background/page-title-5.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <h1>404</h1>
+                    <p>página não encontrada</p>
+                </div>
+            </div>
+        </section>
+        <!-- End Page Title -->
+
+
+        <!-- error-section -->
+        <section class="error-section centred">
+            <div class="auto-container">
+                <div class="inner-box">
+                    <h1>404</h1>
+                    <h2>página não encontrada. <br />essa página não existe ou foi excluída</h2>
+                    <a href="/" class="theme-btn">Home</a>
+                </div>
+            </div>
+        </section>
+        <!-- error-section end -->
+
+
+        		<!-- main-footer -->
+        <footer class="main-footer bg-color-2">
+            <div class="footer-top pt-130">
+                <div class="vector-bg" style="background-image: url(/assets/images/shape/shape-11.png);"></div>
+                <div class="auto-container">
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget logo-widget">
+                                <figure class="footer-logo"><a href="/"><img src="/assets/images/footer-logo.png" alt=""></a></figure>
+                                <div class="text">
+                                    <p>Site com bandeiras, brasões, hinos e um acervo histórico dos municípios do Brasil.</p>
+                                </div>
+                                <ul class="social-links clearfix">
+                                    <li><a href="http://www.fb.com/simbolosmunicipais" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="http://www.instagram.com/simbolosmunicipais" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://linkedin.com/company/simbolosmunicipais" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="http://www.youtube.com/@simbolosmunicipais" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget">
+                                <div class="widget-title">
+                                    <h3>Links</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="links-list clearfix">
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/ajuda">Ajuda</a></li>
+                                        <li><a href="/sobre">Sobre</a></li>
+                                        <li><a href="/colabore"><strong>Colabore</strong></a></li>
+                                        <li><a href="/blog">Blog</a></li>
+										<li><a href="/servicos">Serviços</a></li>
+										<li><a href="https://www.camaradevereadores.com.br/" target="_blank">Câmara de Vereadores</a></li>
+										<li><a href="https://www.municipioqueamo.com.br/" target="_blank">Capital Que Amo</a></li>
+										<li><a href="https://www.estadoqueamo.com.br/" target="_blank">Estado Que Amo</a></li>
+										<li><a href="https://www.gentilico.com.br/" target="_blank">Gentílico</a></li>
+										<li><a href="https://www.municipioqueamo.com.br/" target="_blank">Município Que Amo</a></li>
+										<li><a href="https://www.prefeituramunicipal.com.br/" target="_blank">Prefeitura Municipal</a></li>
+										<li><a href="https://www.simbolosdistritais.com.br/" target="_blank">Símbolos Distritais</a></li>
+										<li><a href="https://www.simbolosestaduais.com.br/" target="_blank">Símbolos Estaduais</a></li>
+										<li><a href="https://www.simbolosmunicipais.com.br/" target="_blank">Símbolos Municipais</a></li>
+										<li><a href="https://www.simbolosnacionais.com.br/" target="_blank">Símbolos Nacionais</a></li>
+                                        <li><a href="/contato">Contato</a></li>
+										<li><a href="/contato">Viu algum erro?</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+						<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget">
+                                <div class="widget-title">
+                                    <h3>Estados</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="links-list clearfix">
+                                        <li><a href="/ac/municipios">Acre</a></li>
+										<li><a href="/al/municipios">Alagoas</a></li>
+										<li><a href="/am/municipios">Amazonas</a></li>
+										<li><a href="/ap/municipios">Amapá</a></li>
+										<li><a href="/ba/municipios">Bahia</a></li>
+										<li><a href="/ce/municipios">Ceará</a></li>
+										<li><a href="/df/municipios">Distrito Federal</a></li>
+										<li><a href="/es/municipios">Espírito Santo</a></li>
+										<li><a href="/go/municipios">Goiás</a></li>
+										<li><a href="/ma/municipios">Maranhão</a></li>
+										<li><a href="/mg/municipios">Minas Gerais</a></li>
+										<li><a href="/ms/municipios">Mato Grosso do Sul</a></li>
+										<li><a href="/mt/municipios">Mato Grosso</a></li>
+										<li><a href="/pa/municipios">Pará</a></li>
+										<li><a href="/pb/municipios">Paraíba</a></li>
+										<li><a href="/pe/municipios">Pernambuco</a></li>
+										<li><a href="/pi/municipios">Piauí</a></li>
+										<li><a href="/pr/municipios">Paraná</a></li>
+										<li><a href="/rj/municipios">Rio de Janeiro</a></li>
+										<li><a href="/rn/municipios">Rio Grande do Norte</a></li>
+										<li><a href="/ro/municipios">Rondônia</a></li>
+										<li><a href="/rr/municipios">Roraima</a></li>
+										<li><a href="/rs/municipios">Rio Grande do Sul</a></li>
+										<li><a href="/sc/municipios">Santa Catarina</a></li>
+										<li><a href="/se/municipios">Sergipe</a></li>
+										<li><a href="/sp/municipios">São Paulo</a></li>
+										<li><a href="/to/municipios">Tocantins</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget">
+                                <div class="widget-title">
+                                    <h3>Contato</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="info-list clearfix">
+                                        <li>Brasília - DF</li>
+                                        <li><a href="http://wa.me/556141419911" target="_blank">(61) 4141-9911</a></li>
+                                        <li><a href="mailto:contato@simbolosmunicipais.com.br">contato@simbolosmunicipais.com.br</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="auto-container">
+                    <div class="bottom-inner clearfix">
+                        <div class="copyright pull-left">
+                            <p>&copy; <a href="http://www.tobetics.com.br/" target="_blank">Tobetics</a></p>
+                        </div>
+                        <!--<ul class="footer-nav pull-right">
+                            <li><a href="#">Termos</a></li>
+                            <li><a href="#">Política de privacidade</a></li>
+                        </ul>-->
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+
+
+        <!--Scroll to top-->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <span class="fal fa-angle-up"></span>
+        </button>
+    </div>
+
+
+    <!-- jequery plugins -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/owl.js"></script>
+    <script src="/assets/js/wow.js"></script>
+    <script src="/assets/js/validation.js"></script>
+    <script src="/assets/js/jquery.fancybox.js"></script>
+    <script src="/assets/js/appear.js"></script>
+    <script src="/assets/js/scrollbar.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+    <script src="/assets/js/product-filter.js"></script>
+
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="/assets/js/gmaps.js"></script>
+    <script src="/assets/js/map-helper.js"></script>
+
+    <!-- main-js -->
+    <script src="/assets/js/script.js"></script>
+
+</body><!-- End of .page_wrapper -->
+</html>
