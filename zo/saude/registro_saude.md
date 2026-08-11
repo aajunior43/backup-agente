@@ -23,13 +23,13 @@
 
 | Métrica | Valor |
 |---|---|
-| **Total de medições de glicose (capilar)** | 91 |
+| **Total de medições de glicose (capilar)** | 92 |
 | **Exames laboratoriais de glicemia no histórico** | 4 |
 | **Período coberto** | 28/06/2016 → 10/08/2026 |
 | **Mínima (capilar)** | 126 mg/dL (14/07/2026 12:26 — antes do almoço) |
 | **Máxima (capilar)** | 488 mg/dL (21/04/2026 10:27) |
 | **Média (capilar)** | 271 mg/dL |
-| **Leituras ≥ 300 mg/dL** | 25 (27.5%) |
+| **Leituras ≥ 300 mg/dL** | 26 (28.3%) |
 | **Leituras ≥ 400 mg/dL** | 3 (488, 452, 400) |
 | **Leituras < 180 mg/dL** | 2 (2.3%) |
 
@@ -46,9 +46,10 @@
 
 | # | Data | Hora | mg/dL | Contexto | Fonte |
 |--:|------|------|------:|----------|-------|
-| 0 | 10/08/2026 | 18:05 | **300** 🔴 | Segunda-feira, fim de tarde. | Chat |
-| 1 | 10/08/2026 | 12:37 | **284** 🟡 | Segunda-feira, antes do almoço. | Chat |
-| 2 | 10/08/2026 | 08:00 | **219** 🟠 | Segunda-feira, antes do café. | Chat |
+| 0 | 10/08/2026 | 21:42 | **332** 🔴 | Segunda-feira, antes da janta. PA 129/77, pulso 110. | Chat |
+| 1 | 10/08/2026 | 18:05 | **300** 🔴 | Segunda-feira, fim de tarde. | Chat |
+| 2 | 10/08/2026 | 12:37 | **284** 🟡 | Segunda-feira, antes do almoço. | Chat |
+| 3 | 10/08/2026 | 08:00 | **219** 🟠 | Segunda-feira, antes do café. | Chat |
 | 3 | 07/08/2026 | 21:00 | **198** 🟠 | Sexta-feira, noite. PA 117/85, pulso 90 (~20:48). | registro_saude.md |
 | 4 | 07/08/2026 | 06:54 | **348** 🔴 | Sexta-feira, ao acordar (jejum). PA 136/83, pulso 97 (~06:57). | registro_saude.md |
 | 5 | 06/08/2026 | 18:10 | **345** 🔴 | Quinta-feira, fim de tarde. | registro_saude.md |
@@ -145,6 +146,18 @@
 - Contexto: Antes do almoço.
 - Via: Chat
 - Fonte: registro_saude.md
+- Pressão: **129/77 mmHg** | Pulso: **110 bpm**
+- Hora: 21:42
+- Contexto: Noite.
+- Via: Chat
+- Fonte: registro_saude.md
+
+- Glicose: **332 mg/dL** 🔴
+- Hora: 21:42
+- Contexto: Antes da janta.
+- Via: Chat
+- Fonte: registro_saude.md
+
 
 ### 07/08/2026 (sexta-feira)
 - Glicose: **198 mg/dL** 🟠

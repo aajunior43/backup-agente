@@ -21,6 +21,13 @@
 
 ---
 
+## 2026-08-10 21:42 (UTC-3)
+- PA: 129/77 mmHg
+- Batimentos: 110 bpm
+- Observacao: Pressao elevada (120-129/<80). Batimentos acima do normal (taquicardia leve).
+
+---
+
 ### Referencia rapida:
 - PA normal: < 120/80
 - Elevada: 120-129 / < 80
